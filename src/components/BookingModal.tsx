@@ -44,7 +44,8 @@ const initialForm: FormState = {
 export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const [form, setForm] = useState<FormState>(initialForm)
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({})
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const selectedTour = useMemo(() => `Bucket list: ${tour?.title ?? 'Gorilla Tracking in Bwindi'}`, [tour])
 
@@ -66,7 +67,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const update = (field: keyof FormState, value: string | number) => {
     setForm((current) => ({ ...current, [field]: value }))
     setErrors((current) => ({ ...current, [field]: undefined }))
-    setSent(false)
+    setStatus(null)
   }
 
   const validate = () => {
@@ -79,14 +80,35 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
     return Object.keys(nextErrors).length === 0
   }
 
-  const submit = (event: React.FormEvent<HTMLFormElement>) => {
+  const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!validate()) return
     const payload = { selectedTour, ...form }
-    console.log('Booking request', payload)
-    setSent(true)
-    window.alert('Booking request sent successfully. We will contact you soon.')
-    setForm(initialForm)
+    setIsSubmitting(true)
+    setStatus({ type: 'info', message: 'Sending your booking request...' })
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const result = await response.json().catch(() => null)
+
+      if (!response.ok) {
+        throw new Error(result?.message || 'The booking request could not be sent right now.')
+      }
+
+      setForm(initialForm)
+      setStatus({ type: 'success', message: 'Booking request sent successfully. We will contact you soon.' })
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'The booking request could not be sent right now.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -221,10 +243,24 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
               <FiInfo className="mt-0.5 shrink-0 text-primary" />
               We'll contact you by email or WhatsApp to confirm availability.
             </div>
-            {sent && <p className="rounded-lg bg-green-50 p-3 text-sm font-semibold text-green-700">Booking request sent successfully. We will contact you soon.</p>}
+            {status && (
+              <p
+                className={`rounded-lg p-3 text-sm font-semibold ${
+                  status.type === 'success'
+                    ? 'bg-green-50 text-green-700'
+                    : status.type === 'error'
+                      ? 'bg-red-50 text-red-700'
+                      : 'bg-primary/5 text-primary'
+                }`}
+              >
+                {status.message}
+              </p>
+            )}
             <div className="flex flex-col gap-3 pt-2">
-              <button className="btn-primary justify-center" type="submit">Send Booking Request <FiArrowRight /></button>
-              <button className="btn-outline justify-center" type="button" onClick={onClose}>Cancel</button>
+              <button className="btn-primary justify-center disabled:cursor-not-allowed disabled:opacity-70" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending...' : 'Send Booking Request'} <FiArrowRight />
+              </button>
+              <button className="btn-outline justify-center" type="button" onClick={onClose} disabled={isSubmitting}>Cancel</button>
             </div>
           </form>
         </div>

@@ -11,7 +11,11 @@ type ItineraryPageProps = {
 export function ItineraryPage({ onBook }: ItineraryPageProps) {
   const { tourId } = useParams()
   const tabSentinelRef = useRef<HTMLDivElement>(null)
+  const tabNavRef = useRef<HTMLElement>(null)
+  const priceCardSlotRef = useRef<HTMLElement>(null)
+  const priceCardRef = useRef<HTMLDivElement>(null)
   const [isTabStuck, setIsTabStuck] = useState(false)
+  const [priceCardLayout, setPriceCardLayout] = useState<{ top: number; left: number; width: number; height: number } | null>(null)
   const [activeTab, setActiveTab] = useState(0)
   const [activeGalleryImage, setActiveGalleryImage] = useState<string | null>(null)
   const tour = tours.find((item) => item.slug === tourId) ?? tours.find((item) => `${item.slug}-2` === tourId)
@@ -26,8 +30,30 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
   useEffect(() => {
     const updateTabState = () => {
       if (!tabSentinelRef.current) return
-      const top = tabSentinelRef.current.getBoundingClientRect().top
-      setIsTabStuck(top <= 0)
+      const tabTop = tabSentinelRef.current.getBoundingClientRect().top
+      const nextTabStuck = tabTop <= 0
+      setIsTabStuck(nextTabStuck)
+
+      const isDesktop = window.matchMedia('(min-width: 1024px)').matches
+      if (!isDesktop || !nextTabStuck || !priceCardSlotRef.current) {
+        setPriceCardLayout(null)
+        return
+      }
+
+      const tabHeight = tabNavRef.current?.getBoundingClientRect().height ?? 65
+      const slotRect = priceCardSlotRef.current.getBoundingClientRect()
+      const cardHeight = priceCardRef.current?.offsetHeight ?? 0
+
+      if (slotRect.top <= tabHeight) {
+        setPriceCardLayout({
+          top: tabHeight,
+          left: slotRect.left,
+          width: slotRect.width,
+          height: cardHeight,
+        })
+      } else {
+        setPriceCardLayout(null)
+      }
     }
 
     updateTabState()
@@ -66,6 +92,7 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
       <div className={isTabStuck ? 'h-[57px] md:h-[65px]' : ''}>
         <div className={`transition-all duration-300 ease-out ${isTabStuck ? 'fixed left-0 right-0 top-0 z-50 w-full' : 'relative z-40 container-custom'}`}>
           <nav
+            ref={tabNavRef}
             className={`relative grid grid-cols-4 overflow-hidden bg-white transition-all duration-300 ease-out ${
               isTabStuck ? 'rounded-none border-b border-border shadow-[0_8px_24px_rgba(17,24,39,0.08)]' : 'rounded-card shadow-soft'
             }`}
@@ -160,8 +187,20 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
             </section>
           </div>
 
-          <aside className="lg:self-start">
-            <div className="card p-8 text-center lg:sticky lg:top-24">
+          <aside
+            ref={priceCardSlotRef}
+            className="lg:self-start"
+            style={priceCardLayout ? { minHeight: priceCardLayout.height } : undefined}
+          >
+            <div
+              ref={priceCardRef}
+              className={`card p-8 text-center ${priceCardLayout ? 'lg:fixed lg:z-30' : ''}`}
+              style={priceCardLayout ? {
+                top: priceCardLayout.top,
+                left: priceCardLayout.left,
+                width: priceCardLayout.width,
+              } : undefined}
+            >
               <p className="text-xs font-black uppercase tracking-wide text-ink">Price</p>
               <h2 className="mt-3 text-2xl font-black text-primary">Available on Request</h2>
               <p className="mt-2 text-sm text-muted">Contact us for a personalized quote</p>

@@ -35,7 +35,7 @@ export function HomePage({ onBook }: HomePageProps) {
             </p>
             <Link className="btn-primary mt-8" to="/tours">Explore Our Tours <FiArrowRight /></Link>
           </div>
-          <div className="mt-14 grid w-full max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid w-full max-w-5xl grid-cols-2 gap-4 lg:grid-cols-4">
             {[
               { src: homeIconOne, alt: 'Uganda Family Tours service highlight' },
               { src: homeIconTwo, alt: 'Uganda Family Tours safari planning highlight' },
@@ -97,7 +97,7 @@ export function HomePage({ onBook }: HomePageProps) {
               We craft unforgettable journeys that immerse you in the rich cultural tapestry, stunning landscapes, and diverse wildlife of Uganda. As a locally-rooted company, we take immense pride in showcasing the hidden gems and iconic attractions that make Uganda a true African paradise.
             </p>
           </div>
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid grid-cols-2 gap-5 md:gap-6 lg:grid-cols-4">
             <WhyTravelCard variant="dark" icon={FaSliders} title="Tailor-Made Itineraries" text="Custom itineraries designed just for you." />
             <WhyTravelCard variant="dark" icon={FaPeopleGroup} title="Trusted Local Expertise" text="Passionate local guides and insider knowledge." />
             <WhyTravelCard variant="dark" icon={FaHandHoldingHeart} title="Responsible Travel" text="Protecting nature and empowering communities." />
