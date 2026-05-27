@@ -33,7 +33,7 @@ const initialForm: FormState = {
   country: '',
   travelDate: '',
   flexible: 'Yes',
-  adults: 2,
+  adults: 1,
   children: 0,
   childrenAges: '',
   duration: '',
