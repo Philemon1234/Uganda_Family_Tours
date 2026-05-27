@@ -1,0 +1,143 @@
+import { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import {
+  FaBoxOpen,
+  FaEnvelope,
+  FaFacebookF,
+  FaHome,
+  FaInstagram,
+  FaMapMarkerAlt,
+  FaTimes,
+  FaUser,
+} from 'react-icons/fa'
+import logo from '../../assets/UFT-Logo-PNG.png'
+
+type MobileSidebarDrawerProps = {
+  isOpen: boolean
+  onClose: () => void
+}
+
+const drawerItems = [
+  { id: 'home', label: 'Home', href: '/', icon: FaHome },
+  { id: 'tours', label: 'Tours', href: '/tours', icon: FaMapMarkerAlt },
+  { id: 'packages', label: 'Packages', href: '/tours', icon: FaBoxOpen },
+  { id: 'about', label: 'About', href: '/about', icon: FaUser },
+  { id: 'contact', label: 'Contact', href: '#contact', icon: FaEnvelope },
+]
+
+export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProps) {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [isOpen, onClose])
+
+  const isActive = (id: string) => {
+    if (id === 'home') return location.pathname === '/'
+    if (id === 'tours') return location.pathname.startsWith('/tours')
+    if (id === 'packages') return location.pathname.startsWith('/packages')
+    if (id === 'about') return location.pathname.startsWith('/about')
+    return false
+  }
+
+  return (
+    <div className={`fixed inset-0 z-[70] lg:hidden ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
+      <button
+        type="button"
+        aria-label="Close menu overlay"
+        className={`absolute inset-0 bg-black/45 backdrop-blur-[2px] transition-opacity duration-300 ${
+          isOpen ? 'opacity-100' : 'opacity-0'
+        }`}
+        onClick={onClose}
+      />
+      <aside
+        role="dialog"
+        aria-modal="true"
+        className={`relative flex h-screen w-[82vw] max-w-[340px] flex-col rounded-r-[28px] bg-white px-4 py-7 shadow-[20px_0_50px_rgba(0,0,0,0.18)] transition-transform duration-300 ease-out ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="flex items-center justify-between gap-4">
+          <img className="h-10 w-auto object-contain" src={logo} alt="Uganda Family Tours" />
+          <button
+            type="button"
+            aria-label="Close menu"
+            className="grid h-11 w-11 place-items-center rounded-full bg-primary/10 text-lg text-primary transition hover:bg-primary hover:text-white"
+            onClick={onClose}
+          >
+            <FaTimes />
+          </button>
+        </div>
+
+        <nav className="mt-8 space-y-4" aria-label="Mobile menu">
+          {drawerItems.map((item) => {
+            const Icon = item.icon
+            const active = isActive(item.id)
+            const content = (
+              <>
+                <span
+                  className={`grid h-9 w-9 place-items-center rounded-full text-sm ${
+                    active ? 'bg-white/25 text-white' : 'bg-primary/10 text-primary'
+                  }`}
+                >
+                  <Icon />
+                </span>
+                <span>{item.label}</span>
+              </>
+            )
+
+            const className = `flex w-full items-center gap-4 rounded-2xl px-3 py-3.5 text-base font-bold transition ${
+              active ? 'bg-primary text-white shadow-[0_14px_28px_rgba(253,94,2,0.18)]' : 'text-ink hover:bg-primary/8'
+            }`
+
+            if (item.href.startsWith('#')) {
+              return (
+                <a key={item.id} href={item.href} className={className} onClick={onClose}>
+                  {content}
+                </a>
+              )
+            }
+
+            return (
+              <Link key={item.id} to={item.href} className={className} onClick={onClose}>
+                {content}
+              </Link>
+            )
+          })}
+        </nav>
+
+        <div className="mt-auto border-t border-border pt-6">
+          <p className="text-sm font-bold text-muted">Follow us</p>
+          <div className="mt-4 flex gap-4">
+            <a
+              href="https://facebook.com"
+              aria-label="Facebook"
+              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#e55302]"
+            >
+              <FaFacebookF />
+            </a>
+            <a
+              href="https://instagram.com"
+              aria-label="Instagram"
+              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#e55302]"
+            >
+              <FaInstagram />
+            </a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  )
+}
