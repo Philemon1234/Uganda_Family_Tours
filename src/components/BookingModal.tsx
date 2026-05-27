@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { FaCalendarDays, FaHouse, FaRegStar, FaUserGroup, FaXmark } from 'react-icons/fa6'
-import { FiArrowRight, FiInfo, FiMinus, FiPlus } from 'react-icons/fi'
+import { FiArrowRight, FiChevronDown, FiInfo, FiMinus, FiPlus } from 'react-icons/fi'
 import type { Tour } from '../data/tours'
+import { countries, countryFlag } from '../data/countries'
 
 type BookingModalProps = {
   isOpen: boolean
@@ -28,7 +29,7 @@ type FormState = {
 const initialForm: FormState = {
   fullName: '',
   email: '',
-  phone: '+256 700 123 456',
+  phone: '',
   country: '',
   travelDate: '',
   flexible: 'Yes',
@@ -46,6 +47,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({})
   const [status, setStatus] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isCountryOpen, setIsCountryOpen] = useState(false)
 
   const selectedTour = useMemo(() => `Bucket list: ${tour?.title ?? 'Gorilla Tracking in Bwindi'}`, [tour])
 
@@ -150,14 +152,12 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                 <input className="input" value={form.phone} onChange={(event) => update('phone', event.target.value)} />
               </Field>
               <Field label="Country of Residence" required error={errors.country}>
-                <select className="input" value={form.country} onChange={(event) => update('country', event.target.value)}>
-                  <option value="">Select your country</option>
-                  <option>Uganda</option>
-                  <option>United States</option>
-                  <option>United Kingdom</option>
-                  <option>Australia</option>
-                  <option>Canada</option>
-                </select>
+                <CountrySelect
+                  value={form.country}
+                  isOpen={isCountryOpen}
+                  onOpenChange={setIsCountryOpen}
+                  onChange={(value) => update('country', value)}
+                />
               </Field>
               <Field label="Preferred Travel Date" required error={errors.travelDate}>
                 <input className="input" type="date" value={form.travelDate} onChange={(event) => update('travelDate', event.target.value)} />
@@ -283,6 +283,92 @@ function Field({ label, required, error, children }: FieldProps) {
       <span className="mt-2 block">{children}</span>
       {error && <span className="mt-1 block text-xs font-semibold text-red-600">{error}</span>}
     </label>
+  )
+}
+
+function CountrySelect({
+  value,
+  isOpen,
+  onOpenChange,
+  onChange,
+}: {
+  value: string
+  isOpen: boolean
+  onOpenChange: (value: boolean) => void
+  onChange: (value: string) => void
+}) {
+  const search = value.trim().toLowerCase()
+  const filteredCountries = countries.filter((country) => {
+    if (!search) return true
+    return (
+      country.name.toLowerCase().includes(search) ||
+      country.iso3.toLowerCase().includes(search) ||
+      country.code.toLowerCase().includes(search)
+    )
+  })
+
+  return (
+    <div
+      className="relative"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          onOpenChange(false)
+        }
+      }}
+    >
+      <input
+        className="input pr-11"
+        value={value}
+        onChange={(event) => {
+          onChange(event.target.value)
+          onOpenChange(true)
+        }}
+        onFocus={() => onOpenChange(true)}
+        placeholder="Select country"
+        role="combobox"
+        aria-expanded={isOpen}
+        aria-controls="country-listbox"
+        aria-autocomplete="list"
+      />
+      <button
+        className="absolute right-3 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center text-muted transition hover:text-primary"
+        type="button"
+        aria-label="Toggle country list"
+        onClick={() => onOpenChange(!isOpen)}
+      >
+        <FiChevronDown className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <div
+          id="country-listbox"
+          className="country-options-scroll absolute left-0 right-0 top-[calc(100%+0.35rem)] z-50 max-h-64 overflow-y-auto rounded-lg border border-border bg-white py-2 shadow-[0_18px_35px_rgba(17,24,39,0.16)]"
+          role="listbox"
+        >
+          {filteredCountries.length > 0 ? (
+            filteredCountries.map((country) => (
+              <button
+                key={country.code}
+                className="flex w-full items-center gap-4 px-4 py-3 text-left text-sm font-semibold text-ink transition hover:bg-primary/5 hover:text-primary"
+                type="button"
+                role="option"
+                aria-selected={value === country.name}
+                onMouseDown={(event) => event.preventDefault()}
+                onClick={() => {
+                  onChange(country.name)
+                  onOpenChange(false)
+                }}
+              >
+                <span className="w-9 shrink-0 text-2xl leading-none">{countryFlag(country.code)}</span>
+                <span>{country.name} - {country.iso3}</span>
+              </button>
+            ))
+          ) : (
+            <p className="px-4 py-4 text-sm font-semibold text-muted">No countries found.</p>
+          )}
+        </div>
+      )}
+    </div>
   )
 }
 
