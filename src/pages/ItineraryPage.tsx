@@ -12,7 +12,10 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
   const { tourId } = useParams()
   const tabSentinelRef = useRef<HTMLDivElement>(null)
   const tabNavRef = useRef<HTMLElement>(null)
+  const itineraryTimelineRef = useRef<HTMLDivElement>(null)
+  const dayMarkerRefs = useRef<(HTMLDivElement | null)[]>([])
   const [isTabStuck, setIsTabStuck] = useState(false)
+  const [timelineProgress, setTimelineProgress] = useState(0)
   const [activeTab, setActiveTab] = useState(0)
   const [activeGalleryImage, setActiveGalleryImage] = useState<string | null>(null)
   const tour = tours.find((item) => item.slug === tourId) ?? tours.find((item) => `${item.slug}-2` === tourId)
@@ -42,6 +45,36 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
     }
   }, [])
 
+  useEffect(() => {
+    const updateTimelineProgress = () => {
+      const timeline = itineraryTimelineRef.current
+      const markers = dayMarkerRefs.current.filter(Boolean) as HTMLDivElement[]
+      if (!timeline || markers.length < 2) {
+        setTimelineProgress(0)
+        return
+      }
+
+      const timelineTop = timeline.getBoundingClientRect().top + window.scrollY
+      const firstMarker = markers[0]
+      const lastMarker = markers[markers.length - 1]
+      const firstCenter = firstMarker.getBoundingClientRect().top + window.scrollY + firstMarker.offsetHeight / 2 - timelineTop
+      const lastCenter = lastMarker.getBoundingClientRect().top + window.scrollY + lastMarker.offsetHeight / 2 - timelineTop
+      const viewportAnchor = window.scrollY + window.innerHeight * 0.42 - timelineTop
+      const nextProgress = Math.min(1, Math.max(0, (viewportAnchor - firstCenter) / (lastCenter - firstCenter)))
+
+      setTimelineProgress(nextProgress)
+    }
+
+    updateTimelineProgress()
+    window.addEventListener('scroll', updateTimelineProgress, { passive: true })
+    window.addEventListener('resize', updateTimelineProgress)
+
+    return () => {
+      window.removeEventListener('scroll', updateTimelineProgress)
+      window.removeEventListener('resize', updateTimelineProgress)
+    }
+  }, [tour?.slug])
+
   if (!tour) return <Navigate to="/tours" replace />
 
   const galleryMosaic = Array.from({ length: 4 }, (_, index) => tour.galleryImages[index % tour.galleryImages.length])
@@ -66,7 +99,7 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
 
       <div ref={tabSentinelRef} className="-mt-8 h-px" aria-hidden="true" />
       <div className={isTabStuck ? 'h-[57px] md:h-[65px]' : ''}>
-        <div className={`transition-all duration-300 ease-out ${isTabStuck ? 'fixed left-0 right-0 top-0 z-50 w-full' : 'relative z-40 container-custom'}`}>
+        <div className={`transition-all duration-300 ease-out ${isTabStuck ? 'fixed left-0 right-0 top-[3.75rem] z-50 w-full lg:top-0' : 'relative z-40 container-custom'}`}>
           <nav
             ref={tabNavRef}
             className={`relative grid grid-cols-4 overflow-hidden bg-white transition-all duration-300 ease-out ${
@@ -142,11 +175,22 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
 
             <section id="itinerary" className="scroll-mt-28">
               <h2 className="content-title">Day-by-Day Itinerary</h2>
-              <div className="mt-6 space-y-10">
-                {tour.itineraryDays.map((day) => (
-                  <article key={day.title} className="grid gap-5 md:grid-cols-[56px_1fr]">
-                    <div className="grid h-12 w-12 place-items-center rounded-full bg-primary text-white shadow-orange">
-                      <FaCheck />
+              <div ref={itineraryTimelineRef} className="relative mt-6 space-y-10">
+                <span className="absolute bottom-6 left-6 top-6 w-0.5 bg-gray-200" aria-hidden="true" />
+                <span
+                  className="absolute left-6 top-6 w-0.5 origin-top bg-primary shadow-[0_0_18px_rgba(253,94,2,0.35)]"
+                  style={{ height: `calc((100% - 3rem) * ${timelineProgress})` }}
+                  aria-hidden="true"
+                />
+                {tour.itineraryDays.map((day, index) => (
+                  <article key={day.title} className="relative grid grid-cols-[56px_1fr] gap-5">
+                    <div
+                      ref={(element) => {
+                        dayMarkerRefs.current[index] = element
+                      }}
+                      className="relative z-10 grid h-12 w-12 place-items-center rounded-full border-4 border-white bg-primary text-base font-black text-white shadow-orange"
+                    >
+                      {day.day.replace(/^Day\s*/i, '')}
                     </div>
                     <div>
                       <h3 className="text-lg font-black text-ink">{day.day}: {day.title}</h3>
