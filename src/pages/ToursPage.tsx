@@ -4,7 +4,11 @@ import { TourCard } from '../components/TourCard'
 import { SectionHeader } from '../components/SectionHeader'
 import ctaImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
 
-export function ToursPage() {
+type ToursPageProps = {
+  onInquiry: () => void
+}
+
+export function ToursPage({ onInquiry }: ToursPageProps) {
   return (
     <>
       <main className="bg-white pt-28">
@@ -24,7 +28,7 @@ export function ToursPage() {
           <div className="container-custom relative z-10">
             <p className="font-bold">Explore. Discover. Adventure. Travel</p>
             <h2 className="mx-auto mt-6 max-w-6xl text-4xl font-black leading-tight md:text-7xl">YOUR JOURNEY AWAITS - LET’S PLAN YOUR DREAM TRIP</h2>
-            <a className="btn-primary mt-9" href="#contact">CONTACT OUR TEAM <FiArrowRight /></a>
+            <button className="btn-primary mt-9" type="button" onClick={onInquiry}>CONTACT OUR TEAM <FiArrowRight /></button>
           </div>
         </section>
       </main>

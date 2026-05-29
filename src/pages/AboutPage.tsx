@@ -9,10 +9,10 @@ import ctaImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
 import { MotionReveal } from '../components/MotionReveal'
 
 type AboutPageProps = {
-  onBook: () => void
+  onInquiry: () => void
 }
 
-export function AboutPage({ onBook }: AboutPageProps) {
+export function AboutPage({ onInquiry }: AboutPageProps) {
   const initiatives = [
     {
       icon: FaLeaf,
@@ -152,7 +152,7 @@ export function AboutPage({ onBook }: AboutPageProps) {
           <h2 className="mt-3 text-3xl font-black md:text-4xl">Start building your dream journey</h2>
           <div className="mt-6 flex flex-col justify-center gap-4 sm:flex-row">
             <a className="btn-primary justify-center" href="tel:+256703543027"><FaPhone /> Call Now <FiArrowRight /></a>
-            <button className="btn-outline justify-center border-white/70 bg-transparent text-white hover:border-primary" type="button" onClick={onBook}>
+            <button className="btn-outline justify-center border-white/70 bg-transparent text-white hover:border-primary" type="button" onClick={onInquiry}>
               <FaEnvelope /> Make an Enquiry
             </button>
           </div>

@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { FaBars, FaXmark } from 'react-icons/fa6'
 import { FiArrowRight } from 'react-icons/fi'
 import { Logo } from './Logo'
 
 type NavbarProps = {
-  onBook: () => void
+  onInquiry: () => void
 }
 
 const navItems = [
@@ -14,10 +14,8 @@ const navItems = [
   { label: 'About Us', href: '/about' },
 ]
 
-export function Navbar({ onBook }: NavbarProps) {
+export function Navbar({ onInquiry }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const location = useLocation()
-  const isHome = location.pathname === '/'
 
   return (
     <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/15 bg-black/30 text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)] backdrop-blur-md">
@@ -44,8 +42,8 @@ export function Navbar({ onBook }: NavbarProps) {
           ))}
         </div>
 
-        <button className="btn-primary hidden px-5 py-3 text-[0.72rem] lg:inline-flex" type="button" onClick={onBook}>
-          {isHome ? 'Plan Your Trip' : 'Book This Tour'} <FiArrowRight />
+        <button className="btn-primary hidden px-5 py-3 text-[0.72rem] lg:inline-flex" type="button" onClick={onInquiry}>
+          Talk to a Travel Specialist <FiArrowRight />
         </button>
 
         <button
@@ -71,8 +69,11 @@ export function Navbar({ onBook }: NavbarProps) {
                 {item.label}
               </NavLink>
             ))}
-            <button className="btn-primary mt-2 justify-center" type="button" onClick={onBook}>
-              {isHome ? 'Plan Your Trip' : 'Book This Tour'} <FiArrowRight />
+            <button className="btn-primary mt-2 justify-center" type="button" onClick={() => {
+              setIsOpen(false)
+              onInquiry()
+            }}>
+              Talk to a Travel Specialist <FiArrowRight />
             </button>
           </div>
         </div>
