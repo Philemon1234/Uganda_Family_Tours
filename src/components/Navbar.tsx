@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { FaBars, FaXmark } from 'react-icons/fa6'
-import { FiArrowRight } from 'react-icons/fi'
 import { Logo } from './Logo'
 
 type NavbarProps = {
@@ -43,7 +42,7 @@ export function Navbar({ onInquiry }: NavbarProps) {
         </div>
 
         <button className="btn-primary hidden px-5 py-3 text-[0.72rem] lg:inline-flex" type="button" onClick={onInquiry}>
-          Talk to a Travel Specialist <FiArrowRight />
+          Talk to a Travel Specialist
         </button>
 
         <button
@@ -73,7 +72,7 @@ export function Navbar({ onInquiry }: NavbarProps) {
               setIsOpen(false)
               onInquiry()
             }}>
-              Talk to a Travel Specialist <FiArrowRight />
+              Talk to a Travel Specialist
             </button>
           </div>
         </div>

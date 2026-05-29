@@ -120,13 +120,13 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
               <Field label="Full Name" required error={errors.fullName}>
                 <div className="relative">
                   <FaRegUser className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
-                  <input className="input pl-11" value={form.fullName} onChange={(event) => update('fullName', event.target.value)} placeholder="Enter your full name" />
+                  <input className="input" style={{ paddingLeft: '3.25rem' }} value={form.fullName} onChange={(event) => update('fullName', event.target.value)} placeholder="Enter your full name" />
                 </div>
               </Field>
               <Field label="Email Address" required error={errors.email}>
                 <div className="relative">
                   <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
-                  <input className="input pl-11" type="email" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder="Enter your email address" />
+                  <input className="input" style={{ paddingLeft: '3.25rem' }} type="email" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder="Enter your email address" />
                 </div>
               </Field>
             </div>
@@ -134,7 +134,7 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
             <Field label="Phone / WhatsApp" required error={errors.phone}>
               <div className="relative">
                 <FaPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
-                <input className="input pl-11" value={form.phone} onChange={(event) => update('phone', event.target.value)} placeholder="Enter your phone number" />
+                <input className="input" style={{ paddingLeft: '3.25rem' }} value={form.phone} onChange={(event) => update('phone', event.target.value)} placeholder="Enter your phone number" />
               </div>
             </Field>
 

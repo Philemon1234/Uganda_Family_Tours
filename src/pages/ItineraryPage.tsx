@@ -99,7 +99,7 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
 
       <div ref={tabSentinelRef} className="-mt-8 h-px" aria-hidden="true" />
       <div className={isTabStuck ? 'h-[57px] md:h-[65px]' : ''}>
-        <div className={`transition-all duration-300 ease-out ${isTabStuck ? 'fixed left-0 right-0 top-[3.75rem] z-50 w-full lg:top-0' : 'relative z-40 container-custom'}`}>
+        <div className={`transition-all duration-300 ease-out ${isTabStuck ? 'fixed left-0 right-0 top-[3.75rem] z-50 w-full' : 'relative z-40 container-custom'}`}>
           <nav
             ref={tabNavRef}
             className={`relative grid grid-cols-4 overflow-hidden bg-white transition-all duration-300 ease-out ${
