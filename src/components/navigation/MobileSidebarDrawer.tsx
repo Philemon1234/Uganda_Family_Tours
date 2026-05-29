@@ -5,10 +5,11 @@ import {
   FaEnvelope,
   FaFacebookF,
   FaHome,
-  FaInstagram,
   FaMapMarkerAlt,
   FaTimes,
   FaUser,
+  FaWhatsapp,
+  FaYoutube,
 } from 'react-icons/fa'
 import logo from '../../assets/UFT-Logo-PNG.png'
 
@@ -122,18 +123,31 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
           <p className="text-sm font-bold text-muted">Follow us</p>
           <div className="mt-4 flex gap-4">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/ugandafamilytours"
               aria-label="Facebook"
+              target="_blank"
+              rel="noreferrer"
               className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#e55302]"
             >
               <FaFacebookF />
             </a>
             <a
-              href="https://instagram.com"
-              aria-label="Instagram"
+              href="https://www.youtube.com/@ugandafamilytours/shorts"
+              aria-label="YouTube"
+              target="_blank"
+              rel="noreferrer"
               className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#e55302]"
             >
-              <FaInstagram />
+              <FaYoutube />
+            </a>
+            <a
+              href="https://wa.me/256703543027"
+              aria-label="WhatsApp"
+              target="_blank"
+              rel="noreferrer"
+              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#e55302]"
+            >
+              <FaWhatsapp />
             </a>
           </div>
         </div>

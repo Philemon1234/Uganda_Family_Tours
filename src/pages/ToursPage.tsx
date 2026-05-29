@@ -15,7 +15,7 @@ export function ToursPage() {
               description="Handpicked safari experiences designed for unforgettable journeys across Uganda and East Africa."
             />
             <div className="mt-12 grid gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-              {allTours.map((tour) => <TourCard key={tour.id} tour={tour} />)}
+              {allTours.map((tour, index) => <TourCard key={tour.id} tour={tour} revealDelay={(index % 3) * 90} />)}
             </div>
           </div>
         </section>

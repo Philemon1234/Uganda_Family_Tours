@@ -30,12 +30,14 @@ function App() {
     <div className="min-h-screen bg-white pb-24 font-sans text-ink lg:pb-0">
       <ScrollToTop />
       <Navbar onBook={() => openBooking()} />
-      <Routes>
-        <Route path="/" element={<HomePage onBook={() => openBooking(tours[0])} />} />
-        <Route path="/about" element={<AboutPage onBook={() => openBooking(tours[0])} />} />
-        <Route path="/tours" element={<ToursPage />} />
-        <Route path="/tours/:tourId" element={<ItineraryRoute onBook={openBooking} />} />
-      </Routes>
+      <div key={location.pathname} className="page-transition">
+        <Routes>
+          <Route path="/" element={<HomePage onBook={() => openBooking(tours[0])} />} />
+          <Route path="/about" element={<AboutPage onBook={() => openBooking(tours[0])} />} />
+          <Route path="/tours" element={<ToursPage />} />
+          <Route path="/tours/:tourId" element={<ItineraryRoute onBook={openBooking} />} />
+        </Routes>
+      </div>
       <Footer />
       <MobileBottomNav />
       <BookingModal isOpen={isBookingOpen} tour={bookingTour} onClose={() => setIsBookingOpen(false)} />

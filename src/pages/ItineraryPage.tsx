@@ -12,10 +12,7 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
   const { tourId } = useParams()
   const tabSentinelRef = useRef<HTMLDivElement>(null)
   const tabNavRef = useRef<HTMLElement>(null)
-  const priceCardSlotRef = useRef<HTMLElement>(null)
-  const priceCardRef = useRef<HTMLDivElement>(null)
   const [isTabStuck, setIsTabStuck] = useState(false)
-  const [priceCardLayout, setPriceCardLayout] = useState<{ top: number; left: number; width: number; height: number } | null>(null)
   const [activeTab, setActiveTab] = useState(0)
   const [activeGalleryImage, setActiveGalleryImage] = useState<string | null>(null)
   const tour = tours.find((item) => item.slug === tourId) ?? tours.find((item) => `${item.slug}-2` === tourId)
@@ -33,27 +30,6 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
       const tabTop = tabSentinelRef.current.getBoundingClientRect().top
       const nextTabStuck = tabTop <= 0
       setIsTabStuck(nextTabStuck)
-
-      const isDesktop = window.matchMedia('(min-width: 1024px)').matches
-      if (!isDesktop || !nextTabStuck || !priceCardSlotRef.current) {
-        setPriceCardLayout(null)
-        return
-      }
-
-      const tabHeight = tabNavRef.current?.getBoundingClientRect().height ?? 65
-      const slotRect = priceCardSlotRef.current.getBoundingClientRect()
-      const cardHeight = priceCardRef.current?.offsetHeight ?? 0
-
-      if (slotRect.top <= tabHeight) {
-        setPriceCardLayout({
-          top: tabHeight,
-          left: slotRect.left,
-          width: slotRect.width,
-          height: cardHeight,
-        })
-      } else {
-        setPriceCardLayout(null)
-      }
     }
 
     updateTabState()
@@ -187,19 +163,9 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
             </section>
           </div>
 
-          <aside
-            ref={priceCardSlotRef}
-            className="lg:self-start"
-            style={priceCardLayout ? { minHeight: priceCardLayout.height } : undefined}
-          >
+          <aside className="md:sticky md:top-24 md:self-start">
             <div
-              ref={priceCardRef}
-              className={`card p-8 text-center ${priceCardLayout ? 'lg:fixed lg:z-30' : ''}`}
-              style={priceCardLayout ? {
-                top: priceCardLayout.top,
-                left: priceCardLayout.left,
-                width: priceCardLayout.width,
-              } : undefined}
+              className="card p-8 text-center"
             >
               <p className="text-xs font-black uppercase tracking-wide text-ink">Price</p>
               <h2 className="mt-3 text-2xl font-black text-primary">Available on Request</h2>
@@ -214,8 +180,8 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
               <button className="btn-primary mt-7 w-full justify-center" type="button" onClick={onBook}>Book This Tour <FiArrowRight /></button>
               <div className="mt-8 text-sm">
                 <p className="text-muted">Need assistance with your booking?</p>
-                <a className="mt-2 flex items-center justify-center gap-2 font-black text-primary" href="tel:+256700123456">
-                  <FiPhone /> +256 700 123 456
+                <a className="mt-2 flex items-center justify-center gap-2 font-black text-primary" href="tel:+256703543027">
+                  <FiPhone /> +256 703 543027
                 </a>
               </div>
             </div>

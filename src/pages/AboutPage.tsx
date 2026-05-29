@@ -6,6 +6,7 @@ import originsImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
 import charityOne from '../assets/4.jpeg'
 import charityTwo from '../assets/pic1.jpg'
 import ctaImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
+import { MotionReveal } from '../components/MotionReveal'
 
 type AboutPageProps = {
   onBook: () => void
@@ -40,15 +41,17 @@ export function AboutPage({ onBook }: AboutPageProps) {
       <section className="hero-section min-h-[420px]" style={{ backgroundImage: `url(${heroImage})` }}>
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/20" />
         <div className="container-custom relative z-10 flex min-h-[420px] flex-col justify-center pt-20 text-white">
-          <p className="text-sm font-black uppercase text-primary">Who We Are</p>
-          <h1 className="mt-5 text-5xl font-bold leading-tight md:text-8xl">About Us</h1>
-          <p className="mt-4 text-xl font-medium text-white/90">10 Years of Authentic Safaris</p>
+          <p className="hero-kicker text-sm font-black uppercase text-primary">Who We Are</p>
+          <h1 className="hero-title mt-5 text-5xl font-bold leading-tight md:text-8xl">About Us</h1>
+          <p className="hero-copy mt-4 text-xl font-medium text-white/90">10 Years of Authentic Safaris</p>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-custom grid items-center gap-14 lg:grid-cols-2">
-          <img className="h-[390px] w-full rounded-card object-cover shadow-soft" src={welcomeImage} alt="Uganda Family Tours safari guests by company vehicle" />
+          <MotionReveal>
+            <img className="h-[390px] w-full rounded-card object-cover shadow-soft" src={welcomeImage} alt="Uganda Family Tours safari guests by company vehicle" />
+          </MotionReveal>
           <div>
             <p className="text-sm font-black uppercase text-primary">Welcome</p>
             <h2 className="mt-3 text-4xl font-black text-ink">Karibu!</h2>
@@ -75,7 +78,9 @@ export function AboutPage({ onBook }: AboutPageProps) {
               Over the years we’ve built trusted partnerships, created safe and memorable journeys, and remained true to our values: authenticity, sustainability and exceptional care.
             </p>
           </div>
-          <img className="h-[370px] w-full rounded-card object-cover shadow-soft" src={originsImage} alt="Safari vehicle in Uganda near wildlife" />
+          <MotionReveal delay={90}>
+            <img className="h-[370px] w-full rounded-card object-cover shadow-soft" src={originsImage} alt="Safari vehicle in Uganda near wildlife" />
+          </MotionReveal>
         </div>
       </section>
 
@@ -90,12 +95,14 @@ export function AboutPage({ onBook }: AboutPageProps) {
             </p>
           </div>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {initiatives.map(({ icon: Icon, title, text }) => (
-              <article key={title} className="card p-7 text-center">
-                <Icon className="mx-auto text-5xl text-primary" />
-                <h3 className="mt-5 font-black text-ink">{title}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted">{text}</p>
-              </article>
+            {initiatives.map(({ icon: Icon, title, text }, index) => (
+              <MotionReveal key={title} delay={index * 80}>
+                <article className="card p-7 text-center">
+                  <Icon className="mx-auto text-5xl text-primary" />
+                  <h3 className="mt-5 font-black text-ink">{title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-muted">{text}</p>
+                </article>
+              </MotionReveal>
             ))}
           </div>
         </div>
@@ -144,7 +151,7 @@ export function AboutPage({ onBook }: AboutPageProps) {
           <p className="font-black text-primary">Get in touch now</p>
           <h2 className="mt-3 text-3xl font-black md:text-4xl">Start building your dream journey</h2>
           <div className="mt-6 flex flex-col justify-center gap-4 sm:flex-row">
-            <a className="btn-primary justify-center" href="tel:+256700123456"><FaPhone /> Call Now <FiArrowRight /></a>
+            <a className="btn-primary justify-center" href="tel:+256703543027"><FaPhone /> Call Now <FiArrowRight /></a>
             <button className="btn-outline justify-center border-white/70 bg-transparent text-white hover:border-primary" type="button" onClick={onBook}>
               <FaEnvelope /> Make an Enquiry
             </button>

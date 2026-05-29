@@ -1,7 +1,17 @@
-import { FaCcMastercard, FaFacebookF, FaInstagram, FaLocationDot, FaPaypal, FaPhone, FaYoutube } from 'react-icons/fa6'
+import { FaCcMastercard, FaFacebookF, FaLocationDot, FaPaypal, FaPhone, FaWhatsapp, FaYoutube } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
 import { SiVisa } from 'react-icons/si'
 import { Logo } from './Logo'
+
+const phoneDisplay = '+256 703 543027'
+const phoneHref = 'tel:+256703543027'
+const whatsappHref = 'https://wa.me/256703543027'
+const emailHref = 'mailto:safaris@ugandafamilytours.com'
+const socials = [
+  { label: 'Facebook', href: 'https://www.facebook.com/ugandafamilytours', icon: FaFacebookF },
+  { label: 'YouTube', href: 'https://www.youtube.com/@ugandafamilytours/shorts', icon: FaYoutube },
+  { label: 'WhatsApp', href: whatsappHref, icon: FaWhatsapp },
+]
 
 export function Footer() {
   return (
@@ -13,8 +23,8 @@ export function Footer() {
             We are a local family-owned travel company specializing in tailor-made eco-safari experiences in Uganda and East Africa.
           </p>
           <div className="mt-5 flex gap-3">
-            {[FaFacebookF, FaInstagram, FaYoutube].map((Icon, index) => (
-              <a key={index} className="grid h-9 w-9 place-items-center rounded-full border border-white/20 text-white transition hover:border-primary hover:bg-primary" href="#">
+            {socials.map(({ label, href, icon: Icon }) => (
+              <a key={label} className="grid h-9 w-9 place-items-center rounded-full border border-white/20 text-white transition hover:border-primary hover:bg-primary" href={href} target="_blank" rel="noreferrer" aria-label={label}>
                 <Icon />
               </a>
             ))}
@@ -23,9 +33,8 @@ export function Footer() {
         <div>
           <h3 className="footer-title">Contact Us</h3>
           <ul className="mt-5 space-y-3 text-sm text-white/75">
-            <li className="flex gap-3"><FaPhone className="mt-1 text-primary" />+256 700 123 456</li>
-            <li className="flex gap-3"><FaPhone className="mt-1 text-primary" />+256 787 786 615</li>
-            <li className="flex gap-3"><MdEmail className="mt-1 text-primary" />info@ugandafamilytours.com</li>
+            <li><a className="flex gap-3 transition hover:text-primary" href={phoneHref}><FaPhone className="mt-1 text-primary" />{phoneDisplay}</a></li>
+            <li><a className="flex gap-3 transition hover:text-primary" href={emailHref}><MdEmail className="mt-1 text-primary" />safaris@ugandafamilytours.com</a></li>
             <li className="flex gap-3"><FaLocationDot className="mt-1 text-primary" />Kampala, Uganda</li>
           </ul>
         </div>
@@ -50,8 +59,8 @@ export function Footer() {
           </div>
           <h3 className="footer-title mt-8">Connect With Us</h3>
           <div className="mt-4 flex gap-3">
-            {[FaFacebookF, FaInstagram, FaYoutube].map((Icon, index) => (
-              <a key={index} className="grid h-9 w-9 place-items-center rounded-full border border-white/20 transition hover:border-primary hover:text-primary" href="#">
+            {socials.map(({ label, href, icon: Icon }) => (
+              <a key={label} className="grid h-9 w-9 place-items-center rounded-full border border-white/20 transition hover:border-primary hover:text-primary" href={href} target="_blank" rel="noreferrer" aria-label={label}>
                 <Icon />
               </a>
             ))}

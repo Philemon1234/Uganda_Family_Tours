@@ -20,21 +20,21 @@ export function Navbar({ onBook }: NavbarProps) {
   const isHome = location.pathname === '/'
 
   return (
-    <header className="absolute left-0 right-0 top-0 z-40 border-b border-white/10 bg-dark text-white">
-      <nav className="container-custom flex min-h-20 items-center justify-between py-3">
+    <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/15 bg-black/30 text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)] backdrop-blur-md">
+      <nav className="container-custom flex min-h-15 items-center justify-between py-2">
         <NavLink to="/" aria-label="Uganda Family Tours home">
           <Logo />
         </NavLink>
 
-        <div className="hidden items-center gap-8 lg:flex">
+        <div className="hidden items-center gap-7 lg:flex">
           {navItems.map((item) => (
             <NavLink
               key={item.label}
               to={item.href}
               className={({ isActive }) =>
-                `group flex items-center gap-1.5 py-6 text-sm font-bold text-white transition hover:text-white ${
+                `group flex items-center gap-1.5 py-4 text-[0.78rem] font-bold text-white transition hover:text-white ${
                   isActive
-                    ? 'underline decoration-primary decoration-2 underline-offset-[18px]'
+                    ? 'underline decoration-primary decoration-2 underline-offset-[14px]'
                     : 'text-white'
                 }`
               }
@@ -44,12 +44,12 @@ export function Navbar({ onBook }: NavbarProps) {
           ))}
         </div>
 
-        <button className="btn-primary hidden lg:inline-flex" type="button" onClick={onBook}>
+        <button className="btn-primary hidden px-5 py-3 text-[0.72rem] lg:inline-flex" type="button" onClick={onBook}>
           {isHome ? 'Plan Your Trip' : 'Book This Tour'} <FiArrowRight />
         </button>
 
         <button
-          className="grid h-10 w-10 place-items-center rounded-lg border border-white/15 text-white lg:hidden"
+          className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-white lg:hidden"
           type="button"
           aria-label="Open menu"
           onClick={() => setIsOpen((value) => !value)}
@@ -59,7 +59,7 @@ export function Navbar({ onBook }: NavbarProps) {
       </nav>
 
       {isOpen && (
-        <div className="border-t border-white/10 bg-dark px-5 py-4 lg:hidden">
+        <div className="border-t border-white/10 bg-black/75 px-5 py-4 backdrop-blur-md lg:hidden">
           <div className="flex flex-col gap-2">
             {navItems.map((item) => (
               <NavLink
