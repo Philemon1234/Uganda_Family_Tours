@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { FaCheck, FaShieldHeart } from 'react-icons/fa6'
-import { FiArrowRight, FiCheckCircle, FiPhone, FiX } from 'react-icons/fi'
+import { FiArrowRight, FiCheckCircle, FiChevronRight, FiPhone, FiX } from 'react-icons/fi'
 import { tours } from '../data/tours'
 
 type ItineraryPageProps = {
@@ -89,9 +89,11 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
         <div className="absolute inset-0 bg-black/62" />
         <div className="container-custom relative z-10 flex min-h-[500px] flex-col justify-end pb-24 pt-36 text-white md:pb-28 md:pt-40">
           <h1 className="max-w-5xl text-4xl font-bold leading-tight md:text-6xl">Bucket list: {tour.title}</h1>
-          <div className="mt-6 text-sm font-semibold text-white/80 md:text-base">
-            <Link to="/" className="hover:text-primary">Home</Link> <span className="mx-2">&gt;</span>
-            <Link to="/tours" className="hover:text-primary">Tours</Link> <span className="mx-2">&gt;</span>
+          <div className="mt-6 flex flex-wrap items-center gap-2 text-sm font-semibold text-white/80 md:text-base">
+            <Link to="/" className="hover:text-primary">Home</Link>
+            <FiChevronRight className="text-white/55" />
+            <Link to="/tours" className="hover:text-primary">Tours</Link>
+            <FiChevronRight className="text-white/55" />
             <span>{tour.title}</span>
           </div>
         </div>
