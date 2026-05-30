@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FaEnvelope, FaPhone, FaRegUser, FaXmark } from 'react-icons/fa6'
 import { FiArrowRight } from 'react-icons/fi'
+import { useTranslation } from 'react-i18next'
 
 type InquiryModalProps = {
   isOpen: boolean
@@ -22,6 +23,7 @@ const initialForm: InquiryForm = {
 }
 
 export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
+  const { t } = useTranslation()
   const [form, setForm] = useState<InquiryForm>(initialForm)
   const [errors, setErrors] = useState<Partial<Record<keyof InquiryForm, string>>>({})
   const [status, setStatus] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null)
@@ -54,9 +56,9 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
   const validate = () => {
     const nextErrors: Partial<Record<keyof InquiryForm, string>> = {}
     ;(['fullName', 'email', 'phone', 'message'] as const).forEach((field) => {
-      if (!form[field].trim()) nextErrors[field] = 'This field is required.'
+      if (!form[field].trim()) nextErrors[field] = t('common.required')
     })
-    if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) nextErrors.email = 'Enter a valid email address.'
+    if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) nextErrors.email = t('common.validEmail')
     setErrors(nextErrors)
     return Object.keys(nextErrors).length === 0
   }
@@ -66,7 +68,7 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
     if (!validate()) return
 
     setIsSubmitting(true)
-    setStatus({ type: 'info', message: 'Sending your inquiry...' })
+    setStatus({ type: 'info', message: t('inquiryForm.sending') })
 
     try {
       const response = await fetch('/api/contact', {
@@ -77,15 +79,15 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
       const result = await response.json().catch(() => null)
 
       if (!response.ok) {
-        throw new Error(result?.message || 'The inquiry could not be sent right now.')
+        throw new Error(result?.message || t('inquiryForm.error'))
       }
 
       setForm(initialForm)
-      setStatus({ type: 'success', message: 'Inquiry sent successfully. We will contact you soon.' })
+      setStatus({ type: 'success', message: t('inquiryForm.success') })
     } catch (error) {
       setStatus({
         type: 'error',
-        message: error instanceof Error ? error.message : 'The inquiry could not be sent right now.',
+        message: error instanceof Error ? error.message : t('inquiryForm.error'),
       })
     } finally {
       setIsSubmitting(false)
@@ -103,48 +105,48 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
       >
         <div className="booking-modal-scroll max-h-[94vh] overflow-x-hidden overflow-y-auto p-5 sm:p-7 md:p-9">
           <div className="relative text-center">
-            <button className="absolute right-0 top-0 grid h-10 w-10 place-items-center rounded-full bg-gray-100 text-xl text-muted transition hover:bg-primary hover:text-white" type="button" aria-label="Close inquiry modal" onClick={onClose}>
+            <button className="absolute right-0 top-0 grid h-10 w-10 place-items-center rounded-full bg-gray-100 text-xl text-muted transition hover:bg-primary hover:text-white" type="button" aria-label={t('common.close')} onClick={onClose}>
               <FaXmark />
             </button>
             <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-primary/10 text-2xl text-primary">
               <FaEnvelope />
             </div>
-            <h2 id="inquiry-title" className="mt-4 text-3xl font-bold text-ink">Make an Inquiry</h2>
+            <h2 id="inquiry-title" className="mt-4 text-3xl font-bold text-ink">{t('inquiryForm.title')}</h2>
             <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted">
-              Tell us how we can help and our travel specialists will get back to you by email or WhatsApp.
+              {t('inquiryForm.subtitle')}
             </p>
           </div>
 
           <form className="mt-8 space-y-5" onSubmit={submit} noValidate>
             <div className="grid gap-5 md:grid-cols-2">
-              <Field label="Full Name" required error={errors.fullName}>
+              <Field label={t('inquiryForm.fullName')} required error={errors.fullName}>
                 <div className="relative">
                   <FaRegUser className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
-                  <input className="input" style={{ paddingLeft: '3.25rem' }} value={form.fullName} onChange={(event) => update('fullName', event.target.value)} placeholder="Enter your full name" />
+                  <input className="input" style={{ paddingLeft: '3.25rem' }} value={form.fullName} onChange={(event) => update('fullName', event.target.value)} placeholder={t('inquiryForm.fullNamePlaceholder')} />
                 </div>
               </Field>
-              <Field label="Email Address" required error={errors.email}>
+              <Field label={t('inquiryForm.email')} required error={errors.email}>
                 <div className="relative">
                   <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
-                  <input className="input" style={{ paddingLeft: '3.25rem' }} type="email" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder="Enter your email address" />
+                  <input className="input" style={{ paddingLeft: '3.25rem' }} type="email" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder={t('inquiryForm.emailPlaceholder')} />
                 </div>
               </Field>
             </div>
 
-            <Field label="Phone / WhatsApp" required error={errors.phone}>
+            <Field label={t('inquiryForm.phone')} required error={errors.phone}>
               <div className="relative">
                 <FaPhone className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" />
-                <input className="input" style={{ paddingLeft: '3.25rem' }} value={form.phone} onChange={(event) => update('phone', event.target.value)} placeholder="Enter your phone number" />
+                <input className="input" style={{ paddingLeft: '3.25rem' }} value={form.phone} onChange={(event) => update('phone', event.target.value)} placeholder={t('inquiryForm.phonePlaceholder')} />
               </div>
             </Field>
 
-            <Field label="Message" required error={errors.message}>
+            <Field label={t('inquiryForm.message')} required error={errors.message}>
               <textarea
                 className="input min-h-32 resize-none"
                 value={form.message}
                 maxLength={500}
                 onChange={(event) => update('message', event.target.value)}
-                placeholder="Tell us more about your plans, interests or any special requests..."
+                placeholder={t('inquiryForm.messagePlaceholder')}
               />
               <p className="mt-1 text-right text-xs text-muted">{form.message.length}/500</p>
             </Field>
@@ -164,7 +166,7 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
             )}
 
             <button className="btn-primary w-full justify-center disabled:cursor-not-allowed disabled:opacity-70" type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Sending...' : 'Send Inquiry'} <FiArrowRight />
+              {isSubmitting ? t('common.sending') : t('inquiryForm.submit')} <FiArrowRight />
             </button>
           </form>
         </div>

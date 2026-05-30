@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import { FaCalendarDays, FaHouse, FaRegStar, FaUserGroup, FaXmark } from 'react-icons/fa6'
 import { FiArrowRight, FiChevronDown, FiInfo, FiMinus, FiPlus } from 'react-icons/fi'
+import { useTranslation } from 'react-i18next'
 import type { Tour } from '../data/tours'
 import { countries, countryFlag } from '../data/countries'
+import { useLocale } from '../context/LocaleContext'
 
 type BookingModalProps = {
   isOpen: boolean
@@ -43,6 +45,8 @@ const initialForm: FormState = {
 }
 
 export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
+  const { t } = useTranslation()
+  const { formatCurrencyRange } = useLocale()
   const [form, setForm] = useState<FormState>(initialForm)
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({})
   const [status, setStatus] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null)
@@ -50,6 +54,15 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const [isCountryOpen, setIsCountryOpen] = useState(false)
 
   const selectedTour = useMemo(() => `Bucket list: ${tour?.title ?? 'Gorilla Tracking in Bwindi'}`, [tour])
+  const budgetOptions = [
+    { value: '1000-1500', min: 1000, max: 1500 },
+    { value: '1500-2500', min: 1500, max: 2500 },
+    { value: '2500-4000', min: 2500, max: 4000 },
+    { value: '4000+', min: 4000, max: null },
+  ]
+  const selectedBudget = budgetOptions.find((option) => option.value === form.budget)
+  const travelers = form.adults + form.children
+  const estimatedGroupBudget = selectedBudget ? formatCurrencyRange(selectedBudget.min * travelers, selectedBudget.max ? selectedBudget.max * travelers : null) : null
 
   useEffect(() => {
     if (!isOpen) return
@@ -75,9 +88,9 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const validate = () => {
     const nextErrors: Partial<Record<keyof FormState, string>> = {}
     ;(['fullName', 'email', 'phone', 'country', 'travelDate', 'duration', 'budget'] as const).forEach((field) => {
-      if (!String(form[field]).trim()) nextErrors[field] = 'This field is required.'
+      if (!String(form[field]).trim()) nextErrors[field] = t('common.required')
     })
-    if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) nextErrors.email = 'Enter a valid email address.'
+    if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) nextErrors.email = t('common.validEmail')
     setErrors(nextErrors)
     return Object.keys(nextErrors).length === 0
   }
@@ -87,26 +100,27 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
     if (!validate()) return
     const payload = { selectedTour, ...form }
     setIsSubmitting(true)
-    setStatus({ type: 'info', message: 'Sending your booking request...' })
+    const budgetLabel = selectedBudget ? formatCurrencyRange(selectedBudget.min, selectedBudget.max) : form.budget
+    setStatus({ type: 'info', message: t('bookingForm.sending') })
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, budget: budgetLabel, estimatedGroupBudget }),
       })
       const result = await response.json().catch(() => null)
 
       if (!response.ok) {
-        throw new Error(result?.message || 'The booking request could not be sent right now.')
+        throw new Error(result?.message || t('bookingForm.error'))
       }
 
       setForm(initialForm)
-      setStatus({ type: 'success', message: 'Booking request sent successfully. We will contact you soon.' })
+      setStatus({ type: 'success', message: t('bookingForm.success') })
     } catch (error) {
       setStatus({
         type: 'error',
-        message: error instanceof Error ? error.message : 'The booking request could not be sent right now.',
+        message: error instanceof Error ? error.message : t('bookingForm.error'),
       })
     } finally {
       setIsSubmitting(false)
@@ -124,34 +138,34 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
       >
         <div className="booking-modal-scroll max-h-[94vh] overflow-x-hidden overflow-y-auto p-5 pb-24 sm:p-6 sm:pb-8 md:p-8 lg:p-10">
           <div className="relative text-center">
-            <button className="absolute right-0 top-0 text-2xl text-muted transition hover:text-primary" type="button" aria-label="Close modal" onClick={onClose}>
+            <button className="absolute right-0 top-0 text-2xl text-muted transition hover:text-primary" type="button" aria-label={t('common.close')} onClick={onClose}>
               <FaXmark />
             </button>
             <div className="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-2xl text-primary">
               <FaCalendarDays />
             </div>
-            <h2 id="booking-title" className="mt-3 text-3xl font-bold text-ink">Book This Tour</h2>
+            <h2 id="booking-title" className="mt-3 text-3xl font-bold text-ink">{t('bookingForm.title')}</h2>
             <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted">
-              Tell us about your trip and we'll get back to you with availability and pricing.
+              {t('bookingForm.subtitle')}
             </p>
           </div>
 
           <form className="mt-7 space-y-5" onSubmit={submit} noValidate>
-            <Field label="Selected Tour">
+            <Field label={t('bookingForm.selectedTour')}>
               <input className="input" value={selectedTour} readOnly />
             </Field>
 
             <div className="grid gap-5 md:grid-cols-2">
-              <Field label="Full Name" required error={errors.fullName}>
-                <input className="input" value={form.fullName} onChange={(event) => update('fullName', event.target.value)} placeholder="Enter your full name" />
+              <Field label={t('bookingForm.fullName')} required error={errors.fullName}>
+                <input className="input" value={form.fullName} onChange={(event) => update('fullName', event.target.value)} placeholder={t('bookingForm.fullNamePlaceholder')} />
               </Field>
-              <Field label="Email Address" required error={errors.email}>
-                <input className="input" type="email" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder="Enter your email" />
+              <Field label={t('bookingForm.email')} required error={errors.email}>
+                <input className="input" type="email" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder={t('bookingForm.emailPlaceholder')} />
               </Field>
-              <Field label="Phone / WhatsApp" required error={errors.phone}>
+              <Field label={t('bookingForm.phone')} required error={errors.phone}>
                 <input className="input" value={form.phone} onChange={(event) => update('phone', event.target.value)} />
               </Field>
-              <Field label="Country of Residence" required error={errors.country}>
+              <Field label={t('bookingForm.country')} required error={errors.country}>
                 <CountrySelect
                   value={form.country}
                   isOpen={isCountryOpen}
@@ -159,10 +173,10 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                   onChange={(value) => update('country', value)}
                 />
               </Field>
-              <Field label="Preferred Travel Date" required error={errors.travelDate}>
+              <Field label={t('bookingForm.travelDate')} required error={errors.travelDate}>
                 <input className="input" type="date" value={form.travelDate} onChange={(event) => update('travelDate', event.target.value)} />
               </Field>
-              <Field label="Are your dates flexible?">
+              <Field label={t('bookingForm.flexibleDates')}>
                 <div className="grid grid-cols-2 gap-2">
                   {(['Yes', 'No'] as const).map((value) => (
                     <button
@@ -171,7 +185,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                       type="button"
                       onClick={() => update('flexible', value)}
                     >
-                      {value}
+                      {value === 'Yes' ? t('common.yes') : t('common.no')}
                     </button>
                   ))}
                 </div>
@@ -179,27 +193,27 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
             </div>
 
             <div>
-              <p className="mb-3 text-sm font-semibold text-ink">Group Size</p>
+              <p className="mb-3 text-sm font-semibold text-ink">{t('bookingForm.groupSize')}</p>
               <div className="grid gap-5 md:grid-cols-3">
-                <Counter label="Adults" value={form.adults} onChange={(value) => update('adults', Math.max(1, value))} />
-                <Counter label="Children" value={form.children} onChange={(value) => update('children', Math.max(0, value))} />
-                <Field label="Children's Ages">
-                  <input className="input" value={form.childrenAges} onChange={(event) => update('childrenAges', event.target.value)} placeholder="e.g. 5, 8, 12" />
+                <Counter label={t('bookingForm.adults')} value={form.adults} onChange={(value) => update('adults', Math.max(1, value))} />
+                <Counter label={t('bookingForm.children')} value={form.children} onChange={(value) => update('children', Math.max(0, value))} />
+                <Field label={t('bookingForm.childrenAges')}>
+                  <input className="input" value={form.childrenAges} onChange={(event) => update('childrenAges', event.target.value)} placeholder={t('bookingForm.childrenAgesPlaceholder')} />
                 </Field>
               </div>
             </div>
 
             <div className="grid gap-5 md:grid-cols-2">
-              <Field label="Number of Days / Preferred Duration" required error={errors.duration}>
+              <Field label={t('bookingForm.duration')} required error={errors.duration}>
                 <select className="input" value={form.duration} onChange={(event) => update('duration', event.target.value)}>
-                  <option value="">Select number of days</option>
-                  <option>2 Days</option>
-                  <option>3 Days</option>
-                  <option>4 Days</option>
-                  <option>5+ Days</option>
+                  <option value="">{t('bookingForm.durationPlaceholder')}</option>
+                  <option value={`2 ${t('common.days')}`}>2 {t('common.days')}</option>
+                  <option value={`3 ${t('common.days')}`}>3 {t('common.days')}</option>
+                  <option value={`4 ${t('common.days')}`}>4 {t('common.days')}</option>
+                  <option value={`5+ ${t('common.days')}`}>5+ {t('common.days')}</option>
                 </select>
               </Field>
-              <Field label="Accommodation Preference" required>
+              <Field label={t('bookingForm.accommodation')} required>
                 <div className="grid grid-cols-3 gap-2">
                   {[
                     { name: 'Budget', icon: FaHouse },
@@ -218,22 +232,22 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                   ))}
                 </div>
               </Field>
-              <Field label="Estimated Budget (Per Person)" required error={errors.budget}>
+              <Field label={t('bookingForm.budget')} required error={errors.budget}>
                 <select className="input" value={form.budget} onChange={(event) => update('budget', event.target.value)}>
-                  <option value="">Select budget range</option>
-                  <option>$1,000 - $1,500</option>
-                  <option>$1,500 - $2,500</option>
-                  <option>$2,500 - $4,000</option>
-                  <option>$4,000+</option>
+                  <option value="">{t('bookingForm.budgetPlaceholder')}</option>
+                  {budgetOptions.map((option) => (
+                    <option key={option.value} value={option.value}>{formatCurrencyRange(option.min, option.max)}</option>
+                  ))}
                 </select>
+                {estimatedGroupBudget && <p className="mt-2 text-xs font-semibold text-primary">{t('bookingForm.budgetTotal')}: {estimatedGroupBudget}</p>}
               </Field>
-              <Field label="Special Requests / Notes">
+              <Field label={t('bookingForm.specialRequests')}>
                 <textarea
                   className="input min-h-28 resize-none"
                   value={form.notes}
                   maxLength={500}
                   onChange={(event) => update('notes', event.target.value)}
-                  placeholder="Any special requests or additional information..."
+                  placeholder={t('bookingForm.notesPlaceholder')}
                 />
                 <p className="mt-1 text-right text-xs text-muted">{form.notes.length}/500</p>
               </Field>
@@ -241,7 +255,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
 
             <div className="flex items-start gap-3 rounded-lg border border-primary/25 bg-primary/5 p-4 text-sm text-ink">
               <FiInfo className="mt-0.5 shrink-0 text-primary" />
-              We'll contact you by email or WhatsApp to confirm availability.
+              {t('bookingForm.info')}
             </div>
             {status && (
               <p
@@ -258,9 +272,9 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
             )}
             <div className="flex flex-col gap-3 pt-2">
               <button className="btn-primary justify-center disabled:cursor-not-allowed disabled:opacity-70" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Booking Request'} <FiArrowRight />
+                {isSubmitting ? t('common.sending') : t('bookingForm.submit')} <FiArrowRight />
               </button>
-              <button className="btn-outline justify-center" type="button" onClick={onClose} disabled={isSubmitting}>Cancel</button>
+              <button className="btn-outline justify-center" type="button" onClick={onClose} disabled={isSubmitting}>{t('common.cancel')}</button>
             </div>
           </form>
         </div>
@@ -297,6 +311,7 @@ function CountrySelect({
   onOpenChange: (value: boolean) => void
   onChange: (value: string) => void
 }) {
+  const { t } = useTranslation()
   const search = value.trim().toLowerCase()
   const filteredCountries = countries.filter((country) => {
     if (!search) return true
@@ -324,7 +339,7 @@ function CountrySelect({
           onOpenChange(true)
         }}
         onFocus={() => onOpenChange(true)}
-        placeholder="Select country"
+        placeholder={t('bookingForm.selectCountry')}
         role="combobox"
         aria-expanded={isOpen}
         aria-controls="country-listbox"
@@ -364,7 +379,7 @@ function CountrySelect({
               </button>
             ))
           ) : (
-            <p className="px-4 py-4 text-sm font-semibold text-muted">No countries found.</p>
+            <p className="px-4 py-4 text-sm font-semibold text-muted">{t('bookingForm.noCountries')}</p>
           )}
         </div>
       )}

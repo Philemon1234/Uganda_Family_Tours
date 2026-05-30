@@ -1,10 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { reviews } from '../data/reviews'
 import { ReviewCard } from './ReviewCard'
 
 export function ReviewCarousel() {
+  const { t } = useTranslation()
+  const translatedReviews = reviews.map((review, index) => ({
+    ...review,
+    country: t(`reviews.items.${index}.country`, { defaultValue: review.country }),
+    text: t(`reviews.items.${index}.text`, { defaultValue: review.text }),
+  }))
   const slideCount = reviews.length
-  const slides = useMemo(() => [...reviews, ...reviews, ...reviews], [])
+  const slides = useMemo(() => [...translatedReviews, ...translatedReviews, ...translatedReviews], [translatedReviews])
   const [index, setIndex] = useState(slideCount)
   const [isTransitioning, setIsTransitioning] = useState(true)
   const [isPaused, setIsPaused] = useState(false)
@@ -120,7 +127,7 @@ export function ReviewCarousel() {
         </div>
       </div>
       <div className="mt-7 flex justify-center gap-2">
-        {reviews.map((_, dotIndex) => (
+        {translatedReviews.map((_, dotIndex) => (
           <button
             key={dotIndex}
             type="button"

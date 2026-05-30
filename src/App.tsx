@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Route, Routes, useLocation, useParams } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
@@ -18,12 +18,7 @@ function App() {
   const [bookingTour, setBookingTour] = useState<Tour | undefined>(tours[0])
   const location = useLocation()
 
-  const currentTour = useMemo(() => {
-    const slug = location.pathname.split('/').pop()
-    return tours.find((tour) => tour.slug === slug) ?? tours[0]
-  }, [location.pathname])
-
-  const openBooking = (tour = currentTour) => {
+  const openBooking = (tour = tours[0]) => {
     setBookingTour(tour)
     setIsBookingOpen(true)
   }
@@ -50,8 +45,8 @@ function App() {
 
 function ItineraryRoute({ onBook }: { onBook: (tour?: Tour) => void }) {
   const { tourId } = useParams()
-  const tour = tours.find((item) => item.slug === tourId) ?? tours[0]
-  return <ItineraryPage onBook={() => onBook(tour)} />
+  return <ItineraryPage slug={tourId ?? ''} onBook={onBook} />
 }
 
 export default App
+

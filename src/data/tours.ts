@@ -21,6 +21,7 @@ export type Tour = {
   title: string
   slug: string
   price: string
+  priceUSD: number
   duration: string
   destination: string
   tripLevel: string
@@ -80,6 +81,7 @@ export const tours: Tour[] = [
     title: 'Gorilla Tracking in Bwindi',
     slug: 'gorilla-tracking-in-bwindi',
     price: 'From $1,970',
+    priceUSD: 1970,
     duration: '4 Days',
     destination: 'Bwindi',
     tripLevel: 'Moderate',
@@ -106,6 +108,7 @@ export const tours: Tour[] = [
     title: 'Murchison Falls Safari',
     slug: 'murchison-falls-safari',
     price: 'From $1,600',
+    priceUSD: 1600,
     duration: '3 Days',
     destination: 'Murchison Falls',
     tripLevel: 'Easy',
@@ -125,6 +128,7 @@ export const tours: Tour[] = [
     title: 'Queen Elizabeth Wildlife Safari',
     slug: 'queen-elizabeth-wildlife-safari',
     price: 'From $1,490',
+    priceUSD: 1490,
     duration: '3 Days',
     destination: 'Queen Elizabeth',
     tripLevel: 'Easy',
@@ -144,6 +148,7 @@ export const tours: Tour[] = [
     title: 'Lake Bunyonyi Escape',
     slug: 'lake-bunyonyi-escape',
     price: 'From $1,130',
+    priceUSD: 1130,
     duration: '2 Days',
     destination: 'Lake Bunyonyi',
     tripLevel: 'Easy',
@@ -163,6 +168,7 @@ export const tours: Tour[] = [
     title: 'Chimpanzee Trekking',
     slug: 'chimpanzee-trekking',
     price: 'From $1,300',
+    priceUSD: 1300,
     duration: '3 Days',
     destination: 'Kibale Forest',
     tripLevel: 'Moderate',
@@ -182,6 +188,7 @@ export const tours: Tour[] = [
     title: 'Cultural Uganda Experience',
     slug: 'cultural-uganda-experience',
     price: 'From $1,090',
+    priceUSD: 1090,
     duration: '2 Days',
     destination: 'Uganda',
     tripLevel: 'Easy',

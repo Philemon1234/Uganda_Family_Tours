@@ -1,0 +1,351 @@
+{
+  "navbar": {
+    "home": "Start",
+    "tours": "Touren",
+    "about": "Über uns",
+    "talkToSpecialist": "Mit Reisespezialist sprechen",
+    "language": "Sprache"
+  },
+  "common": {
+    "from": "Ab",
+    "days": "Tage",
+    "sending": "Senden...",
+    "required": "Dieses Feld ist erforderlich.",
+    "validEmail": "Geben Sie eine gültige E-Mail-Adresse ein.",
+    "yes": "Ja",
+    "no": "Nein",
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "menu": "Men?"
+  },
+  "home": {
+    "hero": {
+      "title": "Ihr Abenteuer wartet in der Perle Afrikas",
+      "subtitle": "Entdecken Sie unvergessliche Safaris, atemberaubende Landschaften und lebendige Kulturen mit Uganda Family Tours & Safari Co.",
+      "primaryCta": "Touren ansehen"
+    },
+    "story": {
+      "label": "Unsere Geschichte",
+      "title": "Entdecken Sie das Herz Ugandas",
+      "description": "Von nebligen Bergen bis zu mächtigen Flüssen: Erleben Sie Uganda neu."
+    },
+    "featured": {
+      "label": "Uganda entdecken",
+      "title": "Empfohlene Touren",
+      "viewAll": "Alle Touren ansehen"
+    },
+    "why": {
+      "label": "Ihr Abenteuer. Unsere Erfahrung.",
+      "title": "Warum mit Uganda Family Tours reisen?",
+      "description": "Wir gestalten unvergessliche Reisen durch Kultur, Landschaften und Tierwelt Ugandas.",
+      "tailorTitle": "Maßgeschneiderte Routen",
+      "tailorText": "Individuelle Reisepläne für Sie.",
+      "localTitle": "Lokale Expertise",
+      "localText": "Leidenschaftliche lokale Guides.",
+      "responsibleTitle": "Verantwortungsvolles Reisen",
+      "responsibleText": "Natur schützen und Gemeinden stärken.",
+      "peaceTitle": "Sorgenfrei",
+      "peaceText": "Sichere Buchung und 24/7 Support."
+    },
+    "galleryTitle": "Momente unserer Reisen",
+    "reviewsTitle": "Was unsere Reisenden sagen"
+  },
+  "toursPage": {
+    "title": "Unsere Touren",
+    "description": "Ausgewählte Safari-Erlebnisse für unvergessliche Reisen durch Uganda und Ostafrika.",
+    "ctaLabel": "Entdecken. Erleben. Reisen.",
+    "ctaTitle": "Ihre Reise wartet - planen wir Ihren Traum",
+    "ctaButton": "Team kontaktieren"
+  },
+  "tourCard": {
+    "duration": "Dauer",
+    "getPackage": "Paket ansehen"
+  },
+  "tourDetails": {
+    "breadcrumbHome": "Start",
+    "breadcrumbTours": "Touren",
+    "overview": "Überblick",
+    "gallery": "Galerie",
+    "highlights": "Highlights",
+    "itinerary": "Reiseplan",
+    "tourHighlights": "Tour-Highlights",
+    "dayByDay": "Reiseplan Tag für Tag",
+    "price": "Preis",
+    "availableOnRequest": "Auf Anfrage",
+    "quote": "Kontaktieren Sie uns für ein persönliches Angebot",
+    "instant": "Sofortige Bestätigung",
+    "secure": "Sichere Buchung",
+    "fees": "Keine Buchungsgebühren",
+    "bookThisTour": "Diese Tour buchen",
+    "needHelp": "Benötigen Sie Hilfe bei der Buchung?",
+    "activities": "Aktivit?ten",
+    "bucketList": "Wunschliste",
+    "day": "Tag"
+  },
+  "bookingForm": {
+    "title": "Diese Tour buchen",
+    "subtitle": "Erzählen Sie uns von Ihrer Reise und wir melden uns mit Verfügbarkeit und Preis.",
+    "selectedTour": "Ausgewählte Tour",
+    "fullName": "Vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefon / WhatsApp",
+    "country": "Wohnsitzland",
+    "travelDate": "Gewünschtes Reisedatum",
+    "flexibleDates": "Sind Ihre Daten flexibel?",
+    "groupSize": "Gruppengröße",
+    "adults": "Erwachsene",
+    "children": "Kinder",
+    "childrenAges": "Alter der Kinder",
+    "duration": "Anzahl Tage / Gewünschte Dauer",
+    "accommodation": "Unterkunftswunsch",
+    "budget": "Geschätztes Budget pro Person",
+    "specialRequests": "Besondere Wünsche / Notizen",
+    "submit": "Buchungsanfrage senden",
+    "selectCountry": "Land auswählen",
+    "noCountries": "Keine Länder gefunden.",
+    "fullNamePlaceholder": "Vollständigen Namen eingeben",
+    "emailPlaceholder": "E-Mail eingeben",
+    "childrenAgesPlaceholder": "z. B. 5, 8, 12",
+    "durationPlaceholder": "Anzahl der Tage wählen",
+    "budgetPlaceholder": "Budgetbereich wählen",
+    "notesPlaceholder": "Besondere Wünsche oder weitere Informationen...",
+    "info": "Wir kontaktieren Sie per E-Mail oder WhatsApp.",
+    "sending": "Buchungsanfrage wird gesendet...",
+    "success": "Buchungsanfrage gesendet. Wir melden uns bald.",
+    "error": "Die Anfrage konnte gerade nicht gesendet werden.",
+    "budgetTotal": "Geschätztes Gruppenbudget"
+  },
+  "inquiryForm": {
+    "title": "Anfrage stellen",
+    "subtitle": "Sagen Sie uns, wie wir helfen können, und unsere Spezialisten antworten per E-Mail oder WhatsApp.",
+    "fullName": "Vollständiger Name",
+    "email": "E-Mail-Adresse",
+    "phone": "Telefon / WhatsApp",
+    "message": "Nachricht",
+    "submit": "Anfrage senden",
+    "fullNamePlaceholder": "Vollständigen Namen eingeben",
+    "emailPlaceholder": "E-Mail-Adresse eingeben",
+    "phonePlaceholder": "Telefonnummer eingeben",
+    "messagePlaceholder": "Erzählen Sie uns von Ihren Plänen oder Wünschen...",
+    "sending": "Anfrage wird gesendet...",
+    "success": "Anfrage gesendet. Wir melden uns bald.",
+    "error": "Die Anfrage konnte gerade nicht gesendet werden."
+  },
+  "footer": {
+    "about": "Wir sind ein lokales Familienunternehmen für maßgeschneiderte Öko-Safaris in Uganda und Ostafrika.",
+    "contact": "Kontakt",
+    "quickLinks": "Schnelllinks",
+    "accept": "Wir akzeptieren",
+    "social": "Verbinden Sie sich mit uns",
+    "rights": "© 2025 Uganda Family Tours & Safari Co. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "location": "Kampala, Uganda"
+  },
+  "aboutPage": {
+    "hero": {
+      "kicker": "?ber uns",
+      "title": "?ber uns",
+      "subtitle": "10 Jahre authentische Safaris"
+    },
+    "welcome": {
+      "label": "Willkommen",
+      "title": "Karibu!",
+      "p1": "Willkommen bei Uganda Family Tours & Safari Company, Ihrem zuverl?ssigen Partner f?r sichere und naturfreundliche Familienabenteuer.",
+      "p2": "Unser lokales Team hilft Familien, Ugandas Sch?nheit, Tierwelt und Kultur entspannt und respektvoll zu erleben."
+    },
+    "origins": {
+      "label": "Wunschliste",
+      "title": "Unsere Urspr?nge",
+      "p1": "Unsere Geschichte begann mit Liebe zur Natur, zur Tierwelt und zu den Menschen Ugandas.",
+      "p2": "Heute gestalten wir sichere, authentische und nachhaltige Reisen f?r Familien aus aller Welt."
+    },
+    "initiatives": {
+      "label": "Jetzt Kontakt aufnehmen",
+      "title": "Unsere Initiativen",
+      "description": "Wir setzen uns f?r verantwortungsvolles Reisen und positive Wirkung in Gemeinden und Natur ein.",
+      "responsible": {
+        "title": "Verantwortlicher Tourismus",
+        "text": "Wir setzen uns f?r verantwortungsvolles Reisen und positive Wirkung in Gemeinden und Natur ein."
+      },
+      "community": {
+        "title": "St?rkung der Gemeinschaft",
+        "text": "Wir arbeiten mit Schulen und Gemeindegruppen, um Lernen und Chancen zu st?rken."
+      },
+      "conservation": {
+        "title": "Naturschutz",
+        "text": "Wir setzen uns f?r verantwortungsvolles Reisen und positive Wirkung in Gemeinden und Natur ein."
+      },
+      "eco": {
+        "title": "Umweltfreundliches Reisen",
+        "text": "Wir setzen uns f?r verantwortungsvolles Reisen und positive Wirkung in Gemeinden und Natur ein."
+      }
+    },
+    "charities": {
+      "label": "Jetzt Kontakt aufnehmen",
+      "title": "Unsere Hilfsprojekte",
+      "visit": "Website besuchen",
+      "learn": "Mehr erfahren",
+      "mammadu": {
+        "title": "The Mammadu Trust",
+        "p1": "Wir unterst?tzen Kinder, Frauen und Familien in besonders verletzlichen Situationen.",
+        "p2": "Ihr Guide kann Besuche oder Spenden mit Transparenz und Sorgfalt koordinieren."
+      },
+      "orange": {
+        "title": "Orange Community Project",
+        "p1": "Wir arbeiten mit Schulen und Gemeindegruppen, um Lernen und Chancen zu st?rken.",
+        "p2": "Unsere Projekte schaffen nachhaltigen Nutzen ?ber jede Safari hinaus."
+      }
+    },
+    "cta": {
+      "label": "Jetzt Kontakt aufnehmen",
+      "title": "Ihre Traumreise beginnt hier",
+      "call": "Jetzt anrufen",
+      "inquiry": "Anfrage stellen"
+    }
+  },
+  "tourContent": {
+    "gorilla-tracking-in-bwindi": {
+      "title": "Gorilla-Tracking in Bwindi",
+      "shortDescription": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "overview": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "highlights": [
+        "Gorilla-Tracking in Bwindi",
+        "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+        "Verantwortlicher Tourismus",
+        "Naturschutz",
+        "Umweltfreundliches Reisen"
+      ]
+    },
+    "murchison-falls-safari": {
+      "title": "Murchison Falls Safari",
+      "shortDescription": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "overview": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "highlights": [
+        "Murchison Falls Safari",
+        "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+        "Verantwortlicher Tourismus",
+        "Naturschutz",
+        "Umweltfreundliches Reisen"
+      ]
+    },
+    "queen-elizabeth-wildlife-safari": {
+      "title": "Queen Elizabeth Wildlife Safari",
+      "shortDescription": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "overview": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "highlights": [
+        "Queen Elizabeth Wildlife Safari",
+        "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+        "Verantwortlicher Tourismus",
+        "Naturschutz",
+        "Umweltfreundliches Reisen"
+      ]
+    },
+    "lake-bunyonyi-escape": {
+      "title": "Lake Bunyonyi Auszeit",
+      "shortDescription": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "overview": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "highlights": [
+        "Lake Bunyonyi Auszeit",
+        "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+        "Verantwortlicher Tourismus",
+        "Naturschutz",
+        "Umweltfreundliches Reisen"
+      ]
+    },
+    "chimpanzee-trekking": {
+      "title": "Schimpansen-Tracking",
+      "shortDescription": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "overview": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "highlights": [
+        "Schimpansen-Tracking",
+        "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+        "Verantwortlicher Tourismus",
+        "Naturschutz",
+        "Umweltfreundliches Reisen"
+      ]
+    },
+    "cultural-uganda-experience": {
+      "title": "Kulturelles Uganda-Erlebnis",
+      "shortDescription": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "overview": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+      "highlights": [
+        "Kulturelles Uganda-Erlebnis",
+        "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+        "Verantwortlicher Tourismus",
+        "Naturschutz",
+        "Umweltfreundliches Reisen"
+      ]
+    },
+    "itineraryDays": [
+      {
+        "title": "Ankunft und Einleben",
+        "description": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+        "activities": [
+          "Abholung und Transfer",
+          "Gef?hrte Naturbeobachtung",
+          "Lodge Check-in"
+        ],
+        "details": "Unterkunft: Lodge  Mahlzeiten: Fr?hst?ck, Mittagessen, Abendessen  Entfernung: 120 km"
+      },
+      {
+        "title": "Gorilla-Tracking und Transfer",
+        "description": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+        "activities": [
+          "Abholung und Transfer",
+          "Gef?hrte Naturbeobachtung",
+          "Lodge Check-in"
+        ],
+        "details": "Unterkunft: Lodge  Mahlzeiten: Fr?hst?ck, Mittagessen, Abendessen  Entfernung: 160 km"
+      },
+      {
+        "title": "Queen Elizabeth erkunden",
+        "description": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+        "activities": [
+          "Abholung und Transfer",
+          "Gef?hrte Naturbeobachtung",
+          "Lodge Check-in"
+        ],
+        "details": "Unterkunft: Lodge  Mahlzeiten: Fr?hst?ck, Mittagessen, Abendessen  Entfernung: 80 km"
+      },
+      {
+        "title": "Abreise und Kultur",
+        "description": "Eine sorgf?ltig geplante Safari mit Natur, Kultur und unvergesslichen Tierbeobachtungen.",
+        "activities": [
+          "Abholung und Transfer",
+          "Gef?hrte Naturbeobachtung",
+          "Lodge Check-in"
+        ],
+        "details": "Unterkunft: Lodge  Mahlzeiten: Fr?hst?ck, Mittagessen, Abendessen  Entfernung: 280 km"
+      }
+    ]
+  },
+  "reviews": {
+    "items": [
+      {
+        "country": "Australia",
+        "text": "Die Reise war hervorragend organisiert und sehr pers?nlich."
+      },
+      {
+        "country": "United Kingdom",
+        "text": "Die Reise war hervorragend organisiert und sehr pers?nlich."
+      },
+      {
+        "country": "Canada",
+        "text": "Die Reise war hervorragend organisiert und sehr pers?nlich."
+      },
+      {
+        "country": "United States",
+        "text": "Die Reise war hervorragend organisiert und sehr pers?nlich."
+      },
+      {
+        "country": "Kenya",
+        "text": "Die Reise war hervorragend organisiert und sehr pers?nlich."
+      },
+      {
+        "country": "Spain",
+        "text": "Die Reise war hervorragend organisiert und sehr pers?nlich."
+      }
+    ]
+  }
+}

@@ -1,38 +1,88 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { FaCheck, FaShieldHeart } from 'react-icons/fa6'
 import { FiArrowRight, FiCheckCircle, FiChevronRight, FiPhone, FiX } from 'react-icons/fi'
-import { tours } from '../data/tours'
+import { tours, type ItineraryDay, type Tour } from '../data/tours'
+import { useLocale } from '../context/LocaleContext'
+import { getTourPackageDetailsBySlug } from '../services/publicTourService'
+import type { TourPackageDetails, TourItineraryDayWithDetails } from '../types/tourPackage'
+import hotelExterior from '../assets/Hotels/hotel.jpg'
+import kabiraPool from '../assets/Hotels/Kabira_Country_Club-Kampala-Pool-2-477529.jpg'
+import kampalaSerena from '../assets/Hotels/kampala-serena-hotel.jpg'
+import proteaHotel from '../assets/Hotels/Protea hotel.webp'
+import serenaHotel from '../assets/Hotels/serena hotel.jpg'
+import lodgeRoom from '../assets/Hotels/v3Ppqx8Q6OKs.jpg'
 
 type ItineraryPageProps = {
-  onBook: () => void
+  slug: string
+  onBook: (tour?: Tour) => void
 }
 
-export function ItineraryPage({ onBook }: ItineraryPageProps) {
-  const { tourId } = useParams()
+const fallbackTour = tours[0]
+const fallbackDayImages = [hotelExterior, kabiraPool, kampalaSerena, proteaHotel, serenaHotel, lodgeRoom]
+
+export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
+  const { t } = useTranslation()
+  const { formatCurrency } = useLocale()
   const tabSentinelRef = useRef<HTMLDivElement>(null)
   const tabNavRef = useRef<HTMLElement>(null)
   const itineraryTimelineRef = useRef<HTMLDivElement>(null)
   const dayMarkerRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [details, setDetails] = useState<TourPackageDetails | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState('')
   const [isTabStuck, setIsTabStuck] = useState(false)
   const [timelineProgress, setTimelineProgress] = useState(0)
   const [activeTab, setActiveTab] = useState(0)
   const [activeGalleryImage, setActiveGalleryImage] = useState<string | null>(null)
-  const tour = tours.find((item) => item.slug === tourId) ?? tours.find((item) => `${item.slug}-2` === tourId)
+
+  useEffect(() => {
+    let isMounted = true
+
+    async function loadDetails() {
+      setIsLoading(true)
+      setError('')
+
+      try {
+        const nextDetails = await getTourPackageDetailsBySlug(slug)
+
+        if (isMounted) {
+          setDetails(nextDetails)
+        }
+      } catch (loadError) {
+        const message = loadError instanceof Error ? loadError.message : String(loadError)
+
+        if (isMounted) {
+          setError(message || 'Unable to load tour package details.')
+          setDetails(null)
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false)
+        }
+      }
+    }
+
+    void loadDetails()
+
+    return () => {
+      isMounted = false
+    }
+  }, [slug])
 
   const tabs = [
-    ['Overview', '#overview'],
-    ['Gallery', '#gallery'],
-    ['Highlights', '#highlights'],
-    ['Itinerary', '#itinerary'],
+    [t('tourDetails.overview'), '#overview'],
+    [t('tourDetails.gallery'), '#gallery'],
+    [t('tourDetails.highlights'), '#highlights'],
+    [t('tourDetails.itinerary'), '#itinerary'],
   ] as const
 
   useEffect(() => {
     const updateTabState = () => {
       if (!tabSentinelRef.current) return
       const tabTop = tabSentinelRef.current.getBoundingClientRect().top
-      const nextTabStuck = tabTop <= 0
-      setIsTabStuck(nextTabStuck)
+      setIsTabStuck(tabTop <= 0)
     }
 
     updateTabState()
@@ -73,11 +123,66 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
       window.removeEventListener('scroll', updateTimelineProgress)
       window.removeEventListener('resize', updateTimelineProgress)
     }
-  }, [tour?.slug])
+  }, [details?.package.slug])
 
-  if (!tour) return <Navigate to="/tours" replace />
+  if (isLoading) {
+    return (
+      <main className="bg-white pt-28">
+        <section className="section-padding">
+          <div className="container-custom">
+            <div className="h-[500px] animate-pulse rounded-[2rem] bg-slate-100" />
+            <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_400px]">
+              <div className="space-y-5">
+                {[0, 1, 2].map((item) => (
+                  <div key={item} className="h-32 animate-pulse rounded-2xl bg-slate-100" />
+                ))}
+              </div>
+              <div className="h-72 animate-pulse rounded-2xl bg-slate-100" />
+            </div>
+          </div>
+        </section>
+      </main>
+    )
+  }
 
-  const galleryMosaic = Array.from({ length: 4 }, (_, index) => tour.galleryImages[index % tour.galleryImages.length])
+  if (error) {
+    return (
+      <main className="bg-white pt-28">
+        <section className="section-padding">
+          <div className="container-custom">
+            <div className="mx-auto max-w-3xl rounded-[1.75rem] border border-red-200 bg-red-50 px-6 py-10 text-center text-red-700">
+              <p className="text-2xl font-black">Unable to load tour package</p>
+              <p className="mt-3 text-sm leading-6">{error}</p>
+              <Link className="btn-primary mt-7" to="/tours">Back to tours</Link>
+            </div>
+          </div>
+        </section>
+      </main>
+    )
+  }
+
+  if (!details) {
+    return (
+      <main className="bg-white pt-28">
+        <section className="section-padding">
+          <div className="container-custom">
+            <div className="mx-auto max-w-3xl rounded-[1.75rem] border border-[#eadfd3] bg-[#fff8f3] px-6 py-10 text-center">
+              <p className="text-2xl font-black text-ink">Tour package not found.</p>
+              <p className="mt-3 text-muted">This package may no longer be available.</p>
+              <Link className="btn-primary mt-7" to="/tours">Back to tours</Link>
+            </div>
+          </div>
+        </section>
+      </main>
+    )
+  }
+
+  const tourPackage = details.package
+  const tourTitle = tourPackage.title
+  const tourOverview = tourPackage.overview
+  const heroImage = tourPackage.hero_image_url || tourPackage.main_image_url || fallbackTour.heroImage
+  const galleryImages = details.galleryImages.slice(0, 4)
+  const bookingTour = packageDetailsToTour(details)
 
   const openGalleryImage = (image: string) => {
     setActiveGalleryImage(image)
@@ -85,16 +190,17 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
 
   return (
     <>
-      <section className="hero-section min-h-[500px]" style={{ backgroundImage: `url(${tour.heroImage})` }}>
+      <section className="hero-section min-h-[500px]" style={{ backgroundImage: `url(${heroImage})` }}>
         <div className="absolute inset-0 bg-black/62" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-b from-transparent via-black/25 to-[#faf7f2]" />
         <div className="container-custom relative z-10 flex min-h-[500px] flex-col justify-end pb-24 pt-36 text-white md:pb-28 md:pt-40">
-          <h1 className="max-w-5xl text-4xl font-bold leading-tight md:text-6xl">Bucket list: {tour.title}</h1>
+          <h1 className="max-w-5xl text-4xl font-bold leading-tight md:text-6xl">{t('tourDetails.bucketList')}: {tourTitle}</h1>
           <div className="mt-6 flex flex-wrap items-center gap-2 text-sm font-semibold text-white/80 md:text-base">
-            <Link to="/" className="hover:text-primary">Home</Link>
+            <Link to="/" className="hover:text-primary">{t('tourDetails.breadcrumbHome')}</Link>
             <FiChevronRight className="text-white/55" />
-            <Link to="/tours" className="hover:text-primary">Tours</Link>
+            <Link to="/tours" className="hover:text-primary">{t('tourDetails.breadcrumbTours')}</Link>
             <FiChevronRight className="text-white/55" />
-            <span>{tour.title}</span>
+            <span>{tourTitle}</span>
           </div>
         </div>
       </section>
@@ -130,102 +236,106 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
         </div>
       </div>
 
-      <main className="section-padding bg-white pt-14">
+      <main className="section-padding section-blend-light pt-14">
         <div className="container-custom grid gap-12 lg:grid-cols-[1fr_400px]">
           <div className="space-y-10">
             <section id="overview" className="scroll-mt-28">
-              <h2 className="content-title">Overview</h2>
-              <p className="mt-4 max-w-5xl text-lg leading-8 text-muted">{tour.overview}</p>
+              <h2 className="content-title">{t('tourDetails.overview')}</h2>
+              <p className="mt-4 max-w-5xl text-lg leading-8 text-muted">{tourOverview}</p>
             </section>
 
-            <section id="gallery" className="scroll-mt-28">
-              <h2 className="content-title">Gallery</h2>
-              <div className="mt-5 grid gap-5 md:grid-cols-[0.95fr_1fr_0.95fr] md:grid-rows-[240px_240px]">
-                {galleryMosaic.map((image, index) => {
-                  const classes = [
-                    'h-80 md:row-span-2 md:h-full',
-                    'h-64 md:col-span-2 md:h-full',
-                    'h-64 md:h-full',
-                    'h-64 md:h-full',
-                  ]
+            {galleryImages.length > 0 ? (
+              <section id="gallery" className="scroll-mt-28">
+                <h2 className="content-title">{t('tourDetails.gallery')}</h2>
+                <div className="mt-5 grid gap-5 md:grid-cols-[0.95fr_1fr_0.95fr] md:grid-rows-[240px_240px]">
+                  {galleryImages.map((image, index) => {
+                    const classes = [
+                      'h-80 md:row-span-2 md:h-full',
+                      'h-64 md:col-span-2 md:h-full',
+                      'h-64 md:h-full',
+                      'h-64 md:h-full',
+                    ]
 
-                  return (
-                    <button
-                      key={`${image}-${index}`}
-                      type="button"
-                      className={`group overflow-hidden rounded-2xl ${classes[index]}`}
-                      onClick={() => openGalleryImage(image)}
-                      aria-label={`Open ${tour.title} gallery image ${index + 1}`}
-                    >
-                      <img className="h-full w-full object-cover transition duration-500 group-hover:scale-105" src={image} alt={`${tour.title} gallery ${index + 1}`} />
-                    </button>
-                  )
-                })}
-              </div>
-            </section>
+                    return (
+                      <button
+                        key={image.id}
+                        type="button"
+                        className={`group overflow-hidden rounded-2xl ${classes[index] ?? 'h-64 md:h-full'}`}
+                        onClick={() => openGalleryImage(image.image_url)}
+                        aria-label={`Open ${tourTitle} gallery image ${index + 1}`}
+                      >
+                        <img
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                          src={image.image_url}
+                          alt={image.alt_text || image.caption || `${tourTitle} gallery ${index + 1}`}
+                        />
+                      </button>
+                    )
+                  })}
+                </div>
+              </section>
+            ) : null}
 
-            <section id="highlights" className="scroll-mt-28">
-              <h2 className="content-title">Tour Highlights</h2>
-              <div className="mt-5 grid gap-4 md:grid-cols-2">
-                {tour.highlights.map((highlight) => (
-                  <div key={highlight} className="flex items-center gap-3 text-muted">
-                    <FiCheckCircle className="shrink-0 text-primary" /> {highlight}
-                  </div>
-                ))}
-              </div>
-            </section>
+            {details.highlights.length > 0 ? (
+              <section id="highlights" className="scroll-mt-28">
+                <h2 className="content-title">{t('tourDetails.tourHighlights')}</h2>
+                <div className="mt-5 grid gap-4 md:grid-cols-2">
+                  {details.highlights.map((highlight) => (
+                    <div key={highlight.id} className="flex items-start gap-3 text-muted">
+                      <FiCheckCircle className="mt-1 shrink-0 text-[#FD5E02]" />
+                      <div>
+                        <p className="font-bold text-ink">{highlight.title}</p>
+                        {highlight.description ? (
+                          <p className="mt-1 text-sm leading-6 text-muted">{highlight.description}</p>
+                        ) : null}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ) : null}
 
-            <section id="itinerary" className="scroll-mt-28">
-              <h2 className="content-title">Day-by-Day Itinerary</h2>
-              <div ref={itineraryTimelineRef} className="relative mt-6 space-y-10">
-                <span className="absolute bottom-6 left-6 top-6 w-0.5 bg-gray-200" aria-hidden="true" />
-                <span
-                  className="absolute left-6 top-6 w-0.5 origin-top bg-primary shadow-[0_0_18px_rgba(253,94,2,0.35)]"
-                  style={{ height: `calc((100% - 3rem) * ${timelineProgress})` }}
-                  aria-hidden="true"
-                />
-                {tour.itineraryDays.map((day, index) => (
-                  <article key={day.title} className="relative grid grid-cols-[56px_1fr] gap-5">
-                    <div
-                      ref={(element) => {
+            {details.itineraryDays.length > 0 ? (
+              <section id="itinerary" className="scroll-mt-28">
+                <h2 className="content-title">{t('tourDetails.dayByDay')}</h2>
+                <div ref={itineraryTimelineRef} className="relative mt-6 space-y-10">
+                  <span className="absolute bottom-6 left-6 top-6 w-0.5 bg-gray-200" aria-hidden="true" />
+                  <span
+                    className="absolute left-6 top-6 w-0.5 origin-top bg-primary shadow-[0_0_18px_rgba(233,121,45,0.28)]"
+                    style={{ height: `calc((100% - 3rem) * ${timelineProgress})` }}
+                    aria-hidden="true"
+                  />
+                  {details.itineraryDays.map((day, index) => (
+                    <ItineraryDayArticle
+                      key={day.id}
+                      day={day}
+                      index={index}
+                      tourTitle={tourTitle}
+                      markerRef={(element) => {
                         dayMarkerRefs.current[index] = element
                       }}
-                      className="relative z-10 grid h-12 w-12 place-items-center rounded-full border-4 border-white bg-primary text-base font-black text-white shadow-orange"
-                    >
-                      {day.day.replace(/^Day\s*/i, '')}
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-black text-ink">{day.day}: {day.title}</h3>
-                      <p className="mt-3 max-w-5xl text-base leading-7 text-muted">{day.description}</p>
-                      <p className="mt-3 text-sm font-black text-ink">Activities:</p>
-                      <ul className="mt-2 space-y-1 text-sm text-muted">
-                        {day.activities.map((activity) => <li key={activity} className="orange-bullet">{activity}</li>)}
-                      </ul>
-                      <p className="mt-3 text-sm text-muted">{day.details}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
+                    />
+                  ))}
+                </div>
+              </section>
+            ) : null}
           </div>
 
           <aside className="md:sticky md:top-24 md:self-start">
-            <div
-              className="card p-8 text-center"
-            >
-              <p className="text-xs font-black uppercase tracking-wide text-ink">Price</p>
-              <h2 className="mt-3 text-2xl font-black text-primary">Available on Request</h2>
-              <p className="mt-2 text-sm text-muted">Contact us for a personalized quote</p>
+            <div className="card p-8 text-center">
+              <p className="text-xs font-black uppercase tracking-wide text-ink">{t('tourDetails.price')}</p>
+              <h2 className="mt-3 text-2xl font-black text-[#FD5E02]">{t('common.from')} {formatCurrency(tourPackage.price_from_usd)}</h2>
+              <p className="mt-2 text-sm text-muted">{t('tourDetails.quote')}</p>
               <div className="mx-auto mt-5 inline-flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-sm font-bold text-green-700">
-                <FaCheck /> Instant Confirmation
+                <FaCheck /> {t('tourDetails.instant')}
               </div>
               <div className="mt-7 grid grid-cols-2 gap-4 text-sm text-muted">
-                <span className="flex items-center justify-center gap-2"><FaShieldHeart className="text-primary" /> Secure booking</span>
-                <span className="flex items-center justify-center gap-2"><FaCheck className="text-primary" /> No booking fees</span>
+                <span className="flex items-center justify-center gap-2"><FaShieldHeart className="text-[#FD5E02]" /> {t('tourDetails.secure')}</span>
+                <span className="flex items-center justify-center gap-2"><FaCheck className="text-[#FD5E02]" /> {t('tourDetails.fees')}</span>
               </div>
-              <button className="btn-primary mt-7 w-full justify-center" type="button" onClick={onBook}>Book This Tour <FiArrowRight /></button>
+              <button className="btn-primary mt-7 w-full justify-center" type="button" onClick={() => onBook(bookingTour)}>{t('tourDetails.bookThisTour')} <FiArrowRight /></button>
               <div className="mt-8 text-sm">
-                <p className="text-muted">Need assistance with your booking?</p>
+                <p className="text-muted">{t('tourDetails.needHelp')}</p>
                 <a className="mt-2 flex items-center justify-center gap-2 font-black text-primary" href="tel:+256703543027">
                   <FiPhone /> +256 703 543027
                 </a>
@@ -248,11 +358,172 @@ export function ItineraryPage({ onBook }: ItineraryPageProps) {
           <img
             className="max-h-[86vh] w-full max-w-6xl rounded-3xl object-contain shadow-2xl"
             src={activeGalleryImage}
-            alt={`${tour.title} enlarged gallery`}
+            alt={`${tourTitle} enlarged gallery`}
             onClick={(event) => event.stopPropagation()}
           />
         </div>
       )}
     </>
   )
+}
+
+type ItineraryDayArticleProps = {
+  day: TourItineraryDayWithDetails
+  index: number
+  tourTitle: string
+  markerRef: (element: HTMLDivElement | null) => void
+}
+
+function ItineraryDayArticle({ day, index, tourTitle, markerRef }: ItineraryDayArticleProps) {
+  const { t } = useTranslation()
+  const dayImages = day.images.slice(0, 2).map((image) => image.image_url)
+  const fallbackImages = [
+    fallbackDayImages[index % fallbackDayImages.length],
+    fallbackDayImages[(index + 1) % fallbackDayImages.length],
+  ]
+  const sliderImages = dayImages.length > 0 ? dayImages : fallbackImages
+
+  return (
+    <article className="relative grid grid-cols-[56px_1fr] gap-5">
+      <div
+        ref={markerRef}
+        className="relative z-10 grid h-12 w-12 place-items-center rounded-full border-4 border-white bg-primary text-base font-black text-white shadow-orange"
+      >
+        {day.day_number}
+      </div>
+      <div>
+        <h3 className="text-lg font-black text-ink">{t('tourDetails.day')} {day.day_number}: {day.title}</h3>
+        {day.overview ? <p className="mt-3 max-w-5xl text-base leading-7 text-muted">{day.overview}</p> : null}
+        {day.activities.length > 0 ? (
+          <>
+            <p className="mt-3 text-sm font-black text-ink">{t('tourDetails.activities')}:</p>
+            <ul className="mt-2 space-y-1 text-sm text-muted">
+              {day.activities.map((activity) => (
+                <li key={activity.id} className="orange-bullet">
+                  <span className="font-semibold text-ink">{activity.title}</span>
+                  {activity.description ? <span>: {activity.description}</span> : null}
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
+        {day.accommodation_name ? (
+          <p className="mt-3 text-sm text-muted">Accommodation: {day.accommodation_name}</p>
+        ) : null}
+        {sliderImages.length > 0 ? <DayImageSlider images={sliderImages} title={`${tourTitle} Day ${day.day_number}`} /> : null}
+      </div>
+    </article>
+  )
+}
+
+type DayImageSliderProps = {
+  images: string[]
+  title: string
+}
+
+function DayImageSlider({ images, title }: DayImageSliderProps) {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(true)
+  const [visibleSlides, setVisibleSlides] = useState(2)
+  const safeImages = images.length >= 2 ? images : [...images, ...images]
+  const sliderImages = [...safeImages, ...safeImages.slice(0, visibleSlides)]
+
+  useEffect(() => {
+    const updateVisibleSlides = () => {
+      setVisibleSlides(window.matchMedia('(min-width: 640px)').matches ? 2 : 1)
+    }
+
+    updateVisibleSlides()
+    window.addEventListener('resize', updateVisibleSlides)
+
+    return () => window.removeEventListener('resize', updateVisibleSlides)
+  }, [])
+
+  useEffect(() => {
+    if (safeImages.length <= visibleSlides) return
+
+    const timer = window.setInterval(() => {
+      setIsTransitioning(true)
+      setActiveIndex((current) => current + 1)
+    }, 3000)
+
+    return () => window.clearInterval(timer)
+  }, [safeImages.length, visibleSlides])
+
+  useEffect(() => {
+    setIsTransitioning(false)
+    setActiveIndex(0)
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => setIsTransitioning(true))
+    })
+  }, [visibleSlides])
+
+  const handleTransitionEnd = () => {
+    if (activeIndex < safeImages.length) return
+
+    setIsTransitioning(false)
+    setActiveIndex(0)
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => setIsTransitioning(true))
+    })
+  }
+
+  return (
+    <div className="mt-5 overflow-hidden rounded-2xl" aria-label={`${title} images`}>
+      <div
+        className={`flex ${isTransitioning ? 'transition-transform duration-700 ease-out' : ''}`}
+        style={{ transform: `translateX(-${activeIndex * (100 / visibleSlides)}%)` }}
+        onTransitionEnd={handleTransitionEnd}
+      >
+        {sliderImages.map((image, index) => (
+          <div key={`${image}-${index}`} className="shrink-0 basis-full px-1.5 sm:basis-1/2">
+            <img
+              className="h-48 w-full rounded-xl object-cover shadow-sm sm:h-44 md:h-52"
+              src={image}
+              alt={`${title} image ${index + 1}`}
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function packageDetailsToTour(details: TourPackageDetails): Tour {
+  const tourPackage = details.package
+  const galleryImages = details.galleryImages.map((image) => image.image_url)
+  const heroImage = tourPackage.hero_image_url || tourPackage.main_image_url || fallbackTour.heroImage
+  const cardImage = tourPackage.main_image_url || tourPackage.hero_image_url || fallbackTour.image
+
+  return {
+    id: 1,
+    title: tourPackage.title,
+    slug: tourPackage.slug,
+    price: `From ${new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0,
+    }).format(tourPackage.price_from_usd)}`,
+    priceUSD: tourPackage.price_from_usd,
+    duration: `${tourPackage.duration_days} Days`,
+    destination: tourPackage.category,
+    tripLevel: fallbackTour.tripLevel,
+    bestSeason: fallbackTour.bestSeason,
+    rating: fallbackTour.rating,
+    reviewCount: fallbackTour.reviewCount,
+    shortDescription: tourPackage.short_description,
+    overview: tourPackage.overview,
+    image: cardImage,
+    heroImage,
+    galleryImages: galleryImages.length > 0 ? galleryImages : [cardImage, heroImage],
+    highlights: details.highlights.map((highlight) => highlight.title),
+    itineraryDays: details.itineraryDays.map<ItineraryDay>((day) => ({
+      day: `Day ${day.day_number}`,
+      title: day.title,
+      description: day.overview,
+      activities: day.activities.map((activity) => activity.title),
+      details: day.accommodation_name ? `Accommodation: ${day.accommodation_name}` : '',
+    })),
+  }
 }

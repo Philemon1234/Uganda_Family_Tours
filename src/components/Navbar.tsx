@@ -1,20 +1,20 @@
-import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { FaBars, FaXmark } from 'react-icons/fa6'
+import { useTranslation } from 'react-i18next'
 import { Logo } from './Logo'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
 type NavbarProps = {
   onInquiry: () => void
 }
 
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Tours', href: '/tours' },
-  { label: 'About Us', href: '/about' },
+  { labelKey: 'navbar.home', href: '/' },
+  { labelKey: 'navbar.tours', href: '/tours' },
+  { labelKey: 'navbar.about', href: '/about' },
 ]
 
 export function Navbar({ onInquiry }: NavbarProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const { t } = useTranslation()
 
   return (
     <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/15 bg-black/30 text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)] backdrop-blur-md">
@@ -26,7 +26,7 @@ export function Navbar({ onInquiry }: NavbarProps) {
         <div className="hidden items-center gap-7 lg:flex">
           {navItems.map((item) => (
             <NavLink
-              key={item.label}
+              key={item.labelKey}
               to={item.href}
               className={({ isActive }) =>
                 `group flex items-center gap-1.5 py-4 text-[0.78rem] font-bold text-white transition hover:text-white ${
@@ -36,47 +36,18 @@ export function Navbar({ onInquiry }: NavbarProps) {
                 }`
               }
             >
-              {item.label}
+              {t(item.labelKey)}
             </NavLink>
           ))}
         </div>
 
-        <button className="btn-primary hidden px-5 py-3 text-[0.72rem] lg:inline-flex" type="button" onClick={onInquiry}>
-          Talk to a Travel Specialist
-        </button>
-
-        <button
-          className="grid h-9 w-9 place-items-center rounded-lg border border-white/15 text-white lg:hidden"
-          type="button"
-          aria-label="Open menu"
-          onClick={() => setIsOpen((value) => !value)}
-        >
-          {isOpen ? <FaXmark /> : <FaBars />}
-        </button>
-      </nav>
-
-      {isOpen && (
-        <div className="border-t border-white/10 bg-black/75 px-5 py-4 backdrop-blur-md lg:hidden">
-          <div className="flex flex-col gap-2">
-            {navItems.map((item) => (
-              <NavLink
-                key={item.label}
-                to={item.href}
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between rounded-lg px-3 py-3 text-sm font-bold text-white hover:bg-white/5"
-              >
-                {item.label}
-              </NavLink>
-            ))}
-            <button className="btn-primary mt-2 justify-center" type="button" onClick={() => {
-              setIsOpen(false)
-              onInquiry()
-            }}>
-              Talk to a Travel Specialist
-            </button>
-          </div>
+        <div className="flex items-center gap-3">
+          <LanguageSwitcher />
+          <button className="btn-primary hidden px-5 py-3 text-[0.72rem] lg:inline-flex" type="button" onClick={onInquiry}>
+            {t('navbar.talkToSpecialist')}
+          </button>
         </div>
-      )}
+      </nav>
     </header>
   )
 }

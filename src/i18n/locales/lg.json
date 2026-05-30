@@ -1,0 +1,351 @@
+{
+  "navbar": {
+    "home": "Awaka",
+    "tours": "Entambula",
+    "about": "Ffe baani",
+    "talkToSpecialist": "Yogera n'omukugu",
+    "language": "Olulimi"
+  },
+  "common": {
+    "from": "Okuva",
+    "days": "Enaku",
+    "sending": "Kitumibwa...",
+    "required": "Ekitundu kino kyetaagisa.",
+    "validEmail": "Wandiika email entuufu.",
+    "yes": "Yee",
+    "no": "Nedda",
+    "close": "Ggalawo",
+    "cancel": "Sazaamu",
+    "menu": "Menyu"
+  },
+  "home": {
+    "hero": {
+      "title": "Olugendo lwo lukulindiridde mu Luulu lwa Afrika",
+      "subtitle": "Zuula safari ezitasangika, ebifo ebirungi n'obuwangwa obulamu ne Uganda Family Tours & Safari Co.",
+      "primaryCta": "Laba entambula zaffe"
+    },
+    "story": {
+      "label": "Olugero lwaffe",
+      "title": "Zuula omutima gwa Uganda",
+      "description": "Okuva ku nsozi ezirimu ekifu okutuuka ku migga eminene, manya Uganda mu ngeri empya."
+    },
+    "featured": {
+      "label": "Lambula Uganda",
+      "title": "Entambula ezisinga",
+      "viewAll": "Laba entambula zonna"
+    },
+    "why": {
+      "label": "Olugendo lwo. Obumanyirivu bwaffe.",
+      "title": "Lwaki otambula ne Uganda Family Tours?",
+      "description": "Tutegeka entambula ezitasangika ezirimu obuwangwa, obutonde n'ensolo za Uganda.",
+      "tailorTitle": "Enteekateeka ezikukwatako",
+      "tailorText": "Entambula ezitegekeddwa okusinziira ku by'oyagala.",
+      "localTitle": "Abakugu b'awaka",
+      "localText": "Abakulembeze abamanyi Uganda obulungi.",
+      "responsibleTitle": "Okutambula n'obuvunaanyizibwa",
+      "responsibleText": "Okukuuma obutonde n'okuyamba abantu b'omu kitundu.",
+      "peaceTitle": "Emirembe mu mutima",
+      "peaceText": "Okubookinga okwesigika n'obuyambi 24/7."
+    },
+    "galleryTitle": "Ebiseera by'entambula zaffe",
+    "reviewsTitle": "Abatambuze baffe bye bagamba"
+  },
+  "toursPage": {
+    "title": "Entambula zaffe",
+    "description": "Safari ezirondeddwa obulungi okukuleetera olugendo olutasangika mu Uganda ne East Africa.",
+    "ctaLabel": "Lambula. Zuula. Tambula.",
+    "ctaTitle": "Olugendo lwo lukulindiridde - tukutegekere ekirooto kyo",
+    "ctaButton": "Tukwasaganye"
+  },
+  "tourCard": {
+    "duration": "Obudde",
+    "getPackage": "Laba package"
+  },
+  "tourDetails": {
+    "breadcrumbHome": "Awaka",
+    "breadcrumbTours": "Entambula",
+    "overview": "Okulambika",
+    "gallery": "Ebifaananyi",
+    "highlights": "Ebikulu",
+    "itinerary": "Enteekateeka",
+    "tourHighlights": "Ebikulu mu lugendo",
+    "dayByDay": "Enteekateeka ya buli lunaku",
+    "price": "Ebbeeyi",
+    "availableOnRequest": "Kiboneka ng'osabye",
+    "quote": "Tukwasaganye tukuwe ebbeeyi ekukwatako",
+    "instant": "Okukakasibwa amangu",
+    "secure": "Okubookinga okwesigika",
+    "fees": "Tewali bisale bya booking",
+    "bookThisTour": "Bookinga olugendo luno",
+    "needHelp": "Weetaaga obuyambi mu booking?",
+    "activities": "Ebikolebwa",
+    "bucketList": "Olukalala lw'ebirooto",
+    "day": "Olunaku"
+  },
+  "bookingForm": {
+    "title": "Bookinga olugendo luno",
+    "subtitle": "Tubulire ku lugendo lwo tujja kukuddako ku budde n'ebbeeyi.",
+    "selectedTour": "Olugendo olulondeddwa",
+    "fullName": "Erinnya lyonna",
+    "email": "Email",
+    "phone": "Essimu / WhatsApp",
+    "country": "Ensi gy'obeeramu",
+    "travelDate": "Olunaku lw'oyagala okutambulirako",
+    "flexibleDates": "Ennaku zo zisobola okukyuka?",
+    "groupSize": "Omuwendo gw'abantu",
+    "adults": "Abakulu",
+    "children": "Abaana",
+    "childrenAges": "Emyaka gy'abaana",
+    "duration": "Enaku / obudde bw'oyagala",
+    "accommodation": "Ekifo ky'okusula",
+    "budget": "Budget ya buli muntu",
+    "specialRequests": "By'oyagala / Obubaka",
+    "submit": "Tuma booking",
+    "selectCountry": "Londa ensi",
+    "noCountries": "Tewali nsi ezuuliddwa.",
+    "fullNamePlaceholder": "Wandiika erinnya lyo lyonna",
+    "emailPlaceholder": "Wandiika email yo",
+    "childrenAgesPlaceholder": "okugeza 5, 8, 12",
+    "durationPlaceholder": "Londa enaku",
+    "budgetPlaceholder": "Londa budget",
+    "notesPlaceholder": "By'oyagala oba ebirala...",
+    "info": "Tujja kukutuukirira ku email oba WhatsApp okukakasa.",
+    "sending": "Booking etumibwa...",
+    "success": "Booking etumiddwa bulungi. Tujja kukutuukirira mangu.",
+    "error": "Booking tesobodde kutumibwa kati.",
+    "budgetTotal": "Budget y'abantu bonna"
+  },
+  "inquiryForm": {
+    "title": "Buza ekibuuzo",
+    "subtitle": "Tubulire kye tuyinza okukuyamba, abakugu baffe bajja kukuddamu ku email oba WhatsApp.",
+    "fullName": "Erinnya lyonna",
+    "email": "Email",
+    "phone": "Essimu / WhatsApp",
+    "message": "Obubaka",
+    "submit": "Tuma",
+    "fullNamePlaceholder": "Wandiika erinnya lyo lyonna",
+    "emailPlaceholder": "Wandiika email yo",
+    "phonePlaceholder": "Wandiika ennamba yo",
+    "messagePlaceholder": "Tubulire enteekateeka zo oba by'oyagala...",
+    "sending": "Kitumibwa...",
+    "success": "Obubaka butumiddwa bulungi. Tujja kukutuukirira mangu.",
+    "error": "Obubaka tebusobodde kutumibwa kati."
+  },
+  "footer": {
+    "about": "Tuli kampuni y'amaka ey'awaka etegeka eco-safari mu Uganda ne East Africa.",
+    "contact": "Tukwasaganye",
+    "quickLinks": "Enkolagana ez'amangu",
+    "accept": "Tukkiriza",
+    "social": "Tugoberere",
+    "rights": "© 2025 Uganda Family Tours & Safari Co. Obuyinza bwonna bukumiddwa.",
+    "privacy": "Ebyama",
+    "terms": "Amateeka",
+    "location": "Kampala, Uganda"
+  },
+  "aboutPage": {
+    "hero": {
+      "kicker": "Ffe baani",
+      "title": "Ffe baani",
+      "subtitle": "Emyaka 10 egya safari ez'amazima"
+    },
+    "welcome": {
+      "label": "Tukwaniriza",
+      "title": "Karibu!",
+      "p1": "Tukwaniriza mu Uganda Family Tours & Safari Company, omukwano gwo mu safari z'amaka ezirina obukuumi, essanyu era ezikuuma obutonde mu Luulu lwa Afrika.",
+      "p2": "Tuli ttiimu y'abategesi b'entambula n'abakulembeze b'awaka abayamba amaka okulaba obulungi, ensolo n'obuwangwa bwa Uganda mu ngeri esanyusa abaana, ewummuza abazadde era ekuuma obutonde."
+    },
+    "origins": {
+      "label": "Olugero lwaffe",
+      "title": "Entandikwa yaffe",
+      "p1": "Olugero lwaffe lwatandika n'okwagala obutonde, ensolo n'abantu ba Uganda. Ebyatandika nga safari entono ez'amaka byakula ne bifuuka omulimu ogw'okugabana obulungi bwa Afrika n'amaka okuva mu nsi yonna.",
+      "p2": "Mu myaka egiyise tuzimbye enkolagana ezesigika, tutegeka entambula ez'obukuumi era ezitasangika, ne tusigala ku mpisa zaffe: amazima, okukuuma obutonde n'okufaayo ennyo."
+    },
+    "initiatives": {
+      "label": "Ebitutambuza",
+      "title": "Ebikolebwa byaffe",
+      "description": "Tukola okutambula okw'obuvunaanyizibwa era okugasa abantu b'omu kitundu, ensolo n'obutonde mu Uganda.",
+      "responsible": {
+        "title": "Obulambuzi obuvunaanyizibwa",
+        "text": "Tukubiriza okutambula okukuuma obutonde, okuyamba abantu b'omu kitundu n'okukuuma obuwangwa."
+      },
+      "community": {
+        "title": "Okuzzaamu abantu amaanyi",
+        "text": "Tukolera wamu n'abantu b'omu kitundu okuyamba eby'enjigiriza, okutendeka n'emikisa gy'emirimu."
+      },
+      "conservation": {
+        "title": "Okukuuma ensolo",
+        "text": "Tuwagira enteekateeka ezikuuma ensolo n'ebifo mwe zibeera mu Uganda."
+      },
+      "eco": {
+        "title": "Entambula ekuuma obutonde",
+        "text": "Tukendeeza ku bulabe eri obutonde nga tukola mu ngeri ey'omulembe era etegeerekeka."
+      }
+    },
+    "charities": {
+      "label": "Okukola enjawulo",
+      "title": "Obuyambi bwaffe",
+      "visit": "Lambula omukutu",
+      "learn": "Manya ebisingawo",
+      "mammadu": {
+        "title": "The Mammadu Trust in Windhoek",
+        "p1": "The Mammadu Trust yatandikibwawo okuyamba abaana abataliiko bazadde, abaana n'abakyala abali mu mbeera enzibu. Tukkiriza nti okutambula okw'obuvunaanyizibwa kulina okuleeta emikisa gy'amazima.",
+        "p2": "Bw'odda, omukulembeze wo ayinza okutegeka okulambula oba okuyunga ku bantu b'omu kitundu mu bwesigwa n'okufaayo."
+      },
+      "orange": {
+        "title": "Orange Community Project",
+        "p1": "Tukolera wamu n'amasomero n'abantu b'omu kitundu okulongoosa ebibiina, okuwa ebikozesebwa n'okuyamba abaana okuyiga mu nkola.",
+        "p2": "Uganda Family Tours egenda mu maaso n'okuwagira pulojekiti z'abantu b'omu kitundu ezireeta emigaso egisigala oluvannyuma lwa safari."
+      }
+    },
+    "cta": {
+      "label": "Tukwasaganye kati",
+      "title": "Tandika okuzimba olugendo lw'otoonya",
+      "call": "Kuba essimu kati",
+      "inquiry": "Buza ekibuuzo"
+    }
+  },
+  "tourContent": {
+    "gorilla-tracking-in-bwindi": {
+      "title": "Okulondoola engagi e Bwindi",
+      "shortDescription": "Tambula mu kibira n'abakulembeze abakugu okulaba engagi z'ensozi mu kifo kyazo eky'obutonde.",
+      "overview": "Yingira mu mutima gw'obulungi bw'obutonde. Bwindi erimu engagi z'ensozi nnyingi ezisigadde mu nsi. Olugendo luno olukwata enaku 4 lukuleetera ebiseera eby'ekibira, obuwangwa n'okukuuma ensolo.",
+      "highlights": [
+        "Okulondoola engagi z'ensozi",
+        "Okulaba golden monkeys",
+        "Okuwummulira ku Lake Kivu",
+        "Okuyingira mu buwangwa",
+        "Ebifo eby'ekibira ebirungi"
+      ]
+    },
+    "murchison-falls-safari": {
+      "title": "Safari ya Murchison Falls",
+      "shortDescription": "Laba amazzi agagwa n'amaanyi, game drive ezisanyusa n'olugendo lw'eryato ku Nile.",
+      "overview": "Enteekateeka egatta ensolo ezimanyiddwa, obuwangwa, ebifo ebirungi n'okwaniriza okw'awaka.",
+      "highlights": [
+        "Olugendo ku Nile",
+        "Okulaba waggulu w'amasumo",
+        "Okulaba ensolo ennene",
+        "Ebifo by'ebinyonyi",
+        "Game drive ya makya"
+      ]
+    },
+    "queen-elizabeth-wildlife-safari": {
+      "title": "Safari y'ensolo Queen Elizabeth",
+      "shortDescription": "Lambula empologoma ezirinnya emiti, ennyanja za crater n'ebifo bya savanna n'omukulembeze w'awaka.",
+      "overview": "Safari erimu ensolo nnyingi, ebifo ebirungi n'okumanya abantu b'omu kitundu mu Uganda.",
+      "highlights": [
+        "Empologoma ezirinnya emiti",
+        "Kazinga Channel",
+        "Ennyanja za crater",
+        "Okulaba enjovu",
+        "Okulambula ekyalo"
+      ]
+    },
+    "lake-bunyonyi-escape": {
+      "title": "Okuwummulira ku Lake Bunyonyi",
+      "shortDescription": "Wummulira ku nnyanja, enjoyinga ebizinga, canoe n'ebifo by'ensozi ebirungi.",
+      "overview": "Okuwummula okuteefu ku Lake Bunyonyi nga kulimu obutonde, obuwangwa n'ebifaananyi ebirungi.",
+      "highlights": [
+        "Canoe mu bizinga",
+        "Ebifo ebiraba ensozi",
+        "Okulambula abantu",
+        "Okuwummulira ku nnyanja",
+        "Okulaba ebinyonyi"
+      ]
+    },
+    "chimpanzee-trekking": {
+      "title": "Okulondoola chimpanzee",
+      "shortDescription": "Londoola chimpanzee mu Kibale Forest era otambule mu Bigodi wetland.",
+      "overview": "Olugendo lw'ekibira okulaba primates, ebinyonyi n'obulungi bwa Kibale.",
+      "highlights": [
+        "Okulondoola chimpanzee",
+        "Okutambula mu Bigodi",
+        "Okulaba primates",
+        "Ebinyonyi by'ekibira",
+        "Ennyumya z'abakulembeze"
+      ]
+    },
+    "cultural-uganda-experience": {
+      "title": "Obuwangwa bwa Uganda",
+      "shortDescription": "Yingira mu mmere y'awaka, omuziki, ennyumya, obutale bw'emikono n'obulamu bw'abantu.",
+      "overview": "Olugendo lw'obuwangwa oluleeta ennono, emmere n'obulamu bw'abantu ba Uganda.",
+      "highlights": [
+        "Ebiragiro by'obuwangwa",
+        "Emmere y'awaka",
+        "Obutale bw'emikono",
+        "Okutambula mu bantu",
+        "Ennyumya z'abakwaniriza"
+      ]
+    },
+    "itineraryDays": [
+      {
+        "title": "Okutuuka n'okuteekebwa",
+        "description": "Otuuka ku kifo eky'okukwatirako oba ku airport, omukulembeze wa safari akwaniriza n'akunnyonnyola olugendo.",
+        "activities": [
+          "Okukimibwa n'okutwalibwa",
+          "Olugendo olulungi okugenda ku lodge",
+          "Okuyingira mu lodge n'okunnyonnyolwa"
+        ],
+        "details": "Okusula: lodge  Emmere: ekyeggulo  Ebanga: 120km"
+      },
+      {
+        "title": "Okulondoola engagi n'okugenda Queen Elizabeth",
+        "description": "Yingira mu kibira okulondoola engagi n'omukulembeze, oluvannyuma ogende Queen Elizabeth National Park.",
+        "activities": [
+          "Okulondoola ensolo n'omukulembeze",
+          "Ekyemisana mu butonde",
+          "Okugenda ku lodge n'okuyingira"
+        ],
+        "details": "Okusula: lodge  Emmere: ekyenkya, ekyemisana, ekyeggulo  Ebanga: 160km"
+      },
+      {
+        "title": "Okulambula Queen Elizabeth",
+        "description": "Lambula savanna, ennyanja za crater n'amazzi agalimu enjovu, embogo, antelope n'ebinyonyi.",
+        "activities": [
+          "Game drive ya makya",
+          "Olugendo lw'eryato oba okutambula mu butonde",
+          "Okukuba ebifaananyi ng'enjuba egwa"
+        ],
+        "details": "Okusula: lodge  Emmere: ekyenkya, ekyemisana, ekyeggulo  Ebanga: 80km"
+      },
+      {
+        "title": "Okuddayo n'okujjukira obuwangwa",
+        "description": "Wummula n'ekyenkya nga tonnaddayo, nga waliwo obudde bw'okulaba emikono gy'awaka oba abantu b'omu kitundu.",
+        "activities": [
+          "Okulambula obuwangwa",
+          "Okugula ebirabo",
+          "Okudda Kampala oba Entebbe"
+        ],
+        "details": "Okusula: tewali  Emmere: ekyenkya  Ebanga: 280km"
+      }
+    ]
+  },
+  "reviews": {
+    "items": [
+      {
+        "country": "Australia",
+        "text": "Olugendo lwali lwa kitalo okuva ku ntandikwa okutuuka ku nkomerero. Abakulembeze baali bamanyi nnyo era baali ba mukwano."
+      },
+      {
+        "country": "United Kingdom",
+        "text": "Buli kimu kyategekebwa bulungi. Okulondoola engagi kwali kwa lumu mu bulamu."
+      },
+      {
+        "country": "Canada",
+        "text": "Olugendo olusanyusa n'ebifo ebirungi n'ensolo ezitasangika."
+      },
+      {
+        "country": "United States",
+        "text": "Amaka gaffe gaawulira nga gafiibwako mu buli ddaala."
+      },
+      {
+        "country": "Kenya",
+        "text": "Safari yategekebwa bulungi n'abakulembeze ab'ekisa n'ebifo by'okusula ebirungi."
+      },
+      {
+        "country": "Spain",
+        "text": "Okulondoola engagi kwali kwa maanyi mu mutima era tekujja kwerabirwa."
+      }
+    ]
+  }
+}

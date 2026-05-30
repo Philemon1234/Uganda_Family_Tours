@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { FiHome, FiMenu, FiMessageSquare, FiUser } from 'react-icons/fi'
 import { LuHand } from 'react-icons/lu'
 import type { IconType } from 'react-icons'
@@ -21,6 +22,7 @@ const navItems: NavItem[] = [
 ]
 
 export function MobileBottomNav() {
+  const { t } = useTranslation()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState<string | null>(null)
   const location = useLocation()
@@ -37,6 +39,14 @@ export function MobileBottomNav() {
   const activeIndex = Math.max(navItems.findIndex((item) => item.id === activeItem), 0)
   const activeNavItem = useMemo(() => navItems[activeIndex] ?? navItems[2], [activeIndex])
   const ActiveIcon = activeNavItem.icon
+  const labelFor = (item: NavItem) => {
+    if (item.id === 'menu') return t('common.menu')
+    if (item.id === 'about') return t('navbar.about')
+    if (item.id === 'home') return t('navbar.home')
+    if (item.id === 'services') return t('navbar.tours')
+    if (item.id === 'contact') return t('footer.contact')
+    return item.label
+  }
 
   const handleMenuClick = () => {
     setSelectedItem('menu')
@@ -90,7 +100,7 @@ export function MobileBottomNav() {
                     onClick={handleMenuClick}
                   >
                     <Icon className={`text-[1.35rem] transition ${isActive ? 'opacity-0' : 'opacity-100'}`} strokeWidth={2} />
-                    <span>{item.label}</span>
+                    <span>{labelFor(item)}</span>
                   </button>
                 )
               }
@@ -98,7 +108,7 @@ export function MobileBottomNav() {
               const content = (
                 <>
                   <Icon className={`text-[1.35rem] transition ${isActive ? 'opacity-0' : 'opacity-100'}`} strokeWidth={2} />
-                  <span>{item.label}</span>
+                  <span>{labelFor(item)}</span>
                 </>
               )
 

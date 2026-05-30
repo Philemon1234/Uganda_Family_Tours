@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import {
   FaBoxOpen,
   FaEnvelope,
@@ -19,14 +20,15 @@ type MobileSidebarDrawerProps = {
 }
 
 const drawerItems = [
-  { id: 'home', label: 'Home', href: '/', icon: FaHome },
-  { id: 'tours', label: 'Tours', href: '/tours', icon: FaMapMarkerAlt },
-  { id: 'packages', label: 'Packages', href: '/tours', icon: FaBoxOpen },
-  { id: 'about', label: 'About', href: '/about', icon: FaUser },
-  { id: 'contact', label: 'Contact', href: '#contact', icon: FaEnvelope },
+  { id: 'home', labelKey: 'navbar.home', href: '/', icon: FaHome },
+  { id: 'tours', labelKey: 'navbar.tours', href: '/tours', icon: FaMapMarkerAlt },
+  { id: 'packages', labelKey: 'navbar.tours', href: '/tours', icon: FaBoxOpen },
+  { id: 'about', labelKey: 'navbar.about', href: '/about', icon: FaUser },
+  { id: 'contact', labelKey: 'footer.contact', href: '#contact', icon: FaEnvelope },
 ]
 
 export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProps) {
+  const { t } = useTranslation()
   const location = useLocation()
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
     <div className={`fixed inset-0 z-[70] lg:hidden ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
       <button
         type="button"
-        aria-label="Close menu overlay"
+        aria-label={t('common.close')}
         className={`absolute inset-0 bg-black/45 backdrop-blur-[2px] transition-opacity duration-300 ${
           isOpen ? 'opacity-100' : 'opacity-0'
         }`}
@@ -74,7 +76,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
           <img className="h-10 w-auto object-contain" src={logo} alt="Uganda Family Tours" />
           <button
             type="button"
-            aria-label="Close menu"
+            aria-label={t('common.close')}
             className="grid h-11 w-11 place-items-center rounded-full bg-primary/10 text-lg text-primary transition hover:bg-primary hover:text-white"
             onClick={onClose}
           >
@@ -82,7 +84,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
           </button>
         </div>
 
-        <nav className="mt-8 space-y-4" aria-label="Mobile menu">
+        <nav className="mt-8 space-y-4" aria-label={t('navbar.language')}>
           {drawerItems.map((item) => {
             const Icon = item.icon
             const active = isActive(item.id)
@@ -95,7 +97,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
                 >
                   <Icon />
                 </span>
-                <span>{item.label}</span>
+                <span>{t(item.labelKey)}</span>
               </>
             )
 
@@ -120,14 +122,14 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
         </nav>
 
         <div className="mt-auto border-t border-border pt-6">
-          <p className="text-sm font-bold text-muted">Follow us</p>
+          <p className="text-sm font-bold text-muted">{t('footer.social')}</p>
           <div className="mt-4 flex gap-4">
             <a
               href="https://www.facebook.com/ugandafamilytours"
               aria-label="Facebook"
               target="_blank"
               rel="noreferrer"
-              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#e55302]"
+              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#263238]"
             >
               <FaFacebookF />
             </a>
@@ -136,7 +138,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
               aria-label="YouTube"
               target="_blank"
               rel="noreferrer"
-              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#e55302]"
+              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#263238]"
             >
               <FaYoutube />
             </a>
@@ -145,7 +147,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
               aria-label="WhatsApp"
               target="_blank"
               rel="noreferrer"
-              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#e55302]"
+              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#263238]"
             >
               <FaWhatsapp />
             </a>

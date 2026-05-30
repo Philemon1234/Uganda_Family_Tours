@@ -1,0 +1,351 @@
+{
+  "navbar": {
+    "home": "Nyumbani",
+    "tours": "Safari",
+    "about": "Kuhusu Sisi",
+    "talkToSpecialist": "Zungumza na Mtaalamu",
+    "language": "Lugha"
+  },
+  "common": {
+    "from": "Kuanzia",
+    "days": "Siku",
+    "sending": "Inatuma...",
+    "required": "Sehemu hii inahitajika.",
+    "validEmail": "Weka barua pepe sahihi.",
+    "yes": "Ndiyo",
+    "no": "Hapana",
+    "close": "Funga",
+    "cancel": "Ghairi",
+    "menu": "Menyu"
+  },
+  "home": {
+    "hero": {
+      "title": "Safari yako inakusubiri katika Lulu ya Afrika",
+      "subtitle": "Gundua safari zisizosahaulika, mandhari nzuri na tamaduni hai na Uganda Family Tours & Safari Co.",
+      "primaryCta": "Tazama safari"
+    },
+    "story": {
+      "label": "Hadithi yetu",
+      "title": "Gundua moyo wa Uganda",
+      "description": "Kutoka milima yenye ukungu hadi mito mikubwa, ipate Uganda kwa namna mpya."
+    },
+    "featured": {
+      "label": "Gundua Uganda",
+      "title": "Safari maalum",
+      "viewAll": "Tazama safari zote"
+    },
+    "why": {
+      "label": "Safari yako. Uzoefu wetu.",
+      "title": "Kwa nini usafiri nasi?",
+      "description": "Tunatengeneza safari za kukumbukwa zenye utamaduni, mandhari na wanyamapori.",
+      "tailorTitle": "Ratiba maalum",
+      "tailorText": "Ratiba iliyobuniwa kwa ajili yako.",
+      "localTitle": "Utaalamu wa wenyeji",
+      "localText": "Waongoza safari wenye uzoefu.",
+      "responsibleTitle": "Usafiri endelevu",
+      "responsibleText": "Kulinda mazingira na jamii.",
+      "peaceTitle": "Utulivu",
+      "peaceText": "Uhifadhi salama na msaada saa 24/7."
+    },
+    "galleryTitle": "Matukio ya safari zetu",
+    "reviewsTitle": "Wasafiri wetu wanasema nini"
+  },
+  "toursPage": {
+    "title": "Safari zetu",
+    "description": "Safari zilizochaguliwa kwa makini Uganda na Afrika Mashariki.",
+    "ctaLabel": "Gundua. Safiri. Furahia.",
+    "ctaTitle": "Safari yako inakusubiri - tupange ndoto yako",
+    "ctaButton": "Wasiliana na timu"
+  },
+  "tourCard": {
+    "duration": "Muda",
+    "getPackage": "Tazama kifurushi"
+  },
+  "tourDetails": {
+    "breadcrumbHome": "Nyumbani",
+    "breadcrumbTours": "Safari",
+    "overview": "Muhtasari",
+    "gallery": "Picha",
+    "highlights": "Vivutio",
+    "itinerary": "Ratiba",
+    "tourHighlights": "Vivutio vya safari",
+    "dayByDay": "Ratiba ya siku kwa siku",
+    "price": "Bei",
+    "availableOnRequest": "Inapatikana kwa ombi",
+    "quote": "Wasiliana nasi kupata makadirio binafsi",
+    "instant": "Uthibitisho wa haraka",
+    "secure": "Uhifadhi salama",
+    "fees": "Hakuna ada ya uhifadhi",
+    "bookThisTour": "Hifadhi safari hii",
+    "needHelp": "Unahitaji msaada wa uhifadhi?",
+    "activities": "Shughuli",
+    "bucketList": "Orodha ya ndoto",
+    "day": "Siku"
+  },
+  "bookingForm": {
+    "title": "Hifadhi safari hii",
+    "subtitle": "Tuambie kuhusu safari yako nasi tutakujibu kuhusu upatikanaji na bei.",
+    "selectedTour": "Safari uliyochagua",
+    "fullName": "Jina kamili",
+    "email": "Barua pepe",
+    "phone": "Simu / WhatsApp",
+    "country": "Nchi unayoishi",
+    "travelDate": "Tarehe ya safari",
+    "flexibleDates": "Tarehe zako zinaweza kubadilika?",
+    "groupSize": "Idadi ya watu",
+    "adults": "Watu wazima",
+    "children": "Watoto",
+    "childrenAges": "Umri wa watoto",
+    "duration": "Idadi ya siku / Muda unaopenda",
+    "accommodation": "Aina ya malazi",
+    "budget": "Bajeti kwa mtu",
+    "specialRequests": "Maombi maalum / Maelezo",
+    "submit": "Tuma ombi",
+    "selectCountry": "Chagua nchi",
+    "noCountries": "Hakuna nchi zilizopatikana.",
+    "fullNamePlaceholder": "Weka jina lako kamili",
+    "emailPlaceholder": "Weka barua pepe",
+    "childrenAgesPlaceholder": "mf. 5, 8, 12",
+    "durationPlaceholder": "Chagua idadi ya siku",
+    "budgetPlaceholder": "Chagua kiwango cha bajeti",
+    "notesPlaceholder": "Maombi maalum au taarifa zaidi...",
+    "info": "Tutawasiliana nawe kwa barua pepe au WhatsApp.",
+    "sending": "Inatuma ombi lako...",
+    "success": "Ombi limetumwa. Tutawasiliana nawe hivi karibuni.",
+    "error": "Ombi haliwezi kutumwa sasa.",
+    "budgetTotal": "Makadirio ya bajeti ya kundi"
+  },
+  "inquiryForm": {
+    "title": "Tuma swali",
+    "subtitle": "Tuambie jinsi tunavyoweza kusaidia na wataalamu wetu watakujibu kwa email au WhatsApp.",
+    "fullName": "Jina kamili",
+    "email": "Barua pepe",
+    "phone": "Simu / WhatsApp",
+    "message": "Ujumbe",
+    "submit": "Tuma swali",
+    "fullNamePlaceholder": "Weka jina lako kamili",
+    "emailPlaceholder": "Weka barua pepe",
+    "phonePlaceholder": "Weka namba ya simu",
+    "messagePlaceholder": "Tuambie kuhusu mipango au maombi yako...",
+    "sending": "Inatuma swali...",
+    "success": "Swali limetumwa. Tutawasiliana nawe hivi karibuni.",
+    "error": "Swali haliwezi kutumwa sasa."
+  },
+  "footer": {
+    "about": "Sisi ni kampuni ya familia ya wenyeji inayobuni safari za kiikolojia Uganda na Afrika Mashariki.",
+    "contact": "Wasiliana nasi",
+    "quickLinks": "Viungo",
+    "accept": "Tunakubali",
+    "social": "Ungana nasi",
+    "rights": "© 2025 Uganda Family Tours & Safari Co. Haki zote zimehifadhiwa.",
+    "privacy": "Sera ya faragha",
+    "terms": "Masharti",
+    "location": "Kampala, Uganda"
+  },
+  "aboutPage": {
+    "hero": {
+      "kicker": "Kuhusu Sisi",
+      "title": "Kuhusu Sisi",
+      "subtitle": "Miaka 10 ya safari halisi"
+    },
+    "welcome": {
+      "label": "Karibu",
+      "title": "Karibu!",
+      "p1": "Karibu Uganda Family Tours & Safari Company, mshirika wako wa safari salama na rafiki kwa mazingira.",
+      "p2": "Timu yetu ya wenyeji husaidia familia kugundua uzuri, wanyamapori na utamaduni wa Uganda."
+    },
+    "origins": {
+      "label": "Orodha ya ndoto",
+      "title": "Asili yetu",
+      "p1": "Hadithi yetu ilianza kwa upendo wa asili, wanyamapori na watu wa Uganda.",
+      "p2": "Leo tunatengeneza safari salama, halisi na endelevu kwa familia kutoka duniani kote."
+    },
+    "initiatives": {
+      "label": "Wasiliana nasi sasa",
+      "title": "Miradi yetu",
+      "description": "Tunajitolea kwa utalii unaowajibika na manufaa kwa jamii na mazingira.",
+      "responsible": {
+        "title": "Utalii unaowajibika",
+        "text": "Tunajitolea kwa utalii unaowajibika na manufaa kwa jamii na mazingira."
+      },
+      "community": {
+        "title": "Uwezeshaji jamii",
+        "text": "Tunafanya kazi na shule na vikundi vya jamii kuboresha elimu na fursa."
+      },
+      "conservation": {
+        "title": "Uhifadhi",
+        "text": "Tunajitolea kwa utalii unaowajibika na manufaa kwa jamii na mazingira."
+      },
+      "eco": {
+        "title": "Safari rafiki kwa mazingira",
+        "text": "Tunajitolea kwa utalii unaowajibika na manufaa kwa jamii na mazingira."
+      }
+    },
+    "charities": {
+      "label": "Wasiliana nasi sasa",
+      "title": "Misaada yetu",
+      "visit": "Tembelea tovuti",
+      "learn": "Jifunze zaidi",
+      "mammadu": {
+        "title": "The Mammadu Trust",
+        "p1": "Tunaunga mkono watoto, wanawake na familia zilizo katika mazingira magumu.",
+        "p2": "Mwongoza safari anaweza kupanga ziara au msaada kwa uwazi na uangalifu."
+      },
+      "orange": {
+        "title": "Orange Community Project",
+        "p1": "Tunafanya kazi na shule na vikundi vya jamii kuboresha elimu na fursa.",
+        "p2": "Miradi yetu huleta faida endelevu zaidi ya kila safari."
+      }
+    },
+    "cta": {
+      "label": "Wasiliana nasi sasa",
+      "title": "Anza kupanga safari yako ya ndoto",
+      "call": "Piga simu sasa",
+      "inquiry": "Tuma swali"
+    }
+  },
+  "tourContent": {
+    "gorilla-tracking-in-bwindi": {
+      "title": "Safari ya sokwe Bwindi",
+      "shortDescription": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "overview": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "highlights": [
+        "Safari ya sokwe Bwindi",
+        "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+        "Utalii unaowajibika",
+        "Uhifadhi",
+        "Safari rafiki kwa mazingira"
+      ]
+    },
+    "murchison-falls-safari": {
+      "title": "Safari ya Murchison Falls",
+      "shortDescription": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "overview": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "highlights": [
+        "Safari ya Murchison Falls",
+        "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+        "Utalii unaowajibika",
+        "Uhifadhi",
+        "Safari rafiki kwa mazingira"
+      ]
+    },
+    "queen-elizabeth-wildlife-safari": {
+      "title": "Safari ya Queen Elizabeth",
+      "shortDescription": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "overview": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "highlights": [
+        "Safari ya Queen Elizabeth",
+        "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+        "Utalii unaowajibika",
+        "Uhifadhi",
+        "Safari rafiki kwa mazingira"
+      ]
+    },
+    "lake-bunyonyi-escape": {
+      "title": "Mapumziko Lake Bunyonyi",
+      "shortDescription": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "overview": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "highlights": [
+        "Mapumziko Lake Bunyonyi",
+        "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+        "Utalii unaowajibika",
+        "Uhifadhi",
+        "Safari rafiki kwa mazingira"
+      ]
+    },
+    "chimpanzee-trekking": {
+      "title": "Safari ya sokwe mtu",
+      "shortDescription": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "overview": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "highlights": [
+        "Safari ya sokwe mtu",
+        "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+        "Utalii unaowajibika",
+        "Uhifadhi",
+        "Safari rafiki kwa mazingira"
+      ]
+    },
+    "cultural-uganda-experience": {
+      "title": "Uzoefu wa utamaduni Uganda",
+      "shortDescription": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "overview": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+      "highlights": [
+        "Uzoefu wa utamaduni Uganda",
+        "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+        "Utalii unaowajibika",
+        "Uhifadhi",
+        "Safari rafiki kwa mazingira"
+      ]
+    },
+    "itineraryDays": [
+      {
+        "title": "Kuwasili na kuanza",
+        "description": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+        "activities": [
+          "Kupokelewa na uhamisho",
+          "Kuangalia wanyamapori kwa mwongozo",
+          "Kuingia lodge"
+        ],
+        "details": "Malazi: lodge  Milo: kifungua kinywa, chakula cha mchana, chakula cha jioni  Umbali: 120 km"
+      },
+      {
+        "title": "Safari ya sokwe na uhamisho",
+        "description": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+        "activities": [
+          "Kupokelewa na uhamisho",
+          "Kuangalia wanyamapori kwa mwongozo",
+          "Kuingia lodge"
+        ],
+        "details": "Malazi: lodge  Milo: kifungua kinywa, chakula cha mchana, chakula cha jioni  Umbali: 160 km"
+      },
+      {
+        "title": "Kuchunguza Queen Elizabeth",
+        "description": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+        "activities": [
+          "Kupokelewa na uhamisho",
+          "Kuangalia wanyamapori kwa mwongozo",
+          "Kuingia lodge"
+        ],
+        "details": "Malazi: lodge  Milo: kifungua kinywa, chakula cha mchana, chakula cha jioni  Umbali: 80 km"
+      },
+      {
+        "title": "Kuondoka na utamaduni",
+        "description": "Safari iliyopangwa vizuri yenye asili, utamaduni na wanyamapori wa kukumbukwa.",
+        "activities": [
+          "Kupokelewa na uhamisho",
+          "Kuangalia wanyamapori kwa mwongozo",
+          "Kuingia lodge"
+        ],
+        "details": "Malazi: lodge  Milo: kifungua kinywa, chakula cha mchana, chakula cha jioni  Umbali: 280 km"
+      }
+    ]
+  },
+  "reviews": {
+    "items": [
+      {
+        "country": "Australia",
+        "text": "Safari ilikuwa imepangwa vizuri na ilikuwa ya kukumbukwa."
+      },
+      {
+        "country": "United Kingdom",
+        "text": "Safari ilikuwa imepangwa vizuri na ilikuwa ya kukumbukwa."
+      },
+      {
+        "country": "Canada",
+        "text": "Safari ilikuwa imepangwa vizuri na ilikuwa ya kukumbukwa."
+      },
+      {
+        "country": "United States",
+        "text": "Safari ilikuwa imepangwa vizuri na ilikuwa ya kukumbukwa."
+      },
+      {
+        "country": "Kenya",
+        "text": "Safari ilikuwa imepangwa vizuri na ilikuwa ya kukumbukwa."
+      },
+      {
+        "country": "Spain",
+        "text": "Safari ilikuwa imepangwa vizuri na ilikuwa ya kukumbukwa."
+      }
+    ]
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "navbar": {
+    "home": "Ahabanza",
+    "tours": "Ingendo",
+    "about": "Abo turi bo",
+    "talkToSpecialist": "Vugana n'inzobere",
+    "language": "Ururimi"
+  },
+  "common": {
+    "from": "Guhera kuri",
+    "days": "Iminsi",
+    "sending": "Birimo koherezwa...",
+    "required": "Iki gice kirakenewe.",
+    "validEmail": "Andika email yemewe.",
+    "yes": "Yego",
+    "no": "Oya",
+    "close": "Funga",
+    "cancel": "Hagarika",
+    "menu": "Ibikubiyemo"
+  },
+  "home": {
+    "hero": {
+      "title": "Urugendo rwawe ruragutegereje mu Isaro rya Afurika",
+      "subtitle": "Menya safari zitazibagirana, ibyiza nyaburanga bitangaje n'umuco ukungahaye hamwe na Uganda Family Tours & Safari Co.",
+      "primaryCta": "Reba ingendo zacu"
+    },
+    "story": {
+      "label": "Inkuru yacu",
+      "title": "Menya umutima wa Uganda",
+      "description": "Kuva ku misozi itwikiriwe n'ibicu kugeza ku migezi minini, sobanukirwa Uganda mu buryo budasanzwe."
+    },
+    "featured": {
+      "label": "Sura Uganda",
+      "title": "Ingendo zatoranyijwe",
+      "viewAll": "Reba ingendo zose"
+    },
+    "why": {
+      "label": "Urugendo rwawe. Ubunararibonye bwacu.",
+      "title": "Kuki wahitamo Uganda Family Tours?",
+      "description": "Dutegura ingendo zitazibagirana zikwinjiza mu muco, mu byiza nyaburanga no mu nyamaswa zo muri Uganda.",
+      "tailorTitle": "Gahunda z'ingendo zihariye",
+      "tailorText": "Gahunda zitegurwa hagendewe ku byo wifuza.",
+      "localTitle": "Ubumenyi bw'abanyagihugu",
+      "localText": "Abayobozi b'ingendo b'inararibonye kandi bakunda igihugu.",
+      "responsibleTitle": "Ingendo zirengera ibidukikije",
+      "responsibleText": "Kurengera ibidukikije no gufasha abaturage.",
+      "peaceTitle": "Umutekano n'ituze",
+      "peaceText": "Kwiyandikisha mu mutekano n'ubufasha amasaha 24/7."
+    },
+    "galleryTitle": "Ibihe byiza byo mu ngendo zacu",
+    "reviewsTitle": "Ibyo abagenzi bacu bavuga"
+  },
+  "toursPage": {
+    "title": "Ingendo zacu",
+    "description": "Safari zatoranyijwe neza zigenewe kukugeza ku rugendo rutazibagirana muri Uganda no muri Afurika y'Iburasirazuba.",
+    "ctaLabel": "Sura. Menya. Genda.",
+    "ctaTitle": "Urugendo rwawe ruragutegereje - reka dutegure inzozi zawe",
+    "ctaButton": "Vugana n'ikipe yacu"
+  },
+  "tourCard": {
+    "duration": "Igihe",
+    "getPackage": "Reba urugendo"
+  },
+  "tourDetails": {
+    "breadcrumbHome": "Ahabanza",
+    "breadcrumbTours": "Ingendo",
+    "overview": "Incamake",
+    "gallery": "Amafoto",
+    "highlights": "Ibizakurura",
+    "itinerary": "Gahunda",
+    "tourHighlights": "Ibikurura by'urugendo",
+    "dayByDay": "Gahunda y'umunsi ku munsi",
+    "price": "Igiciro",
+    "availableOnRequest": "Kiboneka ubisabye",
+    "quote": "Twandikire tuguhe igiciro kijyanye n'urugendo rwawe",
+    "instant": "Kwemezwa vuba",
+    "secure": "Kwiyandikisha bifite umutekano",
+    "fees": "Nta mafaranga y'inyongera",
+    "bookThisTour": "Iyandikishe kuri uru rugendo",
+    "needHelp": "Ukeneye ubufasha mu kwiyandikisha?",
+    "activities": "Ibikorwa",
+    "bucketList": "Urutonde rw'inzozi",
+    "day": "Umunsi"
+  },
+  "bookingForm": {
+    "title": "Iyandikishe kuri uru rugendo",
+    "subtitle": "Tubwire uko wifuza kugenda, tuzagusubiza ku gihe kiboneka n'igiciro.",
+    "selectedTour": "Urugendo wahisemo",
+    "fullName": "Amazina yose",
+    "email": "Email",
+    "phone": "Telefone / WhatsApp",
+    "country": "Igihugu utuyemo",
+    "travelDate": "Itariki wifuza kugenderaho",
+    "flexibleDates": "Amatariki yawe ashobora guhinduka?",
+    "groupSize": "Umubare w'abagenzi",
+    "adults": "Abakuru",
+    "children": "Abana",
+    "childrenAges": "Imyaka y'abana",
+    "duration": "Umubare w'iminsi / Igihe wifuza",
+    "accommodation": "Uburyo bwo gucumbika",
+    "budget": "Ingengo y'imari kuri buri muntu",
+    "specialRequests": "Ibyifuzo byihariye / Ibisobanuro",
+    "submit": "Ohereza ubusabe",
+    "selectCountry": "Hitamo igihugu",
+    "noCountries": "Nta gihugu cyabonetse.",
+    "fullNamePlaceholder": "Andika amazina yawe yose",
+    "emailPlaceholder": "Andika email yawe",
+    "childrenAgesPlaceholder": "urugero: 5, 8, 12",
+    "durationPlaceholder": "Hitamo umubare w'iminsi",
+    "budgetPlaceholder": "Hitamo ingengo y'imari",
+    "notesPlaceholder": "Ibyifuzo byihariye cyangwa andi makuru...",
+    "info": "Tuzakuvugisha kuri email cyangwa WhatsApp kugira ngo twemeze.",
+    "sending": "Ubusabe bwawe burimo koherezwa...",
+    "success": "Ubusabe bwo kwiyandikisha bwoherejwe neza. Tuzakuvugisha vuba.",
+    "error": "Ubusabe ntibwashoboye koherezwa ubu.",
+    "budgetTotal": "Ingengo y'imari y'itsinda"
+  },
+  "inquiryForm": {
+    "title": "Ohereza ikibazo",
+    "subtitle": "Tubwire uko twagufasha, inzobere zacu zizagusubiza kuri email cyangwa WhatsApp.",
+    "fullName": "Amazina yose",
+    "email": "Email",
+    "phone": "Telefone / WhatsApp",
+    "message": "Ubutumwa",
+    "submit": "Ohereza",
+    "fullNamePlaceholder": "Andika amazina yawe",
+    "emailPlaceholder": "Andika email",
+    "phonePlaceholder": "Andika telefone",
+    "messagePlaceholder": "Tubwire gahunda yawe cyangwa ibyo wifuza...",
+    "sending": "Birimo koherezwa...",
+    "success": "Byoherejwe neza. Tuzakuvugisha vuba.",
+    "error": "Ntibyashoboye koherezwa ubu."
+  },
+  "footer": {
+    "about": "Turi kompanyi y'umuryango ikorera hano, dutegura eco-safari zihariye muri Uganda no muri Afurika y'Iburasirazuba.",
+    "contact": "Twandikire",
+    "quickLinks": "Amahuza yihuse",
+    "accept": "Twemera",
+    "social": "Dukurikire",
+    "rights": "© 2025 Uganda Family Tours & Safari Co. Uburenganzira bwose burabitswe.",
+    "privacy": "Politiki y'ibanga",
+    "terms": "Amabwiriza n'amasezerano",
+    "location": "Kampala, Uganda"
+  },
+  "aboutPage": {
+    "hero": {
+      "kicker": "Abo turi bo",
+      "title": "Abo turi bo",
+      "subtitle": "Imyaka 10 dutegura safari z'ukuri"
+    },
+    "welcome": {
+      "label": "Murakaza neza",
+      "title": "Karibu!",
+      "p1": "Murakaza neza muri Uganda Family Tours & Safari Company - umufatanyabikorwa wizewe mu ngendo z'umuryango zifite umutekano, zishimishije kandi zirengera ibidukikije mu Isaro rya Afurika.",
+      "p2": "Turi ikipe y'abategura ingendo n'abayobozi bazo bakorera hano, twiyemeje gufasha imiryango kumenya ubwiza, inyamaswa n'umuco wa Uganda mu buryo bushimisha abana, buruhura ababyeyi kandi bwubaha ibidukikije."
+    },
+    "origins": {
+      "label": "Inkuru yacu",
+      "title": "Aho twakomotse",
+      "p1": "Inkuru yacu yatangiriye ku rukundo dukunda ibidukikije, inyamaswa n'abantu badasanzwe ba Uganda. Ibyatangiye ari safari nto ziyobowe n'umuryango byakuze bihinduka intego yo gusangiza imiryango yo ku isi yose uburanga bwa Afurika.",
+      "p2": "Mu myaka ishize twubatse ubufatanye bwizewe, dutegura ingendo zifite umutekano kandi zitazibagirana, dukomeza indangagaciro zacu: ukuri, kurengera ibidukikije no kwita ku mukiriya."
+    },
+    "initiatives": {
+      "label": "Ibidutera imbaraga",
+      "title": "Ibikorwa byacu",
+      "description": "Twiyemeje ingendo zifite inshingano no guteza imbere abaturage, inyamaswa n'ibidukikije muri Uganda.",
+      "responsible": {
+        "title": "Ubukerarugendo bufite inshingano",
+        "text": "Duteza imbere uburyo bwo gutembera burengera ibidukikije, bufasha abaturage kandi bubungabunga umuco."
+      },
+      "community": {
+        "title": "Guteza imbere abaturage",
+        "text": "Dukorana n'abaturage mu gushyigikira uburezi, amahugurwa n'amahirwe y'ubukungu."
+      },
+      "conservation": {
+        "title": "Gushyigikira kubungabunga inyamaswa",
+        "text": "Dushyigikira gahunda zo kurengera inyamaswa n'aho ziba muri Uganda."
+      },
+      "eco": {
+        "title": "Ingendo zirengera ibidukikije",
+        "text": "Dugabanya ingaruka ku bidukikije binyuze mu mikorere irambye no gutegura ingendo neza."
+      }
+    },
+    "charities": {
+      "label": "Gukora itandukaniro",
+      "title": "Imishinga dushyigikira",
+      "visit": "Sura urubuga",
+      "learn": "Menya byinshi",
+      "mammadu": {
+        "title": "The Mammadu Trust in Windhoek",
+        "p1": "The Mammadu Trust yashinzwe kwita no gufasha impfubyi, abana n'abagore bari mu buzima bugoye cyane. Twemera ko urugendo rufite inshingano rugomba kurema amahirwe nyayo ku rubyiruko n'imiryango.",
+        "p2": "Iyo ugarutse, umuyobozi wawe ashobora gutegura gusura aho inkunga ijya cyangwa kuguhuza n'abaturage, inkunga yawe igatangwa mu mucyo no mu bwitonzi."
+      },
+      "orange": {
+        "title": "Orange Community Project",
+        "p1": "Dukorana n'amashuri n'amatsinda y'abaturage mu kunoza ibyumba by'ishuri, gutanga ibikoresho no gushyigikira imyigire ifatika y'abana mu byaro.",
+        "p2": "Uganda Family Tours ikomeza gushyigikira imishinga y'abaturage yatangijwe n'abayobozi b'inzego z'ibanze, igatanga inyungu zirambye zirenze safari imwe."
+      }
+    },
+    "cta": {
+      "label": "Twandikire ubu",
+      "title": "Tangira gutegura urugendo rw'inzozi zawe",
+      "call": "Hamagara ubu",
+      "inquiry": "Ohereza ikibazo"
+    }
+  },
+  "tourContent": {
+    "gorilla-tracking-in-bwindi": {
+      "title": "Gukurikirana ingagi i Bwindi",
+      "shortDescription": "Genda mu ishyamba ry'inzitane uri kumwe n'abayobozi b'inararibonye uhure n'ingagi zo mu misozi mu buzima bwazo busanzwe.",
+      "overview": "Jya mu mutima w'ubwiza bw'ishyamba. Pariki ya Bwindi Impenetrable ibamo hafi kimwe cya kabiri cy'ingagi zo mu misozi zisigaye ku isi. Uru rugendo rw'iminsi 4 rutanga ubunararibonye butazibagirana mu ishyamba, mu muco no mu kubungabunga inyamaswa.",
+      "highlights": [
+        "Gukurikirana ingagi zo mu misozi",
+        "Kubona inkende za zahabu",
+        "Kuruhukira ku kiyaga Kivu",
+        "Kwinjira mu muco",
+        "Ibyiza nyaburanga by'ishyamba"
+      ]
+    },
+    "murchison-falls-safari": {
+      "title": "Safari ya Murchison Falls",
+      "shortDescription": "Menya amasumo akomeye, game drive ishimishije n'urugendo rw'ubwato kuri Nile witegereza inyamaswa nyinshi.",
+      "overview": "Jya mu mutima w'ubwiza bwa Uganda. Iyi gahunda ihuza inyamaswa zizwi, umuco, ibyiza nyaburanga n'ubwakiranyi bw'abanyagihugu.",
+      "highlights": [
+        "Urugendo rw'ubwato kuri Nile",
+        "Gusura hejuru y'amasumo",
+        "Kubona inyamaswa nini",
+        "Ahantu h'inyoni nyinshi",
+        "Game drive mu gitondo"
+      ]
+    },
+    "queen-elizabeth-wildlife-safari": {
+      "title": "Safari y'inyamaswa muri Queen Elizabeth",
+      "shortDescription": "Sura inyamaswa zitandukanye, intare zizamuka ibiti, ibiyaga bya crater n'ibibaya bya savanna hamwe n'umuyobozi w'inararibonye.",
+      "overview": "Jya mu mutima w'ubwiza bwa Uganda. Iyi gahunda ihuza inyamaswa zizwi, umuco, ibyiza nyaburanga n'ubwakiranyi bw'abanyagihugu.",
+      "highlights": [
+        "Intare zizamuka ibiti",
+        "Urugendo kuri Kazinga Channel",
+        "Ibyiza by'ibiyaga bya crater",
+        "Kubona inzovu",
+        "Gusura umudugudu"
+      ]
+    },
+    "lake-bunyonyi-escape": {
+      "title": "Kuruhukira ku Kiyaga Bunyonyi",
+      "shortDescription": "Ruhukira ku kiyaga gituje, usure ibirwa, ugende mu bwato bwa canoe kandi wishimire ibyiza by'imisozi.",
+      "overview": "Jya mu mutima w'ubwiza bwa Uganda. Iyi gahunda ihuza inyamaswa zizwi, umuco, ibyiza nyaburanga n'ubwakiranyi bw'abanyagihugu.",
+      "highlights": [
+        "Canoe mu birwa",
+        "Ahantu hareba imisozi",
+        "Gusura abaturage",
+        "Kuruhukira ku kiyaga",
+        "Kureba inyoni"
+      ]
+    },
+    "chimpanzee-trekking": {
+      "title": "Gukurikirana chimpanzee",
+      "shortDescription": "Kurikirana chimpanzee mu ishyamba rya Kibale, wumve primates mu biti kandi ugende muri Bigodi wetland.",
+      "overview": "Jya mu mutima w'ubwiza bwa Uganda. Iyi gahunda ihuza inyamaswa zizwi, umuco, ibyiza nyaburanga n'ubwakiranyi bw'abanyagihugu.",
+      "highlights": [
+        "Gukurikirana chimpanzee",
+        "Kugenda muri Bigodi wetland",
+        "Kubona primates",
+        "Kureba inyoni mu ishyamba",
+        "Inkuru z'abayobozi b'aho"
+      ]
+    },
+    "cultural-uganda-experience": {
+      "title": "Ubunararibonye bw'umuco wa Uganda",
+      "shortDescription": "Injira mu muco w'aho, amafunguro gakondo, umuziki, inkuru, amasoko y'ubukorikori n'ubuzima bw'abaturage.",
+      "overview": "Jya mu mutima w'ubwiza bwa Uganda. Iyi gahunda ihuza inyamaswa zizwi, umuco, ibyiza nyaburanga n'ubwakiranyi bw'abanyagihugu.",
+      "highlights": [
+        "Imbyino n'ibitaramo by'umuco",
+        "Amafunguro ya kinyagihugu",
+        "Amasoko y'ubukorikori",
+        "Kugenda mu baturage",
+        "Inkuru z'abakiriye"
+      ]
+    },
+    "itineraryDays": [
+      {
+        "title": "Kugera no gutangira urugendo",
+        "description": "Ugera ku kibuga cy'indege cyangwa aho muhurira, umuyobozi wa safari akakwakira akagusobanurira urugendo rutangiye.",
+        "activities": [
+          "Kwakirwa ku kibuga no kujyanwa",
+          "Urugendo rwiza rugana kuri lodge",
+          "Kwinjira muri lodge no gusobanurirwa"
+        ],
+        "details": "Icumbi: lodge  Amafunguro: nimugoroba  Intera: 120km"
+      },
+      {
+        "title": "Gukurikirana ingagi no kujya Queen Elizabeth",
+        "description": "Winjira mu ishyamba ry'inzitane ku rugendo ruyobowe, nyuma ugakomereza mu misozi n'imidugudu werekeza muri Queen Elizabeth National Park.",
+        "activities": [
+          "Gukurikirana inyamaswa uyobowe",
+          "Ifunguro rya saa sita mu byanya nyaburanga",
+          "Kujya kuri lodge nimugoroba no kwiyandikisha"
+        ],
+        "details": "Icumbi: lodge  Amafunguro: mu gitondo, saa sita, nimugoroba  Intera: 160km"
+      },
+      {
+        "title": "Gusura Queen Elizabeth",
+        "description": "Umunsi wose uwumara usura ibibaya bya savanna, ibiyaga bya crater n'inzira z'amazi bizwiho inzovu, imbogo, antelope n'inyoni.",
+        "activities": [
+          "Game drive ya mu gitondo",
+          "Urugendo rw'ubwato cyangwa kugenda mu bidukikije",
+          "Gufata amafoto izuba rirenga"
+        ],
+        "details": "Icumbi: lodge  Amafunguro: mu gitondo, saa sita, nimugoroba  Intera: 80km"
+      },
+      {
+        "title": "Gusezera n'umuco",
+        "description": "Ishimire ifunguro rya mu gitondo rituje mbere yo gusubira, ufite umwanya wo gusura ubukorikori, abaturage cyangwa ahantu h'ibyiza nyaburanga.",
+        "activities": [
+          "Gusura umuco",
+          "Guhagarara kugura souvenir",
+          "Gusubira Kampala cyangwa Entebbe"
+        ],
+        "details": "Icumbi: nta ryo  Amafunguro: mu gitondo  Intera: 280km"
+      }
+    ]
+  },
+  "reviews": {
+    "items": [
+      {
+        "country": "Australia",
+        "text": "Byari ubunararibonye buhebuje kuva dutangiye kugeza dusoje. Abayobozi bari abahanga, b'inshuti kandi batumye urugendo rutazibagirana."
+      },
+      {
+        "country": "United Kingdom",
+        "text": "Byose byateguwe neza. Gukurikirana ingagi byari iby'ubuzima bwose. Turasaba cyane Uganda Family Tours!"
+      },
+      {
+        "country": "Canada",
+        "text": "Urugendo rutangaje rufite ibyiza nyaburanga n'inyamaswa zidasanzwe. Tuzagaruka muri Uganda!"
+      },
+      {
+        "country": "United States",
+        "text": "Umuryango wacu witayeho muri buri ntambwe. Gahunda yari yuzuye, iteguwe neza kandi ifite ibihe byiza."
+      },
+      {
+        "country": "Kenya",
+        "text": "Safari yateguwe neza, abayobozi b'ineza, lodge nziza n'inyamaswa nyinshi mu rugendo rwose."
+      },
+      {
+        "country": "Spain",
+        "text": "Gukurikirana ingagi byari iby'amarangamutima kandi ntibizibagirana. Uganda Family Tours yakoze byose neza kandi mu buryo bwihariye."
+      }
+    ]
+  }
+}
