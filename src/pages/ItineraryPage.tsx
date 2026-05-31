@@ -194,13 +194,13 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
         <div className="absolute inset-0 bg-black/62" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-b from-transparent via-black/25 to-[#faf7f2]" />
         <div className="container-custom relative z-10 flex min-h-[500px] flex-col justify-end pb-24 pt-36 text-white md:pb-28 md:pt-40">
-          <h1 className="max-w-5xl text-4xl font-bold leading-tight md:text-6xl">{t('tourDetails.bucketList')}: {tourTitle}</h1>
-          <div className="mt-6 flex flex-wrap items-center gap-2 text-sm font-semibold text-white/80 md:text-base">
+          <h1 className="text-safe max-w-5xl text-4xl font-bold leading-tight md:text-6xl">{t('tourDetails.bucketList')}: {tourTitle}</h1>
+          <div className="mt-6 flex min-w-0 flex-wrap items-center gap-2 text-sm font-semibold text-white/80 md:text-base">
             <Link to="/" className="hover:text-primary">{t('tourDetails.breadcrumbHome')}</Link>
             <FiChevronRight className="text-white/55" />
             <Link to="/tours" className="hover:text-primary">{t('tourDetails.breadcrumbTours')}</Link>
             <FiChevronRight className="text-white/55" />
-            <span>{tourTitle}</span>
+            <span className="text-safe min-w-0">{tourTitle}</span>
           </div>
         </div>
       </section>
@@ -210,7 +210,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
         <div className={`transition-all duration-300 ease-out ${isTabStuck ? 'fixed left-0 right-0 top-[3.75rem] z-50 w-full' : 'relative z-40 container-custom'}`}>
           <nav
             ref={tabNavRef}
-            className={`relative grid grid-cols-4 overflow-hidden bg-white transition-all duration-300 ease-out ${
+            className={`relative grid min-w-0 grid-cols-4 overflow-hidden bg-white transition-all duration-300 ease-out ${
               isTabStuck ? 'rounded-none border-b border-border shadow-[0_8px_24px_rgba(17,24,39,0.08)]' : 'rounded-card shadow-soft'
             }`}
             aria-label="Tour sections"
@@ -222,13 +222,13 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
             {tabs.map(([label, href], index) => (
               <a
                 key={label}
-                className={`relative flex items-center justify-center px-2 py-4 text-sm font-medium transition hover:text-primary md:px-5 md:py-5 md:text-base ${
+                className={`relative flex min-w-0 items-center justify-center px-2 py-4 text-center text-sm font-medium transition hover:text-primary md:px-5 md:py-5 md:text-base ${
                   activeTab === index ? 'text-primary' : 'text-ink'
                 }`}
                 href={href}
                 onClick={() => setActiveTab(index)}
               >
-                {label}
+                <span className="truncate">{label}</span>
                 {index < tabs.length - 1 && <span className="absolute right-0 top-1/2 h-5 w-px -translate-y-1/2 bg-primary/45" />}
               </a>
             ))}
@@ -237,16 +237,16 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
       </div>
 
       <main className="section-padding section-blend-light pt-14">
-        <div className="container-custom grid gap-12 lg:grid-cols-[1fr_400px]">
-          <div className="space-y-10">
+        <div className="container-custom grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1fr)_400px]">
+          <div className="min-w-0 space-y-10">
             <section id="overview" className="scroll-mt-28">
-              <h2 className="content-title">{t('tourDetails.overview')}</h2>
-              <p className="mt-4 max-w-5xl text-lg leading-8 text-muted">{tourOverview}</p>
+              <h2 className="content-title text-safe">{t('tourDetails.overview')}</h2>
+              <p className="text-safe mt-4 max-w-5xl text-lg leading-8 text-muted">{tourOverview}</p>
             </section>
 
             {galleryImages.length > 0 ? (
               <section id="gallery" className="scroll-mt-28">
-                <h2 className="content-title">{t('tourDetails.gallery')}</h2>
+                <h2 className="content-title text-safe">{t('tourDetails.gallery')}</h2>
                 <div className="mt-5 grid gap-5 md:grid-cols-[0.95fr_1fr_0.95fr] md:grid-rows-[240px_240px]">
                   {galleryImages.map((image, index) => {
                     const classes = [
@@ -260,7 +260,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                       <button
                         key={image.id}
                         type="button"
-                        className={`group overflow-hidden rounded-2xl ${classes[index] ?? 'h-64 md:h-full'}`}
+                        className={`group max-w-full overflow-hidden rounded-2xl ${classes[index] ?? 'h-64 md:h-full'}`}
                         onClick={() => openGalleryImage(image.image_url)}
                         aria-label={`Open ${tourTitle} gallery image ${index + 1}`}
                       >
@@ -278,15 +278,15 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
 
             {details.highlights.length > 0 ? (
               <section id="highlights" className="scroll-mt-28">
-                <h2 className="content-title">{t('tourDetails.tourHighlights')}</h2>
-                <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <h2 className="content-title text-safe">{t('tourDetails.tourHighlights')}</h2>
+                <div className="mt-5 grid min-w-0 gap-4 md:grid-cols-2">
                   {details.highlights.map((highlight) => (
-                    <div key={highlight.id} className="flex items-start gap-3 text-muted">
+                    <div key={highlight.id} className="flex min-w-0 items-start gap-3 text-muted">
                       <FiCheckCircle className="mt-1 shrink-0 text-[#FD5E02]" />
-                      <div>
-                        <p className="font-bold text-ink">{highlight.title}</p>
+                      <div className="min-w-0">
+                        <p className="text-safe font-bold text-ink">{highlight.title}</p>
                         {highlight.description ? (
-                          <p className="mt-1 text-sm leading-6 text-muted">{highlight.description}</p>
+                          <p className="text-safe mt-1 text-sm leading-6 text-muted">{highlight.description}</p>
                         ) : null}
                       </div>
                     </div>
@@ -297,8 +297,8 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
 
             {details.itineraryDays.length > 0 ? (
               <section id="itinerary" className="scroll-mt-28">
-                <h2 className="content-title">{t('tourDetails.dayByDay')}</h2>
-                <div ref={itineraryTimelineRef} className="relative mt-6 space-y-10">
+                <h2 className="content-title text-safe">{t('tourDetails.dayByDay')}</h2>
+                <div ref={itineraryTimelineRef} className="relative mt-6 max-w-full space-y-10 overflow-hidden">
                   <span className="absolute bottom-6 left-6 top-6 w-0.5 bg-gray-200" aria-hidden="true" />
                   <span
                     className="absolute left-6 top-6 w-0.5 origin-top bg-primary shadow-[0_0_18px_rgba(233,121,45,0.28)]"
@@ -322,21 +322,21 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
           </div>
 
           <aside className="md:sticky md:top-24 md:self-start">
-            <div className="card p-8 text-center">
-              <p className="text-xs font-black uppercase tracking-wide text-ink">{t('tourDetails.price')}</p>
-              <h2 className="mt-3 text-2xl font-black text-[#FD5E02]">{t('common.from')} {formatCurrency(tourPackage.price_from_usd)}</h2>
-              <p className="mt-2 text-sm text-muted">{t('tourDetails.quote')}</p>
+            <div className="card min-w-0 p-8 text-center">
+              <p className="text-safe text-xs font-black uppercase tracking-wide text-ink">{t('tourDetails.price')}</p>
+              <h2 className="text-safe mt-3 text-2xl font-black text-[#FD5E02]">{t('common.from')} {formatCurrency(tourPackage.price_from_usd)}</h2>
+              <p className="text-safe mt-2 text-sm text-muted">{t('tourDetails.quote')}</p>
               <div className="mx-auto mt-5 inline-flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-sm font-bold text-green-700">
                 <FaCheck /> {t('tourDetails.instant')}
               </div>
-              <div className="mt-7 grid grid-cols-2 gap-4 text-sm text-muted">
-                <span className="flex items-center justify-center gap-2"><FaShieldHeart className="text-[#FD5E02]" /> {t('tourDetails.secure')}</span>
-                <span className="flex items-center justify-center gap-2"><FaCheck className="text-[#FD5E02]" /> {t('tourDetails.fees')}</span>
+              <div className="mt-7 grid min-w-0 grid-cols-2 gap-4 text-sm text-muted">
+                <span className="text-safe flex items-center justify-center gap-2"><FaShieldHeart className="shrink-0 text-[#FD5E02]" /> {t('tourDetails.secure')}</span>
+                <span className="text-safe flex items-center justify-center gap-2"><FaCheck className="shrink-0 text-[#FD5E02]" /> {t('tourDetails.fees')}</span>
               </div>
               <button className="btn-primary mt-7 w-full justify-center" type="button" onClick={() => onBook(bookingTour)}>{t('tourDetails.bookThisTour')} <FiArrowRight /></button>
               <div className="mt-8 text-sm">
-                <p className="text-muted">{t('tourDetails.needHelp')}</p>
-                <a className="mt-2 flex items-center justify-center gap-2 font-black text-primary" href="tel:+256703543027">
+                <p className="text-safe text-muted">{t('tourDetails.needHelp')}</p>
+                <a className="text-safe mt-2 flex items-center justify-center gap-2 font-black text-primary" href="tel:+256703543027">
                   <FiPhone /> +256 703 543027
                 </a>
               </div>
@@ -384,31 +384,31 @@ function ItineraryDayArticle({ day, index, tourTitle, markerRef }: ItineraryDayA
   const sliderImages = dayImages.length > 0 ? dayImages : fallbackImages
 
   return (
-    <article className="relative grid grid-cols-[56px_1fr] gap-5">
+    <article className="relative grid min-w-0 max-w-full grid-cols-[48px_minmax(0,1fr)] gap-4 sm:grid-cols-[56px_minmax(0,1fr)] sm:gap-5">
       <div
         ref={markerRef}
         className="relative z-10 grid h-12 w-12 place-items-center rounded-full border-4 border-white bg-primary text-base font-black text-white shadow-orange"
       >
         {day.day_number}
       </div>
-      <div>
-        <h3 className="text-lg font-black text-ink">{t('tourDetails.day')} {day.day_number}: {day.title}</h3>
-        {day.overview ? <p className="mt-3 max-w-5xl text-base leading-7 text-muted">{day.overview}</p> : null}
+      <div className="min-w-0 max-w-full">
+        <h3 className="text-safe text-lg font-black text-ink">{t('tourDetails.day')} {day.day_number}: {day.title}</h3>
+        {day.overview ? <p className="text-safe mt-3 max-w-5xl text-base leading-7 text-muted">{day.overview}</p> : null}
         {day.activities.length > 0 ? (
           <>
-            <p className="mt-3 text-sm font-black text-ink">{t('tourDetails.activities')}:</p>
-            <ul className="mt-2 space-y-1 text-sm text-muted">
+            <p className="text-safe mt-3 text-sm font-black text-ink">{t('tourDetails.activities')}:</p>
+            <ul className="mt-2 max-w-full space-y-1 text-sm text-muted">
               {day.activities.map((activity) => (
-                <li key={activity.id} className="orange-bullet">
+                <li key={activity.id} className="orange-bullet text-safe">
                   <span className="font-semibold text-ink">{activity.title}</span>
-                  {activity.description ? <span>: {activity.description}</span> : null}
+                  {activity.description ? <span className="text-safe">: {activity.description}</span> : null}
                 </li>
               ))}
             </ul>
           </>
         ) : null}
         {day.accommodation_name ? (
-          <p className="mt-3 text-sm text-muted">Accommodation: {day.accommodation_name}</p>
+          <p className="text-safe mt-3 text-sm text-muted">Accommodation: {day.accommodation_name}</p>
         ) : null}
         {sliderImages.length > 0 ? <DayImageSlider images={sliderImages} title={`${tourTitle} Day ${day.day_number}`} /> : null}
       </div>
@@ -469,7 +469,7 @@ function DayImageSlider({ images, title }: DayImageSliderProps) {
   }
 
   return (
-    <div className="mt-5 overflow-hidden rounded-2xl" aria-label={`${title} images`}>
+    <div className="mt-5 max-w-full overflow-hidden rounded-2xl" aria-label={`${title} images`}>
       <div
         className={`flex ${isTransitioning ? 'transition-transform duration-700 ease-out' : ''}`}
         style={{ transform: `translateX(-${activeIndex * (100 / visibleSlides)}%)` }}

@@ -30,7 +30,8 @@ function packageToTour(tourPackage: TourPackage, index: number): Tour {
     bestSeason: fallbackTour.bestSeason,
     rating: fallbackTour.rating,
     reviewCount: fallbackTour.reviewCount,
-    shortDescription: tourPackage.short_description,
+    shortDescription:
+      tourPackage.short_description || 'Explore this Uganda Family Tours experience.',
     overview: tourPackage.overview,
     image: tourPackage.main_image_url || fallbackImage,
     heroImage,
@@ -100,7 +101,7 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
           />
 
           {isLoading ? (
-            <div className="mt-12 grid gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid items-stretch gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
               {[0, 1, 2, 3, 4, 5].map((item) => (
                 <div
                   key={item}
