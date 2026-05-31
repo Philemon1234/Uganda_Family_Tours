@@ -10,7 +10,7 @@
   --radius-card: 16px;
   --shadow-soft: 0 20px 55px rgb(17 24 39 / 0.08);
   --shadow-orange: 0 12px 28px rgb(255 164 96 / 0.18);
-  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
 }
 
 * {
@@ -27,7 +27,7 @@ body {
   margin: 0;
   background: #faf7f2;
   color: #111827;
-  font-family: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Nunito", ui-sans-serif, system-ui, sans-serif;
   font-weight: 400;
   overflow-x: hidden;
 }
@@ -166,6 +166,18 @@ img {
   will-change: transform;
 }
 
+.tour-booking-sticky {
+  align-self: start;
+}
+
+@media (min-width: 1024px) {
+  .tour-booking-sticky {
+    position: sticky !important;
+    top: 9rem;
+    z-index: 20;
+  }
+}
+
 @supports (bottom: constant(safe-area-inset-bottom)) {
   .mobile-bottom-nav {
     bottom: 0 !important;
@@ -267,7 +279,18 @@ img {
 
 .input:focus {
   border-color: #FFA460;
-  box-shadow: 0 0 0 4px rgb(253 94 2 / 0.1);
+  box-shadow: 0 0 0 4px rgb(255 164 96 / 0.14);
+}
+
+.field-error .input {
+  border-color: #dc2626;
+  background: #fff7f7;
+  box-shadow: 0 0 0 3px rgb(220 38 38 / 0.08);
+}
+
+.field-error .input:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 4px rgb(220 38 38 / 0.12);
 }
 
 .segmented {
@@ -363,9 +386,15 @@ img {
 }
 
 .footer-title {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .footer-title {
+    font-size: 0.9rem;
+  }
 }
 
 .content-title {

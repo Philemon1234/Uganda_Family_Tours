@@ -100,7 +100,7 @@
     "childrenAges": "Emyaka gy'abaana",
     "duration": "Enaku / obudde bw'oyagala",
     "accommodation": "Ekifo ky'okusula",
-    "budget": "Budget ya buli muntu",
+    "budget": "Budget eteberezebwa",
     "specialRequests": "By'oyagala / Obubaka",
     "submit": "Tuma booking",
     "selectCountry": "Londa ensi",
@@ -115,7 +115,9 @@
     "sending": "Booking etumibwa...",
     "success": "Booking etumiddwa bulungi. Tujja kukutuukirira mangu.",
     "error": "Booking tesobodde kutumibwa kati.",
-    "budgetTotal": "Budget y'abantu bonna"
+    "budgetTotal": "Budget y'abantu bonna",
+    "budgetCalculation": "{{perPerson}} buli muntu x abatambuze {{travelers}}",
+    "requiredMissing": "Jjuza ebifo ebyetaagisa ebiragiddwa nga tonnasindika."
   },
   "inquiryForm": {
     "title": "Buza ekibuuzo",

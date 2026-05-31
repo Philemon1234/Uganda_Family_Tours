@@ -100,7 +100,7 @@
     "childrenAges": "Children's Ages",
     "duration": "Number of Days / Preferred Duration",
     "accommodation": "Accommodation Preference",
-    "budget": "Estimated Budget (Per Person)",
+    "budget": "Estimated Budget",
     "specialRequests": "Special Requests / Notes",
     "submit": "Send Booking Request",
     "selectCountry": "Select country",
@@ -115,7 +115,9 @@
     "sending": "Sending your booking request...",
     "success": "Booking request sent successfully. We will contact you soon.",
     "error": "The booking request could not be sent right now.",
-    "budgetTotal": "Estimated group budget"
+    "budgetTotal": "Estimated group budget",
+    "budgetCalculation": "{{perPerson}} per person x {{travelers}} travelers",
+    "requiredMissing": "Please fill in the highlighted required fields before sending."
   },
   "inquiryForm": {
     "title": "Make an Inquiry",

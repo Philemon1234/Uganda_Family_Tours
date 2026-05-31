@@ -100,7 +100,7 @@
     "childrenAges": "Umri wa watoto",
     "duration": "Idadi ya siku / Muda unaopenda",
     "accommodation": "Aina ya malazi",
-    "budget": "Bajeti kwa mtu",
+    "budget": "Makadirio ya bajeti",
     "specialRequests": "Maombi maalum / Maelezo",
     "submit": "Tuma ombi",
     "selectCountry": "Chagua nchi",
@@ -115,7 +115,9 @@
     "sending": "Inatuma ombi lako...",
     "success": "Ombi limetumwa. Tutawasiliana nawe hivi karibuni.",
     "error": "Ombi haliwezi kutumwa sasa.",
-    "budgetTotal": "Makadirio ya bajeti ya kundi"
+    "budgetTotal": "Makadirio ya bajeti ya kundi",
+    "budgetCalculation": "{{perPerson}} kwa mtu x wasafiri {{travelers}}",
+    "requiredMissing": "Tafadhali jaza sehemu muhimu zilizoangaziwa kabla ya kutuma."
   },
   "inquiryForm": {
     "title": "Tuma swali",

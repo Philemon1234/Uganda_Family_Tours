@@ -192,7 +192,6 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
     <>
       <section className="hero-section min-h-[500px]" style={{ backgroundImage: `url(${heroImage})` }}>
         <div className="absolute inset-0 bg-black/62" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-b from-transparent via-black/25 to-[#faf7f2]" />
         <div className="container-custom relative z-10 flex min-h-[500px] flex-col justify-end pb-24 pt-36 text-white md:pb-28 md:pt-40">
           <h1 className="text-safe max-w-5xl text-4xl font-bold leading-tight md:text-6xl">{t('tourDetails.bucketList')}: {tourTitle}</h1>
           <div className="mt-6 flex min-w-0 flex-wrap items-center gap-2 text-sm font-semibold text-white/80 md:text-base">
@@ -207,7 +206,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
 
       <div ref={tabSentinelRef} className="-mt-8 h-px" aria-hidden="true" />
       <div className={isTabStuck ? 'h-[57px] md:h-[65px]' : ''}>
-        <div className={`transition-all duration-300 ease-out ${isTabStuck ? 'fixed left-0 right-0 top-[3.75rem] z-50 w-full' : 'relative z-40 container-custom'}`}>
+        <div className={`transition-all duration-300 ease-out ${isTabStuck ? 'fixed left-0 right-0 top-[3.75rem] z-50 w-full md:top-[4.1rem]' : 'relative z-40 container-custom'}`}>
           <nav
             ref={tabNavRef}
             className={`relative grid min-w-0 grid-cols-4 overflow-hidden bg-white transition-all duration-300 ease-out ${
@@ -237,7 +236,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
       </div>
 
       <main className="section-padding section-blend-light pt-14">
-        <div className="container-custom grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1fr)_400px]">
+        <div className="container-custom grid min-w-0 items-start gap-12 lg:grid-cols-[minmax(0,1fr)_400px]">
           <div className="min-w-0 space-y-10">
             <section id="overview" className="scroll-mt-28">
               <h2 className="content-title text-safe">{t('tourDetails.overview')}</h2>
@@ -321,7 +320,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
             ) : null}
           </div>
 
-          <aside className="md:sticky md:top-24 md:self-start">
+          <aside className="tour-booking-sticky self-start">
             <div className="card min-w-0 p-8 text-center">
               <p className="text-safe text-xs font-black uppercase tracking-wide text-ink">{t('tourDetails.price')}</p>
               <h2 className="text-safe mt-3 text-2xl font-black text-primary">{t('common.from')} {formatCurrency(tourPackage.price_from_usd)}</h2>
@@ -397,10 +396,11 @@ function ItineraryDayArticle({ day, index, tourTitle, markerRef }: ItineraryDayA
         {day.activities.length > 0 ? (
           <>
             <p className="text-safe mt-3 text-sm font-black text-ink">{t('tourDetails.activities')}:</p>
-            <ul className="mt-2 max-w-full space-y-1 text-sm text-muted">
+            <ul className="mt-4 grid max-w-full gap-x-14 gap-y-4 text-sm text-ink md:grid-flow-col md:grid-rows-3 md:auto-cols-fr md:text-base">
               {day.activities.map((activity) => (
-                <li key={activity.id} className="orange-bullet text-safe">
-                  <span className="font-semibold text-ink">{activity.title}</span>
+                <li key={activity.id} className="text-safe flex min-w-0 items-start gap-3">
+                  <FiCheckCircle className="mt-0.5 shrink-0 text-primary" />
+                  <span className="font-semibold leading-6 text-ink">{activity.title}</span>
                   {activity.description ? <span className="text-safe">: {activity.description}</span> : null}
                 </li>
               ))}

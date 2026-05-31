@@ -100,7 +100,7 @@
     "childrenAges": "Alter der Kinder",
     "duration": "Anzahl Tage / Gewünschte Dauer",
     "accommodation": "Unterkunftswunsch",
-    "budget": "Geschätztes Budget pro Person",
+    "budget": "Geschätztes Budget",
     "specialRequests": "Besondere Wünsche / Notizen",
     "submit": "Buchungsanfrage senden",
     "selectCountry": "Land auswählen",
@@ -115,7 +115,9 @@
     "sending": "Buchungsanfrage wird gesendet...",
     "success": "Buchungsanfrage gesendet. Wir melden uns bald.",
     "error": "Die Anfrage konnte gerade nicht gesendet werden.",
-    "budgetTotal": "Geschätztes Gruppenbudget"
+    "budgetTotal": "Geschätztes Gruppenbudget",
+    "budgetCalculation": "{{perPerson}} pro Person x {{travelers}} Reisende",
+    "requiredMissing": "Bitte füllen Sie die markierten Pflichtfelder aus, bevor Sie senden."
   },
   "inquiryForm": {
     "title": "Anfrage stellen",

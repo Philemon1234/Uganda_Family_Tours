@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import type { Tour } from '../data/tours'
 import { countries, countryFlag } from '../data/countries'
 import { useLocale } from '../context/LocaleContext'
+import { formatPrice, type CurrencyCode } from '../utils/currency'
 
 type BookingModalProps = {
   isOpen: boolean
@@ -22,9 +23,7 @@ type FormState = {
   adults: number
   children: number
   childrenAges: string
-  duration: string
   accommodation: 'Budget' | 'Mid-range' | 'Luxury'
-  budget: string
   notes: string
 }
 
@@ -38,15 +37,34 @@ const initialForm: FormState = {
   adults: 1,
   children: 0,
   childrenAges: '',
-  duration: '',
   accommodation: 'Mid-range',
-  budget: '',
   notes: '',
+}
+
+const euroCountryCodes = new Set([
+  'AD', 'AT', 'BE', 'CY', 'DE', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'IE', 'IT', 'LT', 'LU', 'LV', 'MC', 'ME',
+  'MT', 'NL', 'PT', 'SI', 'SK', 'SM', 'VA',
+])
+
+const countryCurrencyOverrides: Partial<Record<string, CurrencyCode>> = {
+  AE: 'AED',
+  CN: 'CNY',
+  IN: 'INR',
+  RU: 'RUB',
+  RW: 'RWF',
+  TZ: 'TZS',
+  UG: 'UGX',
+}
+
+function currencyForCountryCode(countryCode?: string, fallback: CurrencyCode = 'USD') {
+  if (!countryCode) return fallback
+  if (euroCountryCodes.has(countryCode)) return 'EUR'
+  return countryCurrencyOverrides[countryCode] ?? fallback
 }
 
 export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const { t } = useTranslation()
-  const { formatCurrencyRange } = useLocale()
+  const { currency } = useLocale()
   const [form, setForm] = useState<FormState>(initialForm)
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({})
   const [status, setStatus] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null)
@@ -54,15 +72,12 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const [isCountryOpen, setIsCountryOpen] = useState(false)
 
   const selectedTour = useMemo(() => `Bucket list: ${tour?.title ?? 'Gorilla Tracking in Bwindi'}`, [tour])
-  const budgetOptions = [
-    { value: '1000-1500', min: 1000, max: 1500 },
-    { value: '1500-2500', min: 1500, max: 2500 },
-    { value: '2500-4000', min: 2500, max: 4000 },
-    { value: '4000+', min: 4000, max: null },
-  ]
-  const selectedBudget = budgetOptions.find((option) => option.value === form.budget)
+  const selectedCountry = countries.find((country) => country.name.toLowerCase() === form.country.trim().toLowerCase())
+  const selectedCurrency = currencyForCountryCode(selectedCountry?.code, currency)
+  const perPersonBudgetUSD = tour?.priceUSD ?? 1970
   const travelers = form.adults + form.children
-  const estimatedGroupBudget = selectedBudget ? formatCurrencyRange(selectedBudget.min * travelers, selectedBudget.max ? selectedBudget.max * travelers : null) : null
+  const estimatedPerPersonBudget = formatPrice(perPersonBudgetUSD, selectedCurrency)
+  const estimatedGroupBudget = formatPrice(perPersonBudgetUSD * travelers, selectedCurrency)
 
   useEffect(() => {
     if (!isOpen) return
@@ -87,7 +102,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
 
   const validate = () => {
     const nextErrors: Partial<Record<keyof FormState, string>> = {}
-    ;(['fullName', 'email', 'phone', 'country', 'travelDate', 'duration', 'budget'] as const).forEach((field) => {
+    ;(['fullName', 'email', 'phone', 'country', 'travelDate'] as const).forEach((field) => {
       if (!String(form[field]).trim()) nextErrors[field] = t('common.required')
     })
     if (form.email && !/^\S+@\S+\.\S+$/.test(form.email)) nextErrors.email = t('common.validEmail')
@@ -97,17 +112,30 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!validate()) return
+    if (!validate()) {
+      setStatus({
+        type: 'error',
+        message: t('bookingForm.requiredMissing', {
+          defaultValue: 'Please fill in the highlighted required fields before sending.',
+        }),
+      })
+      return
+    }
     const payload = { selectedTour, ...form }
     setIsSubmitting(true)
-    const budgetLabel = selectedBudget ? formatCurrencyRange(selectedBudget.min, selectedBudget.max) : form.budget
     setStatus({ type: 'info', message: t('bookingForm.sending') })
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...payload, budget: budgetLabel, estimatedGroupBudget }),
+        body: JSON.stringify({
+          ...payload,
+          budgetPerPerson: estimatedPerPersonBudget,
+          estimatedGroupBudget,
+          travelers,
+          currency: selectedCurrency,
+        }),
       })
       const result = await response.json().catch(() => null)
 
@@ -130,13 +158,13 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   return (
     <div className="fixed inset-0 z-[100] grid place-items-center overflow-x-hidden bg-black/65 px-3 py-4 backdrop-blur-sm sm:px-4 sm:py-6" onMouseDown={onClose}>
       <div
-        className="max-h-[94vh] w-full max-w-[58rem] overflow-hidden rounded-[1.75rem] bg-white shadow-2xl"
+        className="max-h-[94vh] w-full max-w-[54rem] overflow-hidden rounded-[1.5rem] bg-white shadow-2xl"
         role="dialog"
         aria-modal="true"
         aria-labelledby="booking-title"
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <div className="booking-modal-scroll max-h-[94vh] overflow-x-hidden overflow-y-auto p-5 pb-24 sm:p-6 sm:pb-8 md:p-8 lg:p-10">
+        <div className="booking-modal-scroll max-h-[94vh] overflow-x-hidden overflow-y-auto p-5 pb-24 sm:p-6 sm:pb-8 md:p-7 lg:p-8">
           <div className="relative text-center">
             <button className="absolute right-0 top-0 text-2xl text-muted transition hover:text-primary" type="button" aria-label={t('common.close')} onClick={onClose}>
               <FaXmark />
@@ -144,18 +172,18 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
             <div className="mx-auto grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-2xl text-primary">
               <FaCalendarDays />
             </div>
-            <h2 id="booking-title" className="mt-3 text-3xl font-bold text-ink">{t('bookingForm.title')}</h2>
+            <h2 id="booking-title" className="mt-3 text-2xl font-bold text-ink md:text-3xl">{t('bookingForm.title')}</h2>
             <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-muted">
               {t('bookingForm.subtitle')}
             </p>
           </div>
 
-          <form className="mt-7 space-y-5" onSubmit={submit} noValidate>
+          <form className="mt-6 space-y-4" onSubmit={submit} noValidate>
             <Field label={t('bookingForm.selectedTour')}>
               <input className="input" value={selectedTour} readOnly />
             </Field>
 
-            <div className="grid gap-5 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-2">
               <Field label={t('bookingForm.fullName')} required error={errors.fullName}>
                 <input className="input" value={form.fullName} onChange={(event) => update('fullName', event.target.value)} placeholder={t('bookingForm.fullNamePlaceholder')} />
               </Field>
@@ -193,8 +221,8 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
             </div>
 
             <div>
-              <p className="mb-3 text-sm font-semibold text-ink">{t('bookingForm.groupSize')}</p>
-              <div className="grid gap-5 md:grid-cols-3">
+              <p className="mb-2 text-sm font-semibold text-ink">{t('bookingForm.groupSize')}</p>
+              <div className="grid gap-4 md:grid-cols-3">
                 <Counter label={t('bookingForm.adults')} value={form.adults} onChange={(value) => update('adults', Math.max(1, value))} />
                 <Counter label={t('bookingForm.children')} value={form.children} onChange={(value) => update('children', Math.max(0, value))} />
                 <Field label={t('bookingForm.childrenAges')}>
@@ -203,16 +231,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
               </div>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2">
-              <Field label={t('bookingForm.duration')} required error={errors.duration}>
-                <select className="input" value={form.duration} onChange={(event) => update('duration', event.target.value)}>
-                  <option value="">{t('bookingForm.durationPlaceholder')}</option>
-                  <option value={`2 ${t('common.days')}`}>2 {t('common.days')}</option>
-                  <option value={`3 ${t('common.days')}`}>3 {t('common.days')}</option>
-                  <option value={`4 ${t('common.days')}`}>4 {t('common.days')}</option>
-                  <option value={`5+ ${t('common.days')}`}>5+ {t('common.days')}</option>
-                </select>
-              </Field>
+            <div className="grid gap-4 md:grid-cols-2">
               <Field label={t('bookingForm.accommodation')} required>
                 <div className="grid grid-cols-3 gap-2">
                   {[
@@ -232,18 +251,19 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                   ))}
                 </div>
               </Field>
-              <Field label={t('bookingForm.budget')} required error={errors.budget}>
-                <select className="input" value={form.budget} onChange={(event) => update('budget', event.target.value)}>
-                  <option value="">{t('bookingForm.budgetPlaceholder')}</option>
-                  {budgetOptions.map((option) => (
-                    <option key={option.value} value={option.value}>{formatCurrencyRange(option.min, option.max)}</option>
-                  ))}
-                </select>
-                {estimatedGroupBudget && <p className="mt-2 text-xs font-semibold text-primary">{t('bookingForm.budgetTotal')}: {estimatedGroupBudget}</p>}
+              <Field label={t('bookingForm.budget')} required>
+                <input className="input font-bold text-ink" value={estimatedGroupBudget} readOnly />
+                <p className="mt-2 text-xs font-semibold text-muted">
+                  {t('bookingForm.budgetCalculation', {
+                    perPerson: estimatedPerPersonBudget,
+                    travelers,
+                    defaultValue: `${estimatedPerPersonBudget} per person x ${travelers} ${travelers === 1 ? 'traveler' : 'travelers'}`,
+                  })}
+                </p>
               </Field>
-              <Field label={t('bookingForm.specialRequests')}>
+              <Field label={t('bookingForm.specialRequests')} className="md:col-span-2">
                 <textarea
-                  className="input min-h-28 resize-none"
+                  className="input min-h-20 resize-none"
                   value={form.notes}
                   maxLength={500}
                   onChange={(event) => update('notes', event.target.value)}
@@ -253,7 +273,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
               </Field>
             </div>
 
-            <div className="flex items-start gap-3 rounded-lg border border-primary/25 bg-primary/5 p-4 text-sm text-ink">
+            <div className="flex items-start gap-3 rounded-lg border border-primary/25 bg-primary/5 p-3 text-sm text-ink">
               <FiInfo className="mt-0.5 shrink-0 text-primary" />
               {t('bookingForm.info')}
             </div>
@@ -270,7 +290,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                 {status.message}
               </p>
             )}
-            <div className="flex flex-col gap-3 pt-2">
+            <div className="flex flex-col gap-3 pt-1">
               <button className="btn-primary justify-center disabled:cursor-not-allowed disabled:opacity-70" type="submit" disabled={isSubmitting}>
                 {isSubmitting ? t('common.sending') : t('bookingForm.submit')} <FiArrowRight />
               </button>
@@ -287,12 +307,13 @@ type FieldProps = {
   label: string
   required?: boolean
   error?: string
+  className?: string
   children: React.ReactNode
 }
 
-function Field({ label, required, error, children }: FieldProps) {
+function Field({ label, required, error, className = '', children }: FieldProps) {
   return (
-    <label className="block text-left text-sm font-semibold text-ink">
+    <label className={`block text-left text-sm font-semibold text-ink ${error ? 'field-error' : ''} ${className}`}>
       {label} {required && <span className="text-primary">*</span>}
       <span className="mt-2 block">{children}</span>
       {error && <span className="mt-1 block text-xs font-semibold text-red-600">{error}</span>}

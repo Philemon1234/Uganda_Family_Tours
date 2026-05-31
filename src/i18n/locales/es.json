@@ -100,7 +100,7 @@
     "childrenAges": "Edades de los niños",
     "duration": "Número de días / Duración preferida",
     "accommodation": "Preferencia de alojamiento",
-    "budget": "Presupuesto estimado por persona",
+    "budget": "Presupuesto estimado",
     "specialRequests": "Solicitudes especiales / Notas",
     "submit": "Enviar solicitud",
     "selectCountry": "Seleccionar país",
@@ -115,7 +115,9 @@
     "sending": "Enviando tu solicitud...",
     "success": "Solicitud enviada correctamente. Te contactaremos pronto.",
     "error": "La solicitud no se pudo enviar ahora.",
-    "budgetTotal": "Presupuesto estimado del grupo"
+    "budgetTotal": "Presupuesto estimado del grupo",
+    "budgetCalculation": "{{perPerson}} por persona x {{travelers}} viajeros",
+    "requiredMissing": "Completa los campos obligatorios resaltados antes de enviar."
   },
   "inquiryForm": {
     "title": "Hacer una consulta",

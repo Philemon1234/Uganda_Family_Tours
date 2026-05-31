@@ -152,12 +152,13 @@ export async function onRequestPost({ request, env }) {
   const adults = Number(body?.adults ?? 0)
   const children = Number(body?.children ?? 0)
   const childrenAges = clean(body?.childrenAges)
-  const duration = clean(body?.duration)
   const accommodation = clean(body?.accommodation)
-  const budget = clean(body?.budget)
+  const budgetPerPerson = clean(body?.budgetPerPerson)
+  const estimatedGroupBudget = clean(body?.estimatedGroupBudget)
+  const currency = clean(body?.currency)
   const notes = clean(body?.notes)
 
-  if (!selectedTour || !fullName || !email || !phone || !country || !travelDate || !duration || !budget) {
+  if (!selectedTour || !fullName || !email || !phone || !country || !travelDate || !budgetPerPerson || !estimatedGroupBudget) {
     return sendJson(400, { message: 'Please complete every required field before sending.' })
   }
 
@@ -189,9 +190,10 @@ export async function onRequestPost({ request, env }) {
     ['Children', children],
     ["Children's ages", childrenAges],
     ['Total travelers', totalTravelers],
-    ['Duration', duration],
     ['Accommodation', accommodation],
-    ['Budget per person', budget],
+    ['Budget per person', budgetPerPerson],
+    ['Estimated group budget', estimatedGroupBudget],
+    ['Currency', currency],
     ['Submitted', submittedAt],
   ]
 

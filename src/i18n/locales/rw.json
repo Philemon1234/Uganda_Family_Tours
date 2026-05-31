@@ -100,7 +100,7 @@
     "childrenAges": "Imyaka y'abana",
     "duration": "Umubare w'iminsi / Igihe wifuza",
     "accommodation": "Uburyo bwo gucumbika",
-    "budget": "Ingengo y'imari kuri buri muntu",
+    "budget": "Ingengo y'imari igenwe",
     "specialRequests": "Ibyifuzo byihariye / Ibisobanuro",
     "submit": "Ohereza ubusabe",
     "selectCountry": "Hitamo igihugu",
@@ -115,7 +115,9 @@
     "sending": "Ubusabe bwawe burimo koherezwa...",
     "success": "Ubusabe bwo kwiyandikisha bwoherejwe neza. Tuzakuvugisha vuba.",
     "error": "Ubusabe ntibwashoboye koherezwa ubu.",
-    "budgetTotal": "Ingengo y'imari y'itsinda"
+    "budgetTotal": "Ingengo y'imari y'itsinda",
+    "budgetCalculation": "{{perPerson}} kuri buri muntu x abagenzi {{travelers}}",
+    "requiredMissing": "Nyamuneka uzuza ahagaragajwe hasabwa mbere yo kohereza."
   },
   "inquiryForm": {
     "title": "Ohereza ikibazo",
