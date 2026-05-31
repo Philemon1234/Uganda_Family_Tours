@@ -39,8 +39,8 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
             <img className="h-[390px] w-full rounded-card object-cover shadow-soft" src={welcomeImage} alt="Uganda Family Tours safari guests by company vehicle" />
           </MotionReveal>
           <div>
-            <p className="text-sm font-black uppercase text-primary">{t('aboutPage.welcome.label')}</p>
-            <h2 className="mt-3 text-4xl font-black text-ink">{t('aboutPage.welcome.title')}</h2>
+            <p className="luxury-script text-4xl leading-none text-ink md:text-5xl">{t('aboutPage.welcome.label')}</p>
+            <h2 className="mt-2 text-2xl font-black leading-tight text-ink md:text-3xl">{t('aboutPage.welcome.title')}</h2>
             <p className="mt-5 leading-8 text-muted">{t('aboutPage.welcome.p1')}</p>
             <p className="mt-5 leading-8 text-muted">{t('aboutPage.welcome.p2')}</p>
           </div>
@@ -50,8 +50,8 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
       <section className="section-padding bg-white">
         <div className="container-custom grid items-center gap-14 lg:grid-cols-2">
           <div>
-            <p className="text-sm font-black uppercase text-primary">{t('aboutPage.origins.label')}</p>
-            <h2 className="mt-3 text-4xl font-black text-ink">{t('aboutPage.origins.title')}</h2>
+            <p className="luxury-script text-4xl leading-none text-ink md:text-5xl">{t('aboutPage.origins.label')}</p>
+            <h2 className="mt-2 text-2xl font-black leading-tight text-ink md:text-3xl">{t('aboutPage.origins.title')}</h2>
             <span className="mt-4 block h-0.5 w-12 bg-primary" />
             <p className="mt-6 leading-8 text-muted">{t('aboutPage.origins.p1')}</p>
             <p className="mt-5 leading-8 text-muted">{t('aboutPage.origins.p2')}</p>
@@ -65,8 +65,8 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
       <section className="section-padding">
         <div className="container-custom">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-black uppercase text-primary">{t('aboutPage.initiatives.label')}</p>
-            <h2 className="mt-3 text-4xl font-black text-ink">{t('aboutPage.initiatives.title')}</h2>
+            <p className="luxury-script text-4xl leading-none text-ink md:text-5xl">{t('aboutPage.initiatives.label')}</p>
+            <h2 className="mt-2 text-2xl font-black leading-tight text-ink md:text-3xl">{t('aboutPage.initiatives.title')}</h2>
             <span className="mx-auto mt-4 block h-0.5 w-12 bg-primary" />
             <p className="mt-5 leading-7 text-muted">{t('aboutPage.initiatives.description')}</p>
           </div>
@@ -87,8 +87,8 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
       <section className="pb-20">
         <div className="container-custom">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-black uppercase text-primary">{t('aboutPage.charities.label')}</p>
-            <h2 className="mt-3 text-4xl font-black text-ink">{t('aboutPage.charities.title')}</h2>
+            <p className="luxury-script text-4xl leading-none text-ink md:text-5xl">{t('aboutPage.charities.label')}</p>
+            <h2 className="mt-2 text-2xl font-black leading-tight text-ink md:text-3xl">{t('aboutPage.charities.title')}</h2>
           </div>
           <div className="mt-10 grid gap-6">
             <article className="card grid overflow-hidden lg:grid-cols-[1fr_1.1fr]">
@@ -116,8 +116,8 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
       <section className="relative overflow-hidden bg-cover bg-center py-12 text-center text-white" style={{ backgroundImage: `url(${ctaImage})` }}>
         <div className="absolute inset-0 bg-black/70" />
         <div className="container-custom relative z-10">
-          <p className="font-black text-primary">{t('aboutPage.cta.label')}</p>
-          <h2 className="mt-3 text-3xl font-black md:text-4xl">{t('aboutPage.cta.title')}</h2>
+          <p className="luxury-script text-4xl leading-none md:text-5xl">{t('aboutPage.cta.label')}</p>
+          <h2 className="mt-2 text-2xl font-black leading-tight md:text-3xl">{t('aboutPage.cta.title')}</h2>
           <div className="mt-6 flex flex-col justify-center gap-4 sm:flex-row">
             <a className="btn-primary justify-center" href="tel:+256703543027"><FaPhone /> {t('aboutPage.cta.call')} <FiArrowRight /></a>
             <button className="btn-outline justify-center border-white/70 bg-transparent text-white hover:border-primary" type="button" onClick={onInquiry}>

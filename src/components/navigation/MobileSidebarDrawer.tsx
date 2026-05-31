@@ -77,7 +77,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
           <button
             type="button"
             aria-label={t('common.close')}
-            className="grid h-11 w-11 place-items-center rounded-full bg-primary/10 text-lg text-primary transition hover:bg-primary hover:text-white"
+            className="grid h-11 w-11 place-items-center rounded-full bg-primary/10 text-lg text-primary transition hover:bg-primary hover:text-ink"
             onClick={onClose}
           >
             <FaTimes />
@@ -102,7 +102,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
             )
 
             const className = `flex w-full items-center gap-4 rounded-2xl px-3 py-3.5 text-base font-bold transition ${
-              active ? 'bg-primary text-white shadow-[0_14px_28px_rgba(253,94,2,0.18)]' : 'text-ink hover:bg-primary/8'
+              active ? 'bg-primary text-ink shadow-[0_14px_28px_rgba(255,164,96,0.18)]' : 'text-ink hover:bg-primary/8'
             }`
 
             if (item.href.startsWith('#')) {
@@ -129,7 +129,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
               aria-label="Facebook"
               target="_blank"
               rel="noreferrer"
-              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#263238]"
+              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-ink transition hover:bg-[#263238] hover:text-white"
             >
               <FaFacebookF />
             </a>
@@ -138,7 +138,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
               aria-label="YouTube"
               target="_blank"
               rel="noreferrer"
-              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#263238]"
+              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-ink transition hover:bg-[#263238] hover:text-white"
             >
               <FaYoutube />
             </a>
@@ -147,7 +147,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
               aria-label="WhatsApp"
               target="_blank"
               rel="noreferrer"
-              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-white transition hover:bg-[#263238]"
+              className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-ink transition hover:bg-[#263238] hover:text-white"
             >
               <FaWhatsapp />
             </a>

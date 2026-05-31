@@ -105,7 +105,7 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
       >
         <div className="booking-modal-scroll max-h-[94vh] overflow-x-hidden overflow-y-auto p-5 sm:p-7 md:p-9">
           <div className="relative text-center">
-            <button className="absolute right-0 top-0 grid h-10 w-10 place-items-center rounded-full bg-gray-100 text-xl text-muted transition hover:bg-primary hover:text-white" type="button" aria-label={t('common.close')} onClick={onClose}>
+            <button className="absolute right-0 top-0 grid h-10 w-10 place-items-center rounded-full bg-gray-100 text-xl text-muted transition hover:bg-primary hover:text-ink" type="button" aria-label={t('common.close')} onClick={onClose}>
               <FaXmark />
             </button>
             <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-primary/10 text-2xl text-primary">

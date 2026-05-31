@@ -25,7 +25,7 @@ export function Footer() {
           <p className="mt-5 max-w-sm text-sm leading-7 text-white/70">{t('footer.about')}</p>
           <div className="mt-5 flex gap-3">
             {socials.map(({ label, href, icon: Icon }) => (
-              <a key={label} className="grid h-9 w-9 place-items-center rounded-full border border-white/20 text-white transition hover:border-[#FD5E02] hover:bg-white/10 hover:text-[#FD5E02]" href={href} target="_blank" rel="noreferrer" aria-label={label}>
+              <a key={label} className="grid h-9 w-9 place-items-center rounded-full border border-white/20 text-white transition hover:border-primary hover:bg-white/10 hover:text-primary" href={href} target="_blank" rel="noreferrer" aria-label={label}>
                 <Icon />
               </a>
             ))}
@@ -34,9 +34,9 @@ export function Footer() {
         <div>
           <h3 className="footer-title">{t('footer.contact')}</h3>
           <ul className="mt-5 space-y-3 text-sm text-white/75">
-            <li><a className="flex gap-3 transition hover:text-[#FD5E02]" href={phoneHref}><FaPhone className="mt-1 text-[#FD5E02]" />{phoneDisplay}</a></li>
-            <li><a className="flex gap-3 transition hover:text-[#FD5E02]" href={emailHref}><MdEmail className="mt-1 text-[#FD5E02]" />safaris@ugandafamilytours.com</a></li>
-            <li className="flex gap-3"><FaLocationDot className="mt-1 text-[#FD5E02]" />{t('footer.location')}</li>
+            <li><a className="flex gap-3 transition hover:text-primary" href={phoneHref}><FaPhone className="mt-1 text-primary" />{phoneDisplay}</a></li>
+            <li><a className="flex gap-3 transition hover:text-primary" href={emailHref}><MdEmail className="mt-1 text-primary" />safaris@ugandafamilytours.com</a></li>
+            <li className="flex gap-3"><FaLocationDot className="mt-1 text-primary" />{t('footer.location')}</li>
           </ul>
         </div>
         <div>
@@ -47,7 +47,7 @@ export function Footer() {
               [t('navbar.tours'), '/tours'],
               [t('navbar.about'), '/about'],
             ].map(([item, href]) => (
-              <li key={item}><a className="transition hover:text-[#FD5E02]" href={href}>{item}</a></li>
+              <li key={item}><a className="transition hover:text-primary" href={href}>{item}</a></li>
             ))}
           </ul>
         </div>
@@ -61,7 +61,7 @@ export function Footer() {
           <h3 className="footer-title mt-8">{t('footer.social')}</h3>
           <div className="mt-4 flex gap-3">
             {socials.map(({ label, href, icon: Icon }) => (
-              <a key={label} className="grid h-9 w-9 place-items-center rounded-full border border-white/20 transition hover:border-[#FD5E02] hover:text-[#FD5E02]" href={href} target="_blank" rel="noreferrer" aria-label={label}>
+              <a key={label} className="grid h-9 w-9 place-items-center rounded-full border border-white/20 transition hover:border-primary hover:text-primary" href={href} target="_blank" rel="noreferrer" aria-label={label}>
                 <Icon />
               </a>
             ))}
@@ -72,8 +72,8 @@ export function Footer() {
         <div className="container-custom flex flex-col gap-3 text-sm text-white/60 md:flex-row md:items-center md:justify-between">
           <p>{t('footer.rights')}</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-[#FD5E02]">{t('footer.privacy')}</a>
-            <a href="#" className="hover:text-[#FD5E02]">{t('footer.terms')}</a>
+            <a href="#" className="hover:text-primary">{t('footer.privacy')}</a>
+            <a href="#" className="hover:text-primary">{t('footer.terms')}</a>
           </div>
         </div>
       </div>

@@ -74,7 +74,7 @@ export function MobileBottomNav() {
             }}
           />
           <div
-            className="absolute -top-[1.55rem] left-[calc(10%_-_28px)] z-10 grid h-[56px] w-[56px] place-items-center rounded-full bg-primary text-[1.55rem] text-white transition-transform duration-300 ease-out will-change-transform"
+            className="absolute -top-[1.55rem] left-[calc(10%_-_28px)] z-10 grid h-[56px] w-[56px] place-items-center rounded-full bg-primary text-[1.55rem] text-ink transition-transform duration-300 ease-out will-change-transform"
             style={{
               transform: `translate3d(${activeIndex * 20}vw, 0, 0)`,
             }}

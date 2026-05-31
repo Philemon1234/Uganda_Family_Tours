@@ -131,8 +131,8 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
       <section className="relative overflow-hidden bg-cover bg-center py-28 text-center text-white" style={{ backgroundImage: `url(${ctaImage})` }}>
         <div className="absolute inset-0 bg-black/70" />
         <div className="container-custom relative z-10">
-          <p className="font-bold text-[#FD5E02]">{t('toursPage.ctaLabel')}</p>
-          <h2 className="mx-auto mt-6 max-w-6xl text-4xl font-black leading-tight md:text-7xl">{t('toursPage.ctaTitle')}</h2>
+          <p className="font-bold text-white/70">{t('toursPage.ctaLabel')}</p>
+          <h2 className="mx-auto mt-4 max-w-5xl text-2xl font-black leading-tight md:text-4xl">{t('toursPage.ctaTitle')}</h2>
           <button className="btn-primary mt-9" type="button" onClick={onInquiry}>{t('toursPage.ctaButton')} <FiArrowRight /></button>
         </div>
       </section>

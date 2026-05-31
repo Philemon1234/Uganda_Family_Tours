@@ -32,7 +32,7 @@ export function TourCard({ tour, revealDelay = 0 }: TourCardProps) {
           {formatCurrency(tour.priceUSD)}
         </span>
         <div className="relative z-10 -mt-8 flex min-h-60 min-w-0 flex-1 flex-col rounded-t-[1.75rem] rounded-b-[1.75rem] bg-white px-7 pb-7 pt-9">
-          <h3 className="clamp-2 text-safe text-2xl font-medium leading-tight text-ink transition group-hover:text-[#FD5E02]">{title}</h3>
+          <h3 className="clamp-2 text-safe text-2xl font-medium leading-tight text-ink transition group-hover:text-primary">{title}</h3>
           <p className="tour-description mt-4 flex-1 text-lg leading-8 text-muted">
             {shortDescription || 'Explore this Uganda Family Tours experience.'}
           </p>
@@ -41,7 +41,7 @@ export function TourCard({ tour, revealDelay = 0 }: TourCardProps) {
               <span className="truncate">
               {t('tourCard.getPackage', { defaultValue: 'Get Package' })}
               </span>
-              <FiArrowRight className="text-[#FD5E02] transition group-hover:translate-x-0.5" />
+              <FiArrowRight className="text-primary transition group-hover:translate-x-0.5" />
             </span>
             <span className="shrink-0 text-base font-semibold text-slate-600">
               {durationDays} {t('common.days')}

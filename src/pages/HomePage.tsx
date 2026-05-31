@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { FaHandHoldingHeart, FaPeopleGroup, FaShieldHeart, FaSliders } from 'react-icons/fa6'
 import { FiArrowRight } from 'react-icons/fi'
 import { tours } from '../data/tours'
@@ -26,9 +26,9 @@ export function HomePage({ onBook }: HomePageProps) {
 
   return (
     <>
-        <section className="hero-section min-h-[90vh]" style={{ backgroundImage: `url(${heroImage})` }}>
+        <section className="hero-section min-h-[90vh] bg-black" style={{ backgroundImage: `url(${heroImage})` }}>
           <div className="absolute inset-0 bg-black/45" />
-          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/65 via-black/25 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-[68%] bg-gradient-to-t from-black via-black/70 via-35% to-transparent" />
           <div className="container-custom relative z-10 flex min-h-[90vh] flex-col items-center justify-center px-4 pb-16 pt-40 text-center text-white lg:pb-20 lg:pt-44">
           <div className="w-full">
             <h1 className="hero-title mx-auto max-w-5xl text-4xl font-bold leading-tight md:text-7xl">{t('home.hero.title')}</h1>
@@ -52,15 +52,37 @@ export function HomePage({ onBook }: HomePageProps) {
         </div>
       </section>
 
-      <section className="section-padding section-blend-cream">
+      <section className="bg-black pb-14 pt-20 md:pb-18 md:pt-24">
         <div className="container-custom">
-          <SectionHeader
-            label={t('home.story.label')}
-            title={t('home.story.title')}
-            description={t('home.story.description')}
-          />
+          <MotionReveal>
+            <div className="mx-auto max-w-5xl text-center">
+              <p className="luxury-script text-3xl leading-none text-white md:text-5xl">{t('home.story.label')}</p>
+              <h2 className="mx-auto mt-1 max-w-4xl text-xl font-black leading-tight text-white md:text-3xl">
+                {t('home.story.title')}
+              </h2>
+              <div className="mx-auto mt-8 max-w-5xl space-y-10 text-base leading-8 text-white/78 md:text-lg">
+                <p>
+                  <Trans
+                    i18nKey="home.story.p1"
+                    components={[<strong className="font-black text-white" />]}
+                  />
+                </p>
+                <p>
+                  <Trans
+                    i18nKey="home.story.p2"
+                    components={[<strong className="font-black text-white" />]}
+                  />
+                </p>
+              </div>
+            </div>
+          </MotionReveal>
+        </div>
+      </section>
+
+      <section className="section-padding bg-white">
+        <div className="container-custom">
           <MotionReveal delay={90}>
-            <div className="relative mt-10 aspect-video w-full overflow-hidden rounded-[2rem] border border-white/80 shadow-soft">
+            <div className="relative aspect-video w-full overflow-hidden rounded-[2rem] border border-white/80 shadow-soft">
               <img className="h-full w-full object-cover" src={storyThumbnail} alt="Uganda Family Tours safari story" />
               <span className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/5 to-transparent" />
             </div>
@@ -83,8 +105,8 @@ export function HomePage({ onBook }: HomePageProps) {
         <section className="section-padding bg-[#17333a]">
         <div className="container-custom">
           <div className="mx-auto max-w-5xl text-center">
-            <p className="text-sm font-bold text-[#FD5E02]">{t('home.why.label')}</p>
-            <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">{t('home.why.title')}</h2>
+            <p className="luxury-script text-4xl leading-none text-white md:text-5xl">{t('home.why.label')}</p>
+            <h2 className="mt-1 text-2xl font-black leading-tight text-white md:text-3xl">{t('home.why.title')}</h2>
             <p className="mx-auto mt-5 max-w-4xl text-lg leading-8 text-white/72">
               {t('home.why.description')}
             </p>

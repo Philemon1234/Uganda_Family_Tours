@@ -282,7 +282,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                 <div className="mt-5 grid min-w-0 gap-4 md:grid-cols-2">
                   {details.highlights.map((highlight) => (
                     <div key={highlight.id} className="flex min-w-0 items-start gap-3 text-muted">
-                      <FiCheckCircle className="mt-1 shrink-0 text-[#FD5E02]" />
+                      <FiCheckCircle className="mt-1 shrink-0 text-primary" />
                       <div className="min-w-0">
                         <p className="text-safe font-bold text-ink">{highlight.title}</p>
                         {highlight.description ? (
@@ -324,14 +324,14 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
           <aside className="md:sticky md:top-24 md:self-start">
             <div className="card min-w-0 p-8 text-center">
               <p className="text-safe text-xs font-black uppercase tracking-wide text-ink">{t('tourDetails.price')}</p>
-              <h2 className="text-safe mt-3 text-2xl font-black text-[#FD5E02]">{t('common.from')} {formatCurrency(tourPackage.price_from_usd)}</h2>
+              <h2 className="text-safe mt-3 text-2xl font-black text-primary">{t('common.from')} {formatCurrency(tourPackage.price_from_usd)}</h2>
               <p className="text-safe mt-2 text-sm text-muted">{t('tourDetails.quote')}</p>
               <div className="mx-auto mt-5 inline-flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-sm font-bold text-green-700">
                 <FaCheck /> {t('tourDetails.instant')}
               </div>
               <div className="mt-7 grid min-w-0 grid-cols-2 gap-4 text-sm text-muted">
-                <span className="text-safe flex items-center justify-center gap-2"><FaShieldHeart className="shrink-0 text-[#FD5E02]" /> {t('tourDetails.secure')}</span>
-                <span className="text-safe flex items-center justify-center gap-2"><FaCheck className="shrink-0 text-[#FD5E02]" /> {t('tourDetails.fees')}</span>
+                <span className="text-safe flex items-center justify-center gap-2"><FaShieldHeart className="shrink-0 text-primary" /> {t('tourDetails.secure')}</span>
+                <span className="text-safe flex items-center justify-center gap-2"><FaCheck className="shrink-0 text-primary" /> {t('tourDetails.fees')}</span>
               </div>
               <button className="btn-primary mt-7 w-full justify-center" type="button" onClick={() => onBook(bookingTour)}>{t('tourDetails.bookThisTour')} <FiArrowRight /></button>
               <div className="mt-8 text-sm">
@@ -349,7 +349,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
         <div className="fixed inset-0 z-[90] grid place-items-center bg-black/80 p-4 backdrop-blur-sm" onClick={() => setActiveGalleryImage(null)}>
           <button
             type="button"
-            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white text-2xl text-ink transition hover:bg-primary hover:text-white"
+            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white text-2xl text-ink transition hover:bg-primary hover:text-ink"
             aria-label="Close gallery image"
             onClick={() => setActiveGalleryImage(null)}
           >
@@ -387,7 +387,7 @@ function ItineraryDayArticle({ day, index, tourTitle, markerRef }: ItineraryDayA
     <article className="relative grid min-w-0 max-w-full grid-cols-[48px_minmax(0,1fr)] gap-4 sm:grid-cols-[56px_minmax(0,1fr)] sm:gap-5">
       <div
         ref={markerRef}
-        className="relative z-10 grid h-12 w-12 place-items-center rounded-full border-4 border-white bg-primary text-base font-black text-white shadow-orange"
+        className="relative z-10 grid h-12 w-12 place-items-center rounded-full border-4 border-white bg-primary text-base font-black text-ink shadow-orange"
       >
         {day.day_number}
       </div>

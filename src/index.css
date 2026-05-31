@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #FD5E02;
+  --color-primary: #FFA460;
   --color-dark: #1f2937;
   --color-ink: #111827;
   --color-muted: #64748b;
@@ -9,7 +9,7 @@
   --color-soft: #faf7f2;
   --radius-card: 16px;
   --shadow-soft: 0 20px 55px rgb(17 24 39 / 0.08);
-  --shadow-orange: 0 12px 28px rgb(253 94 2 / 0.16);
+  --shadow-orange: 0 12px 28px rgb(255 164 96 / 0.18);
   --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -32,12 +32,16 @@ body {
   overflow-x: hidden;
 }
 
+.luxury-script {
+  font-family: "Allura", cursive;
+}
+
 button,
 a,
 input,
 select,
 textarea {
-  outline-color: #FD5E02;
+  outline-color: #FFA460;
 }
 
 button,
@@ -91,15 +95,15 @@ img {
   align-items: center;
   gap: 0.5rem;
   justify-content: center;
-  border: 1px solid #FD5E02;
+  border: 1px solid #FFA460;
   border-radius: 0.15rem;
-  background: #FD5E02;
+  background: #FFA460;
   padding: 0.95rem 1.85rem;
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #111827;
   box-shadow: none;
   transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
@@ -129,8 +133,8 @@ img {
 }
 
 .btn-primary:hover {
-  border-color: #e55302;
-  background: #e55302;
+  border-color: #f08f4f;
+  background: #f08f4f;
   transform: translateY(-1px);
 }
 
@@ -236,7 +240,7 @@ img {
 }
 
 .input:focus {
-  border-color: #FD5E02;
+  border-color: #FFA460;
   box-shadow: 0 0 0 4px rgb(253 94 2 / 0.1);
 }
 
@@ -252,9 +256,9 @@ img {
 }
 
 .segmented-active {
-  border-color: #FD5E02;
-  background: #fff3ea;
-  color: #c65a1e;
+  border-color: #FFA460;
+  background: #fff4ec;
+  color: #8f4b22;
 }
 
 .counter-btn {
@@ -268,8 +272,8 @@ img {
 }
 
 .counter-btn:hover {
-  background: #fff3ea;
-  color: #c65a1e;
+  background: #fff4ec;
+  color: #8f4b22;
 }
 
 .booking-modal-scroll {
@@ -317,7 +321,7 @@ img {
 }
 
 .country-options-scroll::-webkit-scrollbar-thumb:hover {
-  background: #e55302;
+  background: #f08f4f;
 }
 
 .font-black {
@@ -357,7 +361,7 @@ img {
   height: 0.38rem;
   width: 0.38rem;
   border-radius: 999px;
-  background: #FD5E02;
+  background: #FFA460;
 }
 
 .tour-description {
@@ -381,7 +385,7 @@ img {
   place-items: center;
   border-radius: 999px;
   background: #ffffff;
-  color: #c65a1e;
+  color: #8f4b22;
   box-shadow: 0 18px 45px rgb(17 24 39 / 0.13);
   transition: background-color 160ms ease, color 160ms ease;
 }
