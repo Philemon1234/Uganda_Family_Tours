@@ -152,6 +152,32 @@ img {
   background-position: center;
 }
 
+.mobile-bottom-nav {
+  position: fixed !important;
+  inset-inline: 0 !important;
+  inset-block-start: auto !important;
+  inset-block-end: 0 !important;
+  bottom: 0 !important;
+  z-index: 80;
+  width: 100%;
+  margin: 0;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+@supports (bottom: constant(safe-area-inset-bottom)) {
+  .mobile-bottom-nav {
+    bottom: 0 !important;
+  }
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .mobile-bottom-nav nav {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
 .section-blend-warm {
   background: #faf7f2;
 }

@@ -61,7 +61,7 @@ export function MobileBottomNav() {
   return (
     <>
       <MobileSidebarDrawer isOpen={isSidebarOpen} onClose={closeSidebar} />
-      <div className="mobile-bottom-nav fixed inset-x-0 bottom-[0px] z-[60] translate-y-0 lg:hidden" style={{ bottom: 0 }}>
+      <div className="mobile-bottom-nav lg:hidden">
         <nav
           className="relative h-[calc(88px+env(safe-area-inset-bottom))] rounded-t-[24px] bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-10px_30px_rgba(0,0,0,0.10)]"
           aria-label="Mobile bottom navigation"
