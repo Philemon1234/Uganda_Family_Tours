@@ -330,17 +330,17 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
       </main>
 
       {activeGalleryImage && (
-        <div className="fixed inset-0 z-[90] grid place-items-center bg-black/80 p-4 backdrop-blur-sm" onClick={() => setActiveGalleryImage(null)}>
+        <div className="fixed inset-0 z-[120] grid h-screen w-screen place-items-center bg-black/78 px-4 pb-6 pt-24 md:px-8 md:pb-8 md:pt-28" onClick={() => setActiveGalleryImage(null)}>
           <button
             type="button"
-            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white text-2xl text-ink transition hover:bg-primary hover:text-ink"
+            className="fixed right-4 top-24 z-[130] grid h-12 w-12 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-ink md:right-7 md:top-24"
             aria-label={t('tourDetails.closeGalleryImage')}
             onClick={() => setActiveGalleryImage(null)}
           >
             <FiX />
           </button>
           <img
-            className="max-h-[86vh] w-full max-w-6xl rounded-3xl object-contain shadow-2xl"
+            className="max-h-[calc(100vh-7.5rem)] max-w-[calc(100vw-2rem)] rounded-[1.25rem] object-contain shadow-none md:max-h-[calc(100vh-8.5rem)] md:max-w-[calc(100vw-4rem)]"
             src={activeGalleryImage}
             alt={t('tourDetails.enlargedGalleryAlt', { title: tourTitle })}
             onClick={(event) => event.stopPropagation()}

@@ -18,7 +18,7 @@ const defaultPriceBounds = {
   min: 0,
   max: 10000,
 }
-const toursPerPage = 6
+const toursPerPage = 9
 
 function getDurationDays(tour: Tour) {
   return Number(tour.duration.match(/\d+/)?.[0] ?? 0)
@@ -59,13 +59,15 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
     setCurrentPage(1)
   }
 
-  const filteredTours = useMemo(() => (
-    tours.filter((tour) => (
-      tour.priceUSD >= priceRange.min
-      && tour.priceUSD <= priceRange.max
-      && matchesDurationFilter(tour, durationFilter)
-    ))
-  ), [durationFilter, priceRange.max, priceRange.min, tours])
+  const filteredTours = useMemo(() => {
+    const hasPriceFilter = priceRange.min !== defaultPriceBounds.min || priceRange.max !== defaultPriceBounds.max
+
+    return tours.filter((tour) => {
+      const matchesPrice = !hasPriceFilter || (tour.priceUSD >= priceRange.min && tour.priceUSD <= priceRange.max)
+
+      return matchesPrice && matchesDurationFilter(tour, durationFilter)
+    })
+  }, [durationFilter, priceRange.max, priceRange.min, tours])
 
   const totalPages = Math.max(1, Math.ceil(filteredTours.length / toursPerPage))
   const pageStartIndex = (currentPage - 1) * toursPerPage

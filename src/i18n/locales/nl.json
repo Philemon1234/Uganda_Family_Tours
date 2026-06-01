@@ -1,103 +1,108 @@
 {
   "navbar": {
     "home": "Home",
-    "tours": "Tours",
-    "about": "About Us",
-    "talkToSpecialist": "Talk to a Travel Specialist",
-    "language": "Language"
+    "tours": "Reizen",
+    "about": "Over ons",
+    "talkToSpecialist": "Praat met een reisspecialist",
+    "language": "Taal",
+    "homeAria": "Uganda Family Tours home"
   },
   "common": {
-    "from": "From",
-    "days": "Days",
-    "sending": "Sending...",
-    "required": "This field is required.",
-    "validEmail": "Enter a valid email address.",
-    "yes": "Yes",
-    "no": "No",
-    "close": "Close",
-    "cancel": "Cancel",
-    "menu": "Menu"
+    "from": "Vanaf",
+    "days": "Dagen",
+    "sending": "Verzenden...",
+    "required": "Dit veld is verplicht.",
+    "validEmail": "Voer een geldig e-mailadres in.",
+    "yes": "Ja",
+    "no": "Nee",
+    "close": "Sluiten",
+    "cancel": "Annuleren",
+    "menu": "Menu",
+    "loading": "Laden",
+    "logoAlt": "Uganda Family Tours",
+    "increase": "{{label}} verhogen",
+    "decrease": "{{label}} verlagen"
   },
   "home": {
     "hero": {
-      "kicker": "The Pearl of Africa",
-      "title": "A Safari Journey Made Personal",
-      "subtitle": "Travel through Uganda's forests, savannahs, lakes, and cultures with a local team that shapes every detail around you.",
-      "primaryCta": "Explore Our Tours"
+      "kicker": "De Parel van Afrika",
+      "title": "Een safari persoonlijk gemaakt",
+      "subtitle": "Reis door de bossen, savannes, meren en culturen van Uganda met een lokaal team dat elk detail rond jou vormt.",
+      "primaryCta": "Ontdek onze reizen"
     },
     "story": {
-      "label": "Explore Africa with",
+      "label": "Ontdek Afrika met",
       "title": "Uganda Family Tours & Safari Co.",
-      "description": "From misty mountains and mighty rivers to rare wildlife and warm hospitality, experience Uganda like never before.",
-      "p1": "Uganda is not just a destination. It is a feeling - the sound of the forest, the silence of the savannah, the warmth of its people, and the thrill of seeing wildlife in its natural home.",
-      "p2": "<0>Uganda Family Tours & Safari Co.</0> creates authentic, smooth, and memorable journeys across Uganda and East Africa for travelers who want comfort, care, and a deeper connection to place."
+      "description": "Van mistige bergen en machtige rivieren tot zeldzame wildlife en warme gastvrijheid: ervaar Uganda op een nieuwe manier.",
+      "p1": "Uganda is niet zomaar een bestemming. Het is een gevoel: het geluid van het bos, de stilte van de savanne, de warmte van de mensen en de spanning van wildlife in hun natuurlijke thuis.",
+      "p2": "<0>Uganda Family Tours & Safari Co.</0> maakt authentieke, soepele en memorabele reizen door Uganda en Oost-Afrika voor reizigers die comfort, zorg en een diepere band met de plek zoeken."
     },
     "signature": {
-      "label": "What we shape",
-      "title": "Signature Experiences",
-      "description": "From gorilla forests to open savannahs, every journey is shaped around what travelers want to feel, see, and remember.",
+      "label": "Signatuurervaringen",
+      "title": "Signatuurervaringen",
+      "description": "Van gorillabossen tot open savannes: elke reis wordt gevormd rond wat reizigers willen voelen, zien en onthouden.",
       "items": [
         {
-          "title": "Gorilla Trekking",
-          "text": "Quiet forest walks toward one of Africa's most moving wildlife encounters."
+          "title": "Gorilla trekking",
+          "text": "Rustige boswandelingen naar een van Afrika s meest ontroerende wildlife-ontmoetingen."
         },
         {
-          "title": "Wildlife Safaris",
-          "text": "Game drives, boat cruises, and wild landscapes guided by local knowledge."
+          "title": "Wildlife safaris",
+          "text": "Game drives, boottochten en wilde landschappen met lokale kennis."
         },
         {
-          "title": "Chimpanzee Tracking",
-          "text": "Follow forest calls through Kibale and other primate-rich habitats."
+          "title": "Chimpansees volgen",
+          "text": "Volg bosgeluiden door Kibale en andere primatenrijke gebieden."
         },
         {
-          "title": "Cultural Experiences",
-          "text": "Meet communities, makers, storytellers, and traditions with respect."
+          "title": "Culturele ervaringen",
+          "text": "Ontmoet gemeenschappen, makers, verhalenvertellers en tradities met respect."
         },
         {
-          "title": "Lake & Nature Escapes",
-          "text": "Slow down beside crater lakes, highlands, rivers, and peaceful retreats."
+          "title": "Meren en natuur",
+          "text": "Vertraag bij kratermeren, hooglanden, rivieren en stille retraites."
         },
         {
-          "title": "Family Adventures",
-          "text": "Easy-paced, thoughtful safaris planned for every generation."
+          "title": "Familie-avonturen",
+          "text": "Rustige, doordachte safaris gepland voor elke generatie."
         }
       ]
     },
     "featured": {
-      "label": "Curated for you",
-      "title": "Handpicked Safari Experiences",
-      "description": "A focused selection of journeys from our published safari collection, kept concise so the homepage feels like an invitation rather than a catalogue.",
-      "viewAll": "View All Tours"
+      "label": "Voor jou geselecteerd",
+      "title": "Geselecteerde safari-ervaringen",
+      "description": "Een gerichte selectie uit onze gepubliceerde safaris, kort gehouden zodat de homepage uitnodigt in plaats van een catalogus wordt.",
+      "viewAll": "Bekijk alle reizen"
     },
     "journey": {
-      "label": "Designed with care",
-      "title": "Around Your Journey",
-      "description": "Every itinerary is shaped around your pace, interests, comfort, and travel style - whether you are visiting Uganda for gorillas, wildlife, culture, or a once-in-a-lifetime family adventure.",
-      "cta": "Talk to a Travel Specialist"
+      "label": "Met zorg ontworpen",
+      "title": "Rond jouw reis",
+      "description": "Elke route wordt gevormd rond jouw tempo, interesses, comfort en reisstijl, of je nu komt voor gorillas, wildlife, cultuur of een familie-avontuur.",
+      "cta": "Praat met een reisspecialist"
     },
     "why": {
-      "label": "Your adventure. Our expertise.",
-      "title": "Why Travel With Uganda Family Tours?",
-      "description": "Quiet planning, trusted local guidance, responsible travel values, and steady support from the first idea to the final day of your safari.",
-      "tailorTitle": "Tailor-Made Itineraries",
-      "tailorText": "Journeys shaped around your pace, interests, and comfort.",
-      "localTitle": "Trusted Local Expertise",
-      "localText": "Local guides, thoughtful routing, and insider knowledge.",
-      "responsibleTitle": "Responsible Travel",
-      "responsibleText": "Safari planning that respects wildlife, nature, and communities.",
-      "peaceTitle": "Peace of Mind",
-      "peaceText": "Secure booking, clear communication, and travel support."
+      "label": "Jouw avontuur. Onze expertise.",
+      "title": "Waarom reizen met Uganda Family Tours?",
+      "description": "Rustige planning, vertrouwde lokale begeleiding, verantwoord reizen en vaste steun van eerste idee tot laatste safaridag.",
+      "tailorTitle": "Reizen op maat",
+      "tailorText": "Reizen gevormd rond jouw tempo, interesses en comfort.",
+      "localTitle": "Vertrouwde lokale expertise",
+      "localText": "Lokale gidsen, doordachte routes en insiderkennis.",
+      "responsibleTitle": "Verantwoord reizen",
+      "responsibleText": "Safariplanning met respect voor wildlife, natuur en gemeenschappen.",
+      "peaceTitle": "Gemoedsrust",
+      "peaceText": "Veilig boeken, heldere communicatie en reisondersteuning."
     },
-    "galleryLabel": "Seen along the way",
-    "galleryTitle": "Moments From Our Journeys",
-    "galleryDescription": "A glimpse of the landscapes, wildlife, lodges, and human moments that make each itinerary feel alive.",
-    "reviewsTitle": "What Our Travelers Remember",
-    "reviewsDescription": "Simple stories from guests who trusted our local team with their time in Uganda.",
+    "galleryLabel": "Gezien onderweg",
+    "galleryTitle": "Momenten van onze reizen",
+    "galleryDescription": "Een blik op landschappen, wildlife, lodges en menselijke momenten die elke route laten leven.",
+    "reviewsTitle": "Wat onze reizigers onthouden",
+    "reviewsDescription": "Eenvoudige verhalen van gasten die hun tijd in Uganda aan ons lokale team toevertrouwden.",
     "finalCta": {
-      "label": "Begin the conversation",
-      "title": "Ready to Plan Your Uganda Safari?",
-      "description": "Tell us what kind of journey you are dreaming of, and our local team will help shape it into a personal itinerary.",
-      "button": "Talk to a Travel Specialist"
+      "label": "Begin het gesprek",
+      "title": "Klaar om je Uganda-safari te plannen?",
+      "description": "Vertel ons van welke reis je droomt en ons lokale team helpt er een persoonlijk programma van te maken.",
+      "button": "Praat met een reisspecialist"
     }
   },
   "toursPage": {
@@ -108,8 +113,9 @@
     "ctaButton": "Contact Our Team"
   },
   "tourCard": {
-    "duration": "Duration",
-    "getPackage": "Get Package"
+    "duration": "Duur",
+    "getPackage": "Bekijk pakket",
+    "fallbackDescription": "Ontdek deze ervaring van Uganda Family Tours."
   },
   "tourDetails": {
     "breadcrumbHome": "Home",
@@ -190,14 +196,14 @@
     "error": "The inquiry could not be sent right now."
   },
   "footer": {
-    "about": "We are a local family-owned travel company specializing in tailor-made eco-safari experiences in Uganda and East Africa.",
-    "contact": "Contact Us",
-    "quickLinks": "Quick Links",
-    "accept": "We Accept",
-    "social": "Connect With Us",
-    "rights": "© 2025 Uganda Family Tours & Safari Co. All Rights Reserved.",
-    "privacy": "Privacy Policy",
-    "terms": "Terms & Conditions",
+    "about": "Wij zijn een lokaal familiebedrijf gespecialiseerd in op maat gemaakte eco-safaris in Uganda en Oost-Afrika.",
+    "contact": "Contact",
+    "quickLinks": "Snelle links",
+    "accept": "Wij accepteren",
+    "social": "Verbind met ons",
+    "rights": "© 2025 Uganda Family Tours & Safari Co. Alle rechten voorbehouden.",
+    "privacy": "Privacybeleid",
+    "terms": "Algemene voorwaarden",
     "location": "Kampala, Uganda"
   },
   "aboutPage": {
@@ -280,9 +286,9 @@
   },
   "tourContent": {
     "gorilla-tracking-in-bwindi": {
-      "title": "Gorilla Tracking in Bwindi",
-      "shortDescription": "Trek through lush rainforest with expert guides to encounter mountain gorillas in their natural habitat and learn about conservation.",
-      "overview": "Journey into the heart of untamed beauty. Bwindi Impenetrable National Park is home to nearly half of the world's remaining mountain gorillas. This 4-day journey offers an unforgettable trekking experience through lush rainforest, vibrant culture, and meaningful conservation - a true bucket list adventure.",
+      "title": "Gorilla trekking in Bwindi",
+      "shortDescription": "Trek door weelderig regenwoud met deskundige gidsen en ontmoet berggorilla s in hun natuurlijke leefgebied.",
+      "overview": "Reis naar het hart van Bwindi Impenetrable National Park voor een onvergetelijke gorilla trekking, met natuur, cultuur en zorgvuldig lokaal gastheerschap.",
       "highlights": [
         "Mountain gorilla tracking",
         "Golden monkey encounters",
@@ -293,8 +299,8 @@
     },
     "murchison-falls-safari": {
       "title": "Murchison Falls Safari",
-      "shortDescription": "Experience powerful waterfalls, thrilling game drives, and a scenic boat cruise along the Nile with rich wildlife viewing.",
-      "overview": "Journey into the heart of untamed beauty. This itinerary blends iconic wildlife encounters, rich culture, scenic landscapes, and thoughtful local hosting for a memorable Uganda safari experience.",
+      "shortDescription": "Ervaar krachtige watervallen, spannende game drives en een boottocht over de Nijl met rijke wildlife.",
+      "overview": "Een zorgvuldig samengestelde Uganda safari met iconische wildlife, lokale cultuur, mooie landschappen en warme begeleiding.",
       "highlights": [
         "Nile boat cruise",
         "Top of the falls visit",
@@ -305,8 +311,8 @@
     },
     "queen-elizabeth-wildlife-safari": {
       "title": "Queen Elizabeth Wildlife Safari",
-      "shortDescription": "Explore diverse wildlife, tree-climbing lions, crater lake views, and open savannah landscapes with your local safari guide.",
-      "overview": "Journey into the heart of untamed beauty. This itinerary blends iconic wildlife encounters, rich culture, scenic landscapes, and thoughtful local hosting for a memorable Uganda safari experience.",
+      "shortDescription": "Ontdek wildlife, boomklimmende leeuwen, kratermeren en open savannes met je lokale safarigids.",
+      "overview": "Een safari vol dieren, landschappen en lokale ontmoetingen in het hart van Uganda.",
       "highlights": [
         "Tree-climbing lions",
         "Kazinga Channel cruise",
@@ -317,8 +323,8 @@
     },
     "lake-bunyonyi-escape": {
       "title": "Lake Bunyonyi Escape",
-      "shortDescription": "Relax beside the serene lake, enjoy island hopping, canoe rides, and breathtaking highland scenery at an easy pace.",
-      "overview": "Journey into the heart of untamed beauty. This itinerary blends iconic wildlife encounters, rich culture, scenic landscapes, and thoughtful local hosting for a memorable Uganda safari experience.",
+      "shortDescription": "Ontspan aan het rustige meer, bezoek eilanden per kano en geniet van het hooglandlandschap.",
+      "overview": "Een rustige natuur- en meerervaring met cultuur, uitzicht en tijd om te vertragen.",
       "highlights": [
         "Island canoe tour",
         "Highland viewpoints",
@@ -328,9 +334,9 @@
       ]
     },
     "chimpanzee-trekking": {
-      "title": "Chimpanzee Trekking",
-      "shortDescription": "Track chimpanzees in Kibale Forest, listen for primates in the canopy, and enjoy beautiful Bigodi wetland walks.",
-      "overview": "Journey into the heart of untamed beauty. This itinerary blends iconic wildlife encounters, rich culture, scenic landscapes, and thoughtful local hosting for a memorable Uganda safari experience.",
+      "title": "Chimpansees volgen",
+      "shortDescription": "Volg chimpansees in Kibale Forest en geniet van de prachtige Bigodi wetland-wandeling.",
+      "overview": "Een boservaring voor primaten, vogels en groene landschappen in Uganda.",
       "highlights": [
         "Chimpanzee tracking",
         "Bigodi wetland walk",
@@ -340,9 +346,9 @@
       ]
     },
     "cultural-uganda-experience": {
-      "title": "Cultural Uganda Experience",
-      "shortDescription": "Immerse in local culture, traditional food, music, storytelling, craft markets, and meaningful community experiences.",
-      "overview": "Journey into the heart of untamed beauty. This itinerary blends iconic wildlife encounters, rich culture, scenic landscapes, and thoughtful local hosting for a memorable Uganda safari experience.",
+      "title": "Culturele Uganda ervaring",
+      "shortDescription": "Dompel je onder in lokale cultuur, eten, muziek, verhalen, markten en betekenisvolle gemeenschapsbezoeken.",
+      "overview": "Een warme culturele reis door tradities, smaken en dagelijks leven in Uganda.",
       "highlights": [
         "Cultural performances",
         "Local food experience",
@@ -393,5 +399,33 @@
         "details": "Accommodation: none  Meals: breakfast  Distance: 280km"
       }
     ]
+  },
+  "languages": {
+    "enGB": "Engels VK",
+    "enUS": "Engels VS",
+    "es": "Spaans",
+    "fr": "Frans",
+    "de": "Duits",
+    "ru": "Russisch",
+    "nl": "Nederlands",
+    "ar": "Arabisch"
+  },
+  "mobileNav": {
+    "ariaLabel": "Mobiele onderste navigatie",
+    "openMenu": "Menu openen",
+    "drawerAriaLabel": "Mobiele navigatie"
+  },
+  "gallery": {
+    "previous": "Vorige galerijafbeelding",
+    "next": "Volgende galerijafbeelding",
+    "goToSlide": "Ga naar afbeelding {{number}}",
+    "images": {
+      "lake": "Uitzicht op de hooglanden van Lake Bunyonyi",
+      "safariTruck": "Safari-voertuig in Uganda",
+      "culture": "Culturele bijeenkomst in Uganda",
+      "forest": "Begeleide regenwoudwandeling",
+      "gorilla": "Berggorilla in Bwindi Forest",
+      "lions": "Boomklimmende leeuwen"
+    }
   }
 }

@@ -1,103 +1,114 @@
 {
   "navbar": {
-    "home": "Home",
-    "tours": "Tours",
-    "about": "About Us",
-    "talkToSpecialist": "Talk to a Travel Specialist",
-    "language": "Language"
+    "home": "الرئيسية",
+    "tours": "الجولات",
+    "about": "من نحن",
+    "talkToSpecialist": "تحدث إلى خبير سفر",
+    "language": "اللغة",
+    "homeAria": "الصفحة الرئيسية لأوغندا فاميلي تورز"
   },
   "common": {
-    "from": "From",
-    "days": "Days",
-    "sending": "Sending...",
-    "required": "This field is required.",
-    "validEmail": "Enter a valid email address.",
-    "yes": "Yes",
-    "no": "No",
-    "close": "Close",
-    "cancel": "Cancel",
-    "menu": "Menu"
+    "from": "ابتداء من",
+    "days": "أيام",
+    "sending": "جار الإرسال...",
+    "required": "هذا الحقل مطلوب.",
+    "validEmail": "أدخل بريدا إلكترونيا صالحا.",
+    "yes": "نعم",
+    "no": "لا",
+    "close": "إغلاق",
+    "cancel": "إلغاء",
+    "menu": "القائمة",
+    "loading": "جار التحميل",
+    "logoAlt": "أوغندا فاميلي تورز",
+    "increase": "زيادة {{label}}",
+    "decrease": "تقليل {{label}}"
   },
   "home": {
     "hero": {
-      "kicker": "The Pearl of Africa",
-      "title": "A Safari Journey Made Personal",
-      "subtitle": "Travel through Uganda's forests, savannahs, lakes, and cultures with a local team that shapes every detail around you.",
-      "primaryCta": "Explore Our Tours"
+      "kicker": "لؤلؤة أفريقيا",
+      "title": "رحلة سفاري مصممة لك",
+      "subtitle": "سافر عبر غابات أوغندا وسهولها وبحيراتها وثقافاتها مع فريق محلي يصمم كل تفصيل حولك.",
+      "primaryCta": "استكشف الجولات"
     },
     "story": {
-      "label": "Explore Africa with",
+      "label": "استكشف أفريقيا مع",
       "title": "Uganda Family Tours & Safari Co.",
-      "description": "From misty mountains and mighty rivers to rare wildlife and warm hospitality, experience Uganda like never before.",
-      "p1": "Uganda is not just a destination. It is a feeling - the sound of the forest, the silence of the savannah, the warmth of its people, and the thrill of seeing wildlife in its natural home.",
-      "p2": "<0>Uganda Family Tours & Safari Co.</0> creates authentic, smooth, and memorable journeys across Uganda and East Africa for travelers who want comfort, care, and a deeper connection to place."
+      "description": "من الجبال الضبابية والأنهار العظيمة إلى الحياة البرية النادرة والضيافة الدافئة، اختبر أوغندا بطريقة جديدة.",
+      "p1": "أوغندا ليست مجرد وجهة. إنها إحساس: صوت الغابة، هدوء السافانا، دفء الناس، وروعة رؤية الحياة البرية في موطنها الطبيعي.",
+      "p2": "<0>Uganda Family Tours & Safari Co.</0> تنشئ رحلات أصيلة وسلسة ولا تنسى في أوغندا وشرق أفريقيا للمسافرين الذين يبحثون عن الراحة والعناية والارتباط العميق بالمكان."
     },
     "signature": {
-      "label": "What we shape",
-      "title": "Signature Experiences",
-      "description": "From gorilla forests to open savannahs, every journey is shaped around what travelers want to feel, see, and remember.",
+      "label": "تجارب مميزة",
+      "title": "تجارب مميزة",
+      "description": "من غابات الغوريلا إلى السافانا المفتوحة، يتم تشكيل كل رحلة حول ما يريد المسافر أن يشعر به ويراه ويتذكره.",
       "items": [
         {
-          "title": "Gorilla Trekking",
-          "text": "Quiet forest walks toward one of Africa's most moving wildlife encounters."
+          "title": "تتبع الغوريلا",
+          "text": "مسارات هادئة في الغابة نحو واحدة من أكثر لقاءات الحياة البرية تأثيرا في أفريقيا."
         },
         {
-          "title": "Wildlife Safaris",
-          "text": "Game drives, boat cruises, and wild landscapes guided by local knowledge."
+          "title": "سفاري الحياة البرية",
+          "text": "رحلات مشاهدة الحيوانات ورحلات القوارب والمناظر البرية بمعرفة محلية."
         },
         {
-          "title": "Chimpanzee Tracking",
-          "text": "Follow forest calls through Kibale and other primate-rich habitats."
+          "title": "تتبع الشمبانزي",
+          "text": "اتبع نداءات الغابة في كيبالي وغيرها من مواطن الرئيسيات."
         },
         {
-          "title": "Cultural Experiences",
-          "text": "Meet communities, makers, storytellers, and traditions with respect."
+          "title": "تجارب ثقافية",
+          "text": "التق بالمجتمعات والحرفيين والرواة والتقاليد باحترام."
         },
         {
-          "title": "Lake & Nature Escapes",
-          "text": "Slow down beside crater lakes, highlands, rivers, and peaceful retreats."
+          "title": "البحيرات والطبيعة",
+          "text": "تمهل بجوار بحيرات الفوهات والمرتفعات والأنهار والملاذات الهادئة."
         },
         {
-          "title": "Family Adventures",
-          "text": "Easy-paced, thoughtful safaris planned for every generation."
+          "title": "مغامرات عائلية",
+          "text": "رحلات سفاري هادئة ومدروسة لكل الأجيال."
         }
-      ]
+      ],
+      "videoAria": "فيديو تجارب السفاري المميزة",
+      "videoFallback": "متصفحك لا يدعم الفيديو المضمن."
     },
     "featured": {
-      "label": "Curated for you",
-      "title": "Handpicked Safari Experiences",
-      "description": "A focused selection of journeys from our published safari collection, kept concise so the homepage feels like an invitation rather than a catalogue.",
-      "viewAll": "View All Tours"
+      "label": "مختارة لك",
+      "title": "تجارب سفاري مختارة",
+      "description": "مجموعة مركزة من رحلاتنا المنشورة، قصيرة بما يكفي لتبقى الصفحة دعوة وليست كتالوجا.",
+      "viewAll": "عرض كل الجولات",
+      "errorTitle": "تعذر تحميل الجولات المميزة",
+      "errorMessage": "لا يمكن تحميل الجولات المميزة الآن.",
+      "emptyTitle": "لا توجد جولات مميزة حاليا",
+      "emptyDescription": "يرجى العودة قريبا لاكتشاف تجارب سفاري جديدة."
     },
     "journey": {
-      "label": "Designed with care",
-      "title": "Around Your Journey",
-      "description": "Every itinerary is shaped around your pace, interests, comfort, and travel style - whether you are visiting Uganda for gorillas, wildlife, culture, or a once-in-a-lifetime family adventure.",
-      "cta": "Talk to a Travel Specialist"
+      "label": "مصممة بعناية",
+      "title": "حول رحلتك",
+      "description": "كل برنامج يصمم حسب وتيرتك واهتماماتك وراحتك وأسلوب سفرك، سواء كنت تزور أوغندا من أجل الغوريلا أو الحياة البرية أو الثقافة أو مغامرة عائلية لا تنسى.",
+      "cta": "تحدث إلى خبير سفر"
     },
     "why": {
-      "label": "Your adventure. Our expertise.",
-      "title": "Why Travel With Uganda Family Tours?",
-      "description": "Quiet planning, trusted local guidance, responsible travel values, and steady support from the first idea to the final day of your safari.",
-      "tailorTitle": "Tailor-Made Itineraries",
-      "tailorText": "Journeys shaped around your pace, interests, and comfort.",
-      "localTitle": "Trusted Local Expertise",
-      "localText": "Local guides, thoughtful routing, and insider knowledge.",
-      "responsibleTitle": "Responsible Travel",
-      "responsibleText": "Safari planning that respects wildlife, nature, and communities.",
-      "peaceTitle": "Peace of Mind",
-      "peaceText": "Secure booking, clear communication, and travel support."
+      "label": "مغامرتك. خبرتنا.",
+      "title": "لماذا تسافر مع أوغندا فاميلي تورز؟",
+      "description": "تخطيط هادئ، إرشاد محلي موثوق، قيم سفر مسؤولة، ودعم ثابت من الفكرة الأولى إلى آخر يوم في السفاري.",
+      "tailorTitle": "برامج مصممة لك",
+      "tailorText": "رحلات تشكل حول وتيرتك واهتماماتك وراحتك.",
+      "localTitle": "خبرة محلية موثوقة",
+      "localText": "مرشدون محليون ومسارات مدروسة ومعرفة داخلية.",
+      "responsibleTitle": "سفر مسؤول",
+      "responsibleText": "تخطيط سفاري يحترم الحياة البرية والطبيعة والمجتمعات.",
+      "peaceTitle": "راحة البال",
+      "peaceText": "حجز آمن وتواصل واضح ودعم أثناء السفر."
     },
-    "galleryLabel": "Seen along the way",
-    "galleryTitle": "Moments From Our Journeys",
-    "galleryDescription": "A glimpse of the landscapes, wildlife, lodges, and human moments that make each itinerary feel alive.",
-    "reviewsTitle": "What Our Travelers Remember",
-    "reviewsDescription": "Simple stories from guests who trusted our local team with their time in Uganda.",
+    "galleryLabel": "مشاهد من الطريق",
+    "galleryTitle": "لحظات من رحلاتنا",
+    "galleryDescription": "لمحة عن المناظر والحياة البرية والنزل واللحظات الإنسانية التي تجعل كل برنامج حيا.",
+    "reviewsTitle": "ما يتذكره مسافرونا",
+    "reviewsDescription": "قصص بسيطة من ضيوف وثقوا بفريقنا المحلي أثناء وقتهم في أوغندا.",
     "finalCta": {
-      "label": "Begin the conversation",
-      "title": "Ready to Plan Your Uganda Safari?",
-      "description": "Tell us what kind of journey you are dreaming of, and our local team will help shape it into a personal itinerary.",
-      "button": "Talk to a Travel Specialist"
+      "label": "ابدأ الحديث",
+      "title": "هل أنت جاهز لتخطيط سفاري أوغندا؟",
+      "description": "أخبرنا بنوع الرحلة التي تحلم بها، وسيساعدك فريقنا المحلي في تحويلها إلى برنامج شخصي.",
+      "button": "تحدث إلى خبير سفر"
     }
   },
   "toursPage": {
@@ -108,8 +119,9 @@
     "ctaButton": "Contact Our Team"
   },
   "tourCard": {
-    "duration": "Duration",
-    "getPackage": "Get Package"
+    "duration": "المدة",
+    "getPackage": "عرض الباقة",
+    "fallbackDescription": "استكشف هذه التجربة مع أوغندا فاميلي تورز."
   },
   "tourDetails": {
     "breadcrumbHome": "Home",
@@ -190,15 +202,15 @@
     "error": "The inquiry could not be sent right now."
   },
   "footer": {
-    "about": "We are a local family-owned travel company specializing in tailor-made eco-safari experiences in Uganda and East Africa.",
-    "contact": "Contact Us",
-    "quickLinks": "Quick Links",
-    "accept": "We Accept",
-    "social": "Connect With Us",
-    "rights": "© 2025 Uganda Family Tours & Safari Co. All Rights Reserved.",
-    "privacy": "Privacy Policy",
-    "terms": "Terms & Conditions",
-    "location": "Kampala, Uganda"
+    "about": "نحن شركة سفر عائلية محلية متخصصة في رحلات سفاري بيئية مصممة حسب الطلب في أوغندا وشرق أفريقيا.",
+    "contact": "اتصل بنا",
+    "quickLinks": "روابط سريعة",
+    "accept": "نقبل",
+    "social": "تواصل معنا",
+    "rights": "© 2025 Uganda Family Tours & Safari Co. جميع الحقوق محفوظة.",
+    "privacy": "سياسة الخصوصية",
+    "terms": "الشروط والأحكام",
+    "location": "كمبالا، أوغندا"
   },
   "aboutPage": {
     "hero": {
@@ -280,9 +292,9 @@
   },
   "tourContent": {
     "gorilla-tracking-in-bwindi": {
-      "title": "Gorilla Tracking in Bwindi",
-      "shortDescription": "Trek through lush rainforest with expert guides to encounter mountain gorillas in their natural habitat and learn about conservation.",
-      "overview": "Journey into the heart of untamed beauty. Bwindi Impenetrable National Park is home to nearly half of the world's remaining mountain gorillas. This 4-day journey offers an unforgettable trekking experience through lush rainforest, vibrant culture, and meaningful conservation - a true bucket list adventure.",
+      "title": "تتبع الغوريلا في بويندي",
+      "shortDescription": "سر عبر الغابة المطيرة مع مرشدين خبراء لمشاهدة الغوريلا الجبلية في موطنها الطبيعي.",
+      "overview": "رحلة إلى قلب منتزه بويندي لتجربة تتبع الغوريلا، مع طبيعة وثقافة واستضافة محلية بعناية.",
       "highlights": [
         "Mountain gorilla tracking",
         "Golden monkey encounters",
@@ -292,9 +304,9 @@
       ]
     },
     "murchison-falls-safari": {
-      "title": "Murchison Falls Safari",
-      "shortDescription": "Experience powerful waterfalls, thrilling game drives, and a scenic boat cruise along the Nile with rich wildlife viewing.",
-      "overview": "Journey into the heart of untamed beauty. This itinerary blends iconic wildlife encounters, rich culture, scenic landscapes, and thoughtful local hosting for a memorable Uganda safari experience.",
+      "title": "سفاري شلالات ميرتشيسون",
+      "shortDescription": "اختبر الشلالات القوية ورحلات مشاهدة الحيوانات ورحلة قارب على النيل وسط حياة برية غنية.",
+      "overview": "سفاري مدروس في أوغندا يجمع الحياة البرية الشهيرة والثقافة المحلية والمناظر الجميلة والإرشاد الدافئ.",
       "highlights": [
         "Nile boat cruise",
         "Top of the falls visit",
@@ -304,9 +316,9 @@
       ]
     },
     "queen-elizabeth-wildlife-safari": {
-      "title": "Queen Elizabeth Wildlife Safari",
-      "shortDescription": "Explore diverse wildlife, tree-climbing lions, crater lake views, and open savannah landscapes with your local safari guide.",
-      "overview": "Journey into the heart of untamed beauty. This itinerary blends iconic wildlife encounters, rich culture, scenic landscapes, and thoughtful local hosting for a memorable Uganda safari experience.",
+      "title": "سفاري الحياة البرية في كوين إليزابيث",
+      "shortDescription": "استكشف الحياة البرية والأسود المتسلقة للأشجار وبحيرات الفوهات والسافانا مع مرشد محلي.",
+      "overview": "سفاري مليء بالحيوانات والمناظر واللقاءات المحلية في قلب أوغندا.",
       "highlights": [
         "Tree-climbing lions",
         "Kazinga Channel cruise",
@@ -316,9 +328,9 @@
       ]
     },
     "lake-bunyonyi-escape": {
-      "title": "Lake Bunyonyi Escape",
-      "shortDescription": "Relax beside the serene lake, enjoy island hopping, canoe rides, and breathtaking highland scenery at an easy pace.",
-      "overview": "Journey into the heart of untamed beauty. This itinerary blends iconic wildlife encounters, rich culture, scenic landscapes, and thoughtful local hosting for a memorable Uganda safari experience.",
+      "title": "استراحة بحيرة بونيوني",
+      "shortDescription": "استرخ بجانب البحيرة الهادئة واستمتع بالجزر والزوارق ومناظر المرتفعات.",
+      "overview": "تجربة هادئة بجانب البحيرة تجمع الطبيعة والثقافة والمناظر ووقت الاسترخاء.",
       "highlights": [
         "Island canoe tour",
         "Highland viewpoints",
@@ -328,9 +340,9 @@
       ]
     },
     "chimpanzee-trekking": {
-      "title": "Chimpanzee Trekking",
-      "shortDescription": "Track chimpanzees in Kibale Forest, listen for primates in the canopy, and enjoy beautiful Bigodi wetland walks.",
-      "overview": "Journey into the heart of untamed beauty. This itinerary blends iconic wildlife encounters, rich culture, scenic landscapes, and thoughtful local hosting for a memorable Uganda safari experience.",
+      "title": "تتبع الشمبانزي",
+      "shortDescription": "تتبع الشمبانزي في غابة كيبالي واستمتع بمشي مستنقعات بيغودي الجميل.",
+      "overview": "تجربة غابية لمشاهدة الرئيسيات والطيور والمناظر الخضراء في أوغندا.",
       "highlights": [
         "Chimpanzee tracking",
         "Bigodi wetland walk",
@@ -340,9 +352,9 @@
       ]
     },
     "cultural-uganda-experience": {
-      "title": "Cultural Uganda Experience",
-      "shortDescription": "Immerse in local culture, traditional food, music, storytelling, craft markets, and meaningful community experiences.",
-      "overview": "Journey into the heart of untamed beauty. This itinerary blends iconic wildlife encounters, rich culture, scenic landscapes, and thoughtful local hosting for a memorable Uganda safari experience.",
+      "title": "تجربة أوغندا الثقافية",
+      "shortDescription": "انغمس في الثقافة المحلية والطعام والموسيقى والحكايات وأسواق الحرف واللقاءات المجتمعية.",
+      "overview": "رحلة ثقافية دافئة عبر التقاليد والنكهات والحياة اليومية في أوغندا.",
       "highlights": [
         "Cultural performances",
         "Local food experience",
@@ -391,6 +403,63 @@
           "Transfer to Kampala or Entebbe"
         ],
         "details": "Accommodation: none  Meals: breakfast  Distance: 280km"
+      }
+    ]
+  },
+  "languages": {
+    "enGB": "الإنجليزية - بريطانيا",
+    "enUS": "الإنجليزية - أمريكا",
+    "es": "الإسبانية",
+    "fr": "الفرنسية",
+    "de": "الألمانية",
+    "ru": "الروسية",
+    "nl": "الهولندية",
+    "ar": "العربية"
+  },
+  "mobileNav": {
+    "ariaLabel": "التنقل السفلي للجوال",
+    "openMenu": "فتح القائمة",
+    "drawerAriaLabel": "تنقل الجوال"
+  },
+  "gallery": {
+    "previous": "صورة المعرض السابقة",
+    "next": "صورة المعرض التالية",
+    "goToSlide": "اذهب إلى صورة المعرض {{number}}",
+    "images": {
+      "lake": "إطلالة مرتفعات بحيرة بونيوني",
+      "safariTruck": "مركبة سفاري في أوغندا",
+      "culture": "تجمع ثقافي أوغندي",
+      "forest": "جولة مشي موجهة في الغابة المطيرة",
+      "gorilla": "غوريلا جبلية في غابة بويندي",
+      "lions": "أسود تتسلق الأشجار"
+    }
+  },
+  "reviews": {
+    "goToSlide": "اذهب إلى التقييم {{number}}",
+    "items": [
+      {
+        "country": "أستراليا",
+        "text": "تجربة رائعة من البداية إلى النهاية. كان المرشدون محترفين وودودين وجعلوا الرحلة لا تنسى."
+      },
+      {
+        "country": "المملكة المتحدة",
+        "text": "كل شيء كان منظما بإتقان. تتبع الغوريلا كان تجربة العمر. نوصي بشدة بأوغندا فاميلي تورز."
+      },
+      {
+        "country": "كندا",
+        "text": "مغامرة مذهلة بمناظر خلابة وحياة برية رائعة. نتطلع للعودة إلى أوغندا."
+      },
+      {
+        "country": "الولايات المتحدة",
+        "text": "شعرت عائلتنا بالعناية في كل خطوة. كان البرنامج متوازنا ومدروسا ومليئا بالذكريات."
+      },
+      {
+        "country": "كينيا",
+        "text": "سفاري منظم بشكل جميل مع مرشدين ودودين ونزل مريحة ومشاهدات رائعة للحياة البرية."
+      },
+      {
+        "country": "إسبانيا",
+        "text": "كان تتبع الغوريلا مؤثرا ولا ينسى. جعلت أوغندا فاميلي تورز كل شيء سلسا وشخصيا."
       }
     ]
   }

@@ -85,15 +85,15 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
             <span className="mx-auto mt-4 block h-0.5 w-12 bg-primary" />
             <p className="mt-5 leading-7 text-white/72">{t('aboutPage.initiatives.description')}</p>
           </div>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {initiatives.map(({ icon: Icon, title, text }, index) => (
               <MotionReveal key={title} delay={index * 80}>
-                <article className="h-full border-t border-white/15 px-1 py-6 text-center transition hover:border-primary">
-                  <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-white/8 text-xl text-primary">
+                <article className="h-full border-t border-white/15 px-1 py-5 text-center transition hover:border-primary sm:py-6">
+                  <span className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-white/8 text-lg text-primary sm:h-12 sm:w-12 sm:text-xl">
                     <Icon />
                   </span>
-                  <h3 className="mt-5 font-black text-white">{title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-white/68">{text}</p>
+                  <h3 className="mt-4 text-sm font-black leading-5 text-white sm:mt-5 sm:text-base">{title}</h3>
+                  <p className="mt-2 text-xs leading-5 text-white/68 sm:mt-3 sm:text-sm sm:leading-6">{text}</p>
                 </article>
               </MotionReveal>
             ))}

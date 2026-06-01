@@ -154,16 +154,24 @@ img {
 
 .mobile-bottom-nav {
   position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  bottom: 0 !important;
   inset-inline: 0 !important;
   inset-block-start: auto !important;
   inset-block-end: 0 !important;
-  bottom: 0 !important;
   z-index: 80;
   width: 100%;
   margin: 0;
-  transform: translate3d(0, 0, 0);
+  transform: none !important;
   backface-visibility: hidden;
-  will-change: transform;
+  will-change: auto;
+  overflow: visible !important;
+}
+
+.mobile-bottom-nav nav {
+  overflow: visible !important;
 }
 
 .safari-loader-overlay {
@@ -208,6 +216,14 @@ img {
 @supports (bottom: constant(safe-area-inset-bottom)) {
   .mobile-bottom-nav {
     bottom: 0 !important;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  .mobile-bottom-nav {
+    position: fixed !important;
+    bottom: 0 !important;
+    transform: translateY(0) !important;
   }
 }
 

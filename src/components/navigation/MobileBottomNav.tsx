@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { FiHome, FiMenu, FiMessageSquare, FiUser } from 'react-icons/fi'
+import { FiHome, FiMenu, FiUser } from 'react-icons/fi'
+import { FaWhatsapp } from 'react-icons/fa'
 import { LuHand } from 'react-icons/lu'
 import type { IconType } from 'react-icons'
 import { MobileSidebarDrawer } from './MobileSidebarDrawer'
@@ -17,7 +18,7 @@ const navItems: NavItem[] = [
   { id: 'about', href: '/about', icon: FiUser },
   { id: 'home', href: '/', icon: FiHome },
   { id: 'services', href: '/tours', icon: LuHand },
-  { id: 'contact', href: '#contact', icon: FiMessageSquare },
+  { id: 'whatsapp', href: 'https://wa.me/256703543027', icon: FaWhatsapp },
 ]
 
 export function MobileBottomNav() {
@@ -27,12 +28,11 @@ export function MobileBottomNav() {
   const location = useLocation()
 
   const routeActiveItem = useMemo(() => {
-    if (location.hash === '#contact') return 'contact'
     if (location.pathname === '/') return 'home'
     if (location.pathname.startsWith('/about')) return 'about'
     if (location.pathname.startsWith('/tours')) return 'services'
     return 'home'
-  }, [location.hash, location.pathname])
+  }, [location.pathname])
 
   useEffect(() => {
     setSelectedItem(null)
@@ -47,7 +47,7 @@ export function MobileBottomNav() {
     if (item.id === 'about') return t('navbar.about')
     if (item.id === 'home') return t('navbar.home')
     if (item.id === 'services') return t('navbar.tours')
-    if (item.id === 'contact') return t('footer.contact')
+    if (item.id === 'whatsapp') return 'WhatsApp'
     return t('common.menu')
   }
 
@@ -115,11 +115,13 @@ export function MobileBottomNav() {
                 </>
               )
 
-              if (item.href?.startsWith('#')) {
+              if (item.href?.startsWith('http')) {
                 return (
                   <a
                     key={item.id}
                     href={item.href}
+                    target="_blank"
+                    rel="noreferrer"
                     className={buttonClass}
                     onClick={() => setSelectedItem(item.id)}
                     aria-current={isActive ? 'page' : undefined}
