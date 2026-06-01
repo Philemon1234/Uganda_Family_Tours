@@ -164,7 +164,13 @@
     "success": "Buchungsanfrage gesendet. Wir melden uns bald.",
     "error": "Die Anfrage konnte gerade nicht gesendet werden.",
     "budgetTotal": "Geschätztes Gruppenbudget",
-    "budgetCalculation": "{{perPerson}} pro Person x {{travelers}} Reisende",
+    "budgetCalculation": "{{perPerson}} pro Person x {{travelers}} Reisende · {{stay}}",
+    "accommodationNote": "Die Unterkunftswahl passt das geschaetzte Budget an.",
+    "accommodationStay": {
+      "budget": "Budget-Unterkunft",
+      "midRange": "Mittelklasse-Unterkunft",
+      "luxury": "Luxus-Unterkunft"
+    },
     "requiredMissing": "Bitte füllen Sie die markierten Pflichtfelder aus, bevor Sie senden."
   },
   "inquiryForm": {

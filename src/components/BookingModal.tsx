@@ -27,6 +27,8 @@ type FormState = {
   notes: string
 }
 
+type AccommodationPreference = FormState['accommodation']
+
 const initialForm: FormState = {
   fullName: '',
   email: '',
@@ -39,6 +41,12 @@ const initialForm: FormState = {
   childrenAges: '',
   accommodation: 'Mid-range',
   notes: '',
+}
+
+const accommodationMultipliers: Record<AccommodationPreference, number> = {
+  Budget: 0.85,
+  'Mid-range': 1,
+  Luxury: 1.35,
 }
 
 const euroCountryCodes = new Set([
@@ -89,9 +97,18 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   })
   const selectedCurrency = currencyForCountryCode(selectedCountry?.code, currency)
   const perPersonBudgetUSD = tour?.priceUSD ?? 1970
-  const travelers = form.adults + form.children
-  const estimatedPerPersonBudget = formatPrice(perPersonBudgetUSD, selectedCurrency)
-  const estimatedGroupBudget = formatPrice(perPersonBudgetUSD * travelers, selectedCurrency)
+  const travelers = Math.max(0, Number(form.adults) + Number(form.children))
+  const accommodationMultiplier = accommodationMultipliers[form.accommodation]
+  // Children are counted as full travelers for now to match the existing group-size estimate.
+  const adjustedPerPersonBudgetUSD = perPersonBudgetUSD * accommodationMultiplier
+  const estimatedPerPersonBudget = formatPrice(adjustedPerPersonBudgetUSD, selectedCurrency)
+  const estimatedGroupBudget = formatPrice(adjustedPerPersonBudgetUSD * travelers, selectedCurrency)
+  const accommodationStayLabelKey =
+    form.accommodation === 'Budget'
+      ? 'budget'
+      : form.accommodation === 'Luxury'
+        ? 'luxury'
+        : 'midRange'
 
   useEffect(() => {
     if (!isOpen) return
@@ -144,8 +161,11 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
         body: JSON.stringify({
           ...payload,
           budgetPerPerson: estimatedPerPersonBudget,
+          baseBudgetPerPerson: formatPrice(perPersonBudgetUSD, selectedCurrency),
           estimatedGroupBudget,
           travelers,
+          accommodationPreference: form.accommodation,
+          accommodationMultiplier,
           currency: selectedCurrency,
         }),
       })
@@ -263,6 +283,9 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                     </button>
                   ))}
                 </div>
+                <p className="mt-2 text-xs font-semibold text-muted">
+                  {t('bookingForm.accommodationNote')}
+                </p>
               </Field>
               <Field label={t('bookingForm.budget')} required>
                 <input className="input font-bold text-ink" value={estimatedGroupBudget} readOnly />
@@ -271,6 +294,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                     perPerson: estimatedPerPersonBudget,
                     travelers,
                     travelerLabel: travelers === 1 ? t('bookingForm.traveler') : t('bookingForm.travelers'),
+                    stay: t(`bookingForm.accommodationStay.${accommodationStayLabelKey}`),
                   })}
                 </p>
               </Field>

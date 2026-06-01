@@ -164,7 +164,13 @@
     "success": "Solicitud enviada correctamente. Te contactaremos pronto.",
     "error": "La solicitud no se pudo enviar ahora.",
     "budgetTotal": "Presupuesto estimado del grupo",
-    "budgetCalculation": "{{perPerson}} por persona x {{travelers}} viajeros",
+    "budgetCalculation": "{{perPerson}} por persona x {{travelers}} viajeros · {{stay}}",
+    "accommodationNote": "La preferencia de alojamiento ajusta el presupuesto estimado.",
+    "accommodationStay": {
+      "budget": "Estancia económica",
+      "midRange": "Estancia de gama media",
+      "luxury": "Estancia de lujo"
+    },
     "requiredMissing": "Completa los campos obligatorios resaltados antes de enviar."
   },
   "inquiryForm": {

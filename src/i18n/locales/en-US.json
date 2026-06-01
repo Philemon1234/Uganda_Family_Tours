@@ -275,7 +275,13 @@
     "success": "Booking request sent successfully. We will contact you soon.",
     "error": "The booking request could not be sent right now.",
     "budgetTotal": "Estimated group budget",
-    "budgetCalculation": "{{perPerson}} per person x {{travelers}} travelers",
+    "budgetCalculation": "{{perPerson}} per person x {{travelers}} travelers · {{stay}}",
+    "accommodationNote": "Accommodation preference adjusts the estimated budget.",
+    "accommodationStay": {
+      "budget": "Budget stay",
+      "midRange": "Mid-range stay",
+      "luxury": "Luxury stay"
+    },
     "traveler": "traveler",
     "travelers": "travelers",
     "requiredMissing": "Please fill in the highlighted required fields before sending.",

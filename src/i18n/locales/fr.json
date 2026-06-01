@@ -164,7 +164,13 @@
     "success": "Demande envoyée avec succès. Nous vous contacterons bientôt.",
     "error": "La demande n’a pas pu être envoyée maintenant.",
     "budgetTotal": "Budget estimé du groupe",
-    "budgetCalculation": "{{perPerson}} par personne x {{travelers}} voyageurs",
+    "budgetCalculation": "{{perPerson}} par personne x {{travelers}} voyageurs · {{stay}}",
+    "accommodationNote": "La preference d'hebergement ajuste le budget estime.",
+    "accommodationStay": {
+      "budget": "Sejour budget",
+      "midRange": "Sejour milieu de gamme",
+      "luxury": "Sejour luxe"
+    },
     "requiredMissing": "Veuillez remplir les champs obligatoires indiqués avant l’envoi."
   },
   "inquiryForm": {
