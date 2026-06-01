@@ -22,12 +22,24 @@ function getSupabaseClient() {
   return supabase
 }
 
-export async function getPublishedTourPackages(): Promise<TourPackage[]> {
-  const { data, error } = await getSupabaseClient()
+type PublishedTourPackageOptions = {
+  limit?: number
+}
+
+export async function getPublishedTourPackages(
+  options: PublishedTourPackageOptions = {},
+): Promise<TourPackage[]> {
+  let query = getSupabaseClient()
     .from('tour_packages')
     .select(TOUR_PACKAGE_SELECT)
     .eq('status', 'published')
     .order('created_at', { ascending: false })
+
+  if (options.limit) {
+    query = query.limit(options.limit)
+  }
+
+  const { data, error } = await query
 
   if (error) {
     throw new Error(error.message)

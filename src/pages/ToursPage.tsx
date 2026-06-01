@@ -1,54 +1,16 @@
 import { useEffect, useState } from 'react'
 import { FiArrowRight } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
-import { allTours, type Tour } from '../data/tours'
+import type { Tour } from '../data/tours'
 import { TourCard } from '../components/TourCard'
 import { SectionHeader } from '../components/SectionHeader'
+import { SafariLoaderOverlay } from '../components/SafariTrailLoader'
 import { getPublishedTourPackages } from '../services/publicTourService'
-import type { TourPackage } from '../types/tourPackage'
+import { packageToTour } from '../utils/tourPackageMapper'
 import ctaImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
 
 type ToursPageProps = {
   onInquiry: () => void
-}
-
-const fallbackTour = allTours[0]
-
-function packageToTour(tourPackage: TourPackage, index: number): Tour {
-  const fallbackImage = fallbackTour.image
-  const heroImage = tourPackage.hero_image_url || tourPackage.main_image_url || fallbackTour.heroImage
-
-  return {
-    id: index + 1,
-    title: tourPackage.title,
-    slug: tourPackage.slug,
-    price: `From ${formatUsd(tourPackage.price_from_usd)}`,
-    priceUSD: Number(tourPackage.price_from_usd),
-    duration: `${tourPackage.duration_days} Days`,
-    destination: tourPackage.category,
-    tripLevel: fallbackTour.tripLevel,
-    bestSeason: fallbackTour.bestSeason,
-    rating: fallbackTour.rating,
-    reviewCount: fallbackTour.reviewCount,
-    shortDescription:
-      tourPackage.short_description || 'Explore this Uganda Family Tours experience.',
-    overview: tourPackage.overview,
-    image: tourPackage.main_image_url || fallbackImage,
-    heroImage,
-    galleryImages: [tourPackage.main_image_url, tourPackage.hero_image_url].filter(
-      (imageUrl): imageUrl is string => Boolean(imageUrl),
-    ),
-    highlights: [],
-    itineraryDays: [],
-  }
-}
-
-function formatUsd(value: number) {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0,
-  }).format(value)
 }
 
 export function ToursPage({ onInquiry }: ToursPageProps) {
@@ -91,6 +53,10 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
     }
   }, [])
 
+  if (isLoading) {
+    return <SafariLoaderOverlay />
+  }
+
   return (
     <main className="bg-white pt-28">
       <section className="section-padding pt-10">
@@ -100,16 +66,7 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
             description={t('toursPage.description')}
           />
 
-          {isLoading ? (
-            <div className="mt-12 grid items-stretch gap-x-7 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
-              {[0, 1, 2, 3, 4, 5].map((item) => (
-                <div
-                  key={item}
-                  className="h-[520px] animate-pulse rounded-[1.75rem] border border-[#eadfd3] bg-slate-100"
-                />
-              ))}
-            </div>
-          ) : error ? (
+          {error ? (
             <div className="mx-auto mt-12 max-w-3xl rounded-[1.75rem] border border-red-200 bg-red-50 px-6 py-8 text-center text-red-700">
               <p className="text-lg font-bold">Unable to load tours</p>
               <p className="mt-2 text-sm leading-6">{error}</p>

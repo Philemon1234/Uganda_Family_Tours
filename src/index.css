@@ -166,6 +166,33 @@ img {
   will-change: transform;
 }
 
+.safari-loader-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 999999 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  background: #fffdf9 !important;
+  animation: loader-overlay-enter 180ms ease-out both;
+}
+
+@supports (height: 100dvh) {
+  .safari-loader-overlay {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+  }
+}
+
+.compass-needle {
+  animation: compass-needle-turn 1.8s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
 .tour-booking-sticky {
   align-self: start;
 }
@@ -261,6 +288,31 @@ img {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes loader-overlay-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes compass-needle-turn {
+  0%,
+  100% {
+    transform: rotate(-28deg);
+  }
+
+  35% {
+    transform: rotate(38deg);
+  }
+
+  68% {
+    transform: rotate(-16deg);
   }
 }
 
@@ -490,5 +542,9 @@ img {
   .motion-reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .compass-needle {
+    animation: none;
   }
 }

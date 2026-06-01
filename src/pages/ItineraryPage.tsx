@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FaCheck, FaShieldHeart } from 'react-icons/fa6'
 import { FiArrowRight, FiCheckCircle, FiChevronRight, FiPhone, FiX } from 'react-icons/fi'
+import { SafariLoaderOverlay } from '../components/SafariTrailLoader'
 import { tours, type ItineraryDay, type Tour } from '../data/tours'
 import { useLocale } from '../context/LocaleContext'
 import { getTourPackageDetailsBySlug } from '../services/publicTourService'
@@ -126,23 +127,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
   }, [details?.package.slug])
 
   if (isLoading) {
-    return (
-      <main className="bg-white pt-28">
-        <section className="section-padding">
-          <div className="container-custom">
-            <div className="h-[500px] animate-pulse rounded-[2rem] bg-slate-100" />
-            <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_400px]">
-              <div className="space-y-5">
-                {[0, 1, 2].map((item) => (
-                  <div key={item} className="h-32 animate-pulse rounded-2xl bg-slate-100" />
-                ))}
-              </div>
-              <div className="h-72 animate-pulse rounded-2xl bg-slate-100" />
-            </div>
-          </div>
-        </section>
-      </main>
-    )
+    return <SafariLoaderOverlay />
   }
 
   if (error) {
