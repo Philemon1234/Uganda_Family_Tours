@@ -6,10 +6,10 @@ import gorilla from '../assets/gorilla-7708328_1920.jpg'
 import lions from '../assets/cover_1669-Tree-Climbing-Lions.jpg'
 
 export const galleryImages = [
-  { src: lake, alt: 'Lake Bunyonyi highland view' },
-  { src: safariTruck, alt: 'Safari vehicle in Uganda' },
-  { src: culture, alt: 'Ugandan cultural gathering' },
-  { src: forest, alt: 'Guided rainforest walk' },
-  { src: gorilla, alt: 'Mountain gorilla in Bwindi forest' },
-  { src: lions, alt: 'Tree climbing lions' },
+  { src: lake, altKey: 'gallery.images.lake' },
+  { src: safariTruck, altKey: 'gallery.images.safariTruck' },
+  { src: culture, altKey: 'gallery.images.culture' },
+  { src: forest, altKey: 'gallery.images.forest' },
+  { src: gorilla, altKey: 'gallery.images.gorilla' },
+  { src: lions, altKey: 'gallery.images.lions' },
 ]

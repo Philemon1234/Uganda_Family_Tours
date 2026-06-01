@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FiHome, FiMenu, FiMessageSquare, FiUser } from 'react-icons/fi'
@@ -8,17 +8,16 @@ import { MobileSidebarDrawer } from './MobileSidebarDrawer'
 
 type NavItem = {
   id: string
-  label: string
   href: string | null
   icon: IconType
 }
 
 const navItems: NavItem[] = [
-  { id: 'menu', label: 'Menu', href: null, icon: FiMenu },
-  { id: 'about', label: 'About', href: '/about', icon: FiUser },
-  { id: 'home', label: 'Home', href: '/', icon: FiHome },
-  { id: 'services', label: 'Packages', href: '/tours', icon: LuHand },
-  { id: 'contact', label: 'Contact', href: '#contact', icon: FiMessageSquare },
+  { id: 'menu', href: null, icon: FiMenu },
+  { id: 'about', href: '/about', icon: FiUser },
+  { id: 'home', href: '/', icon: FiHome },
+  { id: 'services', href: '/tours', icon: LuHand },
+  { id: 'contact', href: '#contact', icon: FiMessageSquare },
 ]
 
 export function MobileBottomNav() {
@@ -35,6 +34,10 @@ export function MobileBottomNav() {
     return 'home'
   }, [location.hash, location.pathname])
 
+  useEffect(() => {
+    setSelectedItem(null)
+  }, [location.hash, location.pathname])
+
   const activeItem = selectedItem ?? routeActiveItem
   const activeIndex = Math.max(navItems.findIndex((item) => item.id === activeItem), 0)
   const activeNavItem = useMemo(() => navItems[activeIndex] ?? navItems[2], [activeIndex])
@@ -45,7 +48,7 @@ export function MobileBottomNav() {
     if (item.id === 'home') return t('navbar.home')
     if (item.id === 'services') return t('navbar.tours')
     if (item.id === 'contact') return t('footer.contact')
-    return item.label
+    return t('common.menu')
   }
 
   const handleMenuClick = () => {
@@ -64,7 +67,7 @@ export function MobileBottomNav() {
       <div className="mobile-bottom-nav lg:hidden">
         <nav
           className="relative h-[calc(88px+env(safe-area-inset-bottom))] rounded-t-[24px] bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-10px_30px_rgba(0,0,0,0.10)]"
-          aria-label="Mobile bottom navigation"
+          aria-label={t('mobileNav.ariaLabel')}
         >
           <div
             className="absolute -top-[2.15rem] left-[calc(10%_-_37px)] z-0 h-[74px] w-[74px] rounded-full bg-white transition-transform duration-300 ease-out will-change-transform"
@@ -95,7 +98,7 @@ export function MobileBottomNav() {
                   <button
                     key={item.id}
                     type="button"
-                    aria-label="Open menu"
+                    aria-label={t('mobileNav.openMenu')}
                     className={buttonClass}
                     onClick={handleMenuClick}
                   >

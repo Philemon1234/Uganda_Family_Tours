@@ -131,7 +131,7 @@ export function ReviewCarousel() {
           <button
             key={dotIndex}
             type="button"
-            aria-label={`Go to review slide ${dotIndex + 1}`}
+            aria-label={t('reviews.goToSlide', { number: dotIndex + 1 })}
             className={`h-2.5 rounded-full transition-all duration-300 ${dotIndex === activeIndex ? 'w-7 bg-primary' : 'w-2.5 bg-gray-300'}`}
             onClick={() => goTo(dotIndex)}
           />

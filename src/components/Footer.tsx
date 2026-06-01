@@ -9,9 +9,9 @@ const phoneHref = 'tel:+256703543027'
 const whatsappHref = 'https://wa.me/256703543027'
 const emailHref = 'mailto:safaris@ugandafamilytours.com'
 const socials = [
-  { label: 'Facebook', href: 'https://www.facebook.com/ugandafamilytours', icon: FaFacebookF },
-  { label: 'YouTube', href: 'https://www.youtube.com/@ugandafamilytours/shorts', icon: FaYoutube },
-  { label: 'WhatsApp', href: whatsappHref, icon: FaWhatsapp },
+  { labelKey: 'social.facebook', href: 'https://www.facebook.com/ugandafamilytours', icon: FaFacebookF },
+  { labelKey: 'social.youtube', href: 'https://www.youtube.com/@ugandafamilytours/shorts', icon: FaYoutube },
+  { labelKey: 'social.whatsapp', href: whatsappHref, icon: FaWhatsapp },
 ]
 
 export function Footer() {
@@ -53,8 +53,8 @@ export function Footer() {
           </div>
           <h3 className="footer-title mt-5 md:mt-8">{t('footer.social')}</h3>
           <div className="mt-3 flex gap-3 md:mt-4">
-            {socials.map(({ label, href, icon: Icon }) => (
-              <a key={label} className="grid h-9 w-9 place-items-center rounded-full border border-white/20 transition hover:border-primary hover:text-primary" href={href} target="_blank" rel="noreferrer" aria-label={label}>
+            {socials.map(({ labelKey, href, icon: Icon }) => (
+              <a key={labelKey} className="grid h-9 w-9 place-items-center rounded-full border border-white/20 transition hover:border-primary hover:text-primary" href={href} target="_blank" rel="noreferrer" aria-label={t(labelKey)}>
                 <Icon />
               </a>
             ))}

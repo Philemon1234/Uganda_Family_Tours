@@ -1,31 +1,34 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import en from './locales/en.json'
+import enUS from './locales/en-US.json'
 import fr from './locales/fr.json'
 import es from './locales/es.json'
-import it from './locales/it.json'
 import de from './locales/de.json'
-import sw from './locales/sw.json'
-import rw from './locales/rw.json'
-import lg from './locales/lg.json'
+import ru from './locales/ru.json'
+import nl from './locales/nl.json'
+import ar from './locales/ar.json'
 
-const supportedLanguages = ['en', 'fr', 'es', 'it', 'de', 'sw', 'rw', 'lg']
-const savedLanguage = localStorage.getItem('uft-language') || 'en'
-const initialLanguage = supportedLanguages.includes(savedLanguage) ? savedLanguage : 'en'
+const supportedLanguages = ['en-US', 'en-GB', 'es', 'fr', 'de', 'ru', 'nl', 'ar']
+const legacyLanguageMap: Record<string, string> = {
+  en: 'en-US',
+}
+const savedLanguage = localStorage.getItem('uft-language') || 'en-US'
+const normalizedSavedLanguage = legacyLanguageMap[savedLanguage] ?? savedLanguage
+const initialLanguage = supportedLanguages.includes(normalizedSavedLanguage) ? normalizedSavedLanguage : 'en-US'
 
 void i18n.use(initReactI18next).init({
   resources: {
-    en: { translation: en },
+    'en-US': { translation: enUS },
+    'en-GB': { translation: enUS },
     fr: { translation: fr },
     es: { translation: es },
-    it: { translation: it },
     de: { translation: de },
-    sw: { translation: sw },
-    rw: { translation: rw },
-    lg: { translation: lg },
+    ru: { translation: ru },
+    nl: { translation: nl },
+    ar: { translation: ar },
   },
   lng: initialLanguage,
-  fallbackLng: 'en',
+  fallbackLng: 'en-US',
   interpolation: {
     escapeValue: false,
   },

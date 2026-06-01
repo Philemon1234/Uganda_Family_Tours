@@ -1,7 +1,8 @@
-export type CurrencyCode = 'USD' | 'EUR' | 'TZS' | 'RWF' | 'UGX' | 'CNY' | 'RUB' | 'AED' | 'INR'
+export type CurrencyCode = 'USD' | 'GBP' | 'EUR' | 'TZS' | 'RWF' | 'UGX' | 'CNY' | 'RUB' | 'AED' | 'INR'
 
 export const exchangeRatesFromUSD: Record<CurrencyCode, number> = {
   USD: 1,
+  GBP: 0.79,
   EUR: 0.92,
   TZS: 2600,
   RWF: 1300,
@@ -14,6 +15,7 @@ export const exchangeRatesFromUSD: Record<CurrencyCode, number> = {
 
 export const currencyLocales: Record<CurrencyCode, string> = {
   USD: 'en-US',
+  GBP: 'en-GB',
   EUR: 'fr-FR',
   TZS: 'sw-TZ',
   RWF: 'rw-RW',

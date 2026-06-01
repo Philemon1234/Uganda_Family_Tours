@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { galleryImages } from '../data/gallery'
 
 export function GalleryCarousel() {
+  const { t } = useTranslation()
   const slideCount = galleryImages.length
   const slides = useMemo(() => [...galleryImages, ...galleryImages, ...galleryImages], [])
   const [index, setIndex] = useState(slideCount)
@@ -119,16 +121,16 @@ export function GalleryCarousel() {
           onTransitionEnd={handleTransitionEnd}
         >
           {slides.map((image, slideIndex) => (
-            <div key={`${image.alt}-${slideIndex}`} className="shrink-0 basis-full bg-transparent px-0 md:basis-1/2 md:px-2.5 lg:basis-1/3">
-              <img className="h-80 w-full rounded-[1.75rem] object-cover pointer-events-none" src={image.src} alt={image.alt} draggable="false" />
+            <div key={`${image.altKey}-${slideIndex}`} className="shrink-0 basis-full bg-transparent px-0 md:basis-1/2 md:px-2.5 lg:basis-1/3">
+              <img className="h-80 w-full rounded-[1.75rem] object-cover pointer-events-none" src={image.src} alt={t(image.altKey)} draggable="false" />
             </div>
           ))}
         </div>
       </div>
-      <button className="carousel-button left-3" type="button" aria-label="Previous gallery image" onClick={() => move(-1)}>
+      <button className="carousel-button left-3" type="button" aria-label={t('gallery.previous')} onClick={() => move(-1)}>
         <FiArrowLeft />
       </button>
-      <button className="carousel-button right-3" type="button" aria-label="Next gallery image" onClick={() => move(1)}>
+      <button className="carousel-button right-3" type="button" aria-label={t('gallery.next')} onClick={() => move(1)}>
         <FiArrowRight />
       </button>
       <div className="mt-6 flex justify-center gap-2">
@@ -136,7 +138,7 @@ export function GalleryCarousel() {
           <button
             key={dotIndex}
             type="button"
-            aria-label={`Go to gallery slide ${dotIndex + 1}`}
+            aria-label={t('gallery.goToSlide', { number: dotIndex + 1 })}
             className={`h-2.5 rounded-full transition-all duration-300 ${dotIndex === activeIndex ? 'w-7 bg-primary' : 'w-2.5 bg-gray-300'}`}
             onClick={() => goTo(dotIndex)}
           />

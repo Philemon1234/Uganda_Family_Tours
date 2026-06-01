@@ -73,7 +73,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
         }`}
       >
         <div className="flex items-center justify-between gap-4">
-          <img className="h-10 w-auto object-contain" src={logo} alt="Uganda Family Tours" />
+          <img className="h-10 w-auto object-contain" src={logo} alt={t('common.logoAlt')} />
           <button
             type="button"
             aria-label={t('common.close')}
@@ -84,7 +84,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
           </button>
         </div>
 
-        <nav className="mt-8 space-y-4" aria-label={t('navbar.language')}>
+        <nav className="mt-8 space-y-4" aria-label={t('mobileNav.drawerAriaLabel')}>
           {drawerItems.map((item) => {
             const Icon = item.icon
             const active = isActive(item.id)
@@ -126,7 +126,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
           <div className="mt-4 flex gap-4">
             <a
               href="https://www.facebook.com/ugandafamilytours"
-              aria-label="Facebook"
+              aria-label={t('social.facebook')}
               target="_blank"
               rel="noreferrer"
               className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-ink transition hover:bg-[#263238] hover:text-white"
@@ -135,7 +135,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
             </a>
             <a
               href="https://www.youtube.com/@ugandafamilytours/shorts"
-              aria-label="YouTube"
+              aria-label={t('social.youtube')}
               target="_blank"
               rel="noreferrer"
               className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-ink transition hover:bg-[#263238] hover:text-white"
@@ -144,7 +144,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
             </a>
             <a
               href="https://wa.me/256703543027"
-              aria-label="WhatsApp"
+              aria-label={t('social.whatsapp')}
               target="_blank"
               rel="noreferrer"
               className="grid h-12 w-12 place-items-center rounded-full bg-primary text-lg text-ink transition hover:bg-[#263238] hover:text-white"

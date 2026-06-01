@@ -46,7 +46,7 @@ export function LanguageSwitcher() {
               onClick={() => chooseLanguage(item.code)}
             >
               <span className="text-xl leading-none">{item.flag}</span>
-              <span className="min-w-0 flex-1 truncate">{item.nativeName}</span>
+              <span className="min-w-0 flex-1 truncate">{t(item.labelKey, { defaultValue: item.nativeName })}</span>
               {item.code === language.code && <FiCheck className="text-lg text-green-600" />}
             </button>
           ))}

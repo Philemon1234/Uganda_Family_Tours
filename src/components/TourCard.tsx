@@ -34,12 +34,12 @@ export function TourCard({ tour, revealDelay = 0 }: TourCardProps) {
         <div className="relative z-10 -mt-8 flex min-h-60 min-w-0 flex-1 flex-col rounded-t-[1.75rem] rounded-b-[1.75rem] bg-white px-7 pb-7 pt-9">
           <h3 className="clamp-2 text-safe text-2xl font-medium leading-tight text-ink transition group-hover:text-primary">{title}</h3>
           <p className="tour-description mt-4 flex-1 text-lg leading-8 text-muted">
-            {shortDescription || 'Explore this Uganda Family Tours experience.'}
+            {shortDescription || t('tourCard.fallbackDescription')}
           </p>
           <div className="mt-6 flex min-w-0 items-center justify-between gap-4">
             <span className="inline-flex min-w-0 items-center justify-center gap-2 rounded-full bg-[#263238] px-4 py-2.5 text-xs font-bold uppercase tracking-[0.08em] text-white transition group-hover:bg-[#111827]">
               <span className="truncate">
-              {t('tourCard.getPackage', { defaultValue: 'Get Package' })}
+              {t('tourCard.getPackage')}
               </span>
               <FiArrowRight className="text-primary transition group-hover:translate-x-0.5" />
             </span>

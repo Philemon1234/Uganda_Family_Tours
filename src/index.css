@@ -482,6 +482,96 @@ img {
   -webkit-line-clamp: 3;
 }
 
+.tour-range-track {
+  position: relative;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: #e5e7eb;
+  user-select: none;
+}
+
+.tour-range-input {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 1.9rem;
+  z-index: 10;
+  height: 1.45rem;
+  width: 100%;
+  appearance: none;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tour-range-input:active {
+  cursor: grabbing;
+}
+
+.tour-range-input::-webkit-slider-thumb {
+  pointer-events: auto;
+  height: 0.95rem;
+  width: 0.95rem;
+  appearance: none;
+  border: 0.18rem solid #ffffff;
+  border-radius: 999px;
+  background: #ff6f1a;
+  cursor: grab;
+  box-shadow: 0 0 0 1px rgb(255 164 96 / 0.65), 0 8px 18px rgb(17 24 39 / 0.14);
+}
+
+.tour-range-input:active::-webkit-slider-thumb {
+  cursor: grabbing;
+}
+
+.tour-range-input::-moz-range-thumb {
+  pointer-events: auto;
+  height: 0.95rem;
+  width: 0.95rem;
+  border: 0.18rem solid #ffffff;
+  border-radius: 999px;
+  background: #ff6f1a;
+  cursor: grab;
+  box-shadow: 0 0 0 1px rgb(255 164 96 / 0.65), 0 8px 18px rgb(17 24 39 / 0.14);
+}
+
+.tour-range-input:active::-moz-range-thumb {
+  cursor: grabbing;
+}
+
+.tour-range-input::-webkit-slider-runnable-track {
+  height: 0.25rem;
+  appearance: none;
+  background: transparent;
+  cursor: grab;
+}
+
+.tour-range-input::-moz-range-track {
+  height: 0.25rem;
+  background: transparent;
+  cursor: grab;
+}
+
+.animate-filter-panel {
+  animation: filter-panel-enter 200ms ease-out both;
+}
+
+@keyframes filter-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.35rem) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .carousel-button {
   position: absolute;
   top: 50%;

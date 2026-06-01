@@ -1,11 +1,14 @@
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { useTranslation } from 'react-i18next'
 
 type SafariTrailLoaderProps = {
   className?: string
 }
 
 export function SafariLoaderOverlay({ className = '' }: SafariTrailLoaderProps) {
+  const { t } = useTranslation()
+
   useEffect(() => {
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
@@ -19,7 +22,7 @@ export function SafariLoaderOverlay({ className = '' }: SafariTrailLoaderProps) 
     <div
       className={`safari-loader-overlay fixed inset-0 z-[9999] grid h-screen w-screen place-items-center overflow-hidden bg-[#fffdf9] px-0 font-sans ${className}`}
       role="status"
-      aria-label="Loading"
+      aria-label={t('common.loading')}
     >
       <svg
         className="h-28 w-28 overflow-visible sm:h-32 sm:w-32"
@@ -42,10 +45,10 @@ export function SafariLoaderOverlay({ className = '' }: SafariTrailLoaderProps) 
           strokeLinecap="round"
           strokeWidth="1.4"
         />
-        <text x="60" y="10.5" fill="#263238" fontSize="8" fontWeight="700" textAnchor="middle">N</text>
-        <text x="109" y="63" fill="#263238" fontSize="8" fontWeight="700" textAnchor="middle">E</text>
-        <text x="60" y="116" fill="#263238" fontSize="8" fontWeight="700" textAnchor="middle">S</text>
-        <text x="11" y="63" fill="#263238" fontSize="8" fontWeight="700" textAnchor="middle">W</text>
+        <text x="60" y="10.5" fill="#263238" fontSize="8" fontWeight="700" textAnchor="middle">{t('loader.compass.north')}</text>
+        <text x="109" y="63" fill="#263238" fontSize="8" fontWeight="700" textAnchor="middle">{t('loader.compass.east')}</text>
+        <text x="60" y="116" fill="#263238" fontSize="8" fontWeight="700" textAnchor="middle">{t('loader.compass.south')}</text>
+        <text x="11" y="63" fill="#263238" fontSize="8" fontWeight="700" textAnchor="middle">{t('loader.compass.west')}</text>
         <path
           d="M60 22c5.8.1 11.4 1.5 16.4 4M84.4 32.5A38 38 0 0 1 98 60"
           stroke="#FFA460"

@@ -4,11 +4,23 @@
     "tours": "Tours",
     "about": "About Us",
     "talkToSpecialist": "Talk to a Travel Specialist",
-    "language": "Language"
+    "language": "Language",
+    "homeAria": "Uganda Family Tours home"
+  },
+  "languages": {
+    "enGB": "English UK",
+    "enUS": "English USA",
+    "es": "Spanish",
+    "fr": "French",
+    "de": "German",
+    "ru": "Russian",
+    "nl": "Dutch",
+    "ar": "Arabic"
   },
   "common": {
     "from": "From",
     "days": "Days",
+    "loading": "Loading",
     "sending": "Sending...",
     "required": "This field is required.",
     "validEmail": "Enter a valid email address.",
@@ -16,52 +28,182 @@
     "no": "No",
     "close": "Close",
     "cancel": "Cancel",
-    "menu": "Menu"
+    "menu": "Menu",
+    "logoAlt": "Uganda Family Tours",
+    "increase": "Increase {{label}}",
+    "decrease": "Decrease {{label}}"
+  },
+  "social": {
+    "facebook": "Facebook",
+    "youtube": "YouTube",
+    "whatsapp": "WhatsApp"
+  },
+  "mobileNav": {
+    "ariaLabel": "Mobile bottom navigation",
+    "openMenu": "Open menu",
+    "drawerAriaLabel": "Mobile navigation"
+  },
+  "loader": {
+    "compass": {
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W"
+    }
   },
   "home": {
     "hero": {
-      "title": "Your Adventure Awaits in the Pearl of Africa",
-      "subtitle": "Discover unforgettable safari experiences, breathtaking landscapes, and vibrant cultures with Uganda Family Tours & Safari Co.",
-      "primaryCta": "Explore Our Tours"
+      "kicker": "The Pearl of Africa",
+      "title": "A Safari Journey Made Personal",
+      "subtitle": "Travel through Uganda's forests, savannahs, lakes, and cultures with a local team that shapes every detail around you.",
+      "primaryCta": "Explore Our Tours",
+      "badgeAlt": {
+        "service": "Uganda Family Tours service icon",
+        "planning": "Uganda Family Tours planning icon",
+        "support": "Uganda Family Tours support icon",
+        "brand": "Uganda Family Tours brand mark"
+      }
     },
     "story": {
       "label": "Explore Africa with",
       "title": "Uganda Family Tours & Safari Co.",
       "description": "From misty mountains and mighty rivers to rare wildlife and warm hospitality, experience Uganda like never before.",
-      "p1": "<0>Uganda Family Tours & Safari Co.</0> is a destination management company established in Uganda, specializing in authentic, smooth, and memorable journeys across East Africa. From misty mountains and dense rainforests to serene lakes, mighty rivers, and warm local hospitality, we design travel experiences that feel personal, polished, and deeply connected to place.",
-      "p2": "<0>Uganda Family Tours & Safari Co.</0> offers carefully tailored safaris for families, couples, groups, and private explorers seeking something more meaningful than an ordinary holiday. Our journeys bring together wildlife, culture, conservation, and comfort, creating an elegant way to encounter Uganda in its most beautiful and unforgettable form."
+      "p1": "Uganda is not just a destination. It is a feeling - the sound of the forest, the silence of the savannah, the warmth of its people, and the thrill of seeing wildlife in its natural home.",
+      "p2": "<0>Uganda Family Tours & Safari Co.</0> creates authentic, smooth, and memorable journeys across Uganda and East Africa for travelers who want comfort, care, and a deeper connection to place."
+    },
+    "signature": {
+      "label": "Signature Experiences",
+      "title": "Signature Experiences",
+      "description": "From gorilla forests to open savannahs, every journey is shaped around what travelers want to feel, see, and remember.",
+      "videoAria": "Signature safari experiences video",
+      "videoFallback": "Your browser does not support embedded video.",
+      "items": [
+        {
+          "title": "Gorilla Trekking",
+          "text": "Quiet forest walks toward one of Africa's most moving wildlife encounters."
+        },
+        {
+          "title": "Wildlife Safaris",
+          "text": "Game drives, boat cruises, and wild landscapes guided by local knowledge."
+        },
+        {
+          "title": "Chimpanzee Tracking",
+          "text": "Follow forest calls through Kibale and other primate-rich habitats."
+        },
+        {
+          "title": "Cultural Experiences",
+          "text": "Meet communities, makers, storytellers, and traditions with respect."
+        },
+        {
+          "title": "Lake & Nature Escapes",
+          "text": "Slow down beside crater lakes, highlands, rivers, and peaceful retreats."
+        },
+        {
+          "title": "Family Adventures",
+          "text": "Easy-paced, thoughtful safaris planned for every generation."
+        }
+      ]
     },
     "featured": {
-      "label": "Explore Uganda",
-      "title": "Featured Tours",
-      "viewAll": "View All Tours"
+      "label": "Curated for you",
+      "title": "Handpicked Safari Experiences",
+      "description": "A focused selection of journeys from our published safari collection, kept concise so the homepage feels like an invitation rather than a catalogue.",
+      "viewAll": "View All Tours",
+      "errorTitle": "Unable to load featured tours",
+      "errorMessage": "Unable to load featured tours right now.",
+      "emptyTitle": "No featured tours available",
+      "emptyDescription": "Please check back soon for new safari experiences."
+    },
+    "journey": {
+      "label": "Designed with care",
+      "title": "Around Your Journey",
+      "description": "Every itinerary is shaped around your pace, interests, comfort, and travel style - whether you are visiting Uganda for gorillas, wildlife, culture, or a once-in-a-lifetime family adventure.",
+      "cta": "Talk to a Travel Specialist",
+      "imageAlt": "Safari journey through Uganda",
+      "thumbnailAlt": "Uganda Family Tours safari moment"
     },
     "why": {
       "label": "Your adventure. Our expertise.",
       "title": "Why Travel With Uganda Family Tours?",
-      "description": "We craft unforgettable journeys that immerse you in the rich cultural tapestry, stunning landscapes, and diverse wildlife of Uganda.",
+      "description": "Quiet planning, trusted local guidance, responsible travel values, and steady support from the first idea to the final day of your safari.",
       "tailorTitle": "Tailor-Made Itineraries",
-      "tailorText": "Custom itineraries designed just for you.",
+      "tailorText": "Journeys shaped around your pace, interests, and comfort.",
       "localTitle": "Trusted Local Expertise",
-      "localText": "Passionate local guides and insider knowledge.",
+      "localText": "Local guides, thoughtful routing, and insider knowledge.",
       "responsibleTitle": "Responsible Travel",
-      "responsibleText": "Protecting nature and empowering communities.",
+      "responsibleText": "Safari planning that respects wildlife, nature, and communities.",
       "peaceTitle": "Peace of Mind",
-      "peaceText": "Secure booking and 24/7 travel support."
+      "peaceText": "Secure booking, clear communication, and travel support."
     },
-    "galleryTitle": "Moments from Our Journeys",
-    "reviewsTitle": "What Our Travelers Say"
+    "galleryLabel": "Seen along the way",
+    "galleryTitle": "Moments From Our Journeys",
+    "galleryDescription": "A glimpse of the landscapes, wildlife, lodges, and human moments that make each itinerary feel alive.",
+    "reviewsTitle": "What Our Travelers Remember",
+    "reviewsDescription": "Simple stories from guests who trusted our local team with their time in Uganda.",
+    "finalCta": {
+      "label": "Begin the conversation",
+      "title": "Ready to Plan Your Uganda Safari?",
+      "description": "Tell us what kind of journey you are dreaming of, and our local team will help shape it into a personal itinerary.",
+      "button": "Talk to a Travel Specialist"
+    }
   },
   "toursPage": {
     "title": "Our Tours",
     "description": "Handpicked safari experiences designed for unforgettable journeys across Uganda and East Africa.",
+    "errorTitle": "Unable to load tours",
+    "errorMessage": "Unable to load tours right now.",
+    "emptyTitle": "No tours available",
+    "emptyDescription": "Please check back soon for new safari experiences.",
     "ctaLabel": "Explore. Discover. Adventure. Travel",
     "ctaTitle": "Your Journey Awaits - Let's Plan Your Dream Trip",
     "ctaButton": "Contact Our Team"
   },
   "tourCard": {
     "duration": "Duration",
-    "getPackage": "Get Package"
+    "getPackage": "Get Package",
+    "fallbackDescription": "Explore this Uganda Family Tours experience."
+  },
+  "gallery": {
+    "previous": "Previous gallery image",
+    "next": "Next gallery image",
+    "goToSlide": "Go to gallery slide {{number}}",
+    "images": {
+      "lake": "Lake Bunyonyi highland view",
+      "safariTruck": "Safari vehicle in Uganda",
+      "culture": "Ugandan cultural gathering",
+      "forest": "Guided rainforest walk",
+      "gorilla": "Mountain gorilla in Bwindi forest",
+      "lions": "Tree climbing lions"
+    }
+  },
+  "reviews": {
+    "goToSlide": "Go to review slide {{number}}",
+    "items": [
+      {
+        "country": "Australia",
+        "text": "An incredible experience from start to finish! The guides were knowledgeable, friendly, and made our trip unforgettable."
+      },
+      {
+        "country": "United Kingdom",
+        "text": "Everything was perfectly organized. Gorilla tracking was a once-in-a-lifetime experience. Highly recommend Uganda Family Tours!"
+      },
+      {
+        "country": "Canada",
+        "text": "Amazing adventure with stunning landscapes and incredible wildlife. Can't wait to return to Uganda!"
+      },
+      {
+        "country": "United States",
+        "text": "Our family felt cared for every step of the way. The itinerary was balanced, thoughtful, and full of memorable moments."
+      },
+      {
+        "country": "Kenya",
+        "text": "Beautifully organized safari with warm guides, comfortable lodges, and incredible wildlife sightings throughout the journey."
+      },
+      {
+        "country": "Spain",
+        "text": "The gorilla trekking experience was emotional and unforgettable. Uganda Family Tours made everything smooth and personal."
+      }
+    ]
   },
   "tourDetails": {
     "breadcrumbHome": "Home",
@@ -81,13 +223,29 @@
     "bookThisTour": "Book This Tour",
     "needHelp": "Need assistance with your booking?",
     "activities": "Activities",
+    "accommodation": "Accommodation",
     "bucketList": "Bucket list",
-    "day": "Day"
+    "day": "Day",
+    "loadDetailsError": "Unable to load tour package details.",
+    "loadErrorTitle": "Unable to load tour package",
+    "backToTours": "Back to tours",
+    "notFoundTitle": "Tour package not found.",
+    "notFoundDescription": "This package may no longer be available.",
+    "sectionsAria": "Tour sections",
+    "openGalleryImage": "Open {{title}} gallery image {{number}}",
+    "galleryImageAlt": "{{title}} gallery {{number}}",
+    "closeGalleryImage": "Close gallery image",
+    "enlargedGalleryAlt": "{{title}} enlarged gallery",
+    "dayImageTitle": "{{title}} Day {{number}}",
+    "dayImagesAria": "{{title}} images",
+    "dayImageAlt": "{{title}} image {{number}}"
   },
   "bookingForm": {
     "title": "Book This Tour",
     "subtitle": "Tell us about your trip and we'll get back to you with availability and pricing.",
     "selectedTour": "Selected Tour",
+    "selectedTourValue": "{{tour}}",
+    "defaultTourName": "Uganda safari",
     "fullName": "Full Name",
     "email": "Email Address",
     "phone": "Phone / WhatsApp",
@@ -104,6 +262,7 @@
     "specialRequests": "Special Requests / Notes",
     "submit": "Send Booking Request",
     "selectCountry": "Select country",
+    "toggleCountryList": "Toggle country list",
     "noCountries": "No countries found.",
     "fullNamePlaceholder": "Enter your full name",
     "emailPlaceholder": "Enter your email",
@@ -117,7 +276,14 @@
     "error": "The booking request could not be sent right now.",
     "budgetTotal": "Estimated group budget",
     "budgetCalculation": "{{perPerson}} per person x {{travelers}} travelers",
-    "requiredMissing": "Please fill in the highlighted required fields before sending."
+    "traveler": "traveler",
+    "travelers": "travelers",
+    "requiredMissing": "Please fill in the highlighted required fields before sending.",
+    "accommodationOptions": {
+      "budget": "Budget",
+      "midRange": "Mid-range",
+      "luxury": "Luxury"
+    }
   },
   "inquiryForm": {
     "title": "Make an Inquiry",
@@ -155,12 +321,14 @@
     "welcome": {
       "label": "Welcome",
       "title": "Karibu!",
+      "imageAlt": "Uganda Family Tours safari guests by company vehicle",
       "p1": "Welcome to Uganda Family Tours & Safari Company - your trusted partner for safe, fun and eco-friendly family adventures in the Pearl of Africa.",
       "p2": "We are a team of locally based tour planners and guides committed to helping families explore the beauty, wildlife and culture of Uganda in a way that is exciting for kids, relaxing for parents and respectful to nature."
     },
     "origins": {
       "label": "Our Story",
       "title": "Our Origins",
+      "imageAlt": "Safari vehicle in Uganda near wildlife",
       "p1": "Our story began with a love for nature, wildlife and the incredible people of Uganda. What started as small, family-led safaris has grown into a mission to share the magic of Africa with families from around the world.",
       "p2": "Over the years we have built trusted partnerships, created safe and memorable journeys, and remained true to our values: authenticity, sustainability and exceptional care."
     },
@@ -185,18 +353,36 @@
         "text": "Reducing our environmental impact through sustainable operations and thoughtful travel planning."
       }
     },
+    "impact": {
+      "label": "Travel with purpose",
+      "title": "Travel That Gives Back",
+      "imageAlt": "Community travel experience supported by Uganda Family Tours",
+      "description": "Every journey we create is designed with care for people, wildlife and place. We work with local guides, support community-led experiences and encourage travel choices that protect Uganda's natural beauty for future generations."
+    },
+    "trust": {
+      "label": "Why choose us",
+      "title": "Why Travelers Trust Us",
+      "items": {
+        "local": "Local Uganda-based team",
+        "family": "Family-friendly safari planning",
+        "support": "Safe and reliable travel support",
+        "responsible": "Responsible and respectful travel"
+      }
+    },
     "charities": {
       "label": "Making A Difference",
-      "title": "Our Charities",
-      "visit": "Visit Trust Site",
+      "title": "Community Impact Through Travel",
+      "visit": "Ask About Responsible Travel",
       "learn": "Learn More",
       "mammadu": {
-        "title": "The Mammadu Trust in Windhoek",
-        "p1": "The Mammadu Trust was founded to care for and support orphans, children and women living in extremely vulnerable conditions. We believe responsible travel should create real opportunities for young people and families.",
-        "p2": "Upon return, your guide can arrange a donation visit or community introduction where your support is directed with transparency and care."
+        "title": "Uganda Community Travel Support",
+        "imageAlt": "Uganda community experience connected to responsible safari travel",
+        "p1": "Our safaris are designed to keep more value within Uganda by working with local guides, community hosts, family-run lodges, craft makers and small travel partners wherever possible.",
+        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences that are connected to the journey, transparent in purpose and never performative."
       },
       "orange": {
         "title": "Orange Community Project",
+        "imageAlt": "Uganda Family Tours team and community project",
         "p1": "We partner with schools and community groups to help improve classrooms, provide supplies and support practical learning opportunities for children in rural areas.",
         "p2": "Uganda Family Tours continues to support community projects initiated by local leaders, creating sustainable benefits beyond each safari."
       }

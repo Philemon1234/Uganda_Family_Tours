@@ -22,7 +22,8 @@
     "hero": {
       "title": "Tu aventura te espera en la Perla de África",
       "subtitle": "Descubre safaris inolvidables, paisajes impresionantes y culturas vibrantes con Uganda Family Tours & Safari Co.",
-      "primaryCta": "Explorar tours"
+      "primaryCta": "Explorar tours",
+      "kicker": "The Pearl of Africa"
     },
     "story": {
       "label": "Explore Africa with",
@@ -34,7 +35,8 @@
     "featured": {
       "label": "Explora Uganda",
       "title": "Tours destacados",
-      "viewAll": "Ver todos los tours"
+      "viewAll": "Ver todos los tours",
+      "description": "A focused selection of journeys from our published safari collection, kept concise so the homepage feels like an invitation rather than a catalogue."
     },
     "why": {
       "label": "Tu aventura. Nuestra experiencia.",
@@ -50,7 +52,53 @@
       "peaceText": "Reserva segura y soporte 24/7."
     },
     "galleryTitle": "Momentos de nuestros viajes",
-    "reviewsTitle": "Lo que dicen nuestros viajeros"
+    "reviewsTitle": "Lo que dicen nuestros viajeros",
+    "signature": {
+      "label": "What we shape",
+      "title": "Signature Experiences",
+      "description": "From gorilla forests to open savannahs, every journey is shaped around what travelers want to feel, see, and remember.",
+      "items": [
+        {
+          "title": "Gorilla Trekking",
+          "text": "Quiet forest walks toward one of Africa's most moving wildlife encounters."
+        },
+        {
+          "title": "Wildlife Safaris",
+          "text": "Game drives, boat cruises, and wild landscapes guided by local knowledge."
+        },
+        {
+          "title": "Chimpanzee Tracking",
+          "text": "Follow forest calls through Kibale and other primate-rich habitats."
+        },
+        {
+          "title": "Cultural Experiences",
+          "text": "Meet communities, makers, storytellers, and traditions with respect."
+        },
+        {
+          "title": "Lake & Nature Escapes",
+          "text": "Slow down beside crater lakes, highlands, rivers, and peaceful retreats."
+        },
+        {
+          "title": "Family Adventures",
+          "text": "Easy-paced, thoughtful safaris planned for every generation."
+        }
+      ]
+    },
+    "journey": {
+      "label": "Designed with care",
+      "title": "Around Your Journey",
+      "description": "Every itinerary is shaped around your pace, interests, comfort, and travel style - whether you are visiting Uganda for gorillas, wildlife, culture, or a once-in-a-lifetime family adventure.",
+      "cta": "Talk to a Travel Specialist"
+    },
+    "galleryLabel": "Seen along the way",
+    "galleryDescription": "A glimpse of the landscapes, wildlife, lodges, and human moments that make each itinerary feel alive.",
+    "reviewsDescription": "Simple stories from guests who trusted our local team with their time in Uganda.",
+    "finalCta": {
+      "label": "Begin the conversation",
+      "title": "Ready to Plan Your Uganda Safari?",
+      "description": "Tell us what kind of journey you are dreaming of, and our local team will help shape it into a personal itinerary.",
+      "button": "Talk to a Travel Specialist"
+    }
   },
   "toursPage": {
     "title": "Nuestros tours",
@@ -185,15 +233,31 @@
         "text": "Reducimos nuestro impacto ambiental con operaciones sostenibles y planificaci?n cuidadosa."
       }
     },
+    "impact": {
+      "label": "Viajar con prop?sito",
+      "title": "Viajes que devuelven",
+      "imageAlt": "Experiencia comunitaria apoyada por Uganda Family Tours",
+      "description": "Cada viaje se dise?a con cuidado por las personas, la vida silvestre y el lugar. Trabajamos con gu?as locales, apoyamos experiencias lideradas por comunidades y fomentamos decisiones de viaje que protegen la belleza natural de Uganda para futuras generaciones."
+    },
+    "trust": {
+      "label": "Por qu? elegirnos",
+      "title": "Por qu? los viajeros conf?an en nosotros",
+      "items": {
+        "local": "Equipo local basado en Uganda",
+        "family": "Planificaci?n de safaris para familias",
+        "support": "Apoyo de viaje seguro y confiable",
+        "responsible": "Viaje responsable y respetuoso"
+      }
+    },
     "charities": {
       "label": "Marcando la diferencia",
-      "title": "Nuestras obras solidarias",
-      "visit": "Visitar sitio",
+      "title": "Impacto comunitario a trav?s del viaje",
+      "visit": "Preguntar sobre viaje responsable",
       "learn": "Saber m?s",
       "mammadu": {
-        "title": "The Mammadu Trust en Windhoek",
-        "p1": "The Mammadu Trust apoya a hu?rfanos, ni?os y mujeres en condiciones vulnerables. Creemos que viajar responsablemente debe crear oportunidades reales.",
-        "p2": "Al volver, tu gu?a puede organizar una visita de donaci?n o una presentaci?n comunitaria con transparencia y cuidado."
+        "title": "Apoyo comunitario en Uganda",
+        "p1": "Nuestros safaris est?n dise?ados para mantener m?s valor dentro de Uganda trabajando con gu?as locales, anfitriones comunitarios, alojamientos familiares, artesanos y peque?os socios de viaje.",
+        "p2": "Cuando los viajeros desean contribuir, nuestro equipo puede recomendar visitas comunitarias respetuosas, oportunidades de apoyo escolar y experiencias locales conectadas con el viaje."
       },
       "orange": {
         "title": "Proyecto comunitario Orange",

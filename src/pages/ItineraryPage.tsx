@@ -55,7 +55,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
         const message = loadError instanceof Error ? loadError.message : String(loadError)
 
         if (isMounted) {
-          setError(message || 'Unable to load tour package details.')
+          setError(message || t('tourDetails.loadDetailsError'))
           setDetails(null)
         }
       } finally {
@@ -70,7 +70,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
     return () => {
       isMounted = false
     }
-  }, [slug])
+  }, [slug, t])
 
   const tabs = [
     [t('tourDetails.overview'), '#overview'],
@@ -136,9 +136,9 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
         <section className="section-padding">
           <div className="container-custom">
             <div className="mx-auto max-w-3xl rounded-[1.75rem] border border-red-200 bg-red-50 px-6 py-10 text-center text-red-700">
-              <p className="text-2xl font-black">Unable to load tour package</p>
+              <p className="text-2xl font-black">{t('tourDetails.loadErrorTitle')}</p>
               <p className="mt-3 text-sm leading-6">{error}</p>
-              <Link className="btn-primary mt-7" to="/tours">Back to tours</Link>
+              <Link className="btn-primary mt-7" to="/tours">{t('tourDetails.backToTours')}</Link>
             </div>
           </div>
         </section>
@@ -152,9 +152,9 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
         <section className="section-padding">
           <div className="container-custom">
             <div className="mx-auto max-w-3xl rounded-[1.75rem] border border-[#eadfd3] bg-[#fff8f3] px-6 py-10 text-center">
-              <p className="text-2xl font-black text-ink">Tour package not found.</p>
-              <p className="mt-3 text-muted">This package may no longer be available.</p>
-              <Link className="btn-primary mt-7" to="/tours">Back to tours</Link>
+              <p className="text-2xl font-black text-ink">{t('tourDetails.notFoundTitle')}</p>
+              <p className="mt-3 text-muted">{t('tourDetails.notFoundDescription')}</p>
+              <Link className="btn-primary mt-7" to="/tours">{t('tourDetails.backToTours')}</Link>
             </div>
           </div>
         </section>
@@ -197,7 +197,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
             className={`relative grid min-w-0 grid-cols-4 overflow-hidden bg-white transition-all duration-300 ease-out ${
               isTabStuck ? 'rounded-none border-b border-border shadow-[0_8px_24px_rgba(17,24,39,0.08)]' : 'rounded-card shadow-soft'
             }`}
-            aria-label="Tour sections"
+            aria-label={t('tourDetails.sectionsAria')}
           >
             <span
               className="absolute bottom-0 left-0 h-0.5 w-1/4 bg-primary transition-transform duration-300 ease-out"
@@ -246,12 +246,12 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                         type="button"
                         className={`group max-w-full overflow-hidden rounded-2xl ${classes[index] ?? 'h-64 md:h-full'}`}
                         onClick={() => openGalleryImage(image.image_url)}
-                        aria-label={`Open ${tourTitle} gallery image ${index + 1}`}
+                        aria-label={t('tourDetails.openGalleryImage', { title: tourTitle, number: index + 1 })}
                       >
                         <img
                           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                           src={image.image_url}
-                          alt={image.alt_text || image.caption || `${tourTitle} gallery ${index + 1}`}
+                          alt={image.alt_text || image.caption || t('tourDetails.galleryImageAlt', { title: tourTitle, number: index + 1 })}
                         />
                       </button>
                     )
@@ -334,7 +334,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
           <button
             type="button"
             className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full bg-white text-2xl text-ink transition hover:bg-primary hover:text-ink"
-            aria-label="Close gallery image"
+            aria-label={t('tourDetails.closeGalleryImage')}
             onClick={() => setActiveGalleryImage(null)}
           >
             <FiX />
@@ -342,7 +342,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
           <img
             className="max-h-[86vh] w-full max-w-6xl rounded-3xl object-contain shadow-2xl"
             src={activeGalleryImage}
-            alt={`${tourTitle} enlarged gallery`}
+            alt={t('tourDetails.enlargedGalleryAlt', { title: tourTitle })}
             onClick={(event) => event.stopPropagation()}
           />
         </div>
@@ -393,9 +393,9 @@ function ItineraryDayArticle({ day, index, tourTitle, markerRef }: ItineraryDayA
           </>
         ) : null}
         {day.accommodation_name ? (
-          <p className="text-safe mt-3 text-sm text-muted">Accommodation: {day.accommodation_name}</p>
+          <p className="text-safe mt-3 text-sm text-muted">{t('tourDetails.accommodation')}: {day.accommodation_name}</p>
         ) : null}
-        {sliderImages.length > 0 ? <DayImageSlider images={sliderImages} title={`${tourTitle} Day ${day.day_number}`} /> : null}
+        {sliderImages.length > 0 ? <DayImageSlider images={sliderImages} title={t('tourDetails.dayImageTitle', { title: tourTitle, number: day.day_number })} /> : null}
       </div>
     </article>
   )
@@ -407,6 +407,7 @@ type DayImageSliderProps = {
 }
 
 function DayImageSlider({ images, title }: DayImageSliderProps) {
+  const { t } = useTranslation()
   const [activeIndex, setActiveIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(true)
   const [visibleSlides, setVisibleSlides] = useState(2)
@@ -454,7 +455,7 @@ function DayImageSlider({ images, title }: DayImageSliderProps) {
   }
 
   return (
-    <div className="mt-5 max-w-full overflow-hidden rounded-2xl" aria-label={`${title} images`}>
+    <div className="mt-5 max-w-full overflow-hidden rounded-2xl" aria-label={t('tourDetails.dayImagesAria', { title })}>
       <div
         className={`flex ${isTransitioning ? 'transition-transform duration-700 ease-out' : ''}`}
         style={{ transform: `translateX(-${activeIndex * (100 / visibleSlides)}%)` }}
@@ -465,7 +466,7 @@ function DayImageSlider({ images, title }: DayImageSliderProps) {
             <img
               className="h-48 w-full rounded-xl object-cover shadow-sm sm:h-44 md:h-52"
               src={image}
-              alt={`${title} image ${index + 1}`}
+              alt={t('tourDetails.dayImageAlt', { title, number: index + 1 })}
               loading="lazy"
             />
           </div>
@@ -485,13 +486,13 @@ function packageDetailsToTour(details: TourPackageDetails): Tour {
     id: 1,
     title: tourPackage.title,
     slug: tourPackage.slug,
-    price: `From ${new Intl.NumberFormat('en-US', {
+    price: `${new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       maximumFractionDigits: 0,
     }).format(tourPackage.price_from_usd)}`,
     priceUSD: tourPackage.price_from_usd,
-    duration: `${tourPackage.duration_days} Days`,
+    duration: String(tourPackage.duration_days),
     destination: tourPackage.category,
     tripLevel: fallbackTour.tripLevel,
     bestSeason: fallbackTour.bestSeason,
@@ -504,11 +505,11 @@ function packageDetailsToTour(details: TourPackageDetails): Tour {
     galleryImages: galleryImages.length > 0 ? galleryImages : [cardImage, heroImage],
     highlights: details.highlights.map((highlight) => highlight.title),
     itineraryDays: details.itineraryDays.map<ItineraryDay>((day) => ({
-      day: `Day ${day.day_number}`,
+      day: String(day.day_number),
       title: day.title,
       description: day.overview,
       activities: day.activities.map((activity) => activity.title),
-      details: day.accommodation_name ? `Accommodation: ${day.accommodation_name}` : '',
+      details: day.accommodation_name ?? '',
     })),
   }
 }

@@ -63,7 +63,7 @@ function currencyForCountryCode(countryCode?: string, fallback: CurrencyCode = '
 }
 
 export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { currency } = useLocale()
   const [form, setForm] = useState<FormState>(initialForm)
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({})
@@ -71,8 +71,22 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isCountryOpen, setIsCountryOpen] = useState(false)
 
-  const selectedTour = useMemo(() => `Bucket list: ${tour?.title ?? 'Gorilla Tracking in Bwindi'}`, [tour])
-  const selectedCountry = countries.find((country) => country.name.toLowerCase() === form.country.trim().toLowerCase())
+  const selectedTour = useMemo(
+    () => t('bookingForm.selectedTourValue', {
+      tour: tour?.title ?? t('bookingForm.defaultTourName'),
+    }),
+    [t, tour],
+  )
+  const countryDisplayNames = useMemo(
+    () => new Intl.DisplayNames([i18n.language], { type: 'region' }),
+    [i18n.language],
+  )
+  const selectedCountry = countries.find((country) => {
+    const countryInput = form.country.trim().toLowerCase()
+    const translatedName = countryDisplayNames.of(country.code)?.toLowerCase()
+
+    return country.name.toLowerCase() === countryInput || translatedName === countryInput
+  })
   const selectedCurrency = currencyForCountryCode(selectedCountry?.code, currency)
   const perPersonBudgetUSD = tour?.priceUSD ?? 1970
   const travelers = form.adults + form.children
@@ -115,9 +129,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
     if (!validate()) {
       setStatus({
         type: 'error',
-        message: t('bookingForm.requiredMissing', {
-          defaultValue: 'Please fill in the highlighted required fields before sending.',
-        }),
+        message: t('bookingForm.requiredMissing'),
       })
       return
     }
@@ -196,6 +208,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
               <Field label={t('bookingForm.country')} required error={errors.country}>
                 <CountrySelect
                   value={form.country}
+                  locale={i18n.language}
                   isOpen={isCountryOpen}
                   onOpenChange={setIsCountryOpen}
                   onChange={(value) => update('country', value)}
@@ -235,10 +248,10 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
               <Field label={t('bookingForm.accommodation')} required>
                 <div className="grid grid-cols-3 gap-2">
                   {[
-                    { name: 'Budget', icon: FaHouse },
-                    { name: 'Mid-range', icon: FaUserGroup },
-                    { name: 'Luxury', icon: FaRegStar },
-                  ].map(({ name, icon: Icon }) => (
+                    { name: 'Budget', label: t('bookingForm.accommodationOptions.budget'), icon: FaHouse },
+                    { name: 'Mid-range', label: t('bookingForm.accommodationOptions.midRange'), icon: FaUserGroup },
+                    { name: 'Luxury', label: t('bookingForm.accommodationOptions.luxury'), icon: FaRegStar },
+                  ].map(({ name, label, icon: Icon }) => (
                     <button
                       key={name}
                       className={`rounded-lg border p-3 text-xs font-semibold transition hover:border-primary ${form.accommodation === name ? 'border-primary bg-primary/5 text-primary' : 'border-border text-ink'}`}
@@ -246,7 +259,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                       onClick={() => update('accommodation', name)}
                     >
                       <Icon className="mx-auto mb-2 text-lg" />
-                      {name}
+                      {label}
                     </button>
                   ))}
                 </div>
@@ -257,7 +270,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                   {t('bookingForm.budgetCalculation', {
                     perPerson: estimatedPerPersonBudget,
                     travelers,
-                    defaultValue: `${estimatedPerPersonBudget} per person x ${travelers} ${travelers === 1 ? 'traveler' : 'travelers'}`,
+                    travelerLabel: travelers === 1 ? t('bookingForm.traveler') : t('bookingForm.travelers'),
                   })}
                 </p>
               </Field>
@@ -323,21 +336,32 @@ function Field({ label, required, error, className = '', children }: FieldProps)
 
 function CountrySelect({
   value,
+  locale,
   isOpen,
   onOpenChange,
   onChange,
 }: {
   value: string
+  locale: string
   isOpen: boolean
   onOpenChange: (value: boolean) => void
   onChange: (value: string) => void
 }) {
   const { t } = useTranslation()
+  const displayNames = useMemo(() => new Intl.DisplayNames([locale], { type: 'region' }), [locale])
+  const countryOptions = useMemo(
+    () => countries.map((country) => ({
+      ...country,
+      displayName: displayNames.of(country.code) ?? country.name,
+    })),
+    [displayNames],
+  )
   const search = value.trim().toLowerCase()
-  const filteredCountries = countries.filter((country) => {
+  const filteredCountries = countryOptions.filter((country) => {
     if (!search) return true
     return (
       country.name.toLowerCase().includes(search) ||
+      country.displayName.toLowerCase().includes(search) ||
       country.iso3.toLowerCase().includes(search) ||
       country.code.toLowerCase().includes(search)
     )
@@ -369,7 +393,7 @@ function CountrySelect({
       <button
         className="absolute right-3 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center text-muted transition hover:text-primary"
         type="button"
-        aria-label="Toggle country list"
+        aria-label={t('bookingForm.toggleCountryList')}
         onClick={() => onOpenChange(!isOpen)}
       >
         <FiChevronDown className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
@@ -391,12 +415,12 @@ function CountrySelect({
                 aria-selected={value === country.name}
                 onMouseDown={(event) => event.preventDefault()}
                 onClick={() => {
-                  onChange(country.name)
+                  onChange(country.displayName)
                   onOpenChange(false)
                 }}
               >
                 <span className="w-9 shrink-0 text-2xl leading-none">{countryFlag(country.code)}</span>
-                <span>{country.name} - {country.iso3}</span>
+                <span>{country.displayName} - {country.iso3}</span>
               </button>
             ))
           ) : (
@@ -409,15 +433,17 @@ function CountrySelect({
 }
 
 function Counter({ label, value, onChange }: { label: string; value: number; onChange: (value: number) => void }) {
+  const { t } = useTranslation()
+
   return (
     <div>
       <p className="mb-2 text-sm font-semibold text-ink">{label} <span className="text-primary">*</span></p>
       <div className="flex h-12 items-center justify-between rounded-lg border border-border px-3">
-        <button className="counter-btn" type="button" onClick={() => onChange(value - 1)} aria-label={`Decrease ${label}`}>
+        <button className="counter-btn" type="button" onClick={() => onChange(value - 1)} aria-label={t('common.decrease', { label })}>
           <FiMinus />
         </button>
         <span className="font-semibold text-ink">{value}</span>
-        <button className="counter-btn" type="button" onClick={() => onChange(value + 1)} aria-label={`Increase ${label}`}>
+        <button className="counter-btn" type="button" onClick={() => onChange(value + 1)} aria-label={t('common.increase', { label })}>
           <FiPlus />
         </button>
       </div>
