@@ -41,6 +41,66 @@ function detail(label, value) {
   `
 }
 
+function getEnv(name) {
+  return process.env[name]
+}
+
+function toNullable(value) {
+  const cleaned = clean(value)
+  return cleaned || null
+}
+
+function toNullableNumber(value) {
+  const number = Number(value)
+  return Number.isFinite(number) ? number : null
+}
+
+function toNullableUuid(value) {
+  const cleaned = clean(value)
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(cleaned)
+    ? cleaned
+    : null
+}
+
+async function saveFormSubmission(submission) {
+  const supabaseUrl = getEnv('SUPABASE_URL') || getEnv('VITE_SUPABASE_URL')
+  const supabaseKey =
+    getEnv('SUPABASE_SERVICE_ROLE_KEY') ||
+    getEnv('SUPABASE_ANON_KEY') ||
+    getEnv('VITE_SUPABASE_ANON_KEY')
+
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error('Submission storage is not configured.')
+  }
+
+  const response = await fetch(`${supabaseUrl.replace(/\/$/, '')}/rest/v1/form_submissions`, {
+    method: 'POST',
+    headers: {
+      apikey: supabaseKey,
+      Authorization: `Bearer ${supabaseKey}`,
+      'Content-Type': 'application/json',
+      Prefer: 'return=minimal',
+    },
+    body: JSON.stringify(submission),
+  })
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => null)
+    const message = error?.message || 'Submission could not be saved.'
+
+    if (
+      message.toLowerCase().includes('form_submissions') ||
+      message.toLowerCase().includes('schema cache')
+    ) {
+      throw new Error(
+        'We are finishing a quick update to our inquiry system. Please try again shortly or contact us by WhatsApp.',
+      )
+    }
+
+    throw new Error(message)
+  }
+}
+
 export default async function handler(request, response) {
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST')
@@ -90,6 +150,22 @@ export default async function handler(request, response) {
       ['Phone / WhatsApp', phone],
       ['Submitted', submittedAt],
     ]
+
+    try {
+      await saveFormSubmission({
+        type: 'inquiry',
+        status: 'new',
+        full_name: fullName,
+        email,
+        phone,
+        message,
+        raw_payload: body,
+      })
+    } catch (saveError) {
+      return sendJson(response, 502, {
+        message: saveError instanceof Error ? saveError.message : 'The inquiry could not be saved right now.',
+      })
+    }
 
     const text = [
       'New Inquiry from Uganda Family Tours Website',
@@ -157,6 +233,7 @@ export default async function handler(request, response) {
   }
 
   const selectedTour = clean(body?.selectedTour)
+  const packageId = toNullableUuid(body?.packageId)
   const fullName = clean(body?.fullName)
   const email = clean(body?.email).toLowerCase()
   const phone = clean(body?.phone)
@@ -210,6 +287,36 @@ export default async function handler(request, response) {
     ['Currency', currency],
     ['Submitted', submittedAt],
   ]
+
+  try {
+    await saveFormSubmission({
+      type: 'booking',
+      status: 'new',
+      package_id: packageId,
+      tour_package_name: selectedTour,
+      full_name: fullName,
+      email,
+      phone,
+      country,
+      preferred_travel_date: travelDate,
+      date_flexible: flexible ? flexible.toLowerCase() === 'yes' : null,
+      adults,
+      children,
+      children_ages: toNullable(childrenAges),
+      accommodation_preference: toNullable(accommodation),
+      estimated_budget: toNullable(estimatedGroupBudget),
+      budget_per_person: toNullable(budgetPerPerson),
+      estimated_group_budget: toNullable(estimatedGroupBudget),
+      currency: toNullable(currency),
+      travelers: toNullableNumber(totalTravelers),
+      special_requests: toNullable(notes),
+      raw_payload: body,
+    })
+  } catch (saveError) {
+    return sendJson(response, 502, {
+      message: saveError instanceof Error ? saveError.message : 'The booking request could not be saved right now.',
+    })
+  }
 
   const text = [
     'New Uganda Family Tours booking request',

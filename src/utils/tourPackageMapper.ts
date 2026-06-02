@@ -17,6 +17,7 @@ export function packageToTour(tourPackage: TourPackage, index: number): Tour {
 
   return {
     id: index + 1,
+    packageId: tourPackage.id,
     title: tourPackage.title,
     slug: tourPackage.slug,
     price: `From ${formatUsd(tourPackage.price_from_usd)}`,

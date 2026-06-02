@@ -305,7 +305,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
             ) : null}
           </div>
 
-          <aside className="tour-booking-sticky self-start">
+          <aside className="tour-booking-sticky self-start lg:sticky lg:top-[150px]">
             <div className="card min-w-0 border-border/80 p-7 text-center shadow-[0_22px_55px_rgba(17,24,39,0.08)] md:p-8">
               <p className="text-safe text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted">{t('tourDetails.price')}</p>
               <h2 className="text-safe mt-3 text-2xl font-semibold text-primary">{t('common.from')} {formatCurrency(tourPackage.price_from_usd)}</h2>

@@ -32,6 +32,13 @@ body {
   overflow-x: hidden;
 }
 
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
+
 .luxury-script {
   font-family: "Allura", cursive;
 }
@@ -208,7 +215,7 @@ img {
 @media (min-width: 1024px) {
   .tour-booking-sticky {
     position: sticky !important;
-    top: 9rem;
+    top: 150px;
     z-index: 20;
   }
 }

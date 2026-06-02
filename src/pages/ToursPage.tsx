@@ -123,27 +123,25 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
     <main className="bg-white pt-20 md:pt-24">
       <section className="section-padding pt-8 md:pt-10">
         <div className="container-custom">
-          <div className="relative">
-            {!error && tours.length > 0 ? (
-              <div className="mb-5 flex justify-end md:absolute md:right-0 md:top-0 md:z-30 md:mb-0">
-                <TourFilters
-                  maxPrice={defaultPriceBounds.max}
-                  minPrice={defaultPriceBounds.min}
-                  selectedDuration={durationFilter}
-                  selectedMaxPrice={priceRange.max}
-                  selectedMinPrice={priceRange.min}
-                  onDurationChange={updateDurationFilter}
-                  onPriceChange={updatePriceRange}
-                  onReset={resetFilters}
-                />
-              </div>
-            ) : null}
+          <SectionHeader
+            title={t('toursPage.title')}
+            description={t('toursPage.description')}
+          />
 
-            <SectionHeader
-              title={t('toursPage.title')}
-              description={t('toursPage.description')}
-            />
-          </div>
+          {!error && tours.length > 0 ? (
+            <div className="mx-auto mt-9 max-w-6xl">
+              <TourFilters
+                maxPrice={defaultPriceBounds.max}
+                minPrice={defaultPriceBounds.min}
+                selectedDuration={durationFilter}
+                selectedMaxPrice={priceRange.max}
+                selectedMinPrice={priceRange.min}
+                onDurationChange={updateDurationFilter}
+                onPriceChange={updatePriceRange}
+                onReset={resetFilters}
+              />
+            </div>
+          ) : null}
 
           {error ? (
             <div className="mx-auto mt-12 max-w-3xl rounded-[1.75rem] border border-red-200 bg-red-50 px-6 py-8 text-center text-red-700">
@@ -156,7 +154,7 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
               <p className="mt-3 text-muted">{t('toursPage.emptyDescription')}</p>
             </div>
           ) : (
-            <div className="mt-12">
+            <div className="mt-10">
               {filteredTours.length === 0 ? (
                 <div className="mx-auto mt-10 max-w-3xl rounded-[1.75rem] border border-dashed border-[#eadfd3] bg-[#fff8f3] px-6 py-10 text-center">
                   <p className="text-xl font-black text-ink">No tours match your filters.</p>

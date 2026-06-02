@@ -18,6 +18,7 @@ export type ItineraryDay = {
 
 export type Tour = {
   id: number
+  packageId?: string
   title: string
   slug: string
   price: string
