@@ -80,7 +80,7 @@ export async function getTourPackageDetailsBySlug(
   }
 
   const client = getSupabaseClient()
-  const [highlightsResult, galleryResult, daysResult, locationsResult] = await Promise.all([
+  const [highlightsResult, galleryResult, daysResult] = await Promise.all([
     client
       .from('tour_highlights')
       .select('id,package_id,title,description,sort_order,created_at')
@@ -98,17 +98,43 @@ export async function getTourPackageDetailsBySlug(
       .eq('package_id', tourPackage.id)
       .order('sort_order', { ascending: true })
       .order('day_number', { ascending: true }),
-    client
-      .from('package_locations')
-      .select('id,package_id,location_name,latitude,longitude,notes,day_order')
-      .eq('package_id', tourPackage.id)
-      .order('day_order', { ascending: true }),
   ])
 
   if (highlightsResult.error) throw new Error(highlightsResult.error.message)
   if (galleryResult.error) throw new Error(galleryResult.error.message)
   if (daysResult.error) throw new Error(daysResult.error.message)
-  if (locationsResult.error) throw new Error(locationsResult.error.message)
+
+  let locations: TourPackageLocation[] = []
+  const locationsResult = await client
+    .from('package_locations')
+    .select('id,package_id,location_name,latitude,longitude,notes,image_url,day_order')
+    .eq('package_id', tourPackage.id)
+    .order('day_order', { ascending: true })
+
+  if (locationsResult.error) {
+    const isMissingImageColumn = locationsResult.error.message.includes('image_url')
+
+    if (!isMissingImageColumn) {
+      throw new Error(locationsResult.error.message)
+    }
+
+    const fallbackLocationsResult = await client
+      .from('package_locations')
+      .select('id,package_id,location_name,latitude,longitude,notes,day_order')
+      .eq('package_id', tourPackage.id)
+      .order('day_order', { ascending: true })
+
+    if (fallbackLocationsResult.error) {
+      throw new Error(fallbackLocationsResult.error.message)
+    }
+
+    locations = ((fallbackLocationsResult.data ?? []) as Omit<TourPackageLocation, 'image_url'>[]).map((location) => ({
+      ...location,
+      image_url: null,
+    }))
+  } else {
+    locations = (locationsResult.data ?? []) as TourPackageLocation[]
+  }
 
   const itineraryDays = (daysResult.data ?? []) as TourItineraryDay[]
   const dayIds = itineraryDays.map((day) => day.id)
@@ -141,7 +167,7 @@ export async function getTourPackageDetailsBySlug(
     package: tourPackage,
     highlights: (highlightsResult.data ?? []) as TourHighlight[],
     galleryImages: ((galleryResult.data ?? []) as TourGalleryImage[]).slice(0, 4),
-    locations: (locationsResult.data ?? []) as TourPackageLocation[],
+    locations,
     itineraryDays: itineraryDays.map((day) => ({
       ...day,
       activities: activities

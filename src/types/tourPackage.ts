@@ -73,6 +73,7 @@ export type TourPackageLocation = {
   latitude: number
   longitude: number
   notes: string | null
+  image_url: string | null
   day_order: number
 }
 

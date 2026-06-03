@@ -305,7 +305,6 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
               </section>
             ) : null}
 
-            <TourRouteMap locations={details.locations} title={tourTitle} />
           </div>
 
           <aside className="tour-booking-sticky self-start lg:sticky lg:top-[150px]">
@@ -329,6 +328,9 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
               </div>
             </div>
           </aside>
+        </div>
+        <div className="container-custom mt-12">
+          <TourRouteMap locations={details.locations} />
         </div>
       </main>
 

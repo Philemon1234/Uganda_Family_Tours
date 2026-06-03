@@ -1,17 +1,17 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import L from 'leaflet'
 import type { LeafletMouseEvent } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet'
-import { FiMapPin } from 'react-icons/fi'
 import type { TourPackageLocation } from '../types/tourPackage'
 
 type TourRouteMapProps = {
   locations: TourPackageLocation[]
-  title: string
+  title?: string
 }
 
 type RouteMarkerProps = {
+  isAnimationReady: boolean
   location: TourPackageLocation
   index: number
   isActive: boolean
@@ -19,13 +19,21 @@ type RouteMarkerProps = {
 }
 
 const ROUTE_ORANGE = '#f08f4f'
+const UGANDA_BOUNDS = {
+  maxLat: 4.4,
+  maxLng: 35.2,
+  minLat: -1.6,
+  minLng: 29.3,
+}
 
 function isUsableCoordinate(location: TourPackageLocation) {
   return (
     Number.isFinite(location.latitude) &&
     Number.isFinite(location.longitude) &&
-    Math.abs(location.latitude) <= 90 &&
-    Math.abs(location.longitude) <= 180
+    location.latitude >= UGANDA_BOUNDS.minLat &&
+    location.latitude <= UGANDA_BOUNDS.maxLat &&
+    location.longitude >= UGANDA_BOUNDS.minLng &&
+    location.longitude <= UGANDA_BOUNDS.maxLng
   )
 }
 
@@ -33,16 +41,39 @@ function getBounds(locations: TourPackageLocation[]) {
   return L.latLngBounds(locations.map((location) => [location.latitude, location.longitude]))
 }
 
-function FitRouteBounds({ locations, activeLocation }: { locations: TourPackageLocation[]; activeLocation: TourPackageLocation | null }) {
+function getInterpolatedPositions(positions: [number, number][], progress: number) {
+  if (positions.length < 2 || progress <= 0) return []
+
+  const maxProgress = positions.length - 1
+  const clampedProgress = Math.min(Math.max(progress, 0), maxProgress)
+  const wholeSegments = Math.floor(clampedProgress)
+  const segmentProgress = clampedProgress - wholeSegments
+  const nextPositions = positions.slice(0, wholeSegments + 1)
+
+  if (wholeSegments < positions.length - 1) {
+    const [startLat, startLng] = positions[wholeSegments]
+    const [endLat, endLng] = positions[wholeSegments + 1]
+    nextPositions.push([
+      startLat + (endLat - startLat) * segmentProgress,
+      startLng + (endLng - startLng) * segmentProgress,
+    ])
+  }
+
+  return nextPositions
+}
+
+function FitRouteBounds({ locations, focusedLocation }: { locations: TourPackageLocation[]; focusedLocation: TourPackageLocation | null }) {
   const map = useMap()
 
   useEffect(() => {
-    if (activeLocation) {
-      map.flyTo([activeLocation.latitude, activeLocation.longitude], Math.max(map.getZoom(), 8), {
+    if (focusedLocation) {
+      map.flyTo([focusedLocation.latitude, focusedLocation.longitude], Math.max(map.getZoom(), 8), {
         duration: 0.8,
       })
       return
     }
+
+    window.setTimeout(() => map.invalidateSize(), 0)
 
     if (locations.length === 1) {
       map.setView([locations[0].latitude, locations[0].longitude], 8)
@@ -50,34 +81,24 @@ function FitRouteBounds({ locations, activeLocation }: { locations: TourPackageL
     }
 
     if (locations.length > 1) {
+      const isMobile = window.matchMedia('(max-width: 767px)').matches
+
       map.fitBounds(getBounds(locations), {
-        animate: true,
-        padding: [34, 34],
+        animate: false,
+        maxZoom: isMobile ? 9 : 10,
+        padding: isMobile ? [34, 34] : [46, 46],
       })
     }
-  }, [activeLocation, locations, map])
+  }, [focusedLocation, locations, map])
 
   return null
 }
 
 function AnimatedRoute({ positions }: { positions: [number, number][] }) {
-  const [routeRef, setRouteRef] = useState<L.Polyline | null>(null)
-
-  useEffect(() => {
-    const path = routeRef?.getElement() as SVGPathElement | null
-    if (!path) return
-
-    path.style.opacity = '0'
-    path.getBoundingClientRect()
-    path.style.transition = 'opacity 900ms cubic-bezier(0.22, 1, 0.36, 1)'
-    path.style.opacity = '0.86'
-  }, [positions, routeRef])
-
   if (positions.length < 2) return null
 
   return (
     <Polyline
-      ref={setRouteRef}
       positions={positions}
       pathOptions={{
         color: ROUTE_ORANGE,
@@ -91,38 +112,87 @@ function AnimatedRoute({ positions }: { positions: [number, number][] }) {
   )
 }
 
-function createMarkerIcon(index: number, isActive: boolean) {
+function createMarkerIcon(location: TourPackageLocation, index: number, isActive: boolean, isAnimationReady: boolean) {
   return L.divIcon({
     className: '',
-    html: `<span class="tour-map-pin ${isActive ? 'tour-map-pin-active' : ''}" style="--pin-delay: ${index * 120}ms"><span>${index + 1}</span></span>`,
+    html: `<span role="button" aria-label="Day ${location.day_order}: ${location.location_name}" class="tour-map-pin ${isActive ? 'tour-map-pin-active' : ''} ${isAnimationReady ? '' : 'tour-map-pin-waiting'}" style="--pin-delay: ${index * 120}ms"><span>${index + 1}</span></span>`,
     iconAnchor: [16, 34],
     iconSize: [32, 38],
     popupAnchor: [0, -32],
   })
 }
 
-function RouteMarker({ location, index, isActive, onSelect }: RouteMarkerProps) {
-  const icon = useMemo(() => createMarkerIcon(index, isActive), [index, isActive])
+function RouteMarker({ isAnimationReady, location, index, isActive, onSelect }: RouteMarkerProps) {
+  const markerRef = useRef<L.Marker | null>(null)
+  const icon = useMemo(() => createMarkerIcon(location, index, isActive, isAnimationReady), [index, isActive, isAnimationReady, location])
+
+  useEffect(() => {
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      markerRef.current?.closePopup()
+      return
+    }
+
+    if (isActive) {
+      markerRef.current?.openPopup()
+    } else {
+      markerRef.current?.closePopup()
+    }
+  }, [isActive])
 
   return (
     <Marker
+      ref={markerRef}
       position={[location.latitude, location.longitude]}
       icon={icon}
+      keyboard
+      title={`Day ${location.day_order}: ${location.location_name}`}
       eventHandlers={{
         click: () => onSelect(location),
+        keypress: () => onSelect(location),
         mouseover: (event: LeafletMouseEvent) => event.target.openPopup(),
       }}
     >
       <Popup className="tour-map-popup" closeButton={false}>
-        <div className="font-sans">
-          <p className="text-sm font-semibold text-ink">{location.location_name}</p>
-          <p className="mt-1 text-xs font-semibold text-primary">Day {location.day_order}</p>
-          {location.notes ? (
-            <p className="mt-1 max-w-52 text-xs leading-5 text-muted">{location.notes}</p>
+        <div className="tour-map-popup-card hidden font-sans md:block">
+          {location.image_url ? (
+            <img
+              src={location.image_url}
+              alt={location.location_name}
+              className="h-24 w-full rounded-xl object-cover"
+            />
           ) : null}
+          <div className={location.image_url ? 'mt-3' : ''}>
+            <p className="text-sm font-semibold text-ink">{location.location_name}</p>
+            <p className="mt-1 text-xs font-semibold text-primary">Day {location.day_order}</p>
+            {location.notes ? (
+              <p className="mt-2 max-w-60 text-xs leading-5 text-muted">{location.notes}</p>
+            ) : null}
+          </div>
         </div>
       </Popup>
     </Marker>
+  )
+}
+
+function RouteStopCard({ location }: { location: TourPackageLocation }) {
+  return (
+    <article className="overflow-hidden rounded-[1.2rem] border border-border/80 bg-white shadow-[0_18px_42px_rgba(17,24,39,0.08)]">
+      {location.image_url ? (
+        <img
+          src={location.image_url}
+          alt={location.location_name}
+          loading="lazy"
+          className="h-40 w-full object-cover sm:h-48"
+        />
+      ) : null}
+      <div className="p-4">
+        <p className="text-safe text-base font-semibold text-ink">{location.location_name}</p>
+        <p className="mt-2 text-sm font-semibold text-primary">Day {location.day_order}</p>
+        {location.notes ? (
+          <p className="text-safe mt-3 text-sm leading-6 text-muted">{location.notes}</p>
+        ) : null}
+      </div>
+    </article>
   )
 }
 
@@ -152,68 +222,126 @@ function StaticRouteFallback({ locations }: { locations: TourPackageLocation[] }
   )
 }
 
-function TourRouteMap({ locations, title }: TourRouteMapProps) {
+function TourRouteMap({ locations }: TourRouteMapProps) {
+  const sectionRef = useRef<HTMLElement | null>(null)
   const routeLocations = useMemo(
     () => locations.filter(isUsableCoordinate).sort((first, second) => first.day_order - second.day_order),
     [locations],
   )
   const [activeLocation, setActiveLocation] = useState<TourPackageLocation | null>(null)
+  const [focusedLocation, setFocusedLocation] = useState<TourPackageLocation | null>(null)
+  const [isUserPaused, setIsUserPaused] = useState(false)
+  const [routeProgress, setRouteProgress] = useState(0)
+  const [hasActivated, setHasActivated] = useState(false)
   const positions = useMemo<[number, number][]>(
     () => routeLocations.map((location) => [location.latitude, location.longitude]),
     [routeLocations],
   )
+  const animatedPositions = useMemo(
+    () => getInterpolatedPositions(positions, routeProgress),
+    [positions, routeProgress],
+  )
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasActivated(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.35 },
+    )
+
+    observer.observe(section)
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!hasActivated || isUserPaused || routeLocations.length === 0) return
+
+    let step = 0
+    let closeTimer = 0
+    let nextTimer = 0
+    let startTimer = 0
+    let animationFrame = 0
+
+    setRouteProgress(0)
+    setActiveLocation(null)
+    setFocusedLocation(null)
+
+    const animateToStep = (nextStep: number) => {
+      const fromProgress = Math.max(0, nextStep - 1)
+      const startedAt = performance.now()
+      const duration = 1450
+
+      const tick = (now: number) => {
+        const elapsed = now - startedAt
+        const progress = Math.min(1, elapsed / duration)
+        setRouteProgress(fromProgress + progress)
+
+        if (progress < 1) {
+          animationFrame = window.requestAnimationFrame(tick)
+          return
+        }
+
+        step = nextStep
+        showStop()
+      }
+
+      animationFrame = window.requestAnimationFrame(tick)
+    }
+
+    const showStop = () => {
+      setActiveLocation(routeLocations[step])
+
+      closeTimer = window.setTimeout(() => {
+        setActiveLocation(null)
+
+        if (step >= routeLocations.length - 1) return
+
+        step += 1
+        nextTimer = window.setTimeout(() => animateToStep(step), 450)
+      }, 3600)
+    }
+
+    startTimer = window.setTimeout(showStop, 450)
+
+    return () => {
+      window.clearTimeout(startTimer)
+      window.clearTimeout(closeTimer)
+      window.clearTimeout(nextTimer)
+      window.cancelAnimationFrame(animationFrame)
+    }
+  }, [hasActivated, isUserPaused, routeLocations])
 
   if (routeLocations.length === 0) {
     return null
   }
 
-  const initialCenter = positions[0]
+  const initialCenter: [number, number] = [1.3733, 32.2903]
   const activeIndex = activeLocation
     ? routeLocations.findIndex((location) => location.id === activeLocation.id)
     : -1
+  const handleSelectLocation = (location: TourPackageLocation) => {
+    const locationIndex = routeLocations.findIndex((currentLocation) => currentLocation.id === location.id)
+
+    setIsUserPaused(true)
+    setActiveLocation(location)
+    setFocusedLocation(location)
+
+    if (locationIndex > -1) {
+      setRouteProgress((currentProgress) => Math.max(currentProgress, locationIndex))
+    }
+  }
 
   return (
-    <section id="route-map" className="scroll-mt-28">
-      <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="text-safe text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-primary">Route map</p>
-          <h2 className="content-title text-safe mt-2">{title} journey path</h2>
-        </div>
-        <p className="text-safe max-w-xl text-sm leading-6 text-muted">
-          Explore each stop in sequence, then tap a pin to focus the map on that destination.
-        </p>
-      </div>
-
-      <div className="grid min-w-0 overflow-hidden rounded-[1.35rem] border border-border/80 bg-white shadow-[0_22px_55px_rgba(17,24,39,0.08)] lg:grid-cols-[280px_minmax(0,1fr)]">
-        <aside className="max-h-[26rem] min-w-0 overflow-y-auto border-b border-border/80 bg-[#fffaf6] p-4 lg:border-b-0 lg:border-r">
-          <p className="text-safe text-sm font-semibold text-ink">Destinations ({routeLocations.length})</p>
-          <div className="mt-4 space-y-2">
-            {routeLocations.map((location, index) => {
-              const isActive = activeIndex === index
-
-              return (
-                <button
-                  key={location.id}
-                  type="button"
-                  onClick={() => setActiveLocation(location)}
-                  className={`flex w-full min-w-0 items-start gap-3 rounded-xl px-3 py-2 text-left transition ${
-                    isActive ? 'bg-white shadow-[0_10px_26px_rgba(17,24,39,0.08)] ring-1 ring-primary/40' : 'hover:bg-white/80'
-                  }`}
-                >
-                  <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-primary text-xs font-semibold text-ink">
-                    {index + 1}
-                  </span>
-                  <span className="min-w-0">
-                    <span className="text-safe block text-sm font-semibold text-ink">{location.location_name}</span>
-                    <span className="text-safe mt-0.5 block text-xs font-semibold text-muted">Day {location.day_order}</span>
-                  </span>
-                </button>
-              )
-            })}
-          </div>
-        </aside>
-
-        <div className="relative h-[24rem] min-w-0 bg-[#f8f3ec] md:h-[31rem]">
+    <section ref={sectionRef} id="route-map" className="scroll-mt-28">
+      <div className="relative isolate z-0 h-[22rem] min-w-0 overflow-hidden rounded-[1.35rem] border border-border/80 bg-[#f8f3ec] shadow-[0_22px_55px_rgba(17,24,39,0.08)] sm:h-[24rem] md:h-[36rem]">
           <MapContainer
             center={initialCenter}
             zoom={7}
@@ -222,39 +350,27 @@ function TourRouteMap({ locations, title }: TourRouteMapProps) {
             attributionControl={false}
           >
             <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution="&copy; OpenStreetMap contributors"
+              url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
+              attribution="&copy; OpenStreetMap contributors &copy; CARTO"
             />
-            <FitRouteBounds locations={routeLocations} activeLocation={activeLocation} />
-            <AnimatedRoute positions={positions} />
+            <FitRouteBounds locations={routeLocations} focusedLocation={focusedLocation} />
+            <AnimatedRoute positions={animatedPositions} />
             {routeLocations.map((location, index) => (
               <RouteMarker
                 key={location.id}
+                isAnimationReady={hasActivated}
                 location={location}
                 index={index}
                 isActive={activeIndex === index}
-                onSelect={setActiveLocation}
+                onSelect={handleSelectLocation}
               />
             ))}
           </MapContainer>
+      </div>
 
-          {activeLocation ? (
-            <div className="pointer-events-none absolute inset-x-3 bottom-3 z-[500] rounded-xl border border-border/80 bg-white/95 p-3 shadow-[0_16px_34px_rgba(17,24,39,0.14)] backdrop-blur md:hidden">
-              <div className="flex min-w-0 items-start gap-3">
-                <FiMapPin className="mt-1 shrink-0 text-primary" />
-                <div className="min-w-0">
-                  <p className="text-safe text-sm font-semibold text-ink">{activeLocation.location_name}</p>
-                  {activeLocation.day_order || activeLocation.notes ? (
-                    <p className="text-safe mt-1 text-xs leading-5 text-muted">
-                      Day {activeLocation.day_order}
-                      {activeLocation.notes ? ' - ' : ''}
-                      {activeLocation.notes ?? ''}
-                    </p>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          ) : null}
+      <div className="mt-4 md:hidden">
+        <div key={(activeLocation ?? routeLocations[0]).id} className="animate-route-stop-card">
+          <RouteStopCard location={activeLocation ?? routeLocations[0]} />
         </div>
       </div>
 
