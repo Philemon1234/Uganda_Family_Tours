@@ -49,4 +49,3 @@ function ItineraryRoute({ onBook }: { onBook: (tour?: Tour) => void }) {
 }
 
 export default App
-
