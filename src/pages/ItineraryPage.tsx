@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { FaCheck, FaShieldHeart } from 'react-icons/fa6'
 import { FiArrowRight, FiCheckCircle, FiChevronRight, FiPhone, FiX } from 'react-icons/fi'
 import { SafariLoaderOverlay } from '../components/SafariTrailLoader'
+import TourRouteMap from '../components/TourRouteMap'
 import { tours, type ItineraryDay, type Tour } from '../data/tours'
 import { useLocale } from '../context/LocaleContext'
 import { getTourPackageDetailsBySlug } from '../services/publicTourService'
@@ -303,6 +304,8 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                 </div>
               </section>
             ) : null}
+
+            <TourRouteMap locations={details.locations} title={tourTitle} />
           </div>
 
           <aside className="tour-booking-sticky self-start lg:sticky lg:top-[150px]">

@@ -66,6 +66,16 @@ export type TourItineraryImage = {
   created_at: string
 }
 
+export type TourPackageLocation = {
+  id: string
+  package_id: string
+  location_name: string
+  latitude: number
+  longitude: number
+  notes: string | null
+  day_order: number
+}
+
 export type TourItineraryDayWithDetails = TourItineraryDay & {
   activities: TourItineraryActivity[]
   images: TourItineraryImage[]
@@ -76,4 +86,5 @@ export type TourPackageDetails = {
   highlights: TourHighlight[]
   galleryImages: TourGalleryImage[]
   itineraryDays: TourItineraryDayWithDetails[]
+  locations: TourPackageLocation[]
 }
