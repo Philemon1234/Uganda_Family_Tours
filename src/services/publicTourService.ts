@@ -7,6 +7,7 @@ import type {
   TourItineraryImage,
   TourPackage,
   TourPackageDetails,
+  TourPackageLocation,
 } from '../types/tourPackage'
 
 const TOUR_PACKAGE_SELECT =
@@ -79,7 +80,7 @@ export async function getTourPackageDetailsBySlug(
   }
 
   const client = getSupabaseClient()
-  const [highlightsResult, galleryResult, daysResult] = await Promise.all([
+  const [highlightsResult, galleryResult, daysResult, locationsResult] = await Promise.all([
     client
       .from('tour_highlights')
       .select('id,package_id,title,description,sort_order,created_at')
@@ -97,11 +98,17 @@ export async function getTourPackageDetailsBySlug(
       .eq('package_id', tourPackage.id)
       .order('sort_order', { ascending: true })
       .order('day_number', { ascending: true }),
+    client
+      .from('package_locations')
+      .select('id,package_id,location_name,latitude,longitude,notes,day_order')
+      .eq('package_id', tourPackage.id)
+      .order('day_order', { ascending: true }),
   ])
 
   if (highlightsResult.error) throw new Error(highlightsResult.error.message)
   if (galleryResult.error) throw new Error(galleryResult.error.message)
   if (daysResult.error) throw new Error(daysResult.error.message)
+  if (locationsResult.error) throw new Error(locationsResult.error.message)
 
   const itineraryDays = (daysResult.data ?? []) as TourItineraryDay[]
   const dayIds = itineraryDays.map((day) => day.id)
@@ -134,6 +141,7 @@ export async function getTourPackageDetailsBySlug(
     package: tourPackage,
     highlights: (highlightsResult.data ?? []) as TourHighlight[],
     galleryImages: ((galleryResult.data ?? []) as TourGalleryImage[]).slice(0, 4),
+    locations: (locationsResult.data ?? []) as TourPackageLocation[],
     itineraryDays: itineraryDays.map((day) => ({
       ...day,
       activities: activities

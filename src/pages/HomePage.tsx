@@ -89,7 +89,7 @@ export function HomePage({ onBook }: HomePageProps) {
             <Link className="hero-action btn-primary mt-8 shadow-[0_14px_34px_rgba(0,0,0,0.18)]" to="/tours">{t('home.hero.primaryCta')} <FiArrowRight /></Link>
           </div>
           <div className="hero-badges mt-14 flex w-full justify-center">
-            <div className="flex w-full max-w-2xl items-center justify-center gap-4 border-y border-white/15 bg-black/20 px-5 py-4 sm:w-auto sm:px-8 lg:gap-7">
+            <div className="flex w-full max-w-2xl items-center justify-center gap-4 rounded-2xl border border-white/15 bg-black/25 px-5 py-4 shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-md sm:w-auto sm:px-8 lg:gap-7">
               {[
                 { src: homeIconOne, alt: t('home.hero.badgeAlt.service') },
                 { src: homeIconTwo, alt: t('home.hero.badgeAlt.planning') },
