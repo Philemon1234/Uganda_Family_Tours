@@ -76,9 +76,9 @@ export function HomePage({ onBook }: HomePageProps) {
 
   return (
     <>
-      <section className="hero-section min-h-[92vh] bg-black" style={{ backgroundImage: `url(${heroImage})` }}>
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-black/55 to-black md:h-40" />
+      <section className="hero-section min-h-[92vh] bg-dark" style={{ backgroundImage: `url(${heroImage})` }}>
+        <div className="absolute inset-0 bg-dark/50" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-black/70 to-black md:h-40" />
         <div className="container-custom relative z-10 flex min-h-[92vh] flex-col items-center justify-center px-4 pb-20 pt-40 text-center text-white lg:pb-24 lg:pt-44">
           <div className="w-full">
             <p className="hero-kicker luxury-script text-3xl leading-none text-white/95 md:text-4xl">{t('home.hero.kicker')}</p>
@@ -86,10 +86,10 @@ export function HomePage({ onBook }: HomePageProps) {
             <p className="hero-copy mx-auto mt-5 max-w-2xl text-base leading-8 text-white/82 md:text-lg">
               {t('home.hero.subtitle')}
             </p>
-            <Link className="hero-action btn-primary mt-8 shadow-[0_14px_34px_rgba(0,0,0,0.18)]" to="/tours">{t('home.hero.primaryCta')} <FiArrowRight /></Link>
+            <Link className="hero-action btn-primary btn-on-dark mt-8 shadow-[0_14px_34px_rgba(0,0,0,0.18)]" to="/tours">{t('home.hero.primaryCta')} <FiArrowRight /></Link>
           </div>
           <div className="hero-badges mt-14 flex w-full justify-center">
-            <div className="flex w-full max-w-2xl items-center justify-center gap-4 rounded-2xl border border-white/15 bg-black/25 px-5 py-4 shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-md sm:w-auto sm:px-8 lg:gap-7">
+            <div className="flex w-full max-w-2xl items-center justify-center gap-4 rounded-full border border-white/15 bg-dark/25 px-5 py-4 shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-md sm:w-auto sm:px-8 lg:gap-7">
               {[
                 { src: homeIconOne, alt: t('home.hero.badgeAlt.service') },
                 { src: homeIconTwo, alt: t('home.hero.badgeAlt.planning') },
@@ -134,7 +134,7 @@ export function HomePage({ onBook }: HomePageProps) {
         <div className="container-custom">
           <div className="grid gap-12 lg:grid-cols-[0.95fr_1.25fr] lg:items-stretch">
             <MotionReveal className="h-full">
-              <div className="relative h-full min-h-[24rem] overflow-hidden rounded-[1.75rem] bg-[#1f2937] shadow-[0_22px_55px_rgba(17,24,39,0.14)] lg:min-h-full">
+              <div className="relative h-full min-h-[24rem] overflow-hidden rounded-[1.75rem] bg-dark shadow-[0_22px_55px_rgba(37,66,76,0.14)] lg:min-h-full">
                 <video
                   className="aspect-[4/3] h-full w-full object-cover lg:aspect-auto"
                   controls
@@ -158,7 +158,7 @@ export function HomePage({ onBook }: HomePageProps) {
                   {signatureExperiences.map(({ Icon, title, text }) => (
                     <div key={title} className="group border-t border-[#ded2c4] px-1 py-4 transition hover:border-primary sm:py-5">
                       <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
-                        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white text-base text-[#8f4b22] shadow-[0_12px_28px_rgba(17,24,39,0.06)] sm:h-11 sm:w-11 sm:text-lg">
+                        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary text-base text-white shadow-[0_12px_28px_rgba(251,119,13,0.22)] sm:h-11 sm:w-11 sm:text-lg">
                           <Icon />
                         </span>
                         <div className="min-w-0">
@@ -219,7 +219,7 @@ export function HomePage({ onBook }: HomePageProps) {
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-soft">
                   <img className="h-full w-full object-cover" src={journeyImage} alt={t('home.journey.imageAlt')} />
                 </div>
-                <div className="absolute -bottom-5 right-4 hidden w-44 overflow-hidden rounded-2xl border-4 border-[#fffaf5] shadow-[0_20px_45px_rgba(17,24,39,0.18)] sm:block">
+                <div className="absolute -bottom-5 right-4 hidden w-44 overflow-hidden rounded-2xl border-4 border-[#fffaf5] shadow-[0_20px_45px_rgba(37,66,76,0.18)] sm:block">
                   <img className="h-32 w-full object-cover" src={storyThumbnail} alt={t('home.journey.thumbnailAlt')} />
                 </div>
               </div>
@@ -236,7 +236,7 @@ export function HomePage({ onBook }: HomePageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-[#1f2937]">
+      <section className="section-padding bg-dark">
         <div className="container-custom">
           <div className="mx-auto max-w-5xl text-center">
             <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('home.why.label')}</p>
@@ -272,14 +272,14 @@ export function HomePage({ onBook }: HomePageProps) {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#1f2937] py-20 text-center text-white md:py-28" style={{ backgroundImage: `url(${ctaImage})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
-        <div className="absolute inset-0 bg-[#111827]/75" />
+      <section className="relative overflow-hidden bg-dark py-20 text-center text-white md:py-28" style={{ backgroundImage: `url(${ctaImage})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
+        <div className="absolute inset-0 bg-dark/75" />
         <div className="container-custom relative z-10">
           <MotionReveal>
             <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('home.finalCta.label')}</p>
             <h2 className="mx-auto mt-1 max-w-3xl text-3xl font-black leading-tight md:text-5xl">{t('home.finalCta.title')}</h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/78 md:text-lg">{t('home.finalCta.description')}</p>
-            <button className="btn-primary mt-8" type="button" onClick={onBook}>{t('home.finalCta.button')} <FiArrowRight /></button>
+            <button className="btn-primary btn-on-dark mt-8" type="button" onClick={onBook}>{t('home.finalCta.button')} <FiArrowRight /></button>
           </MotionReveal>
         </div>
       </section>

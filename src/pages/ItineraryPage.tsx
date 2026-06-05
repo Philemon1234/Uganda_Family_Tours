@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { type KeyboardEvent, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FaCheck, FaShieldHeart } from 'react-icons/fa6'
@@ -174,10 +174,17 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
     setActiveGalleryImage(image)
   }
 
+  const handleGalleryImageKeyDown = (event: KeyboardEvent<HTMLDivElement>, image: string) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return
+
+    event.preventDefault()
+    openGalleryImage(image)
+  }
+
   return (
     <>
       <section className="hero-section min-h-[460px] md:min-h-[520px]" style={{ backgroundImage: `url(${heroImage})` }}>
-        <div className="absolute inset-0 bg-[#111827]/60" />
+        <div className="absolute inset-0 bg-dark/60" />
         <div className="container-custom relative z-10 flex min-h-[460px] flex-col justify-end pb-20 pt-32 text-white md:min-h-[520px] md:pb-24 md:pt-40">
           <h1 className="text-safe max-w-5xl text-4xl font-semibold leading-[1.08] md:text-5xl lg:text-6xl">{t('tourDetails.bucketList')}: {tourTitle}</h1>
           <div className="mt-5 flex min-w-0 flex-wrap items-center gap-2 text-xs font-semibold text-white/78 md:text-sm">
@@ -240,21 +247,24 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                       'h-64 md:h-full',
                       'h-64 md:h-full',
                     ]
+                    const imagePositions = ['object-center', 'object-center', 'object-[50%_55%]', 'object-[50%_58%]']
 
                     return (
-                      <button
+                      <div
                         key={image.id}
-                        type="button"
-                        className={`group max-w-full overflow-hidden rounded-[1.35rem] shadow-[0_18px_45px_rgba(17,24,39,0.08)] ${classes[index] ?? 'h-64 md:h-full'}`}
+                        role="button"
+                        tabIndex={0}
+                        className={`group max-w-full cursor-pointer overflow-hidden rounded-[2rem] shadow-[0_18px_45px_rgba(17,24,39,0.08)] transition duration-300 hover:shadow-[0_22px_55px_rgba(17,24,39,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 ${classes[index] ?? 'h-64 md:h-full'}`}
                         onClick={() => openGalleryImage(image.image_url)}
+                        onKeyDown={(event) => handleGalleryImageKeyDown(event, image.image_url)}
                         aria-label={t('tourDetails.openGalleryImage', { title: tourTitle, number: index + 1 })}
                       >
                         <img
-                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                          className={`h-full w-full object-cover transition duration-500 group-hover:scale-105 ${imagePositions[index] ?? 'object-center'}`}
                           src={image.image_url}
                           alt={image.alt_text || image.caption || t('tourDetails.galleryImageAlt', { title: tourTitle, number: index + 1 })}
                         />
-                      </button>
+                      </div>
                     )
                   })}
                 </div>
@@ -269,7 +279,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                     <div key={highlight.id} className="flex min-w-0 items-start gap-3 rounded-2xl border border-border/75 bg-white px-4 py-4 text-muted shadow-[0_14px_34px_rgba(17,24,39,0.04)]">
                       <FiCheckCircle className="mt-1 shrink-0 text-primary/90" />
                       <div className="min-w-0">
-                        <p className="text-safe font-semibold text-ink">{highlight.title}</p>
+                        <p className="text-safe font-medium text-ink">{highlight.title}</p>
                         {highlight.description ? (
                           <p className="text-safe mt-1 text-sm leading-6 text-muted">{highlight.description}</p>
                         ) : null}
@@ -286,7 +296,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                 <div ref={itineraryTimelineRef} className="relative mt-7 max-w-full space-y-12 overflow-hidden">
                   <span className="absolute bottom-6 left-6 top-6 w-px bg-border" aria-hidden="true" />
                   <span
-                    className="absolute left-6 top-6 w-px origin-top bg-primary/80 shadow-[0_0_16px_rgba(255,164,96,0.24)]"
+                    className="absolute left-6 top-6 w-px origin-top bg-primary/80 shadow-[0_0_16px_rgba(251,119,13,0.24)]"
                     style={{ height: `calc((100% - 3rem) * ${timelineProgress})` }}
                     aria-hidden="true"
                   />
@@ -322,7 +332,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
               <button className="btn-primary mt-7 w-full justify-center" type="button" onClick={() => onBook(bookingTour)}>{t('tourDetails.bookThisTour')} <FiArrowRight /></button>
               <div className="mt-8 text-sm">
                 <p className="text-safe text-muted">{t('tourDetails.needHelp')}</p>
-                <a className="text-safe mt-2 flex items-center justify-center gap-2 font-semibold text-primary transition hover:text-[#f08f4f]" href="tel:+256703543027">
+                <a className="text-safe mt-2 flex items-center justify-center gap-2 font-semibold text-primary transition hover:text-primary/80" href="tel:+256703543027">
                   <FiPhone /> +256 703 543027
                 </a>
               </div>
@@ -338,7 +348,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
         <div className="fixed inset-0 z-[120] grid h-screen w-screen place-items-center bg-black/78 px-4 pb-6 pt-24 md:px-8 md:pb-8 md:pt-28" onClick={() => setActiveGalleryImage(null)}>
           <button
             type="button"
-            className="fixed right-4 top-24 z-[130] grid h-12 w-12 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-ink md:right-7 md:top-24"
+            className="fixed right-4 top-24 z-[130] grid h-12 w-12 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-white md:right-7 md:top-24"
             aria-label={t('tourDetails.closeGalleryImage')}
             onClick={() => setActiveGalleryImage(null)}
           >
@@ -376,7 +386,7 @@ function ItineraryDayArticle({ day, index, tourTitle, markerRef }: ItineraryDayA
     <article className="relative grid min-w-0 max-w-full grid-cols-[48px_minmax(0,1fr)] gap-4 sm:grid-cols-[56px_minmax(0,1fr)] sm:gap-5">
       <div
         ref={markerRef}
-        className="relative z-10 grid h-12 w-12 place-items-center rounded-full border-[0.32rem] border-white bg-primary text-base font-semibold text-ink shadow-[0_12px_26px_rgba(255,164,96,0.22)]"
+        className="relative z-10 grid h-12 w-12 place-items-center rounded-full border-[0.32rem] border-white bg-primary text-base font-semibold text-ink shadow-[0_12px_26px_rgba(251,119,13,0.22)]"
       >
         {day.day_number}
       </div>
@@ -385,12 +395,12 @@ function ItineraryDayArticle({ day, index, tourTitle, markerRef }: ItineraryDayA
         {day.overview ? <p className="text-safe mt-3 max-w-5xl text-base font-normal leading-7 text-muted md:leading-8">{day.overview}</p> : null}
         {day.activities.length > 0 ? (
           <>
-            <p className="text-safe mt-4 text-sm font-semibold text-ink">{t('tourDetails.activities')}:</p>
+            <p className="text-safe mt-4 text-sm font-medium text-ink">{t('tourDetails.activities')}:</p>
             <ul className="mt-3 grid max-w-full gap-x-12 gap-y-3 text-sm text-ink md:grid-flow-col md:grid-rows-3 md:auto-cols-fr md:text-[0.95rem]">
               {day.activities.map((activity) => (
                 <li key={activity.id} className="text-safe flex min-w-0 items-start gap-3">
                   <FiCheckCircle className="mt-0.5 shrink-0 text-primary/90" />
-                  <span className="font-semibold leading-6 text-ink">{activity.title}</span>
+                  <span className="font-medium leading-6 text-ink">{activity.title}</span>
                   {activity.description ? <span className="text-safe leading-6 text-muted">: {activity.description}</span> : null}
                 </li>
               ))}

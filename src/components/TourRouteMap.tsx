@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import L from 'leaflet'
-import type { LeafletMouseEvent } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet'
+import { MapContainer, Marker, Polyline, TileLayer, useMap } from 'react-leaflet'
 import type { TourPackageLocation } from '../types/tourPackage'
 
 type TourRouteMapProps = {
@@ -18,7 +17,7 @@ type RouteMarkerProps = {
   onSelect: (location: TourPackageLocation) => void
 }
 
-const ROUTE_ORANGE = '#f08f4f'
+const ROUTE_ORANGE = '#FB770D'
 const UGANDA_BOUNDS = {
   maxLat: 4.4,
   maxLng: 35.2,
@@ -123,25 +122,10 @@ function createMarkerIcon(location: TourPackageLocation, index: number, isActive
 }
 
 function RouteMarker({ isAnimationReady, location, index, isActive, onSelect }: RouteMarkerProps) {
-  const markerRef = useRef<L.Marker | null>(null)
   const icon = useMemo(() => createMarkerIcon(location, index, isActive, isAnimationReady), [index, isActive, isAnimationReady, location])
-
-  useEffect(() => {
-    if (window.matchMedia('(max-width: 767px)').matches) {
-      markerRef.current?.closePopup()
-      return
-    }
-
-    if (isActive) {
-      markerRef.current?.openPopup()
-    } else {
-      markerRef.current?.closePopup()
-    }
-  }, [isActive])
 
   return (
     <Marker
-      ref={markerRef}
       position={[location.latitude, location.longitude]}
       icon={icon}
       keyboard
@@ -149,28 +133,8 @@ function RouteMarker({ isAnimationReady, location, index, isActive, onSelect }: 
       eventHandlers={{
         click: () => onSelect(location),
         keypress: () => onSelect(location),
-        mouseover: (event: LeafletMouseEvent) => event.target.openPopup(),
       }}
-    >
-      <Popup className="tour-map-popup" closeButton={false}>
-        <div className="tour-map-popup-card hidden font-sans md:block">
-          {location.image_url ? (
-            <img
-              src={location.image_url}
-              alt={location.location_name}
-              className="h-24 w-full rounded-xl object-cover"
-            />
-          ) : null}
-          <div className={location.image_url ? 'mt-3' : ''}>
-            <p className="text-sm font-semibold text-ink">{location.location_name}</p>
-            <p className="mt-1 text-xs font-semibold text-primary">Day {location.day_order}</p>
-            {location.notes ? (
-              <p className="mt-2 max-w-60 text-xs leading-5 text-muted">{location.notes}</p>
-            ) : null}
-          </div>
-        </div>
-      </Popup>
-    </Marker>
+    />
   )
 }
 

@@ -30,9 +30,9 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
 
   return (
     <main className="bg-white">
-      <section className="hero-section min-h-[72vh] bg-black" style={{ backgroundImage: `url(${heroImage})` }}>
-        <div className="absolute inset-0 bg-black/55" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-black/45 to-black/70" />
+      <section className="hero-section min-h-[72vh] bg-dark" style={{ backgroundImage: `url(${heroImage})` }}>
+        <div className="absolute inset-0 bg-dark/55" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-dark/45 to-dark/70" />
         <div className="container-custom relative z-10 flex min-h-[72vh] flex-col items-center justify-center pb-16 pt-36 text-center text-white">
           <p className="hero-kicker luxury-script text-3xl leading-none text-white/95 md:text-4xl">{t('aboutPage.hero.kicker')}</p>
           <h1 className="hero-title mt-1 text-4xl font-bold leading-tight md:text-7xl">{t('aboutPage.hero.title')}</h1>
@@ -77,7 +77,7 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-[#1f2937]">
+      <section className="section-padding bg-dark">
         <div className="container-custom">
           <div className="mx-auto max-w-3xl text-center">
             <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('aboutPage.initiatives.label')}</p>
@@ -157,12 +157,12 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
       </section>
 
       <section className="relative overflow-hidden bg-cover bg-center py-20 text-center text-white md:py-28" style={{ backgroundImage: `url(${ctaImage})` }}>
-        <div className="absolute inset-0 bg-[#111827]/75" />
+        <div className="absolute inset-0 bg-dark/75" />
         <div className="container-custom relative z-10">
           <p className="luxury-script text-2xl leading-none md:text-3xl">{t('aboutPage.cta.label')}</p>
           <h2 className="mx-auto mt-2 max-w-3xl text-3xl font-black leading-tight md:text-5xl">{t('aboutPage.cta.title')}</h2>
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-            <a className="btn-primary justify-center" href="tel:+256703543027"><FaPhone /> {t('aboutPage.cta.call')} <FiArrowRight /></a>
+            <a className="btn-primary btn-on-dark justify-center" href="tel:+256703543027"><FaPhone /> {t('aboutPage.cta.call')} <FiArrowRight /></a>
             <button className="btn-outline justify-center border-white/70 bg-transparent text-white hover:border-primary" type="button" onClick={onInquiry}>
               <FaEnvelope /> {t('aboutPage.cta.inquiry')}
             </button>

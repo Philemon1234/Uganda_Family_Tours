@@ -17,7 +17,7 @@ export function Navbar({ onInquiry }: NavbarProps) {
   const { t } = useTranslation()
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/15 bg-black/30 text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)] backdrop-blur-md">
+    <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/15 bg-dark text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)]">
       <nav className="container-custom flex min-h-15 items-center justify-between py-2">
         <NavLink to="/" aria-label={t('navbar.homeAria')}>
           <Logo />

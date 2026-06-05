@@ -1,16 +1,88 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url("./font-family/gothamrnd_light.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url("./font-family/gothamrnd_lightitalic.otf") format("opentype");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url("./font-family/gothamrnd_book.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url("./font-family/gothamrnd_bookitalic.otf") format("opentype");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url("./font-family/gothamrnd_medium.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500 600;
+}
+
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url("./font-family/gothamrnd_mediumitalic.otf") format("opentype");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 500 600;
+}
+
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url("./font-family/gothamrnd_bold.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700 900;
+}
+
+@font-face {
+  font-family: "Gotham Rounded";
+  src: url("./font-family/gothamrnd_bolditalic.otf") format("opentype");
+  font-display: swap;
+  font-style: italic;
+  font-weight: 700 900;
+}
+
+@font-face {
+  font-family: "Adelia";
+  src: url("./font-family/Adelia.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
 @theme {
-  --color-primary: #FFA460;
-  --color-dark: #1f2937;
-  --color-ink: #111827;
+  --color-primary: #FB770D;
+  --color-dark: #25424C;
+  --color-ink: #25424C;
   --color-muted: #64748b;
   --color-border: #e7ded3;
   --color-soft: #faf7f2;
   --radius-card: 16px;
   --shadow-soft: 0 20px 55px rgb(17 24 39 / 0.08);
-  --shadow-orange: 0 12px 28px rgb(255 164 96 / 0.18);
-  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --shadow-orange: 0 12px 28px rgb(251 119 13 / 0.18);
+  --font-sans: "Gotham Rounded", ui-sans-serif, system-ui, sans-serif;
 }
 
 * {
@@ -26,8 +98,8 @@ html {
 body {
   margin: 0;
   background: #faf7f2;
-  color: #111827;
-  font-family: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  color: #ffffff;
+  font-family: "Gotham Rounded", ui-sans-serif, system-ui, sans-serif;
   font-weight: 400;
   overflow-x: hidden;
 }
@@ -40,7 +112,7 @@ body {
 }
 
 .luxury-script {
-  font-family: "Allura", cursive;
+  font-family: "Adelia", cursive;
 }
 
 button,
@@ -48,12 +120,16 @@ a,
 input,
 select,
 textarea {
-  outline-color: #FFA460;
+  outline-color: #FB770D;
 }
 
 button,
 a {
   cursor: pointer;
+}
+
+button {
+  border-radius: 999px;
 }
 
 img {
@@ -102,15 +178,15 @@ img {
   align-items: center;
   gap: 0.5rem;
   justify-content: center;
-  border: 1px solid #FFA460;
-  border-radius: 0.15rem;
-  background: #FFA460;
+  border: 1px solid #FB770D;
+  border-radius: 999px;
+  background: #FB770D;
   padding: 0.95rem 1.85rem;
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #111827;
+  color: #25424C;
   box-shadow: none;
   transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
@@ -120,15 +196,15 @@ img {
   align-items: center;
   gap: 0.5rem;
   justify-content: center;
-  border-radius: 0.15rem;
-  border: 1px solid #263238;
+  border-radius: 999px;
+  border: 1px solid #25424C;
   background: #ffffff;
   padding: 0.95rem 1.85rem;
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #263238;
+  color: #25424C;
   transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
 
@@ -140,16 +216,29 @@ img {
 }
 
 .btn-primary:hover {
-  border-color: #f08f4f;
-  background: #f08f4f;
+  border-color: #FB770D;
+  background: #FB770D;
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
 .btn-outline:hover {
-  border-color: #111827;
-  background: #111827;
+  border-color: #25424C;
+  background: #25424C;
   color: #ffffff;
   transform: translateY(-1px);
+}
+
+.btn-on-dark {
+  border-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #25424C !important;
+}
+
+.btn-on-dark:hover {
+  border-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #25424C !important;
 }
 
 .hero-section {
@@ -219,12 +308,12 @@ img {
   place-items: center;
   border: 0.18rem solid #ffffff;
   border-radius: 999px 999px 999px 0.25rem;
-  background: #FFA460;
+  background: #FB770D;
   color: #ffffff;
-  font-family: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Gotham Rounded", ui-sans-serif, system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
-  box-shadow: 0 14px 26px rgb(17 24 39 / 0.2), 0 0 0 0.28rem rgb(255 164 96 / 0.18);
+  box-shadow: 0 14px 26px rgb(37 66 76 / 0.2), 0 0 0 0.28rem rgb(251 119 13 / 0.18);
   opacity: 0;
   transform: rotate(-45deg) scale(0.72) translateY(0.5rem);
   animation: tour-map-pin-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -248,9 +337,9 @@ img {
 }
 
 .tour-map-pin-active {
-  background: #111827;
+  background: #25424C;
   color: #ffffff;
-  box-shadow: 0 18px 32px rgb(17 24 39 / 0.28), 0 0 0 0.35rem rgb(255 164 96 / 0.3);
+  box-shadow: 0 18px 32px rgb(37 66 76 / 0.28), 0 0 0 0.35rem rgb(251 119 13 / 0.3);
 }
 
 .tour-map-pin-waiting {
@@ -260,8 +349,8 @@ img {
 
 .leaflet-marker-icon:hover .tour-map-pin,
 .leaflet-marker-icon:focus .tour-map-pin {
-  background: #f08f4f;
-  box-shadow: 0 18px 32px rgb(17 24 39 / 0.24), 0 0 0 0.36rem rgb(255 164 96 / 0.28);
+  background: #FB770D;
+  box-shadow: 0 18px 32px rgb(37 66 76 / 0.24), 0 0 0 0.36rem rgb(251 119 13 / 0.28);
 }
 
 .tour-map-popup .leaflet-popup-content-wrapper {
@@ -272,7 +361,7 @@ img {
 
 .tour-map-popup .leaflet-popup-content {
   margin: 0.85rem;
-  font-family: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Gotham Rounded", ui-sans-serif, system-ui, sans-serif;
 }
 
 .tour-map-popup-card {
@@ -297,13 +386,13 @@ img {
 
 .leaflet-control-zoom a {
   border-color: rgb(231 222 211 / 0.9) !important;
-  color: #111827 !important;
-  font-family: "Nunito", ui-sans-serif, system-ui, sans-serif !important;
+  color: #25424C !important;
+  font-family: "Gotham Rounded", ui-sans-serif, system-ui, sans-serif !important;
 }
 
 .leaflet-container {
   z-index: 0;
-  font-family: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Gotham Rounded", ui-sans-serif, system-ui, sans-serif;
 }
 
 .leaflet-pane {
@@ -498,13 +587,13 @@ img {
   padding: 0.75rem 0.9rem;
   font-size: 0.875rem;
   font-weight: 400;
-  color: #111827;
+  color: #25424C;
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .input:focus {
-  border-color: #FFA460;
-  box-shadow: 0 0 0 4px rgb(255 164 96 / 0.14);
+  border-color: #FB770D;
+  box-shadow: 0 0 0 4px rgb(251 119 13 / 0.14);
 }
 
 .field-error .input {
@@ -525,12 +614,12 @@ img {
   background: #ffffff;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #111827;
+  color: #25424C;
   transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease;
 }
 
 .segmented-active {
-  border-color: #FFA460;
+  border-color: #FB770D;
   background: #fff4ec;
   color: #8f4b22;
 }
@@ -595,7 +684,7 @@ img {
 }
 
 .country-options-scroll::-webkit-scrollbar-thumb:hover {
-  background: #f08f4f;
+  background: #FB770D;
 }
 
 .font-black {
@@ -625,7 +714,7 @@ img {
 .content-title {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #111827;
+  color: #25424C;
 }
 
 .orange-bullet {
@@ -641,12 +730,12 @@ img {
   height: 0.38rem;
   width: 0.38rem;
   border-radius: 999px;
-  background: #FFA460;
+  background: #FB770D;
 }
 
 .tour-description {
   display: -webkit-box;
-  min-height: 6rem;
+  height: 5.25rem;
   overflow: hidden;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -694,7 +783,7 @@ img {
   border-radius: 999px;
   background: #ff6f1a;
   cursor: grab;
-  box-shadow: 0 0 0 1px rgb(255 164 96 / 0.65), 0 8px 18px rgb(17 24 39 / 0.14);
+  box-shadow: 0 0 0 1px rgb(251 119 13 / 0.65), 0 8px 18px rgb(37 66 76 / 0.14);
 }
 
 .tour-range-input:active::-webkit-slider-thumb {
@@ -709,7 +798,7 @@ img {
   border-radius: 999px;
   background: #ff6f1a;
   cursor: grab;
-  box-shadow: 0 0 0 1px rgb(255 164 96 / 0.65), 0 8px 18px rgb(17 24 39 / 0.14);
+  box-shadow: 0 0 0 1px rgb(251 119 13 / 0.65), 0 8px 18px rgb(37 66 76 / 0.14);
 }
 
 .tour-range-input:active::-moz-range-thumb {
@@ -761,7 +850,7 @@ img {
 }
 
 .carousel-button:hover {
-  background: #263238;
+  background: #25424C;
   color: #ffffff;
 }
 

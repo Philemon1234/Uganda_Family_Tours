@@ -158,7 +158,7 @@ export function TourFilters({
                 <button
                   className={`min-h-9 rounded-lg border px-3.5 text-xs font-bold transition ${
                     isActive
-                      ? 'border-primary bg-primary text-white shadow-[0_10px_22px_rgba(255,164,96,0.28)]'
+                      ? 'border-primary bg-primary text-white shadow-[0_10px_22px_rgba(251,119,13,0.28)]'
                       : 'border-[#eadfd3] bg-white text-ink hover:border-primary hover:bg-[#fff4ec]'
                   }`}
                   key={option.value}

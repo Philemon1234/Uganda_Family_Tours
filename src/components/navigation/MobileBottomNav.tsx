@@ -89,7 +89,7 @@ export function MobileBottomNav() {
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = item.id === activeItem
-              const buttonClass = `relative z-20 flex h-full flex-col items-center justify-end gap-2 pb-4 text-[0.9rem] font-semibold transition ${
+              const buttonClass = `relative z-20 flex h-full flex-col items-center justify-end gap-2 pb-4 text-[0.9rem] font-semibold transition hover:text-primary ${
                 isActive ? 'text-primary' : 'text-ink'
               }`
 
