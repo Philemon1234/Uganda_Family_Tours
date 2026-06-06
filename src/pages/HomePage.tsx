@@ -136,7 +136,7 @@ export function HomePage({ onBook }: HomePageProps) {
               <h2 className="mx-auto mt-1 max-w-4xl text-xl font-black leading-tight text-white md:text-3xl">
                 {t('home.story.title')}
               </h2>
-              <div className="mx-auto mt-8 max-w-4xl space-y-6 text-base leading-8 text-white/74 md:text-lg">
+              <div className="mx-auto mt-8 max-w-4xl space-y-6 text-base leading-8 text-white md:text-lg">
                 <p>
                   <Trans
                     i18nKey="home.story.p1"
