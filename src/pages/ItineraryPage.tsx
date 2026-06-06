@@ -2,7 +2,7 @@ import { type KeyboardEvent, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FaCheck, FaShieldHeart } from 'react-icons/fa6'
-import { FiArrowRight, FiCheckCircle, FiChevronRight, FiPhone, FiX } from 'react-icons/fi'
+import { FiArrowRight, FiCheckCircle, FiChevronLeft, FiChevronRight, FiPhone, FiX } from 'react-icons/fi'
 import { SafariLoaderOverlay } from '../components/SafariTrailLoader'
 import TourRouteMap from '../components/TourRouteMap'
 import { tours, type ItineraryDay, type Tour } from '../data/tours'
@@ -37,7 +37,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
   const [isTabStuck, setIsTabStuck] = useState(false)
   const [timelineProgress, setTimelineProgress] = useState(0)
   const [activeTab, setActiveTab] = useState(0)
-  const [activeGalleryImage, setActiveGalleryImage] = useState<string | null>(null)
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState<number | null>(null)
 
   useEffect(() => {
     let isMounted = true
@@ -169,16 +169,29 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
   const heroImage = tourPackage.hero_image_url || tourPackage.main_image_url || fallbackTour.heroImage
   const galleryImages = details.galleryImages.slice(0, 4)
   const bookingTour = packageDetailsToTour(details)
+  const activeGalleryImage = activeGalleryIndex === null ? null : galleryImages[activeGalleryIndex]
 
-  const openGalleryImage = (image: string) => {
-    setActiveGalleryImage(image)
+  const openGalleryImage = (index: number) => {
+    setActiveGalleryIndex(index)
   }
 
-  const handleGalleryImageKeyDown = (event: KeyboardEvent<HTMLDivElement>, image: string) => {
+  const closeGalleryImage = () => {
+    setActiveGalleryIndex(null)
+  }
+
+  const moveGalleryImage = (direction: -1 | 1) => {
+    setActiveGalleryIndex((currentIndex) => {
+      if (currentIndex === null || galleryImages.length === 0) return currentIndex
+
+      return (currentIndex + direction + galleryImages.length) % galleryImages.length
+    })
+  }
+
+  const handleGalleryImageKeyDown = (event: KeyboardEvent<HTMLDivElement>, index: number) => {
     if (event.key !== 'Enter' && event.key !== ' ') return
 
     event.preventDefault()
-    openGalleryImage(image)
+    openGalleryImage(index)
   }
 
   return (
@@ -239,13 +252,13 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
             {galleryImages.length > 0 ? (
               <section id="gallery" className="scroll-mt-28">
                 <h2 className="content-title text-safe">{t('tourDetails.gallery')}</h2>
-                <div className="mt-6 grid gap-4 md:grid-cols-[0.95fr_1fr_0.95fr] md:grid-rows-[240px_240px] md:gap-5">
+                <div className="mt-6 grid grid-cols-[0.95fr_1fr_0.95fr] grid-rows-[9.5rem_9.5rem] gap-2 sm:grid-rows-[12rem_12rem] sm:gap-4 md:grid-rows-[240px_240px] md:gap-5">
                   {galleryImages.map((image, index) => {
                     const classes = [
-                      'h-80 md:row-span-2 md:h-full',
-                      'h-64 md:col-span-2 md:h-full',
-                      'h-64 md:h-full',
-                      'h-64 md:h-full',
+                      'row-span-2 h-full',
+                      'col-span-2 h-full',
+                      'h-full',
+                      'h-full',
                     ]
                     const imagePositions = ['object-center', 'object-center', 'object-[50%_55%]', 'object-[50%_58%]']
 
@@ -254,9 +267,9 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                         key={image.id}
                         role="button"
                         tabIndex={0}
-                        className={`group max-w-full cursor-pointer overflow-hidden rounded-[2rem] shadow-[0_18px_45px_rgba(17,24,39,0.08)] transition duration-300 hover:shadow-[0_22px_55px_rgba(17,24,39,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 ${classes[index] ?? 'h-64 md:h-full'}`}
-                        onClick={() => openGalleryImage(image.image_url)}
-                        onKeyDown={(event) => handleGalleryImageKeyDown(event, image.image_url)}
+                        className={`group max-w-full cursor-pointer overflow-hidden rounded-[1.15rem] shadow-[0_18px_45px_rgba(17,24,39,0.08)] transition duration-300 hover:shadow-[0_22px_55px_rgba(17,24,39,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4 sm:rounded-[1.5rem] md:rounded-[2rem] ${classes[index] ?? 'h-full'}`}
+                        onClick={() => openGalleryImage(index)}
+                        onKeyDown={(event) => handleGalleryImageKeyDown(event, index)}
                         aria-label={t('tourDetails.openGalleryImage', { title: tourTitle, number: index + 1 })}
                       >
                         <img
@@ -345,21 +358,68 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
       </main>
 
       {activeGalleryImage && (
-        <div className="fixed inset-0 z-[120] grid h-screen w-screen place-items-center bg-black/78 px-4 pb-6 pt-24 md:px-8 md:pb-8 md:pt-28" onClick={() => setActiveGalleryImage(null)}>
+        <div className="fixed inset-0 z-[120] flex h-screen w-screen items-center justify-center bg-black/78 px-4 pb-28 pt-24 md:grid md:place-items-center md:px-8 md:pb-8 md:pt-28" onClick={closeGalleryImage}>
           <button
             type="button"
             className="fixed right-4 top-24 z-[130] grid h-12 w-12 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-white md:right-7 md:top-24"
             aria-label={t('tourDetails.closeGalleryImage')}
-            onClick={() => setActiveGalleryImage(null)}
+            onClick={closeGalleryImage}
           >
             <FiX />
           </button>
-          <img
-            className="max-h-[calc(100vh-7.5rem)] max-w-[calc(100vw-2rem)] rounded-[1.25rem] object-contain shadow-none md:max-h-[calc(100vh-8.5rem)] md:max-w-[calc(100vw-4rem)]"
-            src={activeGalleryImage}
-            alt={t('tourDetails.enlargedGalleryAlt', { title: tourTitle })}
-            onClick={(event) => event.stopPropagation()}
-          />
+          {galleryImages.length > 1 ? (
+            <>
+              <button
+                type="button"
+                className="fixed left-7 top-1/2 z-[130] hidden h-14 w-14 -translate-y-1/2 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-white md:grid"
+                aria-label="Previous gallery image"
+                onClick={(event) => {
+                  event.stopPropagation()
+                  moveGalleryImage(-1)
+                }}
+              >
+                <FiChevronLeft />
+              </button>
+              <button
+                type="button"
+                className="fixed right-7 top-1/2 z-[130] hidden h-14 w-14 -translate-y-1/2 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-white md:grid"
+                aria-label="Next gallery image"
+                onClick={(event) => {
+                  event.stopPropagation()
+                  moveGalleryImage(1)
+                }}
+              >
+                <FiChevronRight />
+              </button>
+            </>
+          ) : null}
+          <div className="flex max-w-full flex-col items-center gap-4" onClick={(event) => event.stopPropagation()}>
+            <img
+              className="max-h-[calc(100vh-18rem)] max-w-[calc(100vw-2rem)] rounded-[1.25rem] object-contain shadow-none md:max-h-[calc(100vh-8.5rem)] md:max-w-[calc(100vw-4rem)]"
+              src={activeGalleryImage.image_url}
+              alt={activeGalleryImage.alt_text || activeGalleryImage.caption || t('tourDetails.galleryImageAlt', { title: tourTitle, number: (activeGalleryIndex ?? 0) + 1 })}
+            />
+            {galleryImages.length > 1 ? (
+              <div className="flex items-center justify-center gap-5 md:hidden">
+                <button
+                  type="button"
+                  className="grid h-12 w-12 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-white"
+                  aria-label="Previous gallery image"
+                  onClick={() => moveGalleryImage(-1)}
+                >
+                  <FiChevronLeft />
+                </button>
+                <button
+                  type="button"
+                  className="grid h-12 w-12 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-white"
+                  aria-label="Next gallery image"
+                  onClick={() => moveGalleryImage(1)}
+                >
+                  <FiChevronRight />
+                </button>
+              </div>
+            ) : null}
+          </div>
         </div>
       )}
     </>
