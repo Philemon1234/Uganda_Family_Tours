@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { FiHome, FiMenu, FiUser } from 'react-icons/fi'
+import { FiArrowUp, FiHome, FiMenu, FiUser } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
 import { LuHand } from 'react-icons/lu'
 import type { IconType } from 'react-icons'
@@ -25,6 +25,7 @@ export function MobileBottomNav() {
   const { t } = useTranslation()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState<string | null>(null)
+  const [isAtFooterBottom, setIsAtFooterBottom] = useState(false)
   const location = useLocation()
 
   const routeActiveItem = useMemo(() => {
@@ -37,6 +38,28 @@ export function MobileBottomNav() {
   useEffect(() => {
     setSelectedItem(null)
   }, [location.hash, location.pathname])
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 1023px)')
+    const sentinel = document.getElementById('footer-bottom-sentinel')
+
+    if (!sentinel || !mediaQuery.matches) {
+      setIsAtFooterBottom(false)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsAtFooterBottom(entry.isIntersecting),
+      {
+        root: null,
+        threshold: 1,
+      },
+    )
+
+    observer.observe(sentinel)
+
+    return () => observer.disconnect()
+  }, [location.pathname])
 
   const activeItem = selectedItem ?? routeActiveItem
   const activeIndex = Math.max(navItems.findIndex((item) => item.id === activeItem), 0)
@@ -52,6 +75,11 @@ export function MobileBottomNav() {
   }
 
   const handleMenuClick = () => {
+    if (isSidebarOpen) {
+      closeSidebar()
+      return
+    }
+
     setSelectedItem('menu')
     setIsSidebarOpen(true)
   }
@@ -61,9 +89,28 @@ export function MobileBottomNav() {
     setSelectedItem(null)
   }
 
+  const handleNavItemClick = (itemId: string) => {
+    setSelectedItem(itemId)
+    setIsSidebarOpen(false)
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <>
       <MobileSidebarDrawer isOpen={isSidebarOpen} onClose={closeSidebar} />
+      <button
+        type="button"
+        className={`fixed bottom-[7.25rem] right-5 z-[95] grid h-12 w-12 place-items-center rounded-full bg-primary text-xl text-white shadow-[0_14px_34px_rgba(0,0,0,0.22)] transition duration-300 ease-out lg:hidden ${
+          isAtFooterBottom ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+        }`}
+        aria-label={t('common.backToTop', { defaultValue: 'Back to top' })}
+        onClick={scrollToTop}
+      >
+        <FiArrowUp />
+      </button>
       <div className="mobile-bottom-nav lg:hidden">
         <nav
           className="relative h-[calc(88px+env(safe-area-inset-bottom))] rounded-t-[24px] bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-10px_30px_rgba(0,0,0,0.10)]"
@@ -77,7 +124,7 @@ export function MobileBottomNav() {
             }}
           />
           <div
-            className="absolute -top-[1.55rem] left-[calc(10%_-_28px)] z-10 grid h-[56px] w-[56px] place-items-center rounded-full bg-primary text-[1.55rem] text-ink transition-transform duration-300 ease-out will-change-transform"
+            className="absolute -top-[1.55rem] left-[calc(10%_-_28px)] z-10 grid h-[56px] w-[56px] place-items-center rounded-full bg-primary text-[1.55rem] text-white transition-transform duration-300 ease-out will-change-transform"
             style={{
               transform: `translate3d(${activeIndex * 20}vw, 0, 0)`,
             }}
@@ -123,7 +170,7 @@ export function MobileBottomNav() {
                     target="_blank"
                     rel="noreferrer"
                     className={buttonClass}
-                    onClick={() => setSelectedItem(item.id)}
+                    onClick={() => handleNavItemClick(item.id)}
                     aria-current={isActive ? 'page' : undefined}
                   >
                     {content}
@@ -136,7 +183,7 @@ export function MobileBottomNav() {
                   key={item.id}
                   to={item.href ?? '/'}
                   className={buttonClass}
-                  onClick={() => setSelectedItem(item.id)}
+                  onClick={() => handleNavItemClick(item.id)}
                   aria-current={isActive ? 'page' : undefined}
                 >
                   {content}

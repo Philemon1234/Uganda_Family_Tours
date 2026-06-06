@@ -25,7 +25,7 @@ type HomePageProps = {
   onBook: () => void
 }
 
-const FEATURED_TOURS_LIMIT = 3
+const FEATURED_TOURS_LIMIT = 6
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
 

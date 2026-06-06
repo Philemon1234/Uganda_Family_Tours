@@ -26,14 +26,14 @@ export function LanguageSwitcher() {
   return (
     <div ref={rootRef} className="relative">
       <button
-        className="inline-flex h-10 items-center gap-2 rounded-full border border-white/20 bg-white/90 px-3 text-sm font-bold text-ink shadow-[0_8px_18px_rgba(17,24,39,0.12)] transition hover:bg-white"
+        className="inline-flex h-10 items-center gap-2 rounded-none border-0 bg-transparent px-2 text-sm font-bold text-white shadow-none transition hover:bg-transparent"
         type="button"
         aria-label={t('navbar.language')}
         aria-expanded={isOpen}
         onClick={() => setIsOpen((value) => !value)}
       >
         <span className="text-lg leading-none">{language.flag}</span>
-        <FiChevronDown className={`text-xs transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <FiChevronDown className={`text-xs text-white transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (

@@ -340,7 +340,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
           </aside>
         </div>
         <div className="container-custom mt-12">
-          <TourRouteMap locations={details.locations} />
+          <TourRouteMap locations={details.locations} mapStyle={tourPackage.map_style} />
         </div>
       </main>
 

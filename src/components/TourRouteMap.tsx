@@ -2,10 +2,11 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { MapContainer, Marker, Polyline, TileLayer, useMap } from 'react-leaflet'
-import type { TourPackageLocation } from '../types/tourPackage'
+import type { TourMapStyle, TourPackageLocation } from '../types/tourPackage'
 
 type TourRouteMapProps = {
   locations: TourPackageLocation[]
+  mapStyle?: TourMapStyle
   title?: string
 }
 
@@ -18,6 +19,25 @@ type RouteMarkerProps = {
 }
 
 const ROUTE_ORANGE = '#FB770D'
+const DEFAULT_PIN_COLOR = '#FB770D'
+const MAP_TILE_STYLES: Record<TourMapStyle, { className: string; url: string }> = {
+  dark: {
+    className: 'tour-map-tiles-dark',
+    url: 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
+  },
+  green: {
+    className: 'tour-map-tiles-green',
+    url: 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
+  },
+  light: {
+    className: 'tour-map-tiles-light',
+    url: 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
+  },
+  warm: {
+    className: 'tour-map-tiles-warm',
+    url: 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
+  },
+}
 const UGANDA_BOUNDS = {
   maxLat: 4.4,
   maxLng: 35.2,
@@ -112,9 +132,11 @@ function AnimatedRoute({ positions }: { positions: [number, number][] }) {
 }
 
 function createMarkerIcon(location: TourPackageLocation, index: number, isActive: boolean, isAnimationReady: boolean) {
+  const pinColor = location.pin_color || DEFAULT_PIN_COLOR
+
   return L.divIcon({
     className: '',
-    html: `<span role="button" aria-label="Day ${location.day_order}: ${location.location_name}" class="tour-map-pin ${isActive ? 'tour-map-pin-active' : ''} ${isAnimationReady ? '' : 'tour-map-pin-waiting'}" style="--pin-delay: ${index * 120}ms"><span>${index + 1}</span></span>`,
+    html: `<span role="button" aria-label="Day ${location.day_order}: ${location.location_name}" class="tour-map-pin ${isActive ? 'tour-map-pin-active' : ''} ${isAnimationReady ? '' : 'tour-map-pin-waiting'}" style="--pin-delay: ${index * 120}ms; --pin-color: ${pinColor}; --pin-glow: ${pinColor}33"><span>${index + 1}</span></span>`,
     iconAnchor: [16, 34],
     iconSize: [32, 38],
     popupAnchor: [0, -32],
@@ -186,7 +208,7 @@ function StaticRouteFallback({ locations }: { locations: TourPackageLocation[] }
   )
 }
 
-function TourRouteMap({ locations }: TourRouteMapProps) {
+function TourRouteMap({ locations, mapStyle = 'light' }: TourRouteMapProps) {
   const sectionRef = useRef<HTMLElement | null>(null)
   const routeLocations = useMemo(
     () => locations.filter(isUsableCoordinate).sort((first, second) => first.day_order - second.day_order),
@@ -205,6 +227,7 @@ function TourRouteMap({ locations }: TourRouteMapProps) {
     () => getInterpolatedPositions(positions, routeProgress),
     [positions, routeProgress],
   )
+  const tileStyle = MAP_TILE_STYLES[mapStyle] ?? MAP_TILE_STYLES.light
 
   useEffect(() => {
     const section = sectionRef.current
@@ -305,16 +328,21 @@ function TourRouteMap({ locations }: TourRouteMapProps) {
 
   return (
     <section ref={sectionRef} id="route-map" className="scroll-mt-28">
-      <div className="relative isolate z-0 h-[22rem] min-w-0 overflow-hidden rounded-[1.35rem] border border-border/80 bg-[#f8f3ec] shadow-[0_22px_55px_rgba(17,24,39,0.08)] sm:h-[24rem] md:h-[36rem]">
+      <div className="relative isolate z-0 h-[22rem] min-w-0 overflow-hidden bg-[#f8f3ec] shadow-[0_22px_55px_rgba(17,24,39,0.08)] sm:h-[24rem] md:h-[36rem]">
           <MapContainer
             center={initialCenter}
             zoom={7}
+            dragging={false}
             scrollWheelZoom={false}
+            touchZoom={false}
+            boxZoom={false}
+            keyboard={false}
             className="h-full w-full font-sans"
             attributionControl={false}
           >
             <TileLayer
-              url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
+              className={tileStyle.className}
+              url={tileStyle.url}
               attribution="&copy; OpenStreetMap contributors &copy; CARTO"
             />
             <FitRouteBounds locations={routeLocations} focusedLocation={focusedLocation} />

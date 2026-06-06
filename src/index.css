@@ -248,6 +248,11 @@ img {
   background-position: center;
 }
 
+.site-header {
+  transition: opacity 260ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
 .mobile-bottom-nav {
   position: fixed !important;
   left: 0 !important;
@@ -262,7 +267,8 @@ img {
   margin: 0;
   transform: none !important;
   backface-visibility: hidden;
-  will-change: auto;
+  transition: opacity 260ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
   overflow: visible !important;
 }
 
@@ -308,12 +314,12 @@ img {
   place-items: center;
   border: 0.18rem solid #ffffff;
   border-radius: 999px 999px 999px 0.25rem;
-  background: #FB770D;
+  background: var(--pin-color, #FB770D);
   color: #ffffff;
   font-family: "Gotham Rounded", ui-sans-serif, system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
-  box-shadow: 0 14px 26px rgb(37 66 76 / 0.2), 0 0 0 0.28rem rgb(251 119 13 / 0.18);
+  box-shadow: 0 14px 26px rgb(37 66 76 / 0.2), 0 0 0 0.28rem var(--pin-glow, rgb(251 119 13 / 0.18));
   opacity: 0;
   transform: rotate(-45deg) scale(0.72) translateY(0.5rem);
   animation: tour-map-pin-enter 520ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -337,9 +343,9 @@ img {
 }
 
 .tour-map-pin-active {
-  background: #25424C;
+  background: var(--pin-color, #25424C);
   color: #ffffff;
-  box-shadow: 0 18px 32px rgb(37 66 76 / 0.28), 0 0 0 0.35rem rgb(251 119 13 / 0.3);
+  box-shadow: 0 18px 32px rgb(37 66 76 / 0.28), 0 0 0 0.35rem var(--pin-glow, rgb(251 119 13 / 0.3));
 }
 
 .tour-map-pin-waiting {
@@ -349,8 +355,20 @@ img {
 
 .leaflet-marker-icon:hover .tour-map-pin,
 .leaflet-marker-icon:focus .tour-map-pin {
-  background: #FB770D;
-  box-shadow: 0 18px 32px rgb(37 66 76 / 0.24), 0 0 0 0.36rem rgb(251 119 13 / 0.28);
+  background: var(--pin-color, #FB770D);
+  box-shadow: 0 18px 32px rgb(37 66 76 / 0.24), 0 0 0 0.36rem var(--pin-glow, rgb(251 119 13 / 0.28));
+}
+
+.tour-map-tiles-green {
+  filter: hue-rotate(74deg) saturate(1.42) brightness(1.03);
+}
+
+.tour-map-tiles-warm {
+  filter: sepia(0.34) saturate(1.18) brightness(1.04);
+}
+
+.tour-map-tiles-dark {
+  filter: saturate(1.08) brightness(1.08);
 }
 
 .tour-map-popup .leaflet-popup-content-wrapper {
@@ -425,6 +443,14 @@ img {
     position: sticky !important;
     top: 150px;
     z-index: 20;
+  }
+}
+
+@media (max-width: 1023px) {
+  .site-header-hidden-mobile {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(calc(-100% - 1rem));
   }
 }
 
@@ -621,7 +647,7 @@ img {
 .segmented-active {
   border-color: #FB770D;
   background: #fff4ec;
-  color: #8f4b22;
+  color: #FB770D;
 }
 
 .counter-btn {
@@ -636,12 +662,12 @@ img {
 
 .counter-btn:hover {
   background: #fff4ec;
-  color: #8f4b22;
+  color: #FB770D;
 }
 
 .booking-modal-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgb(253 94 2 / 0.35) rgb(253 94 2 / 0.06);
+  scrollbar-color: rgb(251 119 13 / 0.35) rgb(251 119 13 / 0.06);
 }
 
 .booking-modal-scroll::-webkit-scrollbar {
@@ -651,21 +677,21 @@ img {
 .booking-modal-scroll::-webkit-scrollbar-track {
   margin-block: 1.25rem;
   border-radius: 999px;
-  background: rgb(253 94 2 / 0.06);
+  background: rgb(251 119 13 / 0.06);
 }
 
 .booking-modal-scroll::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgb(253 94 2 / 0.35);
+  background: rgb(251 119 13 / 0.35);
 }
 
 .booking-modal-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgb(253 94 2 / 0.5);
+  background: rgb(251 119 13 / 0.5);
 }
 
 .country-options-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgb(253 94 2 / 0.62) rgb(253 94 2 / 0.08);
+  scrollbar-color: rgb(251 119 13 / 0.62) rgb(251 119 13 / 0.08);
 }
 
 .country-options-scroll::-webkit-scrollbar {
@@ -674,13 +700,13 @@ img {
 
 .country-options-scroll::-webkit-scrollbar-track {
   border-radius: 999px;
-  background: rgb(253 94 2 / 0.08);
+  background: rgb(251 119 13 / 0.08);
 }
 
 .country-options-scroll::-webkit-scrollbar-thumb {
   border: 0.18rem solid #ffffff;
   border-radius: 999px;
-  background: rgb(253 94 2 / 0.62);
+  background: rgb(251 119 13 / 0.62);
 }
 
 .country-options-scroll::-webkit-scrollbar-thumb:hover {
@@ -744,11 +770,18 @@ img {
   -webkit-line-clamp: 3;
 }
 
+.tour-range-control {
+  --tour-range-track-height: 0.38rem;
+  --tour-range-touch-height: 2.5rem;
+  --tour-range-thumb-offset: 0.3rem;
+}
+
 .tour-range-track {
   position: relative;
-  height: 0.25rem;
+  height: var(--tour-range-track-height);
   border-radius: 999px;
   background: #e5e7eb;
+  cursor: pointer;
   user-select: none;
 }
 
@@ -757,9 +790,9 @@ img {
   position: absolute;
   left: 0;
   right: 0;
-  top: 1.9rem;
+  top: calc(1.75rem + (var(--tour-range-track-height, 0.38rem) / 2) - (var(--tour-range-touch-height, 2.5rem) / 2) - var(--tour-range-thumb-offset, 0rem));
   z-index: 10;
-  height: 1.45rem;
+  height: var(--tour-range-touch-height, 2.5rem);
   width: 100%;
   appearance: none;
   background: transparent;
@@ -776,12 +809,12 @@ img {
 
 .tour-range-input::-webkit-slider-thumb {
   pointer-events: auto;
-  height: 0.95rem;
-  width: 0.95rem;
+  height: 1.16rem;
+  width: 1.16rem;
   appearance: none;
   border: 0.18rem solid #ffffff;
   border-radius: 999px;
-  background: #ff6f1a;
+  background: #FB770D;
   cursor: grab;
   box-shadow: 0 0 0 1px rgb(251 119 13 / 0.65), 0 8px 18px rgb(37 66 76 / 0.14);
 }
@@ -792,11 +825,11 @@ img {
 
 .tour-range-input::-moz-range-thumb {
   pointer-events: auto;
-  height: 0.95rem;
-  width: 0.95rem;
+  height: 1.16rem;
+  width: 1.16rem;
   border: 0.18rem solid #ffffff;
   border-radius: 999px;
-  background: #ff6f1a;
+  background: #FB770D;
   cursor: grab;
   box-shadow: 0 0 0 1px rgb(251 119 13 / 0.65), 0 8px 18px rgb(37 66 76 / 0.14);
 }
@@ -806,16 +839,34 @@ img {
 }
 
 .tour-range-input::-webkit-slider-runnable-track {
-  height: 0.25rem;
+  height: var(--tour-range-track-height, 0.38rem);
   appearance: none;
   background: transparent;
   cursor: grab;
 }
 
 .tour-range-input::-moz-range-track {
-  height: 0.25rem;
+  height: var(--tour-range-track-height, 0.38rem);
   background: transparent;
   cursor: grab;
+}
+
+@media (max-width: 768px) {
+  .tour-range-control {
+    --tour-range-track-height: 0.44rem;
+    --tour-range-touch-height: 2.85rem;
+    --tour-range-thumb-offset: 0.42rem;
+  }
+
+  .tour-range-input::-webkit-slider-thumb {
+    height: 1.35rem;
+    width: 1.35rem;
+  }
+
+  .tour-range-input::-moz-range-thumb {
+    height: 1.35rem;
+    width: 1.35rem;
+  }
 }
 
 .animate-filter-panel {
@@ -844,7 +895,7 @@ img {
   place-items: center;
   border-radius: 999px;
   background: #ffffff;
-  color: #8f4b22;
+  color: #FB770D;
   box-shadow: 0 18px 45px rgb(17 24 39 / 0.13);
   transition: background-color 160ms ease, color 160ms ease;
 }

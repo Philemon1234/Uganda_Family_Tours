@@ -120,8 +120,8 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
   }
 
   return (
-    <main className="bg-white pt-20 md:pt-24">
-      <section className="section-padding pt-8 md:pt-10">
+    <main className="bg-white pt-16 md:pt-24">
+      <section className="pb-14 pt-5 md:pb-20 md:pt-10">
         <div className="container-custom">
           <SectionHeader
             title={t('toursPage.title')}

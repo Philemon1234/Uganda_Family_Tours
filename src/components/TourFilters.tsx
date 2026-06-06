@@ -1,5 +1,4 @@
-import { useMemo } from 'react'
-import { FiFilter } from 'react-icons/fi'
+import type { PointerEvent } from 'react'
 import { useLocale } from '../context/LocaleContext'
 
 export type DurationFilter = 'all' | '1-2' | '3-4' | '5-7' | '8-plus'
@@ -38,7 +37,6 @@ export function TourFilters({
   selectedDuration,
   onPriceChange,
   onDurationChange,
-  onReset,
 }: TourFiltersProps) {
   const { formatCurrency } = useLocale()
 
@@ -48,15 +46,6 @@ export function TourFilters({
   const maxPosition = ((selectedMaxPrice - minPrice) / rangeSize) * 100
   const minLabelPosition = `clamp(2.25rem, ${minPosition}%, calc(100% - 2.25rem))`
   const maxLabelPosition = `clamp(2.25rem, ${maxPosition}%, calc(100% - 2.25rem))`
-
-  const activeFilterCount = useMemo(() => {
-    let count = 0
-
-    if (selectedMinPrice !== minPrice || selectedMaxPrice !== maxPrice) count += 1
-    if (selectedDuration !== 'all') count += 1
-
-    return count
-  }, [maxPrice, minPrice, selectedDuration, selectedMaxPrice, selectedMinPrice])
 
   const updateMinPrice = (value: number) => {
     onPriceChange({
@@ -72,37 +61,32 @@ export function TourFilters({
     })
   }
 
+  const handleTrackPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    const bounds = event.currentTarget.getBoundingClientRect()
+    const position = Math.min(Math.max((event.clientX - bounds.left) / bounds.width, 0), 1)
+    const rawValue = minPrice + position * rangeSize
+    const steppedValue = Math.round(rawValue / 50) * 50
+    const boundedValue = Math.min(Math.max(steppedValue, minPrice), usableMaxPrice)
+    const distanceToMin = Math.abs(boundedValue - selectedMinPrice)
+    const distanceToMax = Math.abs(boundedValue - selectedMaxPrice)
+
+    if (distanceToMin <= distanceToMax) {
+      updateMinPrice(boundedValue)
+      return
+    }
+
+    updateMaxPrice(boundedValue)
+  }
+
   return (
     <section
       aria-label="Tour filters"
       className="rounded-[1rem] border border-[#eadfd3] bg-[#fffdf9] p-4 shadow-[0_18px_45px_rgba(17,24,39,0.06)] md:p-5"
     >
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="inline-flex min-w-0 items-center gap-2">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#fff4ec] text-primary">
-            <FiFilter />
-          </span>
-          <div className="min-w-0">
-            <h2 className="text-base font-bold text-ink">Filters</h2>
-            <p className="text-sm text-muted">Refine tours by budget and trip length.</p>
-          </div>
-        </div>
-
-        {activeFilterCount > 0 ? (
-          <button
-            className="min-h-9 rounded-lg border border-[#eadfd3] bg-white px-3.5 text-xs font-bold text-[#f97316] transition hover:border-primary hover:bg-[#fff4ec]"
-            type="button"
-            onClick={onReset}
-          >
-            Clear all
-          </button>
-        ) : null}
-      </div>
-
-      <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">Price Range</p>
-          <div className="relative mt-3 touch-none select-none px-1 pb-1 pt-7">
+          <div className="tour-range-control relative mt-3 touch-none select-none px-1 pb-1 pt-7">
             <div
               className="pointer-events-none absolute top-0 -translate-x-1/2 select-none rounded-md border border-[#eadfd3] bg-white px-2 py-0.5 text-[0.68rem] font-bold text-ink shadow-sm"
               style={{ left: minLabelPosition }}
@@ -115,7 +99,7 @@ export function TourFilters({
             >
               {formatCurrency(selectedMaxPrice)}
             </div>
-            <div className="tour-range-track">
+            <div className="tour-range-track" onPointerDown={handleTrackPointerDown}>
               <span
                 className="absolute top-0 h-full rounded-full bg-primary"
                 style={{ left: `${minPosition}%`, right: `${100 - maxPosition}%` }}

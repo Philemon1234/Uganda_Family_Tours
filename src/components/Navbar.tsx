@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Logo } from './Logo'
 import { LanguageSwitcher } from './LanguageSwitcher'
@@ -15,9 +16,37 @@ const navItems = [
 
 export function Navbar({ onInquiry }: NavbarProps) {
   const { t } = useTranslation()
+  const location = useLocation()
+  const [isAtFooterBottom, setIsAtFooterBottom] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 1023px)')
+    const sentinel = document.getElementById('footer-bottom-sentinel')
+
+    if (!sentinel || !mediaQuery.matches) {
+      setIsAtFooterBottom(false)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsAtFooterBottom(entry.isIntersecting),
+      {
+        root: null,
+        threshold: 1,
+      },
+    )
+
+    observer.observe(sentinel)
+
+    return () => observer.disconnect()
+  }, [location.pathname])
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/15 bg-dark text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)]">
+    <header
+      className={`site-header fixed left-0 right-0 top-0 z-40 border-b border-white/15 bg-dark text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)] ${
+        isAtFooterBottom ? 'site-header-hidden-mobile' : ''
+      }`}
+    >
       <nav className="container-custom flex min-h-15 items-center justify-between py-2">
         <NavLink to="/" aria-label={t('navbar.homeAria')}>
           <Logo />

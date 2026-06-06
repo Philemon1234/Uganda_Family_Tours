@@ -1,4 +1,5 @@
 export type PackageStatus = 'draft' | 'published' | 'archived'
+export type TourMapStyle = 'light' | 'green' | 'warm' | 'dark'
 
 export type TourPackage = {
   id: string
@@ -11,6 +12,7 @@ export type TourPackage = {
   overview: string
   main_image_url: string | null
   hero_image_url: string | null
+  map_style: TourMapStyle
   status: PackageStatus
   created_at: string
   updated_at: string
@@ -74,6 +76,7 @@ export type TourPackageLocation = {
   longitude: number
   notes: string | null
   image_url: string | null
+  pin_color: string
   day_order: number
 }
 

@@ -11,7 +11,16 @@ import type {
 } from '../types/tourPackage'
 
 const TOUR_PACKAGE_SELECT =
+  'id,title,slug,category,duration_days,price_from_usd,short_description,overview,main_image_url,hero_image_url,map_style,status,created_at,updated_at'
+const TOUR_PACKAGE_SELECT_FALLBACK =
   'id,title,slug,category,duration_days,price_from_usd,short_description,overview,main_image_url,hero_image_url,status,created_at,updated_at'
+
+function withDefaultMapStyle(packages: Omit<TourPackage, 'map_style'>[]): TourPackage[] {
+  return packages.map((tourPackage) => ({
+    ...tourPackage,
+    map_style: 'light',
+  }))
+}
 
 function getSupabaseClient() {
   if (!supabase) {
@@ -43,6 +52,26 @@ export async function getPublishedTourPackages(
   const { data, error } = await query
 
   if (error) {
+    if (error.message.includes('map_style')) {
+      let fallbackQuery = getSupabaseClient()
+        .from('tour_packages')
+        .select(TOUR_PACKAGE_SELECT_FALLBACK)
+        .eq('status', 'published')
+        .order('created_at', { ascending: false })
+
+      if (options.limit) {
+        fallbackQuery = fallbackQuery.limit(options.limit)
+      }
+
+      const fallbackResult = await fallbackQuery
+
+      if (fallbackResult.error) {
+        throw new Error(fallbackResult.error.message)
+      }
+
+      return withDefaultMapStyle((fallbackResult.data ?? []) as Omit<TourPackage, 'map_style'>[])
+    }
+
     throw new Error(error.message)
   }
 
@@ -60,6 +89,23 @@ export async function getPublishedTourPackageBySlug(
     .maybeSingle()
 
   if (error) {
+    if (error.message.includes('map_style')) {
+      const fallbackResult = await getSupabaseClient()
+        .from('tour_packages')
+        .select(TOUR_PACKAGE_SELECT_FALLBACK)
+        .eq('slug', slug)
+        .eq('status', 'published')
+        .maybeSingle()
+
+      if (fallbackResult.error) {
+        throw new Error(fallbackResult.error.message)
+      }
+
+      return fallbackResult.data
+        ? withDefaultMapStyle([fallbackResult.data as Omit<TourPackage, 'map_style'>])[0]
+        : null
+    }
+
     throw new Error(error.message)
   }
 
@@ -107,14 +153,14 @@ export async function getTourPackageDetailsBySlug(
   let locations: TourPackageLocation[] = []
   const locationsResult = await client
     .from('package_locations')
-    .select('id,package_id,location_name,latitude,longitude,notes,image_url,day_order')
+    .select('id,package_id,location_name,latitude,longitude,notes,image_url,pin_color,day_order')
     .eq('package_id', tourPackage.id)
     .order('day_order', { ascending: true })
 
   if (locationsResult.error) {
-    const isMissingImageColumn = locationsResult.error.message.includes('image_url')
+    const isMissingOptionalMapColumn = locationsResult.error.message.includes('image_url') || locationsResult.error.message.includes('pin_color')
 
-    if (!isMissingImageColumn) {
+    if (!isMissingOptionalMapColumn) {
       throw new Error(locationsResult.error.message)
     }
 
@@ -128,9 +174,10 @@ export async function getTourPackageDetailsBySlug(
       throw new Error(fallbackLocationsResult.error.message)
     }
 
-    locations = ((fallbackLocationsResult.data ?? []) as Omit<TourPackageLocation, 'image_url'>[]).map((location) => ({
+    locations = ((fallbackLocationsResult.data ?? []) as Omit<TourPackageLocation, 'image_url' | 'pin_color'>[]).map((location) => ({
       ...location,
       image_url: null,
+      pin_color: '#FB770D',
     }))
   } else {
     locations = (locationsResult.data ?? []) as TourPackageLocation[]
