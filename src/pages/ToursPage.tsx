@@ -157,10 +157,10 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
             <div className="mt-10">
               {filteredTours.length === 0 ? (
                 <div className="mx-auto mt-10 max-w-3xl rounded-[1.75rem] border border-dashed border-[#eadfd3] bg-[#fff8f3] px-6 py-10 text-center">
-                  <p className="text-xl font-black text-ink">No tours match your filters.</p>
-                  <p className="mt-3 text-muted">Try adjusting your price or duration.</p>
+                  <p className="text-xl font-black text-ink">{t('toursPage.noFilterResultsTitle')}</p>
+                  <p className="mt-3 text-muted">{t('toursPage.noFilterResultsDescription')}</p>
                   <button className="btn-primary mt-6" type="button" onClick={resetFilters}>
-                    Reset Filters
+                    {t('toursPage.resetFilters')}
                   </button>
                 </div>
               ) : (
@@ -171,14 +171,14 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
                     ))}
                   </div>
                   {totalPages > 1 ? (
-                    <nav className="mt-12 flex flex-wrap items-center justify-center gap-2" aria-label="Tour pagination">
+                    <nav className="mt-12 flex flex-wrap items-center justify-center gap-2" aria-label={t('toursPage.paginationAria')}>
                       <button
                         className="min-h-10 rounded-lg border border-[#eadfd3] bg-white px-4 text-sm font-bold text-ink transition hover:border-primary hover:bg-[#fff4ec] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[#eadfd3] disabled:hover:bg-white"
                         type="button"
                         disabled={currentPage === 1}
                         onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
                       >
-                        Previous
+                        {t('toursPage.previousPage')}
                       </button>
                       {visiblePages[0] > 1 ? (
                         <>
@@ -228,7 +228,7 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
                         disabled={currentPage === totalPages}
                         onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
                       >
-                        Next
+                        {t('toursPage.nextPage')}
                       </button>
                     </nav>
                   ) : null}

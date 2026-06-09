@@ -9,6 +9,14 @@ import { tours, type ItineraryDay, type Tour } from '../data/tours'
 import { useLocale } from '../context/LocaleContext'
 import { getTourPackageDetailsBySlug } from '../services/publicTourService'
 import type { TourPackageDetails, TourItineraryDayWithDetails } from '../types/tourPackage'
+import {
+  getLocalizedGalleryImage,
+  getLocalizedHighlight,
+  getLocalizedItineraryDay,
+  getLocalizedLocation,
+  getLocalizedPackage,
+  getTourContentKey,
+} from '../utils/localizedTourContent'
 import hotelExterior from '../assets/Hotels/hotel.jpg'
 import kabiraPool from '../assets/Hotels/Kabira_Country_Club-Kampala-Pool-2-477529.jpg'
 import kampalaSerena from '../assets/Hotels/kampala-serena-hotel.jpg'
@@ -163,12 +171,18 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
     )
   }
 
-  const tourPackage = details.package
+  const contentKey = getTourContentKey(details.package.slug)
+  const tourPackage = getLocalizedPackage(t, details.package)
+  const highlights = details.highlights.map((highlight, index) => getLocalizedHighlight(t, highlight, contentKey, index))
+  const galleryImages = details.galleryImages
+    .slice(0, 4)
+    .map((image, index) => getLocalizedGalleryImage(t, image, contentKey, index))
+  const itineraryDays = details.itineraryDays.map((day, index) => getLocalizedItineraryDay(t, day, contentKey, index))
+  const locations = details.locations.map((location, index) => getLocalizedLocation(t, location, contentKey, index))
   const tourTitle = tourPackage.title
   const tourOverview = tourPackage.overview
   const heroImage = tourPackage.hero_image_url || tourPackage.main_image_url || fallbackTour.heroImage
-  const galleryImages = details.galleryImages.slice(0, 4)
-  const bookingTour = packageDetailsToTour(details)
+  const bookingTour = packageDetailsToTour({ ...details, package: tourPackage, highlights, galleryImages, itineraryDays, locations })
   const activeGalleryImage = activeGalleryIndex === null ? null : galleryImages[activeGalleryIndex]
 
   const openGalleryImage = (index: number) => {
@@ -284,11 +298,11 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
               </section>
             ) : null}
 
-            {details.highlights.length > 0 ? (
+            {highlights.length > 0 ? (
               <section id="highlights" className="scroll-mt-28">
                 <h2 className="content-title text-safe">{t('tourDetails.tourHighlights')}</h2>
                 <div className="mt-6 grid min-w-0 gap-4 md:grid-cols-2">
-                  {details.highlights.map((highlight) => (
+                  {highlights.map((highlight) => (
                     <div key={highlight.id} className="flex min-w-0 items-start gap-3 rounded-2xl border border-border/75 bg-white px-4 py-4 text-muted shadow-[0_14px_34px_rgba(17,24,39,0.04)]">
                       <FiCheckCircle className="mt-1 shrink-0 text-primary/90" />
                       <div className="min-w-0">
@@ -303,7 +317,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
               </section>
             ) : null}
 
-            {details.itineraryDays.length > 0 ? (
+            {itineraryDays.length > 0 ? (
               <section id="itinerary" className="scroll-mt-28">
                 <h2 className="content-title text-safe">{t('tourDetails.dayByDay')}</h2>
                 <div ref={itineraryTimelineRef} className="relative mt-7 max-w-full space-y-12 overflow-hidden">
@@ -313,7 +327,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                     style={{ height: `calc((100% - 3rem) * ${timelineProgress})` }}
                     aria-hidden="true"
                   />
-                  {details.itineraryDays.map((day, index) => (
+                  {itineraryDays.map((day, index) => (
                     <ItineraryDayArticle
                       key={day.id}
                       day={day}
@@ -333,7 +347,10 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
           <aside className="tour-booking-sticky self-start lg:sticky lg:top-[150px]">
             <div className="card min-w-0 border-border/80 p-7 text-center shadow-[0_22px_55px_rgba(17,24,39,0.08)] md:p-8">
               <p className="text-safe text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted">{t('tourDetails.price')}</p>
-              <h2 className="text-safe mt-3 text-2xl font-semibold text-primary">{t('common.from')} {formatCurrency(tourPackage.price_from_usd)}</h2>
+              <h2 className="mt-3 flex max-w-full flex-wrap items-baseline justify-center gap-x-2 gap-y-1 text-2xl font-semibold text-primary">
+                <span>{t('common.from')}</span>
+                <span className="currency-value max-w-full overflow-hidden text-ellipsis">{formatCurrency(tourPackage.price_from_usd)}</span>
+              </h2>
               <p className="text-safe mt-2 text-sm leading-6 text-muted">{t('tourDetails.quote')}</p>
               <div className="mx-auto mt-5 inline-flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-sm font-semibold text-green-700">
                 <FaCheck /> {t('tourDetails.instant')}
@@ -353,7 +370,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
           </aside>
         </div>
         <div className="container-custom mt-12">
-          <TourRouteMap locations={details.locations} mapStyle={tourPackage.map_style} />
+          <TourRouteMap locations={locations} mapStyle={tourPackage.map_style} />
         </div>
       </main>
 
@@ -372,7 +389,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
               <button
                 type="button"
                 className="fixed left-7 top-1/2 z-[130] hidden h-14 w-14 -translate-y-1/2 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-white md:grid"
-                aria-label="Previous gallery image"
+                aria-label={t('gallery.previous')}
                 onClick={(event) => {
                   event.stopPropagation()
                   moveGalleryImage(-1)
@@ -383,7 +400,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
               <button
                 type="button"
                 className="fixed right-7 top-1/2 z-[130] hidden h-14 w-14 -translate-y-1/2 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-white md:grid"
-                aria-label="Next gallery image"
+                aria-label={t('gallery.next')}
                 onClick={(event) => {
                   event.stopPropagation()
                   moveGalleryImage(1)
@@ -404,7 +421,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                 <button
                   type="button"
                   className="grid h-12 w-12 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-white"
-                  aria-label="Previous gallery image"
+                  aria-label={t('gallery.previous')}
                   onClick={() => moveGalleryImage(-1)}
                 >
                   <FiChevronLeft />
@@ -412,7 +429,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                 <button
                   type="button"
                   className="grid h-12 w-12 place-items-center rounded-full bg-white text-2xl text-ink shadow-[0_16px_38px_rgba(0,0,0,0.28)] transition hover:bg-primary hover:text-white"
-                  aria-label="Next gallery image"
+                  aria-label={t('gallery.next')}
                   onClick={() => moveGalleryImage(1)}
                 >
                   <FiChevronRight />

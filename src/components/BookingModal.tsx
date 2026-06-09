@@ -5,7 +5,8 @@ import { useTranslation } from 'react-i18next'
 import type { Tour } from '../data/tours'
 import { countries, countryFlag } from '../data/countries'
 import { useLocale } from '../context/LocaleContext'
-import { formatPrice, type CurrencyCode } from '../utils/currency'
+import type { CurrencyCode } from '../utils/currency'
+import { getLocalizedTourTitle } from '../utils/localizedTourContent'
 
 type BookingModalProps = {
   isOpen: boolean
@@ -60,6 +61,7 @@ const countryCurrencyOverrides: Partial<Record<string, CurrencyCode>> = {
   IN: 'INR',
   RU: 'RUB',
   RW: 'RWF',
+  SA: 'SAR',
   TZ: 'TZS',
   UG: 'UGX',
 }
@@ -72,7 +74,7 @@ function currencyForCountryCode(countryCode?: string, fallback: CurrencyCode = '
 
 export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const { t, i18n } = useTranslation()
-  const { currency } = useLocale()
+  const { currency, formatCurrencyIn, hasLiveExchangeRates } = useLocale()
   const [form, setForm] = useState<FormState>(initialForm)
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({})
   const [status, setStatus] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null)
@@ -81,7 +83,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
 
   const selectedTour = useMemo(
     () => t('bookingForm.selectedTourValue', {
-      tour: tour?.title ?? t('bookingForm.defaultTourName'),
+      tour: tour ? getLocalizedTourTitle(t, tour) : t('bookingForm.defaultTourName'),
     }),
     [t, tour],
   )
@@ -95,14 +97,15 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
 
     return country.name.toLowerCase() === countryInput || translatedName === countryInput
   })
-  const selectedCurrency = currencyForCountryCode(selectedCountry?.code, currency)
+  const requestedSelectedCurrency = currencyForCountryCode(selectedCountry?.code, currency)
+  const selectedCurrency = hasLiveExchangeRates ? requestedSelectedCurrency : 'USD'
   const perPersonBudgetUSD = tour?.priceUSD ?? 1970
   const travelers = Math.max(0, Number(form.adults) + Number(form.children))
   const accommodationMultiplier = accommodationMultipliers[form.accommodation]
   // Children are counted as full travelers for now to match the existing group-size estimate.
   const adjustedPerPersonBudgetUSD = perPersonBudgetUSD * accommodationMultiplier
-  const estimatedPerPersonBudget = formatPrice(adjustedPerPersonBudgetUSD, selectedCurrency)
-  const estimatedGroupBudget = formatPrice(adjustedPerPersonBudgetUSD * travelers, selectedCurrency)
+  const estimatedPerPersonBudget = formatCurrencyIn(adjustedPerPersonBudgetUSD, selectedCurrency)
+  const estimatedGroupBudget = formatCurrencyIn(adjustedPerPersonBudgetUSD * travelers, selectedCurrency)
   const accommodationStayLabelKey =
     form.accommodation === 'Budget'
       ? 'budget'
@@ -162,7 +165,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
           ...payload,
           packageId: tour?.packageId,
           budgetPerPerson: estimatedPerPersonBudget,
-          baseBudgetPerPerson: formatPrice(perPersonBudgetUSD, selectedCurrency),
+          baseBudgetPerPerson: formatCurrencyIn(perPersonBudgetUSD, selectedCurrency),
           estimatedGroupBudget,
           travelers,
           accommodationPreference: form.accommodation,

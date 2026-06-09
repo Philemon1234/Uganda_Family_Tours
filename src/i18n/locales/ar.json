@@ -21,14 +21,22 @@
     "loading": "جار التحميل",
     "logoAlt": "أوغندا فاميلي تورز",
     "increase": "زيادة {{label}}",
-    "decrease": "تقليل {{label}}"
+    "decrease": "تقليل {{label}}",
+    "backToTop": "العودة إلى الأعلى",
+    "separator": "-"
   },
   "home": {
     "hero": {
       "kicker": "لؤلؤة أفريقيا",
       "title": "رحلة سفاري مصممة لك",
       "subtitle": "سافر عبر غابات أوغندا وسهولها وبحيراتها وثقافاتها مع فريق محلي يصمم كل تفصيل حولك.",
-      "primaryCta": "استكشف الجولات"
+      "primaryCta": "استكشف الجولات",
+      "badgeAlt": {
+        "service": "أيقونة خدمة Uganda Family Tours",
+        "planning": "أيقونة تخطيط Uganda Family Tours",
+        "support": "أيقونة دعم Uganda Family Tours",
+        "brand": "علامة Uganda Family Tours التجارية"
+      }
     },
     "story": {
       "label": "استكشف أفريقيا مع",
@@ -84,7 +92,9 @@
       "label": "مصممة بعناية",
       "title": "حول رحلتك",
       "description": "كل برنامج يصمم حسب وتيرتك واهتماماتك وراحتك وأسلوب سفرك، سواء كنت تزور أوغندا من أجل الغوريلا أو الحياة البرية أو الثقافة أو مغامرة عائلية لا تنسى.",
-      "cta": "تحدث إلى خبير سفر"
+      "cta": "تحدث إلى خبير سفر",
+      "imageAlt": "رحلة سفاري عبر أوغندا",
+      "thumbnailAlt": "لحظة سفاري مع Uganda Family Tours"
     },
     "why": {
       "label": "مغامرتك. خبرتنا.",
@@ -116,7 +126,17 @@
     "description": "Handpicked safari experiences designed for unforgettable journeys across Uganda and East Africa.",
     "ctaLabel": "Explore. Discover. Adventure. Travel",
     "ctaTitle": "Your Journey Awaits - Let's Plan Your Dream Trip",
-    "ctaButton": "Contact Our Team"
+    "ctaButton": "Contact Our Team",
+    "errorTitle": "تعذر تحميل الجولات",
+    "errorMessage": "تعذر تحميل الجولات الآن.",
+    "emptyTitle": "لا توجد جولات متاحة",
+    "emptyDescription": "يرجى العودة قريبا لاكتشاف تجارب سفاري جديدة.",
+    "noFilterResultsTitle": "لا توجد جولات تطابق الفلاتر.",
+    "noFilterResultsDescription": "جرب تعديل السعر أو المدة.",
+    "resetFilters": "إعادة ضبط الفلاتر",
+    "paginationAria": "ترقيم صفحات الجولات",
+    "previousPage": "السابق",
+    "nextPage": "التالي"
   },
   "tourCard": {
     "duration": "المدة",
@@ -142,7 +162,21 @@
     "needHelp": "Need assistance with your booking?",
     "activities": "Activities",
     "bucketList": "Bucket list",
-    "day": "Day"
+    "day": "Day",
+    "accommodation": "الإقامة",
+    "loadDetailsError": "تعذر تحميل تفاصيل الباقة.",
+    "loadErrorTitle": "تعذر تحميل الباقة",
+    "backToTours": "العودة إلى الجولات",
+    "notFoundTitle": "لم يتم العثور على باقة الجولة.",
+    "notFoundDescription": "قد لا تكون هذه الباقة متاحة بعد الآن.",
+    "sectionsAria": "أقسام الجولة",
+    "openGalleryImage": "فتح صورة {{number}} من معرض {{title}}",
+    "galleryImageAlt": "معرض {{title}} {{number}}",
+    "closeGalleryImage": "إغلاق صورة المعرض",
+    "enlargedGalleryAlt": "معرض {{title}} المكبر",
+    "dayImageTitle": "{{title}} اليوم {{number}}",
+    "dayImagesAria": "صور {{title}}",
+    "dayImageAlt": "صورة {{number}} من {{title}}"
   },
   "bookingForm": {
     "title": "Book This Tour",
@@ -183,7 +217,17 @@
       "midRange": "Mid-range stay",
       "luxury": "Luxury stay"
     },
-    "requiredMissing": "Please fill in the highlighted required fields before sending."
+    "requiredMissing": "Please fill in the highlighted required fields before sending.",
+    "toggleCountryList": "تبديل قائمة البلدان",
+    "traveler": "مسافر",
+    "travelers": "مسافرون",
+    "accommodationOptions": {
+      "budget": "اقتصادي",
+      "midRange": "متوسط",
+      "luxury": "فاخر"
+    },
+    "selectedTourValue": "{{tour}}",
+    "defaultTourName": "سفاري في أوغندا"
   },
   "inquiryForm": {
     "title": "Make an Inquiry",
@@ -222,13 +266,15 @@
       "label": "Welcome",
       "title": "Karibu!",
       "p1": "Welcome to Uganda Family Tours & Safari Company - your trusted partner for safe, fun and eco-friendly family adventures in the Pearl of Africa.",
-      "p2": "We are a team of locally based tour planners and guides committed to helping families explore the beauty, wildlife and culture of Uganda in a way that is exciting for kids, relaxing for parents and respectful to nature."
+      "p2": "We are a team of locally based tour planners and guides committed to helping families explore the beauty, wildlife and culture of Uganda in a way that is exciting for kids, relaxing for parents and respectful to nature.",
+      "imageAlt": "ضيوف Uganda Family Tours بجانب مركبة السفاري"
     },
     "origins": {
       "label": "Our Story",
       "title": "Our Origins",
       "p1": "Our story began with a love for nature, wildlife and the incredible people of Uganda. What started as small, family-led safaris has grown into a mission to share the magic of Africa with families from around the world.",
-      "p2": "Over the years we have built trusted partnerships, created safe and memorable journeys, and remained true to our values: authenticity, sustainability and exceptional care."
+      "p2": "Over the years we have built trusted partnerships, created safe and memorable journeys, and remained true to our values: authenticity, sustainability and exceptional care.",
+      "imageAlt": "مركبة سفاري في أوغندا بالقرب من الحياة البرية"
     },
     "initiatives": {
       "label": "What Drives Us",
@@ -275,12 +321,14 @@
       "mammadu": {
         "title": "Uganda Community Travel Support",
         "p1": "Our safaris are designed to keep more value within Uganda by working with local guides, community hosts, family-run lodges, craft makers and small travel partners wherever possible.",
-        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences connected to the journey."
+        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences connected to the journey.",
+        "imageAlt": "تجربة مجتمعية في أوغندا مرتبطة بالسفر المسؤول"
       },
       "orange": {
         "title": "Orange Community Project",
         "p1": "We partner with schools and community groups to help improve classrooms, provide supplies and support practical learning opportunities for children in rural areas.",
-        "p2": "Uganda Family Tours continues to support community projects initiated by local leaders, creating sustainable benefits beyond each safari."
+        "p2": "Uganda Family Tours continues to support community projects initiated by local leaders, creating sustainable benefits beyond each safari.",
+        "imageAlt": "فريق Uganda Family Tours ومشروع مجتمعي"
       }
     },
     "cta": {
@@ -462,5 +510,32 @@
         "text": "كان تتبع الغوريلا مؤثرا ولا ينسى. جعلت أوغندا فاميلي تورز كل شيء سلسا وشخصيا."
       }
     ]
+  },
+  "tourFilters": {
+    "ariaLabel": "فلاتر الجولات",
+    "priceRange": "نطاق السعر",
+    "minimumPrice": "الحد الأدنى للسعر",
+    "maximumPrice": "الحد الأقصى للسعر",
+    "duration": "المدة",
+    "durationOptions": {
+      "all": "الكل",
+      "oneTwo": "1-2 يوم",
+      "threeFour": "3-4 أيام",
+      "fiveSeven": "5-7 أيام",
+      "eightPlus": "8+ أيام"
+    }
+  },
+  "social": {
+    "facebook": "Facebook",
+    "youtube": "YouTube",
+    "whatsapp": "WhatsApp"
+  },
+  "loader": {
+    "compass": {
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W"
+    }
   }
 }

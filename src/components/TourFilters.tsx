@@ -1,4 +1,5 @@
 import type { PointerEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useLocale } from '../context/LocaleContext'
 
 export type DurationFilter = 'all' | '1-2' | '3-4' | '5-7' | '8-plus'
@@ -19,12 +20,12 @@ type TourFiltersProps = {
   onReset: () => void
 }
 
-const durationOptions: Array<{ value: DurationFilter; label: string }> = [
-  { value: 'all', label: 'All' },
-  { value: '1-2', label: '1-2 Days' },
-  { value: '3-4', label: '3-4 Days' },
-  { value: '5-7', label: '5-7 Days' },
-  { value: '8-plus', label: '8+ Days' },
+const durationOptions: Array<{ value: DurationFilter; labelKey: string }> = [
+  { value: 'all', labelKey: 'tourFilters.durationOptions.all' },
+  { value: '1-2', labelKey: 'tourFilters.durationOptions.oneTwo' },
+  { value: '3-4', labelKey: 'tourFilters.durationOptions.threeFour' },
+  { value: '5-7', labelKey: 'tourFilters.durationOptions.fiveSeven' },
+  { value: '8-plus', labelKey: 'tourFilters.durationOptions.eightPlus' },
 ]
 
 const minGap = 50
@@ -38,6 +39,7 @@ export function TourFilters({
   onPriceChange,
   onDurationChange,
 }: TourFiltersProps) {
+  const { t } = useTranslation()
   const { formatCurrency } = useLocale()
 
   const usableMaxPrice = Math.max(maxPrice, minPrice + minGap)
@@ -80,12 +82,12 @@ export function TourFilters({
 
   return (
     <section
-      aria-label="Tour filters"
+      aria-label={t('tourFilters.ariaLabel')}
       className="rounded-[1rem] border border-[#eadfd3] bg-[#fffdf9] p-4 shadow-[0_18px_45px_rgba(17,24,39,0.06)] md:p-5"
     >
       <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">Price Range</p>
+          <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">{t('tourFilters.priceRange')}</p>
           <div className="tour-range-control relative mt-3 touch-none select-none px-1 pb-1 pt-7">
             <div
               className="pointer-events-none absolute top-0 -translate-x-1/2 select-none rounded-md border border-[#eadfd3] bg-white px-2 py-0.5 text-[0.68rem] font-bold text-ink shadow-sm"
@@ -106,7 +108,7 @@ export function TourFilters({
               />
             </div>
             <input
-              aria-label="Minimum price"
+              aria-label={t('tourFilters.minimumPrice')}
               className="tour-range-input"
               max={usableMaxPrice}
               min={minPrice}
@@ -116,7 +118,7 @@ export function TourFilters({
               onChange={(event) => updateMinPrice(Number(event.target.value))}
             />
             <input
-              aria-label="Maximum price"
+              aria-label={t('tourFilters.maximumPrice')}
               className="tour-range-input"
               max={usableMaxPrice}
               min={minPrice}
@@ -133,7 +135,7 @@ export function TourFilters({
         </div>
 
         <div className="lg:w-[28rem]">
-          <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">Duration</p>
+          <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">{t('tourFilters.duration')}</p>
           <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-5 lg:grid-cols-2 xl:grid-cols-5">
             {durationOptions.map((option) => {
               const isActive = selectedDuration === option.value
@@ -149,7 +151,7 @@ export function TourFilters({
                   type="button"
                   onClick={() => onDurationChange(option.value)}
                 >
-                  {option.label}
+                  {t(option.labelKey)}
                 </button>
               )
             })}

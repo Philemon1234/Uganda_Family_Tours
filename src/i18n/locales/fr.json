@@ -21,7 +21,9 @@
     "loading": "Chargement",
     "logoAlt": "Uganda Family Tours",
     "increase": "Augmenter {{label}}",
-    "decrease": "Diminuer {{label}}"
+    "decrease": "Diminuer {{label}}",
+    "backToTop": "Retour en haut",
+    "separator": "-"
   },
   "home": {
     "hero": {
@@ -124,7 +126,17 @@
     "description": "Des safaris sélectionnés pour des voyages inoubliables en Ouganda et en Afrique de l’Est.",
     "ctaLabel": "Explorer. Découvrir. Voyager.",
     "ctaTitle": "Votre voyage vous attend - planifions votre rêve",
-    "ctaButton": "Contacter notre équipe"
+    "ctaButton": "Contacter notre équipe",
+    "errorTitle": "Impossible de charger les circuits",
+    "errorMessage": "Impossible de charger les circuits pour le moment.",
+    "emptyTitle": "Aucun circuit disponible",
+    "emptyDescription": "Revenez bientot pour decouvrir de nouvelles experiences de safari.",
+    "noFilterResultsTitle": "Aucun circuit ne correspond a vos filtres.",
+    "noFilterResultsDescription": "Essayez de modifier le prix ou la duree.",
+    "resetFilters": "Reinitialiser les filtres",
+    "paginationAria": "Pagination des circuits",
+    "previousPage": "Precedent",
+    "nextPage": "Suivant"
   },
   "tourCard": {
     "duration": "Duree",
@@ -150,7 +162,21 @@
     "needHelp": "Besoin d’aide pour votre réservation ?",
     "activities": "Activit?s",
     "bucketList": "Liste de r?ves",
-    "day": "Jour"
+    "day": "Jour",
+    "accommodation": "Hebergement",
+    "loadDetailsError": "Impossible de charger les details du forfait.",
+    "loadErrorTitle": "Impossible de charger le forfait",
+    "backToTours": "Retour aux circuits",
+    "notFoundTitle": "Forfait introuvable.",
+    "notFoundDescription": "Ce forfait n est peut-etre plus disponible.",
+    "sectionsAria": "Sections du circuit",
+    "openGalleryImage": "Ouvrir l image {{number}} de la galerie {{title}}",
+    "galleryImageAlt": "Galerie {{title}} {{number}}",
+    "closeGalleryImage": "Fermer l image de la galerie",
+    "enlargedGalleryAlt": "Galerie agrandie de {{title}}",
+    "dayImageTitle": "{{title}} jour {{number}}",
+    "dayImagesAria": "Images de {{title}}",
+    "dayImageAlt": "Image {{number}} de {{title}}"
   },
   "bookingForm": {
     "title": "Réserver ce circuit",
@@ -191,7 +217,17 @@
       "midRange": "Sejour milieu de gamme",
       "luxury": "Sejour luxe"
     },
-    "requiredMissing": "Veuillez remplir les champs obligatoires indiqués avant l’envoi."
+    "requiredMissing": "Veuillez remplir les champs obligatoires indiqués avant l’envoi.",
+    "toggleCountryList": "Afficher ou masquer la liste des pays",
+    "traveler": "voyageur",
+    "travelers": "voyageurs",
+    "accommodationOptions": {
+      "budget": "Economique",
+      "midRange": "Milieu de gamme",
+      "luxury": "Luxe"
+    },
+    "selectedTourValue": "{{tour}}",
+    "defaultTourName": "Safari en Ouganda"
   },
   "inquiryForm": {
     "title": "Faire une demande",
@@ -230,13 +266,15 @@
       "label": "Bienvenue",
       "title": "Karibu !",
       "p1": "Bienvenue chez Uganda Family Tours & Safari Company, votre partenaire de confiance pour des aventures familiales s?res, amusantes et respectueuses de la nature dans la Perle de l?Afrique.",
-      "p2": "Nous sommes une ?quipe locale de planificateurs et de guides qui aide les familles ? d?couvrir la beaut?, la faune et la culture de l?Ouganda d?une mani?re passionnante pour les enfants, reposante pour les parents et respectueuse de la nature."
+      "p2": "Nous sommes une ?quipe locale de planificateurs et de guides qui aide les familles ? d?couvrir la beaut?, la faune et la culture de l?Ouganda d?une mani?re passionnante pour les enfants, reposante pour les parents et respectueuse de la nature.",
+      "imageAlt": "Voyageurs Uganda Family Tours pres du vehicule de safari"
     },
     "origins": {
       "label": "Notre histoire",
       "title": "Nos origines",
       "p1": "Notre histoire a commenc? par l?amour de la nature, de la faune et des personnes extraordinaires de l?Ouganda. De petits safaris familiaux sont devenus une mission : partager la magie de l?Afrique avec des familles du monde entier.",
-      "p2": "Au fil des annees, nous avons construit des partenariats solides, cree des voyages surs et memorables, et garde nos valeurs : authenticite, durabilite et attention exceptionnelle."
+      "p2": "Au fil des annees, nous avons construit des partenariats solides, cree des voyages surs et memorables, et garde nos valeurs : authenticite, durabilite et attention exceptionnelle.",
+      "imageAlt": "Vehicule de safari en Ouganda pres de la faune"
     },
     "initiatives": {
       "label": "Ce qui nous guide",
@@ -283,12 +321,14 @@
       "mammadu": {
         "title": "Soutien communautaire en Ouganda",
         "p1": "Nos safaris sont con?us pour garder plus de valeur en Ouganda en travaillant avec des guides locaux, des h?tes communautaires, des lodges familiaux, des artisans et de petits partenaires de voyage.",
-        "p2": "Lorsque les voyageurs souhaitent redonner, notre ?quipe peut recommander des visites communautaires respectueuses, des opportunit?s de soutien scolaire et des exp?riences locales li?es au voyage."
+        "p2": "Lorsque les voyageurs souhaitent redonner, notre ?quipe peut recommander des visites communautaires respectueuses, des opportunit?s de soutien scolaire et des exp?riences locales li?es au voyage.",
+        "imageAlt": "Experience communautaire en Ouganda liee au voyage responsable"
       },
       "orange": {
         "title": "Projet communautaire Orange",
         "p1": "Nous travaillons avec les ?coles et les groupes communautaires pour am?liorer les salles de classe, fournir du mat?riel et soutenir l?apprentissage pratique.",
-        "p2": "Uganda Family Tours soutient des projets initi?s par les leaders locaux, cr?ant des b?n?fices durables au-del? de chaque safari."
+        "p2": "Uganda Family Tours soutient des projets initi?s par les leaders locaux, cr?ant des b?n?fices durables au-del? de chaque safari.",
+        "imageAlt": "Equipe Uganda Family Tours et projet communautaire"
       }
     },
     "cta": {
@@ -474,6 +514,28 @@
       "forest": "Marche guidee en foret tropicale",
       "gorilla": "Gorille de montagne dans la foret de Bwindi",
       "lions": "Lions grimpeurs"
+    }
+  },
+  "tourFilters": {
+    "ariaLabel": "Filtres des circuits",
+    "priceRange": "Fourchette de prix",
+    "minimumPrice": "Prix minimum",
+    "maximumPrice": "Prix maximum",
+    "duration": "Duree",
+    "durationOptions": {
+      "all": "Tous",
+      "oneTwo": "1-2 jours",
+      "threeFour": "3-4 jours",
+      "fiveSeven": "5-7 jours",
+      "eightPlus": "8+ jours"
+    }
+  },
+  "loader": {
+    "compass": {
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W"
     }
   }
 }

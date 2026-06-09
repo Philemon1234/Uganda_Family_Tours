@@ -20,6 +20,8 @@
     "menu": "Menu",
     "loading": "Cargando",
     "logoAlt": "Uganda Family Tours",
+    "backToTop": "Volver arriba",
+    "separator": "-",
     "increase": "Aumentar {{label}}",
     "decrease": "Disminuir {{label}}"
   },
@@ -124,7 +126,17 @@
     "description": "Safaris seleccionados para viajes inolvidables por Uganda y África Oriental.",
     "ctaLabel": "Explora. Descubre. Viaja.",
     "ctaTitle": "Tu viaje te espera - planifiquemos tu sueño",
-    "ctaButton": "Contactar al equipo"
+    "ctaButton": "Contactar al equipo",
+    "errorTitle": "No se pueden cargar los tours",
+    "errorMessage": "No se pueden cargar los tours ahora.",
+    "emptyTitle": "No hay tours disponibles",
+    "emptyDescription": "Vuelve pronto para ver nuevas experiencias de safari.",
+    "noFilterResultsTitle": "Ningun tour coincide con tus filtros.",
+    "noFilterResultsDescription": "Prueba ajustar el precio o la duracion.",
+    "resetFilters": "Restablecer filtros",
+    "paginationAria": "Paginacion de tours",
+    "previousPage": "Anterior",
+    "nextPage": "Siguiente"
   },
   "tourCard": {
     "duration": "Duracion",
@@ -150,7 +162,21 @@
     "needHelp": "¿Necesitas ayuda con tu reserva?",
     "activities": "Actividades",
     "bucketList": "Lista de sue?os",
-    "day": "D?a"
+    "day": "D?a",
+    "accommodation": "Alojamiento",
+    "loadDetailsError": "No se pueden cargar los detalles del paquete.",
+    "loadErrorTitle": "No se puede cargar el paquete",
+    "backToTours": "Volver a tours",
+    "notFoundTitle": "Paquete no encontrado.",
+    "notFoundDescription": "Es posible que este paquete ya no este disponible.",
+    "sectionsAria": "Secciones del tour",
+    "openGalleryImage": "Abrir imagen {{number}} de la galeria de {{title}}",
+    "galleryImageAlt": "Galeria de {{title}} {{number}}",
+    "closeGalleryImage": "Cerrar imagen de galeria",
+    "enlargedGalleryAlt": "Galeria ampliada de {{title}}",
+    "dayImageTitle": "{{title}} dia {{number}}",
+    "dayImagesAria": "Imagenes de {{title}}",
+    "dayImageAlt": "Imagen {{number}} de {{title}}"
   },
   "bookingForm": {
     "title": "Reservar este tour",
@@ -191,7 +217,17 @@
       "midRange": "Estancia de gama media",
       "luxury": "Estancia de lujo"
     },
-    "requiredMissing": "Completa los campos obligatorios resaltados antes de enviar."
+    "requiredMissing": "Completa los campos obligatorios resaltados antes de enviar.",
+    "toggleCountryList": "Alternar lista de paises",
+    "traveler": "viajero",
+    "travelers": "viajeros",
+    "accommodationOptions": {
+      "budget": "Economico",
+      "midRange": "Gama media",
+      "luxury": "Lujo"
+    },
+    "selectedTourValue": "{{tour}}",
+    "defaultTourName": "Safari en Uganda"
   },
   "inquiryForm": {
     "title": "Hacer una consulta",
@@ -230,13 +266,15 @@
       "label": "Bienvenido",
       "title": "Karibu!",
       "p1": "Bienvenido a Uganda Family Tours & Safari Company, tu socio de confianza para aventuras familiares seguras, divertidas y ecol?gicas en la Perla de ?frica.",
-      "p2": "Somos un equipo local de planificadores y gu?as que ayuda a las familias a descubrir la belleza, la fauna y la cultura de Uganda de forma emocionante para los ni?os, relajante para los padres y respetuosa con la naturaleza."
+      "p2": "Somos un equipo local de planificadores y gu?as que ayuda a las familias a descubrir la belleza, la fauna y la cultura de Uganda de forma emocionante para los ni?os, relajante para los padres y respetuosa con la naturaleza.",
+      "imageAlt": "Huespedes de Uganda Family Tours junto al vehiculo de safari"
     },
     "origins": {
       "label": "Nuestra historia",
       "title": "Nuestros or?genes",
       "p1": "Nuestra historia comenz? con amor por la naturaleza, la fauna y la gente incre?ble de Uganda. Lo que empez? como peque?os safaris familiares creci? hasta convertirse en una misi?n para compartir la magia de ?frica.",
-      "p2": "Con los a?os hemos creado alianzas confiables, viajes seguros y memorables, y seguimos fieles a nuestros valores: autenticidad, sostenibilidad y cuidado excepcional."
+      "p2": "Con los a?os hemos creado alianzas confiables, viajes seguros y memorables, y seguimos fieles a nuestros valores: autenticidad, sostenibilidad y cuidado excepcional.",
+      "imageAlt": "Vehiculo de safari en Uganda cerca de la vida silvestre"
     },
     "initiatives": {
       "label": "Lo que nos impulsa",
@@ -283,12 +321,14 @@
       "mammadu": {
         "title": "Apoyo comunitario en Uganda",
         "p1": "Nuestros safaris est?n dise?ados para mantener m?s valor dentro de Uganda trabajando con gu?as locales, anfitriones comunitarios, alojamientos familiares, artesanos y peque?os socios de viaje.",
-        "p2": "Cuando los viajeros desean contribuir, nuestro equipo puede recomendar visitas comunitarias respetuosas, oportunidades de apoyo escolar y experiencias locales conectadas con el viaje."
+        "p2": "Cuando los viajeros desean contribuir, nuestro equipo puede recomendar visitas comunitarias respetuosas, oportunidades de apoyo escolar y experiencias locales conectadas con el viaje.",
+        "imageAlt": "Experiencia comunitaria en Uganda conectada con viajes responsables"
       },
       "orange": {
         "title": "Proyecto comunitario Orange",
         "p1": "Colaboramos con escuelas y grupos comunitarios para mejorar aulas, proporcionar materiales y apoyar el aprendizaje pr?ctico.",
-        "p2": "Uganda Family Tours apoya proyectos iniciados por l?deres locales para crear beneficios sostenibles."
+        "p2": "Uganda Family Tours apoya proyectos iniciados por l?deres locales para crear beneficios sostenibles.",
+        "imageAlt": "Equipo de Uganda Family Tours y proyecto comunitario"
       }
     },
     "cta": {
@@ -474,6 +514,28 @@
       "forest": "Caminata guiada por la selva",
       "gorilla": "Gorila de montana en el bosque de Bwindi",
       "lions": "Leones trepadores"
+    }
+  },
+  "tourFilters": {
+    "ariaLabel": "Filtros de tours",
+    "priceRange": "Rango de precio",
+    "minimumPrice": "Precio minimo",
+    "maximumPrice": "Precio maximo",
+    "duration": "Duracion",
+    "durationOptions": {
+      "all": "Todos",
+      "oneTwo": "1-2 dias",
+      "threeFour": "3-4 dias",
+      "fiveSeven": "5-7 dias",
+      "eightPlus": "8+ dias"
+    }
+  },
+  "loader": {
+    "compass": {
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W"
     }
   }
 }

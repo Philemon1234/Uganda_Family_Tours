@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import type { Tour } from '../data/tours'
 import { MotionReveal } from './MotionReveal'
 import { useLocale } from '../context/LocaleContext'
+import { getLocalizedTourShortDescription, getLocalizedTourTitle } from '../utils/localizedTourContent'
 
 type TourCardProps = {
   tour: Tour
@@ -12,10 +13,9 @@ type TourCardProps = {
 
 export function TourCard({ tour, revealDelay = 0 }: TourCardProps) {
   const { t } = useTranslation()
-  const { formatCurrency } = useLocale()
-  const contentKey = tour.slug.replace(/-\d+$/, '')
-  const title = t(`tourContent.${contentKey}.title`, { defaultValue: tour.title })
-  const shortDescription = t(`tourContent.${contentKey}.shortDescription`, { defaultValue: tour.shortDescription })
+  const { formatCardCurrency } = useLocale()
+  const title = getLocalizedTourTitle(t, tour)
+  const shortDescription = getLocalizedTourShortDescription(t, tour)
   const durationDays = tour.duration.match(/\d+/)?.[0] ?? tour.duration
 
   return (
@@ -28,8 +28,8 @@ export function TourCard({ tour, revealDelay = 0 }: TourCardProps) {
           <img className="h-full w-full object-cover transition duration-500 group-hover:scale-105" src={tour.image} alt={title} />
           <span className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/35 to-transparent" />
         </div>
-        <span className="absolute left-4 top-[12.85rem] z-30 rounded-full bg-dark px-4 py-2.5 text-base font-black leading-none text-white shadow-[0_14px_30px_rgba(37,66,76,0.18)] sm:-left-4">
-          {formatCurrency(tour.priceUSD)}
+        <span className="tour-price-badge absolute left-4 top-[12.85rem] z-30 rounded-full bg-dark px-4 py-2.5 text-base font-black leading-none text-white shadow-[0_14px_30px_rgba(37,66,76,0.18)] sm:-left-4">
+          <span className="currency-value">{formatCardCurrency(tour.priceUSD)}</span>
         </span>
         <div className="relative z-10 -mt-8 flex min-h-60 min-w-0 flex-1 flex-col rounded-t-[1.75rem] rounded-b-[1.75rem] bg-white px-7 pb-7 pt-9">
           <h3 className="clamp-2 text-safe min-h-[3.75rem] text-2xl font-medium leading-tight text-dark transition group-hover:text-primary">{title}</h3>

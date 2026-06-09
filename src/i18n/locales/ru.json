@@ -21,14 +21,22 @@
     "loading": "Загрузка",
     "logoAlt": "Uganda Family Tours",
     "increase": "Увеличить {{label}}",
-    "decrease": "Уменьшить {{label}}"
+    "decrease": "Уменьшить {{label}}",
+    "backToTop": "Наверх",
+    "separator": "-"
   },
   "home": {
     "hero": {
       "kicker": "Жемчужина Африки",
       "title": "Сафари, созданное лично для вас",
       "subtitle": "Путешествуйте по лесам, саваннам, озерам и культурам Уганды с местной командой, которая продумывает каждую деталь.",
-      "primaryCta": "Посмотреть туры"
+      "primaryCta": "Посмотреть туры",
+      "badgeAlt": {
+        "service": "Иконка сервиса Uganda Family Tours",
+        "planning": "Иконка планирования Uganda Family Tours",
+        "support": "Иконка поддержки Uganda Family Tours",
+        "brand": "Фирменный знак Uganda Family Tours"
+      }
     },
     "story": {
       "label": "Откройте Африку с",
@@ -84,7 +92,9 @@
       "label": "Создано с заботой",
       "title": "Вокруг вашего путешествия",
       "description": "Каждый маршрут строится вокруг вашего темпа, интересов, комфорта и стиля путешествия - ради горилл, дикой природы, культуры или семейного приключения.",
-      "cta": "Связаться со специалистом"
+      "cta": "Связаться со специалистом",
+      "imageAlt": "Сафари-путешествие по Уганде",
+      "thumbnailAlt": "Момент сафари Uganda Family Tours"
     },
     "why": {
       "label": "Ваше приключение. Наш опыт.",
@@ -116,7 +126,17 @@
     "description": "Handpicked safari experiences designed for unforgettable journeys across Uganda and East Africa.",
     "ctaLabel": "Explore. Discover. Adventure. Travel",
     "ctaTitle": "Your Journey Awaits - Let's Plan Your Dream Trip",
-    "ctaButton": "Contact Our Team"
+    "ctaButton": "Contact Our Team",
+    "errorTitle": "Не удалось загрузить туры",
+    "errorMessage": "Сейчас не удалось загрузить туры.",
+    "emptyTitle": "Туры недоступны",
+    "emptyDescription": "Загляните позже, чтобы увидеть новые сафари.",
+    "noFilterResultsTitle": "Нет туров по выбранным фильтрам.",
+    "noFilterResultsDescription": "Измените цену или продолжительность.",
+    "resetFilters": "Сбросить фильтры",
+    "paginationAria": "Навигация по страницам туров",
+    "previousPage": "Назад",
+    "nextPage": "Далее"
   },
   "tourCard": {
     "duration": "Длительность",
@@ -142,7 +162,21 @@
     "needHelp": "Need assistance with your booking?",
     "activities": "Activities",
     "bucketList": "Bucket list",
-    "day": "Day"
+    "day": "Day",
+    "accommodation": "Размещение",
+    "loadDetailsError": "Не удалось загрузить детали пакета.",
+    "loadErrorTitle": "Не удалось загрузить пакет",
+    "backToTours": "Назад к турам",
+    "notFoundTitle": "Турпакет не найден.",
+    "notFoundDescription": "Этот пакет может быть больше недоступен.",
+    "sectionsAria": "Разделы тура",
+    "openGalleryImage": "Открыть изображение {{number}} галереи {{title}}",
+    "galleryImageAlt": "Галерея {{title}} {{number}}",
+    "closeGalleryImage": "Закрыть изображение галереи",
+    "enlargedGalleryAlt": "Увеличенная галерея {{title}}",
+    "dayImageTitle": "{{title}} день {{number}}",
+    "dayImagesAria": "Изображения {{title}}",
+    "dayImageAlt": "Изображение {{number}} {{title}}"
   },
   "bookingForm": {
     "title": "Book This Tour",
@@ -183,7 +217,17 @@
       "midRange": "Mid-range stay",
       "luxury": "Luxury stay"
     },
-    "requiredMissing": "Please fill in the highlighted required fields before sending."
+    "requiredMissing": "Please fill in the highlighted required fields before sending.",
+    "toggleCountryList": "Открыть или закрыть список стран",
+    "traveler": "путешественник",
+    "travelers": "путешественников",
+    "accommodationOptions": {
+      "budget": "Бюджет",
+      "midRange": "Средний уровень",
+      "luxury": "Люкс"
+    },
+    "selectedTourValue": "{{tour}}",
+    "defaultTourName": "Сафари в Уганде"
   },
   "inquiryForm": {
     "title": "Make an Inquiry",
@@ -222,13 +266,15 @@
       "label": "Welcome",
       "title": "Karibu!",
       "p1": "Welcome to Uganda Family Tours & Safari Company - your trusted partner for safe, fun and eco-friendly family adventures in the Pearl of Africa.",
-      "p2": "We are a team of locally based tour planners and guides committed to helping families explore the beauty, wildlife and culture of Uganda in a way that is exciting for kids, relaxing for parents and respectful to nature."
+      "p2": "We are a team of locally based tour planners and guides committed to helping families explore the beauty, wildlife and culture of Uganda in a way that is exciting for kids, relaxing for parents and respectful to nature.",
+      "imageAlt": "Гости Uganda Family Tours у сафари-автомобиля компании"
     },
     "origins": {
       "label": "Our Story",
       "title": "Our Origins",
       "p1": "Our story began with a love for nature, wildlife and the incredible people of Uganda. What started as small, family-led safaris has grown into a mission to share the magic of Africa with families from around the world.",
-      "p2": "Over the years we have built trusted partnerships, created safe and memorable journeys, and remained true to our values: authenticity, sustainability and exceptional care."
+      "p2": "Over the years we have built trusted partnerships, created safe and memorable journeys, and remained true to our values: authenticity, sustainability and exceptional care.",
+      "imageAlt": "Сафари-автомобиль в Уганде рядом с дикой природой"
     },
     "initiatives": {
       "label": "What Drives Us",
@@ -275,12 +321,14 @@
       "mammadu": {
         "title": "Uganda Community Travel Support",
         "p1": "Our safaris are designed to keep more value within Uganda by working with local guides, community hosts, family-run lodges, craft makers and small travel partners wherever possible.",
-        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences connected to the journey."
+        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences connected to the journey.",
+        "imageAlt": "Общественный опыт в Уганде, связанный с ответственным туризмом"
       },
       "orange": {
         "title": "Orange Community Project",
         "p1": "We partner with schools and community groups to help improve classrooms, provide supplies and support practical learning opportunities for children in rural areas.",
-        "p2": "Uganda Family Tours continues to support community projects initiated by local leaders, creating sustainable benefits beyond each safari."
+        "p2": "Uganda Family Tours continues to support community projects initiated by local leaders, creating sustainable benefits beyond each safari.",
+        "imageAlt": "Команда Uganda Family Tours и общественный проект"
       }
     },
     "cta": {
@@ -462,5 +510,32 @@
         "text": "Трекинг к гориллам был трогательным и незабываемым. Uganda Family Tours сделали все плавно и лично."
       }
     ]
+  },
+  "tourFilters": {
+    "ariaLabel": "Фильтры туров",
+    "priceRange": "Диапазон цен",
+    "minimumPrice": "Минимальная цена",
+    "maximumPrice": "Максимальная цена",
+    "duration": "Длительность",
+    "durationOptions": {
+      "all": "Все",
+      "oneTwo": "1-2 дня",
+      "threeFour": "3-4 дня",
+      "fiveSeven": "5-7 дней",
+      "eightPlus": "8+ дней"
+    }
+  },
+  "social": {
+    "facebook": "Facebook",
+    "youtube": "YouTube",
+    "whatsapp": "WhatsApp"
+  },
+  "loader": {
+    "compass": {
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W"
+    }
   }
 }

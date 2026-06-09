@@ -770,6 +770,28 @@ img {
   -webkit-line-clamp: 3;
 }
 
+.currency-value {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tour-price-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  max-width: min(11rem, calc(100% - 2rem));
+}
+
+.tour-price-badge .currency-value {
+  display: inline-block;
+  max-width: min(8.5rem, 100%);
+  overflow: visible;
+  text-overflow: clip;
+}
+
 .tour-range-control {
   --tour-range-track-height: 0.38rem;
   --tour-range-touch-height: 2.5rem;

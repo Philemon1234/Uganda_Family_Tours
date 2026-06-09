@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import { useTranslation } from 'react-i18next'
 import { MapContainer, Marker, Polyline, TileLayer, useMap } from 'react-leaflet'
 import type { TourMapStyle, TourPackageLocation } from '../types/tourPackage'
 
@@ -16,6 +17,7 @@ type RouteMarkerProps = {
   index: number
   isActive: boolean
   onSelect: (location: TourPackageLocation) => void
+  dayLabel: string
 }
 
 const ROUTE_ORANGE = '#FB770D'
@@ -131,27 +133,27 @@ function AnimatedRoute({ positions }: { positions: [number, number][] }) {
   )
 }
 
-function createMarkerIcon(location: TourPackageLocation, index: number, isActive: boolean, isAnimationReady: boolean) {
+function createMarkerIcon(location: TourPackageLocation, index: number, isActive: boolean, isAnimationReady: boolean, dayLabel: string) {
   const pinColor = location.pin_color || DEFAULT_PIN_COLOR
 
   return L.divIcon({
     className: '',
-    html: `<span role="button" aria-label="Day ${location.day_order}: ${location.location_name}" class="tour-map-pin ${isActive ? 'tour-map-pin-active' : ''} ${isAnimationReady ? '' : 'tour-map-pin-waiting'}" style="--pin-delay: ${index * 120}ms; --pin-color: ${pinColor}; --pin-glow: ${pinColor}33"><span>${index + 1}</span></span>`,
+    html: `<span role="button" aria-label="${dayLabel} ${location.day_order}: ${location.location_name}" class="tour-map-pin ${isActive ? 'tour-map-pin-active' : ''} ${isAnimationReady ? '' : 'tour-map-pin-waiting'}" style="--pin-delay: ${index * 120}ms; --pin-color: ${pinColor}; --pin-glow: ${pinColor}33"><span>${index + 1}</span></span>`,
     iconAnchor: [16, 34],
     iconSize: [32, 38],
     popupAnchor: [0, -32],
   })
 }
 
-function RouteMarker({ isAnimationReady, location, index, isActive, onSelect }: RouteMarkerProps) {
-  const icon = useMemo(() => createMarkerIcon(location, index, isActive, isAnimationReady), [index, isActive, isAnimationReady, location])
+function RouteMarker({ isAnimationReady, location, index, isActive, onSelect, dayLabel }: RouteMarkerProps) {
+  const icon = useMemo(() => createMarkerIcon(location, index, isActive, isAnimationReady, dayLabel), [dayLabel, index, isActive, isAnimationReady, location])
 
   return (
     <Marker
       position={[location.latitude, location.longitude]}
       icon={icon}
       keyboard
-      title={`Day ${location.day_order}: ${location.location_name}`}
+      title={`${dayLabel} ${location.day_order}: ${location.location_name}`}
       eventHandlers={{
         click: () => onSelect(location),
         keypress: () => onSelect(location),
@@ -161,6 +163,8 @@ function RouteMarker({ isAnimationReady, location, index, isActive, onSelect }: 
 }
 
 function RouteStopCard({ location }: { location: TourPackageLocation }) {
+  const { t } = useTranslation()
+
   return (
     <article className="overflow-hidden rounded-[1.2rem] border border-border/80 bg-white shadow-[0_18px_42px_rgba(17,24,39,0.08)]">
       {location.image_url ? (
@@ -173,7 +177,7 @@ function RouteStopCard({ location }: { location: TourPackageLocation }) {
       ) : null}
       <div className="p-4">
         <p className="text-safe text-base font-semibold text-ink">{location.location_name}</p>
-        <p className="mt-2 text-sm font-semibold text-primary">Day {location.day_order}</p>
+        <p className="mt-2 text-sm font-semibold text-primary">{t('tourDetails.day')} {location.day_order}</p>
         {location.notes ? (
           <p className="text-safe mt-3 text-sm leading-6 text-muted">{location.notes}</p>
         ) : null}
@@ -183,6 +187,8 @@ function RouteStopCard({ location }: { location: TourPackageLocation }) {
 }
 
 function StaticRouteFallback({ locations }: { locations: TourPackageLocation[] }) {
+  const { t } = useTranslation()
+
   return (
     <div className="rounded-[1.15rem] border border-border/80 bg-white p-4 shadow-[0_18px_45px_rgba(17,24,39,0.06)]">
       <div className="space-y-3">
@@ -195,8 +201,8 @@ function StaticRouteFallback({ locations }: { locations: TourPackageLocation[] }
               <p className="text-safe text-sm font-semibold text-ink">{location.location_name}</p>
               {location.day_order || location.notes ? (
                 <p className="text-safe mt-1 text-xs leading-5 text-muted">
-                  Day {location.day_order}
-                  {location.notes ? ' - ' : ''}
+                  {t('tourDetails.day')} {location.day_order}
+                  {location.notes ? ` ${t('common.separator')} ` : ''}
                   {location.notes ?? ''}
                 </p>
               ) : null}
@@ -209,6 +215,7 @@ function StaticRouteFallback({ locations }: { locations: TourPackageLocation[] }
 }
 
 function TourRouteMap({ locations, mapStyle = 'light' }: TourRouteMapProps) {
+  const { t } = useTranslation()
   const sectionRef = useRef<HTMLElement | null>(null)
   const routeLocations = useMemo(
     () => locations.filter(isUsableCoordinate).sort((first, second) => first.day_order - second.day_order),
@@ -355,6 +362,7 @@ function TourRouteMap({ locations, mapStyle = 'light' }: TourRouteMapProps) {
                 index={index}
                 isActive={activeIndex === index}
                 onSelect={handleSelectLocation}
+                dayLabel={t('tourDetails.day')}
               />
             ))}
           </MapContainer>

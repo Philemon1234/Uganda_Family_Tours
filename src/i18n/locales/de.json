@@ -21,7 +21,9 @@
     "loading": "Laden",
     "logoAlt": "Uganda Family Tours",
     "increase": "{{label}} erhoehen",
-    "decrease": "{{label}} verringern"
+    "decrease": "{{label}} verringern",
+    "backToTop": "Nach oben",
+    "separator": "-"
   },
   "home": {
     "hero": {
@@ -124,7 +126,17 @@
     "description": "Ausgewählte Safari-Erlebnisse für unvergessliche Reisen durch Uganda und Ostafrika.",
     "ctaLabel": "Entdecken. Erleben. Reisen.",
     "ctaTitle": "Ihre Reise wartet - planen wir Ihren Traum",
-    "ctaButton": "Team kontaktieren"
+    "ctaButton": "Team kontaktieren",
+    "errorTitle": "Touren konnten nicht geladen werden",
+    "errorMessage": "Touren konnen derzeit nicht geladen werden.",
+    "emptyTitle": "Keine Touren verfugbar",
+    "emptyDescription": "Schauen Sie bald wieder vorbei fur neue Safari-Erlebnisse.",
+    "noFilterResultsTitle": "Keine Tour passt zu Ihren Filtern.",
+    "noFilterResultsDescription": "Passen Sie Preis oder Dauer an.",
+    "resetFilters": "Filter zurucksetzen",
+    "paginationAria": "Tour-Paginierung",
+    "previousPage": "Zuruck",
+    "nextPage": "Weiter"
   },
   "tourCard": {
     "duration": "Dauer",
@@ -150,7 +162,21 @@
     "needHelp": "Benötigen Sie Hilfe bei der Buchung?",
     "activities": "Aktivit?ten",
     "bucketList": "Wunschliste",
-    "day": "Tag"
+    "day": "Tag",
+    "accommodation": "Unterkunft",
+    "loadDetailsError": "Paketdetails konnten nicht geladen werden.",
+    "loadErrorTitle": "Paket konnte nicht geladen werden",
+    "backToTours": "Zuruck zu den Touren",
+    "notFoundTitle": "Tourpaket nicht gefunden.",
+    "notFoundDescription": "Dieses Paket ist moglicherweise nicht mehr verfugbar.",
+    "sectionsAria": "Tourabschnitte",
+    "openGalleryImage": "Bild {{number}} der Galerie {{title}} offnen",
+    "galleryImageAlt": "{{title}} Galerie {{number}}",
+    "closeGalleryImage": "Galeriebild schliessen",
+    "enlargedGalleryAlt": "Vergrosserte Galerie von {{title}}",
+    "dayImageTitle": "{{title}} Tag {{number}}",
+    "dayImagesAria": "Bilder von {{title}}",
+    "dayImageAlt": "Bild {{number}} von {{title}}"
   },
   "bookingForm": {
     "title": "Diese Tour buchen",
@@ -191,7 +217,17 @@
       "midRange": "Mittelklasse-Unterkunft",
       "luxury": "Luxus-Unterkunft"
     },
-    "requiredMissing": "Bitte füllen Sie die markierten Pflichtfelder aus, bevor Sie senden."
+    "requiredMissing": "Bitte füllen Sie die markierten Pflichtfelder aus, bevor Sie senden.",
+    "toggleCountryList": "Landerliste umschalten",
+    "traveler": "Reisender",
+    "travelers": "Reisende",
+    "accommodationOptions": {
+      "budget": "Budget",
+      "midRange": "Mittelklasse",
+      "luxury": "Luxus"
+    },
+    "selectedTourValue": "{{tour}}",
+    "defaultTourName": "Uganda-Safari"
   },
   "inquiryForm": {
     "title": "Anfrage stellen",
@@ -230,13 +266,15 @@
       "label": "Willkommen",
       "title": "Karibu!",
       "p1": "Willkommen bei Uganda Family Tours & Safari Company, Ihrem zuverl?ssigen Partner f?r sichere und naturfreundliche Familienabenteuer.",
-      "p2": "Unser lokales Team hilft Familien, Ugandas Sch?nheit, Tierwelt und Kultur entspannt und respektvoll zu erleben."
+      "p2": "Unser lokales Team hilft Familien, Ugandas Sch?nheit, Tierwelt und Kultur entspannt und respektvoll zu erleben.",
+      "imageAlt": "Uganda Family Tours Safari-Gaste am Firmenfahrzeug"
     },
     "origins": {
       "label": "Wunschliste",
       "title": "Unsere Urspr?nge",
       "p1": "Unsere Geschichte begann mit Liebe zur Natur, zur Tierwelt und zu den Menschen Ugandas.",
-      "p2": "Heute gestalten wir sichere, authentische und nachhaltige Reisen f?r Familien aus aller Welt."
+      "p2": "Heute gestalten wir sichere, authentische und nachhaltige Reisen f?r Familien aus aller Welt.",
+      "imageAlt": "Safarifahrzeug in Uganda nahe der Tierwelt"
     },
     "initiatives": {
       "label": "Jetzt Kontakt aufnehmen",
@@ -283,12 +321,14 @@
       "mammadu": {
         "title": "Uganda Community Travel Support",
         "p1": "Our safaris are designed to keep more value within Uganda by working with local guides, community hosts, family-run lodges, craft makers and small travel partners wherever possible.",
-        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences connected to the journey."
+        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences connected to the journey.",
+        "imageAlt": "Uganda-Gemeinschaftserlebnis im verantwortungsvollen Reisen"
       },
       "orange": {
         "title": "Orange Community Project",
         "p1": "Wir arbeiten mit Schulen und Gemeindegruppen, um Lernen und Chancen zu st?rken.",
-        "p2": "Unsere Projekte schaffen nachhaltigen Nutzen ?ber jede Safari hinaus."
+        "p2": "Unsere Projekte schaffen nachhaltigen Nutzen ?ber jede Safari hinaus.",
+        "imageAlt": "Uganda Family Tours Team und Gemeinschaftsprojekt"
       }
     },
     "cta": {
@@ -469,6 +509,33 @@
       "forest": "Gefuehrte Regenwaldwanderung",
       "gorilla": "Berggorilla im Bwindi-Wald",
       "lions": "Baumkletternde Loewen"
+    }
+  },
+  "tourFilters": {
+    "ariaLabel": "Tourfilter",
+    "priceRange": "Preisspanne",
+    "minimumPrice": "Mindestpreis",
+    "maximumPrice": "Hochstpreis",
+    "duration": "Dauer",
+    "durationOptions": {
+      "all": "Alle",
+      "oneTwo": "1-2 Tage",
+      "threeFour": "3-4 Tage",
+      "fiveSeven": "5-7 Tage",
+      "eightPlus": "8+ Tage"
+    }
+  },
+  "social": {
+    "facebook": "Facebook",
+    "youtube": "YouTube",
+    "whatsapp": "WhatsApp"
+  },
+  "loader": {
+    "compass": {
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W"
     }
   }
 }

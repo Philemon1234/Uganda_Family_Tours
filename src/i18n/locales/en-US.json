@@ -30,6 +30,8 @@
     "cancel": "Cancel",
     "menu": "Menu",
     "logoAlt": "Uganda Family Tours",
+    "backToTop": "Back to top",
+    "separator": "-",
     "increase": "Increase {{label}}",
     "decrease": "Decrease {{label}}"
   },
@@ -154,9 +156,29 @@
     "errorMessage": "Unable to load tours right now.",
     "emptyTitle": "No tours available",
     "emptyDescription": "Please check back soon for new safari experiences.",
+    "noFilterResultsTitle": "No tours match your filters.",
+    "noFilterResultsDescription": "Try adjusting your price or duration.",
+    "resetFilters": "Reset Filters",
+    "paginationAria": "Tour pagination",
+    "previousPage": "Previous",
+    "nextPage": "Next",
     "ctaLabel": "Explore. Discover. Adventure. Travel",
     "ctaTitle": "Your Journey Awaits - Let's Plan Your Dream Trip",
     "ctaButton": "Contact Our Team"
+  },
+  "tourFilters": {
+    "ariaLabel": "Tour filters",
+    "priceRange": "Price Range",
+    "minimumPrice": "Minimum price",
+    "maximumPrice": "Maximum price",
+    "duration": "Duration",
+    "durationOptions": {
+      "all": "All",
+      "oneTwo": "1-2 Days",
+      "threeFour": "3-4 Days",
+      "fiveSeven": "5-7 Days",
+      "eightPlus": "8+ Days"
+    }
   },
   "tourCard": {
     "duration": "Duration",

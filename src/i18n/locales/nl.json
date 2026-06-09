@@ -21,14 +21,22 @@
     "loading": "Laden",
     "logoAlt": "Uganda Family Tours",
     "increase": "{{label}} verhogen",
-    "decrease": "{{label}} verlagen"
+    "decrease": "{{label}} verlagen",
+    "backToTop": "Terug naar boven",
+    "separator": "-"
   },
   "home": {
     "hero": {
       "kicker": "De Parel van Afrika",
       "title": "Een safari persoonlijk gemaakt",
       "subtitle": "Reis door de bossen, savannes, meren en culturen van Uganda met een lokaal team dat elk detail rond jou vormt.",
-      "primaryCta": "Ontdek onze reizen"
+      "primaryCta": "Ontdek onze reizen",
+      "badgeAlt": {
+        "service": "Servicepictogram van Uganda Family Tours",
+        "planning": "Planningspictogram van Uganda Family Tours",
+        "support": "Ondersteuningspictogram van Uganda Family Tours",
+        "brand": "Merkteken van Uganda Family Tours"
+      }
     },
     "story": {
       "label": "Ontdek Afrika met",
@@ -66,19 +74,27 @@
           "title": "Familie-avonturen",
           "text": "Rustige, doordachte safaris gepland voor elke generatie."
         }
-      ]
+      ],
+      "videoAria": "Video met kenmerkende safari-ervaringen",
+      "videoFallback": "Je browser ondersteunt ingesloten video niet."
     },
     "featured": {
       "label": "Voor jou geselecteerd",
       "title": "Geselecteerde safari-ervaringen",
       "description": "Een gerichte selectie uit onze gepubliceerde safaris, kort gehouden zodat de homepage uitnodigt in plaats van een catalogus wordt.",
-      "viewAll": "Bekijk alle reizen"
+      "viewAll": "Bekijk alle reizen",
+      "errorTitle": "Uitgelichte tours kunnen niet worden geladen",
+      "errorMessage": "Uitgelichte tours kunnen nu niet worden geladen.",
+      "emptyTitle": "Geen uitgelichte tours beschikbaar",
+      "emptyDescription": "Kom binnenkort terug voor nieuwe safari-ervaringen."
     },
     "journey": {
       "label": "Met zorg ontworpen",
       "title": "Rond jouw reis",
       "description": "Elke route wordt gevormd rond jouw tempo, interesses, comfort en reisstijl, of je nu komt voor gorillas, wildlife, cultuur of een familie-avontuur.",
-      "cta": "Praat met een reisspecialist"
+      "cta": "Praat met een reisspecialist",
+      "imageAlt": "Safarireis door Uganda",
+      "thumbnailAlt": "Safari-moment van Uganda Family Tours"
     },
     "why": {
       "label": "Jouw avontuur. Onze expertise.",
@@ -110,7 +126,17 @@
     "description": "Handpicked safari experiences designed for unforgettable journeys across Uganda and East Africa.",
     "ctaLabel": "Explore. Discover. Adventure. Travel",
     "ctaTitle": "Your Journey Awaits - Let's Plan Your Dream Trip",
-    "ctaButton": "Contact Our Team"
+    "ctaButton": "Contact Our Team",
+    "errorTitle": "Tours kunnen niet worden geladen",
+    "errorMessage": "Tours kunnen nu niet worden geladen.",
+    "emptyTitle": "Geen tours beschikbaar",
+    "emptyDescription": "Kom binnenkort terug voor nieuwe safari-ervaringen.",
+    "noFilterResultsTitle": "Geen tours komen overeen met je filters.",
+    "noFilterResultsDescription": "Pas de prijs of duur aan.",
+    "resetFilters": "Filters resetten",
+    "paginationAria": "Tourpaginering",
+    "previousPage": "Vorige",
+    "nextPage": "Volgende"
   },
   "tourCard": {
     "duration": "Duur",
@@ -136,7 +162,21 @@
     "needHelp": "Need assistance with your booking?",
     "activities": "Activities",
     "bucketList": "Bucket list",
-    "day": "Day"
+    "day": "Day",
+    "accommodation": "Accommodatie",
+    "loadDetailsError": "Pakketdetails kunnen niet worden geladen.",
+    "loadErrorTitle": "Pakket kan niet worden geladen",
+    "backToTours": "Terug naar tours",
+    "notFoundTitle": "Tourpakket niet gevonden.",
+    "notFoundDescription": "Dit pakket is mogelijk niet meer beschikbaar.",
+    "sectionsAria": "Toursecties",
+    "openGalleryImage": "Open afbeelding {{number}} van {{title}}",
+    "galleryImageAlt": "{{title}} galerij {{number}}",
+    "closeGalleryImage": "Galerijafbeelding sluiten",
+    "enlargedGalleryAlt": "Vergrote galerij van {{title}}",
+    "dayImageTitle": "{{title}} dag {{number}}",
+    "dayImagesAria": "Afbeeldingen van {{title}}",
+    "dayImageAlt": "Afbeelding {{number}} van {{title}}"
   },
   "bookingForm": {
     "title": "Book This Tour",
@@ -177,7 +217,17 @@
       "midRange": "Mid-range stay",
       "luxury": "Luxury stay"
     },
-    "requiredMissing": "Please fill in the highlighted required fields before sending."
+    "requiredMissing": "Please fill in the highlighted required fields before sending.",
+    "toggleCountryList": "Landenlijst openen of sluiten",
+    "traveler": "reiziger",
+    "travelers": "reizigers",
+    "accommodationOptions": {
+      "budget": "Budget",
+      "midRange": "Middenklasse",
+      "luxury": "Luxe"
+    },
+    "selectedTourValue": "{{tour}}",
+    "defaultTourName": "Uganda-safari"
   },
   "inquiryForm": {
     "title": "Make an Inquiry",
@@ -216,13 +266,15 @@
       "label": "Welcome",
       "title": "Karibu!",
       "p1": "Welcome to Uganda Family Tours & Safari Company - your trusted partner for safe, fun and eco-friendly family adventures in the Pearl of Africa.",
-      "p2": "We are a team of locally based tour planners and guides committed to helping families explore the beauty, wildlife and culture of Uganda in a way that is exciting for kids, relaxing for parents and respectful to nature."
+      "p2": "We are a team of locally based tour planners and guides committed to helping families explore the beauty, wildlife and culture of Uganda in a way that is exciting for kids, relaxing for parents and respectful to nature.",
+      "imageAlt": "Safari-gasten van Uganda Family Tours bij het bedrijfsvoertuig"
     },
     "origins": {
       "label": "Our Story",
       "title": "Our Origins",
       "p1": "Our story began with a love for nature, wildlife and the incredible people of Uganda. What started as small, family-led safaris has grown into a mission to share the magic of Africa with families from around the world.",
-      "p2": "Over the years we have built trusted partnerships, created safe and memorable journeys, and remained true to our values: authenticity, sustainability and exceptional care."
+      "p2": "Over the years we have built trusted partnerships, created safe and memorable journeys, and remained true to our values: authenticity, sustainability and exceptional care.",
+      "imageAlt": "Safarivoertuig in Uganda nabij wilde dieren"
     },
     "initiatives": {
       "label": "What Drives Us",
@@ -269,12 +321,14 @@
       "mammadu": {
         "title": "Uganda Community Travel Support",
         "p1": "Our safaris are designed to keep more value within Uganda by working with local guides, community hosts, family-run lodges, craft makers and small travel partners wherever possible.",
-        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences connected to the journey."
+        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences connected to the journey.",
+        "imageAlt": "Gemeenschapservaring in Uganda verbonden met verantwoord reizen"
       },
       "orange": {
         "title": "Orange Community Project",
         "p1": "We partner with schools and community groups to help improve classrooms, provide supplies and support practical learning opportunities for children in rural areas.",
-        "p2": "Uganda Family Tours continues to support community projects initiated by local leaders, creating sustainable benefits beyond each safari."
+        "p2": "Uganda Family Tours continues to support community projects initiated by local leaders, creating sustainable benefits beyond each safari.",
+        "imageAlt": "Uganda Family Tours team en gemeenschapsproject"
       }
     },
     "cta": {
@@ -427,5 +481,61 @@
       "gorilla": "Berggorilla in Bwindi Forest",
       "lions": "Boomklimmende leeuwen"
     }
+  },
+  "tourFilters": {
+    "ariaLabel": "Tourfilters",
+    "priceRange": "Prijsklasse",
+    "minimumPrice": "Minimumprijs",
+    "maximumPrice": "Maximumprijs",
+    "duration": "Duur",
+    "durationOptions": {
+      "all": "Alle",
+      "oneTwo": "1-2 dagen",
+      "threeFour": "3-4 dagen",
+      "fiveSeven": "5-7 dagen",
+      "eightPlus": "8+ dagen"
+    }
+  },
+  "social": {
+    "facebook": "Facebook",
+    "youtube": "YouTube",
+    "whatsapp": "WhatsApp"
+  },
+  "loader": {
+    "compass": {
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W"
+    }
+  },
+  "reviews": {
+    "goToSlide": "Ga naar review {{number}}",
+    "items": [
+      {
+        "country": "Australie",
+        "text": "Een ongelooflijke ervaring van begin tot eind. De gidsen waren deskundig, vriendelijk en maakten onze reis onvergetelijk."
+      },
+      {
+        "country": "Verenigd Koninkrijk",
+        "text": "Alles was perfect georganiseerd. Gorilla tracking was een once-in-a-lifetime ervaring. Uganda Family Tours is een aanrader."
+      },
+      {
+        "country": "Canada",
+        "text": "Een geweldige reis met prachtige landschappen en indrukwekkende dieren. We kunnen niet wachten om terug te keren naar Uganda."
+      },
+      {
+        "country": "Verenigde Staten",
+        "text": "Onze familie voelde zich bij elke stap goed verzorgd. De route was evenwichtig, doordacht en vol herinneringen."
+      },
+      {
+        "country": "Kenia",
+        "text": "Prachtig georganiseerde safari met warme gidsen, comfortabele lodges en geweldige wildobservaties tijdens de hele reis."
+      },
+      {
+        "country": "Spanje",
+        "text": "De gorilla trekking was emotioneel en onvergetelijk. Uganda Family Tours maakte alles soepel en persoonlijk."
+      }
+    ]
   }
 }
