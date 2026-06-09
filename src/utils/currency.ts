@@ -58,6 +58,7 @@ export function formatPrice(amountUSD: number, currencyCode: CurrencyCode, rates
 
 export function formatCardPrice(amountUSD: number, currencyCode: CurrencyCode, rates: ExchangeRates = fallbackExchangeRatesFromUSD) {
   const converted = convertFromUSD(amountUSD, currencyCode, rates)
+  const hasCents = !Number.isInteger(Math.round(converted * 100) / 100)
 
   return new Intl.NumberFormat(currencyLocales[currencyCode], {
     style: 'currency',
@@ -65,7 +66,7 @@ export function formatCardPrice(amountUSD: number, currencyCode: CurrencyCode, r
     currencyDisplay: 'narrowSymbol',
     useGrouping: true,
     maximumFractionDigits: 2,
-    minimumFractionDigits: 2,
+    minimumFractionDigits: hasCents ? 2 : 0,
   }).format(converted)
 }
 
