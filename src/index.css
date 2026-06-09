@@ -702,10 +702,144 @@ img {
   box-shadow: 0 0 0 4px rgb(251 119 13 / 0.14);
 }
 
+.booking-input {
+  min-height: 3.25rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  background: rgb(255 255 255 / 0.12);
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #ffffff;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.booking-input:focus {
+  border-color: #FB770D;
+  background: rgb(255 255 255 / 0.15);
+  box-shadow: 0 0 0 4px rgb(251 119 13 / 0.14);
+}
+
+.booking-input::placeholder {
+  color: rgb(255 255 255 / 0.46);
+}
+
+.booking-input option {
+  color: #25424C;
+}
+
+.booking-choice,
+.booking-accommodation {
+  min-height: 3.25rem;
+  border-radius: 0.8rem;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  background: rgb(255 255 255 / 0.1);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.booking-accommodation {
+  padding: 1.05rem 0.75rem 0.95rem;
+}
+
+.booking-choice:hover,
+.booking-accommodation:hover {
+  border-color: #FB770D;
+  transform: translateY(-1px);
+}
+
+.booking-choice-active,
+.booking-accommodation-active {
+  border-color: #FB770D;
+  background: rgb(251 119 13 / 0.95);
+  color: #ffffff;
+  box-shadow: 0 14px 34px rgb(0 0 0 / 0.12);
+}
+
+.booking-country-input {
+  display: flex;
+  min-height: 3.25rem;
+  width: 100%;
+  align-items: center;
+  gap: 0.65rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(255 255 255 / 0.35);
+  background: rgb(255 255 255 / 0.12);
+  padding: 0.55rem 1rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.booking-country-input:hover,
+.booking-country-input:focus,
+.booking-country-input:focus-within {
+  border-color: #FB770D;
+  background: rgb(255 255 255 / 0.15);
+  box-shadow: 0 0 0 4px rgb(251 119 13 / 0.14);
+}
+
+.booking-country-flag {
+  display: inline-flex;
+  min-width: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", emoji, sans-serif;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.booking-country-menu {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  max-height: 14rem;
+  overflow-y: auto;
+  border-radius: 0.85rem;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  background: #25424C;
+  padding: 0.35rem;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.28);
+  scrollbar-width: thin;
+  scrollbar-color: rgb(251 119 13 / 0.5) rgb(255 255 255 / 0.08);
+}
+
+.booking-country-option {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.7rem;
+  border-radius: 0.65rem;
+  padding: 0.6rem 0.7rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: left;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+.booking-country-option:hover,
+.booking-country-option-active {
+  background: rgb(255 255 255 / 0.12);
+  color: #FB770D;
+}
+
 .field-error .input {
   border-color: #dc2626;
   background: #fff7f7;
   box-shadow: 0 0 0 3px rgb(220 38 38 / 0.08);
+}
+
+.field-error .booking-input,
+.field-error .booking-country-input {
+  border-color: #fca5a5;
+  background: rgb(127 29 29 / 0.24);
+  box-shadow: 0 0 0 3px rgb(248 113 113 / 0.12);
 }
 
 .field-error .input:focus {
