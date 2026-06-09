@@ -89,7 +89,7 @@ export function HomePage({ onBook }: HomePageProps) {
 
   return (
     <>
-      <section className="hero-section min-h-[92vh] bg-dark">
+      <section className="hero-section home-hero-section min-h-[92vh] bg-dark">
         {heroSlides.map((image, index) => (
           <img
             key={image}
@@ -104,7 +104,7 @@ export function HomePage({ onBook }: HomePageProps) {
         ))}
         <div className="absolute inset-0 bg-dark/50" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-[#171719]/70 to-[#171719] md:h-40" />
-        <div className="container-custom relative z-10 flex min-h-[92vh] flex-col items-center justify-center px-4 pb-20 pt-40 text-center text-white lg:pb-24 lg:pt-44">
+        <div className="container-custom home-hero-content relative z-10 flex min-h-[92vh] flex-col items-center justify-center px-4 pb-20 pt-40 text-center text-white lg:pb-24 lg:pt-44">
           <div className="w-full">
             <p className="hero-kicker luxury-script text-3xl leading-none text-white/95 md:text-4xl">{t('home.hero.kicker')}</p>
             <h1 className="hero-title mx-auto mt-1 max-w-5xl text-4xl font-bold leading-tight md:text-7xl">{t('home.hero.title')}</h1>
@@ -113,23 +113,25 @@ export function HomePage({ onBook }: HomePageProps) {
             </p>
             <Link className="hero-action btn-primary btn-on-dark mt-8 shadow-[0_14px_34px_rgba(0,0,0,0.18)]" to="/tours">{t('home.hero.primaryCta')} <FiArrowRight /></Link>
           </div>
-          <div className="hero-badges mt-14 flex w-full justify-center">
-            <div className="flex w-full max-w-2xl items-center justify-center gap-4 rounded-full border border-white/15 bg-dark/25 px-5 py-4 shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-md sm:w-auto sm:px-8 lg:gap-7">
+        </div>
+      </section>
+
+      <section className="bg-[#171719] pb-20 pt-8 md:pb-28 md:pt-12">
+        <div className="container-custom">
+          <MotionReveal>
+            <div className="mx-auto mb-14 flex w-full max-w-xl items-center justify-center gap-5 px-4 md:mb-16 md:gap-7">
               {[
                 { src: homeIconOne, alt: t('home.hero.badgeAlt.service') },
                 { src: homeIconTwo, alt: t('home.hero.badgeAlt.planning') },
                 { src: homeIconThree, alt: t('home.hero.badgeAlt.support') },
                 { src: homeIconFour, alt: t('home.hero.badgeAlt.brand') },
               ].map((item) => (
-                <img key={item.alt} className="h-10 w-auto object-contain opacity-90 md:h-12" src={item.src} alt={item.alt} />
+                <span key={item.alt} className="grid h-14 w-14 place-items-center rounded-full bg-white shadow-[0_14px_34px_rgba(0,0,0,0.22)] md:h-16 md:w-16">
+                  <img className="max-h-10 w-auto object-contain md:max-h-11" src={item.src} alt={item.alt} />
+                </span>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[#171719] pb-20 pt-8 md:pb-28 md:pt-12">
-        <div className="container-custom">
+          </MotionReveal>
           <MotionReveal>
             <div className="mx-auto max-w-5xl text-center">
               <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('home.story.label')}</p>

@@ -18,16 +18,16 @@ export const fallbackExchangeRatesFromUSD: ExchangeRates = {
 
 export const currencyLocales: Record<CurrencyCode, string> = {
   USD: 'en-US',
-  GBP: 'en-GB',
-  EUR: 'fr-FR',
-  TZS: 'sw-TZ',
-  RWF: 'rw-RW',
-  UGX: 'en-UG',
-  CNY: 'zh-CN',
-  RUB: 'ru-RU',
-  AED: 'ar-AE',
-  SAR: 'ar-SA',
-  INR: 'hi-IN',
+  GBP: 'en-US',
+  EUR: 'en-US',
+  TZS: 'en-US',
+  RWF: 'en-US',
+  UGX: 'en-US',
+  CNY: 'en-US',
+  RUB: 'en-US',
+  AED: 'en-US',
+  SAR: 'en-US',
+  INR: 'en-US',
 }
 
 function safeAmount(value: number) {
@@ -49,6 +49,8 @@ export function formatPrice(amountUSD: number, currencyCode: CurrencyCode, rates
   return new Intl.NumberFormat(currencyLocales[currencyCode], {
     style: 'currency',
     currency: currencyCode,
+    currencyDisplay: 'narrowSymbol',
+    useGrouping: true,
     maximumFractionDigits: 2,
     minimumFractionDigits: 2,
   }).format(converted)
@@ -61,6 +63,7 @@ export function formatCardPrice(amountUSD: number, currencyCode: CurrencyCode, r
     style: 'currency',
     currency: currencyCode,
     currencyDisplay: 'narrowSymbol',
+    useGrouping: true,
     maximumFractionDigits: 2,
     minimumFractionDigits: 2,
   }).format(converted)

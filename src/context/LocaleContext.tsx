@@ -154,7 +154,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   const [exchangeRates, setExchangeRates] = useState<ExchangeRates | null>(() => readCachedExchangeRates())
   const currentLanguage = languages.find((language) => language.code === i18n.language) ?? languages[0]
   const requestedCurrency = currentLanguage.currency
-  const currency = exchangeRates ? requestedCurrency : 'USD'
+  const currency = requestedCurrency
 
   useEffect(() => {
     if (!languages.some((language) => language.code === i18n.language)) {
@@ -175,7 +175,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
       .catch((error) => {
         if (controller.signal.aborted) return
 
-        console.error('Failed to fetch live exchange rates; falling back to USD.', error)
+        console.error('Failed to fetch live exchange rates; using fallback exchange rates.', error)
         setExchangeRates(null)
       })
 
@@ -193,9 +193,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     formatCurrency: (amountUSD) => formatPrice(amountUSD, currency, exchangeRates ?? undefined),
     formatCardCurrency: (amountUSD) => formatCardPrice(amountUSD, currency, exchangeRates ?? undefined),
     formatCurrencyIn: (amountUSD, currencyCode) => {
-      if (!exchangeRates) return formatPrice(amountUSD, 'USD', undefined)
-
-      return formatPrice(amountUSD, currencyCode, exchangeRates)
+      return formatPrice(amountUSD, currencyCode, exchangeRates ?? undefined)
     },
     formatCurrencyRange: (minUSD, maxUSD) => formatPriceRange(minUSD, maxUSD, currency, exchangeRates ?? undefined),
   }), [currency, currentLanguage, exchangeRates, i18n, requestedCurrency])

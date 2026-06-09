@@ -90,16 +90,16 @@ export function TourFilters({
           <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">{t('tourFilters.priceRange')}</p>
           <div className="tour-range-control relative mt-3 touch-none select-none px-1 pb-1 pt-7">
             <div
-              className="pointer-events-none absolute top-0 -translate-x-1/2 select-none rounded-md border border-[#eadfd3] bg-white px-2 py-0.5 text-[0.68rem] font-bold text-ink shadow-sm"
+              className="currency-range-label pointer-events-none absolute top-0 -translate-x-1/2 select-none rounded-md border border-[#eadfd3] bg-white px-2 py-0.5 text-[0.68rem] font-bold text-ink shadow-sm"
               style={{ left: minLabelPosition }}
             >
-              {formatCurrency(selectedMinPrice)}
+              <span className="currency-value">{formatCurrency(selectedMinPrice)}</span>
             </div>
             <div
-              className="pointer-events-none absolute top-0 -translate-x-1/2 select-none rounded-md border border-[#eadfd3] bg-white px-2 py-0.5 text-[0.68rem] font-bold text-ink shadow-sm"
+              className="currency-range-label pointer-events-none absolute top-0 -translate-x-1/2 select-none rounded-md border border-[#eadfd3] bg-white px-2 py-0.5 text-[0.68rem] font-bold text-ink shadow-sm"
               style={{ left: maxLabelPosition }}
             >
-              {formatCurrency(selectedMaxPrice)}
+              <span className="currency-value">{formatCurrency(selectedMaxPrice)}</span>
             </div>
             <div className="tour-range-track" onPointerDown={handleTrackPointerDown}>
               <span

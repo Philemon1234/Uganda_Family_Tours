@@ -9,22 +9,70 @@ import type {
 } from '../types/tourPackage'
 import type { Tour } from '../data/tours'
 
-export function getTourContentKey(slug: string) {
-  return slug.replace(/-\d+$/, '')
+const tourContentKeyAliases = [
+  {
+    key: 'chimpanzee-trekking',
+    patterns: ['chimpanzee', 'chimps', 'kibale'],
+  },
+  {
+    key: 'queen-elizabeth-wildlife-safari',
+    patterns: ['queen-elizabeth', 'queen elizabeth', 'kazinga'],
+  },
+  {
+    key: 'gorilla-tracking-in-bwindi',
+    patterns: ['gorilla', 'bwindi'],
+  },
+  {
+    key: 'murchison-falls-safari',
+    patterns: ['murchison', 'falls', 'nile'],
+  },
+  {
+    key: 'lake-bunyonyi-escape',
+    patterns: ['bunyonyi', 'lake'],
+  },
+  {
+    key: 'cultural-uganda-experience',
+    patterns: ['cultural', 'culture'],
+  },
+]
+
+function normalizeContentSource(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/duplicate(?:-\d+)?/g, '')
+    .replace(/new-package/g, 'queen-elizabeth-wildlife-safari')
+    .replace(/-\d+$/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+export function getTourContentKey(slug: string, fallbackText = '') {
+  const normalizedSource = normalizeContentSource([slug, fallbackText].filter(Boolean).join(' '))
+  const exactKey = normalizedSource
+    .replace(/-experience$/g, '')
+    .replace(/-safari-experience$/g, '-safari')
+
+  for (const alias of tourContentKeyAliases) {
+    if (exactKey === alias.key || alias.patterns.some((pattern) => normalizedSource.includes(pattern))) {
+      return alias.key
+    }
+  }
+
+  return exactKey
 }
 
 export function getLocalizedTourTitle(t: TFunction, tour: Pick<Tour, 'slug' | 'title'>) {
-  return t(`tourContent.${getTourContentKey(tour.slug)}.title`, { defaultValue: tour.title })
+  return t(`tourContent.${getTourContentKey(tour.slug, tour.title)}.title`, { defaultValue: tour.title })
 }
 
 export function getLocalizedTourShortDescription(t: TFunction, tour: Pick<Tour, 'slug' | 'shortDescription'>) {
-  return t(`tourContent.${getTourContentKey(tour.slug)}.shortDescription`, {
+  return t(`tourContent.${getTourContentKey(tour.slug, tour.shortDescription)}.shortDescription`, {
     defaultValue: tour.shortDescription,
   })
 }
 
 export function getLocalizedPackage(t: TFunction, tourPackage: TourPackage): TourPackage {
-  const contentKey = getTourContentKey(tourPackage.slug)
+  const contentKey = getTourContentKey(tourPackage.slug, `${tourPackage.title} ${tourPackage.short_description} ${tourPackage.overview}`)
 
   return {
     ...tourPackage,

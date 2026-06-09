@@ -171,7 +171,10 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
     )
   }
 
-  const contentKey = getTourContentKey(details.package.slug)
+  const contentKey = getTourContentKey(
+    details.package.slug,
+    `${details.package.title} ${details.package.short_description} ${details.package.overview}`,
+  )
   const tourPackage = getLocalizedPackage(t, details.package)
   const highlights = details.highlights.map((highlight, index) => getLocalizedHighlight(t, highlight, contentKey, index))
   const galleryImages = details.galleryImages

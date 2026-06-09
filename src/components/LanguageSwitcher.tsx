@@ -3,6 +3,15 @@ import { FiCheck, FiChevronDown } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 import { languages, useLocale, type LanguageCode } from '../context/LocaleContext'
 
+function FlagIcon({ code }: { code: LanguageCode }) {
+  return (
+    <span
+      className={`language-flag language-flag-${code.toLowerCase()}`}
+      aria-hidden="true"
+    />
+  )
+}
+
 export function LanguageSwitcher() {
   const { t } = useTranslation()
   const { language, setLanguage } = useLocale()
@@ -32,7 +41,7 @@ export function LanguageSwitcher() {
         aria-expanded={isOpen}
         onClick={() => setIsOpen((value) => !value)}
       >
-        <span className="text-lg leading-none">{language.flag}</span>
+        <FlagIcon code={language.code} />
         <FiChevronDown className={`text-xs text-white transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
@@ -45,8 +54,8 @@ export function LanguageSwitcher() {
               type="button"
               onClick={() => chooseLanguage(item.code)}
             >
-              <span className="text-xl leading-none">{item.flag}</span>
-              <span className="min-w-0 flex-1 truncate">{t(item.labelKey, { defaultValue: item.nativeName })}</span>
+              <FlagIcon code={item.code} />
+              <span className="min-w-0 flex-1 truncate">{item.name}</span>
               {item.code === language.code && <FiCheck className="text-lg text-green-600" />}
             </button>
           ))}
