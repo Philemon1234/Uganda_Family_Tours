@@ -703,13 +703,13 @@ img {
 }
 
 .booking-input {
-  min-height: 3.25rem;
+  min-height: 2.75rem;
   width: 100%;
   border-radius: 0.75rem;
   border: 1px solid rgb(255 255 255 / 0.35);
   background: rgb(255 255 255 / 0.12);
-  padding: 0.8rem 1rem;
-  font-size: 0.95rem;
+  padding: 0.62rem 0.85rem;
+  font-size: 0.86rem;
   font-weight: 400;
   color: #ffffff;
   transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
@@ -731,18 +731,18 @@ img {
 
 .booking-choice,
 .booking-accommodation {
-  min-height: 3.25rem;
+  min-height: 2.75rem;
   border-radius: 0.8rem;
   border: 1px solid rgb(255 255 255 / 0.35);
   background: rgb(255 255 255 / 0.1);
   color: #ffffff;
-  font-size: 0.95rem;
+  font-size: 0.86rem;
   font-weight: 700;
   transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
 .booking-accommodation {
-  padding: 1.05rem 0.75rem 0.95rem;
+  padding: 0.7rem 0.55rem 0.65rem;
 }
 
 .booking-choice:hover,
@@ -761,14 +761,14 @@ img {
 
 .booking-country-input {
   display: flex;
-  min-height: 3.25rem;
+  min-height: 2.75rem;
   width: 100%;
   align-items: center;
   gap: 0.65rem;
   border-radius: 0.75rem;
   border: 1px solid rgb(255 255 255 / 0.35);
   background: rgb(255 255 255 / 0.12);
-  padding: 0.55rem 1rem;
+  padding: 0.48rem 0.85rem;
   color: #ffffff;
   cursor: pointer;
   transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
@@ -784,11 +784,11 @@ img {
 
 .booking-country-flag {
   display: inline-flex;
-  min-width: 1.75rem;
+  min-width: 1.45rem;
   align-items: center;
   justify-content: center;
   font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", emoji, sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   line-height: 1;
 }
 
@@ -798,7 +798,7 @@ img {
   left: 0;
   right: 0;
   z-index: 30;
-  max-height: 14rem;
+  max-height: 12rem;
   overflow-y: auto;
   border-radius: 0.85rem;
   border: 1px solid rgb(255 255 255 / 0.16);
@@ -815,9 +815,9 @@ img {
   align-items: center;
   gap: 0.7rem;
   border-radius: 0.65rem;
-  padding: 0.6rem 0.7rem;
+  padding: 0.48rem 0.6rem;
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 700;
   text-align: left;
   transition: background-color 140ms ease, color 140ms ease;
@@ -901,6 +901,29 @@ img {
 
 .booking-modal-scroll::-webkit-scrollbar-thumb:hover {
   background: rgb(251 119 13 / 0.5);
+}
+
+.booking-step-content {
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+
+.booking-step-content::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-height: 760px) {
+  .booking-step-content {
+    overflow-y: auto;
+    padding-bottom: 5.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .booking-step-content {
+    overflow-y: auto;
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom));
+  }
 }
 
 .country-options-scroll {

@@ -296,98 +296,95 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                 </div>
               </div>
 
-              <div className="shrink-0 px-4 pt-5 sm:px-8 lg:px-12 lg:pt-9">
+              <div className="shrink-0 px-4 pt-4 sm:px-8 lg:px-10 lg:pt-7">
                 <ProgressIndicator currentStep={currentStep} steps={steps} />
               </div>
 
-              <div className="booking-modal-scroll min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 py-5 sm:px-8 lg:px-12 lg:py-8">
-                <div className="mx-auto max-w-4xl overflow-hidden">
-                  <div className="flex transition-transform duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)]" style={{ transform: `translateX(-${currentStep * 100}%)` }}>
-                    <StepPanel>
-                      <div className="grid gap-5 pt-4">
-                        <Field label={t('bookingForm.selectedTour')}>
-                          <input className="booking-input" value={selectedTour} readOnly />
+              <div className="booking-step-content min-h-0 flex-1 overflow-hidden px-4 py-3 sm:px-8 lg:px-10 lg:py-4">
+                <div className="mx-auto w-full max-w-[48rem]">
+                  {currentStep === 0 && (
+                    <div className="grid gap-3 pt-1">
+                      <Field label={t('bookingForm.selectedTour')}>
+                        <input className="booking-input" value={selectedTour} readOnly />
+                      </Field>
+                      <div className="grid min-w-0 gap-3 md:grid-cols-2">
+                        <Field label={t('bookingForm.travelDate')} required error={errors.travelDate}>
+                          <input className="booking-input" type="date" value={form.travelDate} onChange={(event) => update('travelDate', event.target.value)} />
                         </Field>
-                        <div className="grid gap-5 md:grid-cols-2">
-                          <Field label={t('bookingForm.travelDate')} required error={errors.travelDate}>
-                            <input className="booking-input" type="date" value={form.travelDate} onChange={(event) => update('travelDate', event.target.value)} />
-                          </Field>
-                          <Field label={t('bookingForm.country')} required error={errors.country}>
-                            <CountryPicker value={form.country} locale={i18n.language} onChange={(country) => update('country', country)} />
-                          </Field>
-                        </div>
-                        <Field label={t('bookingForm.flexibleDates')}>
-                          <div className="grid grid-cols-2 gap-3">
-                            {(['Yes', 'No'] as const).map((value) => (
-                              <button key={value} className={`booking-choice ${form.flexible === value ? 'booking-choice-active' : ''}`} type="button" onClick={() => update('flexible', value)}>
-                                {value === 'Yes' ? t('common.yes') : t('common.no')}
-                              </button>
-                            ))}
-                          </div>
+                        <Field label={t('bookingForm.country')} required error={errors.country}>
+                          <CountryPicker value={form.country} locale={i18n.language} onChange={(country) => update('country', country)} />
                         </Field>
                       </div>
-                    </StepPanel>
+                      <Field label={t('bookingForm.flexibleDates')}>
+                        <div className="grid grid-cols-2 gap-3">
+                          {(['Yes', 'No'] as const).map((value) => (
+                            <button key={value} className={`booking-choice ${form.flexible === value ? 'booking-choice-active' : ''}`} type="button" onClick={() => update('flexible', value)}>
+                              {value === 'Yes' ? t('common.yes') : t('common.no')}
+                            </button>
+                          ))}
+                        </div>
+                      </Field>
+                    </div>
+                  )}
 
-                    <StepPanel>
-                      <div className="grid gap-6 pt-4">
-                        <div className="grid gap-5 md:grid-cols-2">
-                          <Counter label={t('bookingForm.adults')} value={form.adults} error={errors.adults} onChange={(value) => update('adults', Math.max(1, value))} />
-                          <Counter label={t('bookingForm.children')} value={form.children} error={errors.children} onChange={(value) => update('children', Math.max(0, value))} />
-                        </div>
-                        {form.children > 0 && (
-                          <Field label={t('bookingForm.childrenAges')} error={errors.childrenAges}>
-                            <input className="booking-input" value={form.childrenAges} onChange={(event) => update('childrenAges', event.target.value)} placeholder={t('bookingForm.childrenAgesPlaceholder')} />
-                          </Field>
-                        )}
-                        <Field label={t('bookingForm.accommodation')} required>
-                          <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                            {[
-                              { name: 'Budget', label: t('bookingForm.accommodationOptions.budget'), icon: FaHouse },
-                              { name: 'Mid-range', label: t('bookingForm.accommodationOptions.midRange'), icon: FaUserGroup },
-                              { name: 'Luxury', label: t('bookingForm.accommodationOptions.luxury'), icon: FaRegStar },
-                            ].map(({ name, label, icon: Icon }) => (
-                              <button key={name} className={`booking-accommodation ${form.accommodation === name ? 'booking-accommodation-active' : ''}`} type="button" onClick={() => update('accommodation', name)}>
-                                <Icon className="mx-auto mb-2 text-xl" />{label}
-                              </button>
-                            ))}
-                          </div>
-                        </Field>
-                        <BudgetCard
-                          estimatedGroupBudget={estimatedGroupBudget}
-                          estimatedPerPersonBudget={estimatedPerPersonBudget}
-                          travelers={travelers}
-                          stay={t(`bookingForm.accommodationStay.${accommodationStayLabelKey}`)}
-                        />
+                  {currentStep === 1 && (
+                    <div className="grid gap-3 pt-1">
+                      <div className="grid min-w-0 gap-3 md:grid-cols-2">
+                        <Counter label={t('bookingForm.adults')} value={form.adults} error={errors.adults} onChange={(value) => update('adults', Math.max(1, value))} />
+                        <Counter label={t('bookingForm.children')} value={form.children} error={errors.children} onChange={(value) => update('children', Math.max(0, value))} />
                       </div>
-                    </StepPanel>
+                      {form.children > 0 && (
+                        <Field label={t('bookingForm.childrenAges')} error={errors.childrenAges}>
+                          <input className="booking-input" value={form.childrenAges} onChange={(event) => update('childrenAges', event.target.value)} placeholder={t('bookingForm.childrenAgesPlaceholder')} />
+                        </Field>
+                      )}
+                      <Field label={t('bookingForm.accommodation')} required>
+                        <div className="grid min-w-0 grid-cols-3 gap-2">
+                          {[
+                            { name: 'Budget', label: t('bookingForm.accommodationOptions.budget'), icon: FaHouse },
+                            { name: 'Mid-range', label: t('bookingForm.accommodationOptions.midRange'), icon: FaUserGroup },
+                            { name: 'Luxury', label: t('bookingForm.accommodationOptions.luxury'), icon: FaRegStar },
+                          ].map(({ name, label, icon: Icon }) => (
+                            <button key={name} className={`booking-accommodation ${form.accommodation === name ? 'booking-accommodation-active' : ''}`} type="button" onClick={() => update('accommodation', name)}>
+                              <Icon className="mx-auto mb-1.5 text-base" />{label}
+                            </button>
+                          ))}
+                        </div>
+                      </Field>
+                      <BudgetCard
+                        estimatedGroupBudget={estimatedGroupBudget}
+                        estimatedPerPersonBudget={estimatedPerPersonBudget}
+                        travelers={travelers}
+                        stay={t(`bookingForm.accommodationStay.${accommodationStayLabelKey}`)}
+                      />
+                    </div>
+                  )}
 
-                    <StepPanel>
-                      <div className="grid gap-5 pt-4">
-                        <div className="grid gap-5 md:grid-cols-2">
-                          <Field label={t('bookingForm.fullName')} required error={errors.fullName}>
-                            <input className="booking-input" value={form.fullName} onChange={(event) => update('fullName', event.target.value)} placeholder={t('bookingForm.fullNamePlaceholder')} />
-                          </Field>
-                          <Field label={t('bookingForm.email')} required error={errors.email}>
-                            <input className="booking-input" type="email" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder={t('bookingForm.emailPlaceholder')} />
-                          </Field>
-                        </div>
-                        <Field label={t('bookingForm.phone')} required error={errors.phone}>
-                          <input className="booking-input" value={form.phone} onChange={(event) => update('phone', event.target.value)} placeholder={t('inquiryForm.phonePlaceholder')} />
+                  {currentStep === 2 && (
+                    <div className="grid gap-2 pt-1">
+                      <div className="grid min-w-0 gap-3 md:grid-cols-2">
+                        <Field label={t('bookingForm.fullName')} required error={errors.fullName}>
+                          <input className="booking-input" value={form.fullName} onChange={(event) => update('fullName', event.target.value)} placeholder={t('bookingForm.fullNamePlaceholder')} />
                         </Field>
-                        <Field label={t('bookingForm.specialRequests')} error={errors.notes}>
-                          <textarea className="booking-input min-h-28 resize-none" value={form.notes} maxLength={500} onChange={(event) => update('notes', event.target.value)} placeholder={t('bookingForm.notesPlaceholder')} />
-                          <p className="mt-1 text-right text-xs text-white/60">{form.notes.length}/500</p>
+                        <Field label={t('bookingForm.email')} required error={errors.email}>
+                          <input className="booking-input" type="email" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder={t('bookingForm.emailPlaceholder')} />
                         </Field>
-                        <SummaryCard
-                          selectedTour={selectedTour}
-                          form={form}
-                          estimatedGroupBudget={estimatedGroupBudget}
-                          estimatedPerPersonBudget={estimatedPerPersonBudget}
-                          travelers={travelers}
-                        />
                       </div>
-                    </StepPanel>
-                  </div>
+                      <Field label={t('bookingForm.phone')} required error={errors.phone}>
+                        <input className="booking-input" value={form.phone} onChange={(event) => update('phone', event.target.value)} placeholder={t('inquiryForm.phonePlaceholder')} />
+                      </Field>
+                      <Field label={t('bookingForm.specialRequests')} error={errors.notes}>
+                        <textarea className="booking-input min-h-16 resize-none" value={form.notes} maxLength={500} onChange={(event) => update('notes', event.target.value)} placeholder={t('bookingForm.notesPlaceholder')} />
+                        <p className="mt-1 text-right text-xs text-white/60">{form.notes.length}/500</p>
+                      </Field>
+                      <SummaryCard
+                        selectedTour={selectedTour}
+                        form={form}
+                        estimatedGroupBudget={estimatedGroupBudget}
+                        travelers={travelers}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 {status && (
@@ -403,19 +400,19 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                 )}
               </div>
 
-              <footer className="shrink-0 border-t border-white/10 bg-dark px-4 py-3 sm:px-8 lg:px-12">
-                <div className={`mx-auto flex max-w-4xl items-center gap-3 ${currentStep === 0 ? 'justify-end' : 'justify-between'}`}>
+              <footer className="shrink-0 border-t border-white/10 bg-dark px-4 py-2.5 sm:px-8 lg:px-10">
+                <div className={`mx-auto flex max-w-[48rem] items-center gap-3 ${currentStep === 0 ? 'justify-end' : 'justify-between'}`}>
                   {currentStep > 0 && (
                     <button className="inline-flex min-h-12 items-center gap-2 rounded-full px-4 py-3 text-sm font-black text-white/60 transition hover:bg-white/10 hover:text-white disabled:cursor-not-allowed disabled:opacity-40 sm:px-5" type="button" onClick={previousStep} disabled={isSubmitting}>
                       <FiArrowLeft /> {t('toursPage.previousPage')}
                     </button>
                   )}
                   {currentStep < 2 ? (
-                    <button className="btn-primary min-w-0 justify-center px-5 sm:min-w-36" type="button" onClick={nextStep}>
+                    <button className="btn-primary min-w-0 justify-center px-5 py-3 sm:min-w-32" type="button" onClick={nextStep}>
                       {t('toursPage.nextPage')} <FiArrowRight />
                     </button>
                   ) : (
-                    <button className="btn-primary min-w-0 flex-1 justify-center px-4 disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-56 sm:flex-none" type="submit" disabled={isSubmitting}>
+                    <button className="btn-primary min-w-0 flex-1 justify-center px-4 py-3 disabled:cursor-not-allowed disabled:opacity-70 sm:min-w-52 sm:flex-none" type="submit" disabled={isSubmitting}>
                       {isSubmitting ? t('common.sending') : t('bookingForm.submit')} <FiArrowRight />
                     </button>
                   )}
@@ -432,8 +429,8 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
 function ProgressIndicator({ currentStep, steps }: { currentStep: number; steps: string[] }) {
   return (
     <div>
-      <div className="relative mx-auto max-w-3xl">
-        <div className="absolute left-0 right-0 top-5 h-px bg-white/35" />
+      <div className="relative mx-auto max-w-[44rem]">
+        <div className="absolute left-0 right-0 top-4 h-px bg-white/35" />
         <div className="relative grid grid-cols-3 gap-3">
           {steps.map((step, index) => {
             const isActive = index === currentStep
@@ -441,14 +438,14 @@ function ProgressIndicator({ currentStep, steps }: { currentStep: number; steps:
 
             return (
               <div key={step} className="flex flex-col items-center gap-2">
-                <span className={`grid h-10 w-10 place-items-center rounded-full border-2 text-sm font-black transition ${
+                <span className={`grid h-8 w-8 place-items-center rounded-full border-2 text-xs font-black transition ${
                   isActive || isComplete
                     ? 'border-primary bg-primary text-white'
                     : 'border-white/70 bg-dark text-white/75'
                 }`}>
                   {isComplete ? <FiCheck /> : index + 1}
                 </span>
-                <span className={`text-xs font-black uppercase tracking-[0.12em] ${isActive ? 'text-primary' : 'text-white/60'}`}>{step}</span>
+                <span className={`text-[0.66rem] font-black uppercase tracking-[0.12em] ${isActive ? 'text-primary' : 'text-white/60'}`}>{step}</span>
               </div>
             )
           })}
@@ -458,13 +455,9 @@ function ProgressIndicator({ currentStep, steps }: { currentStep: number; steps:
   )
 }
 
-function StepPanel({ children }: { children: React.ReactNode }) {
-  return <div className="w-full shrink-0 px-0">{children}</div>
-}
-
 function Field({ label, required, error, className = '', children }: { label: string; required?: boolean; error?: string; className?: string; children: React.ReactNode }) {
   return (
-    <div className={`block text-left text-sm font-semibold text-white ${error ? 'field-error' : ''} ${className}`}>
+    <div className={`block min-w-0 text-left text-[0.82rem] font-semibold text-white ${error ? 'field-error' : ''} ${className}`}>
       <span>
         {label} {required && <span className="text-primary">*</span>}
       </span>
@@ -478,9 +471,9 @@ function Counter({ label, value, error, onChange }: { label: string; value: numb
   const { t } = useTranslation()
 
   return (
-    <div>
-      <p className="mb-2 text-sm font-semibold text-white">{label} <span className="text-primary">*</span></p>
-      <div className="flex h-[3.25rem] items-center justify-between rounded-xl border border-white/35 bg-white/10 px-3 text-white">
+    <div className="min-w-0">
+      <p className="mb-1.5 text-[0.82rem] font-semibold text-white">{label} <span className="text-primary">*</span></p>
+      <div className="flex h-11 min-w-0 items-center justify-between rounded-xl border border-white/35 bg-white/10 px-2 text-white">
         <button className="counter-btn bg-white text-primary shadow-sm" type="button" onClick={() => onChange(value - 1)} aria-label={t('common.decrease', { label })}><FiMinus /></button>
         <span className="font-semibold">{value}</span>
         <button className="counter-btn bg-white text-primary shadow-sm" type="button" onClick={() => onChange(value + 1)} aria-label={t('common.increase', { label })}><FiPlus /></button>
@@ -572,10 +565,10 @@ function BudgetCard({
   const { t } = useTranslation()
 
   return (
-    <div className="rounded-2xl border border-white/15 bg-white/5 p-5">
+    <div className="rounded-xl border border-white/15 bg-white/5 p-3">
       <p className="text-xs font-black uppercase tracking-[0.14em] text-primary">{t('bookingForm.budget')}</p>
-      <p className="mt-2 text-4xl font-black text-white">{estimatedGroupBudget}</p>
-      <p className="mt-2 text-sm font-semibold text-white/65">
+      <p className="mt-1.5 text-xl font-black leading-tight text-white sm:text-2xl">{estimatedGroupBudget}</p>
+      <p className="mt-1.5 text-xs font-semibold leading-5 text-white/65">
         {t('bookingForm.budgetCalculation', {
           perPerson: estimatedPerPersonBudget,
           travelers,
@@ -591,34 +584,27 @@ function SummaryCard({
   selectedTour,
   form,
   estimatedGroupBudget,
-  estimatedPerPersonBudget,
   travelers,
 }: {
   selectedTour: string
   form: FormState
   estimatedGroupBudget: string
-  estimatedPerPersonBudget: string
   travelers: number
 }) {
   const { t } = useTranslation()
   const rows = [
     [t('bookingForm.selectedTour'), selectedTour],
     [t('bookingForm.travelDate'), form.travelDate || '-'],
-    [t('bookingForm.flexibleDates'), form.flexible === 'Yes' ? t('common.yes') : t('common.no')],
     [t('bookingForm.country'), form.country || '-'],
-    [t('bookingForm.adults'), String(form.adults)],
-    [t('bookingForm.children'), String(form.children)],
-    ...(form.childrenAges ? [[t('bookingForm.childrenAges'), form.childrenAges]] : []),
+    [travelers === 1 ? t('bookingForm.traveler') : t('bookingForm.travelers'), String(travelers)],
     [t('bookingForm.accommodation'), t(`bookingForm.accommodationOptions.${form.accommodation === 'Budget' ? 'budget' : form.accommodation === 'Luxury' ? 'luxury' : 'midRange'}`)],
     [t('bookingForm.budgetTotal'), estimatedGroupBudget],
-    [t('bookingForm.budget'), estimatedPerPersonBudget],
-    [travelers === 1 ? t('bookingForm.traveler') : t('bookingForm.travelers'), String(travelers)],
   ]
 
   return (
-    <div className="rounded-2xl border border-white/15 bg-white/5 p-5 shadow-sm">
+    <div className="rounded-xl border border-white/15 bg-white/5 p-3 shadow-sm">
       <p className="text-xs font-black uppercase tracking-[0.14em] text-primary">{t('bookingForm.title')}</p>
-      <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+      <dl className="mt-2 grid gap-x-4 gap-y-1.5 text-xs sm:grid-cols-2">
         {rows.map(([label, value]) => (
           <div key={label}>
             <dt className="font-bold text-white/55">{label}</dt>
