@@ -242,8 +242,8 @@ img {
 
 .btn-on-dark {
   border-color: #ffffff !important;
-  background: #ffffff !important;
-  color: #25424C !important;
+  background: transparent !important;
+  color: #ffffff !important;
 }
 
 .btn-on-dark:hover {

@@ -111,7 +111,7 @@ export function HomePage({ onBook }: HomePageProps) {
             <p className="hero-copy mx-auto mt-5 max-w-2xl text-base leading-8 text-white/82 md:text-lg">
               {t('home.hero.subtitle')}
             </p>
-            <Link className="hero-action btn-primary btn-on-dark mt-8 shadow-[0_14px_34px_rgba(0,0,0,0.18)]" to="/tours">{t('home.hero.primaryCta')} <FiArrowRight /></Link>
+            <Link className="hero-action btn-primary btn-on-dark mt-8" to="/tours">{t('home.hero.primaryCta')} <FiArrowRight /></Link>
           </div>
         </div>
       </section>
