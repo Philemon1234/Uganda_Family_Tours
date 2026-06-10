@@ -251,15 +251,15 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   }
 
   return (
-    <div className="fixed inset-0 z-[100] h-dvh w-full overflow-hidden bg-dark text-white" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <div className="booking-modal fixed inset-0 z-[100] h-dvh w-full overflow-hidden bg-dark text-white" role="dialog" aria-modal="true" aria-labelledby="booking-title">
       {showSuccess ? (
         <div className="grid h-full place-items-center px-5 text-center">
           <div className="mx-auto max-w-xl">
             <div className="mx-auto grid h-20 w-20 place-items-center rounded-full border border-primary/30 bg-primary text-4xl text-white shadow-[0_20px_60px_rgb(0_0_0_/_0.18)]">
               <FiCheck />
             </div>
-            <h2 className="mt-7 text-3xl font-black leading-tight sm:text-4xl">{t('bookingForm.success')}</h2>
-            <p className="mt-4 text-lg font-semibold leading-8 text-white/75">{t('bookingForm.info')}</p>
+            <h2 className="mt-7 text-3xl font-black leading-tight sm:text-4xl">Booking request sent successfully.</h2>
+            <p className="mt-4 text-lg font-semibold leading-8 text-white/75">We will contact you soon.</p>
             <button className="btn-primary mt-8" type="button" onClick={onClose}>{t('common.close')}</button>
           </div>
         </div>
