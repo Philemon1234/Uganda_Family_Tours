@@ -89,12 +89,20 @@ export function MobileBottomNav() {
     setSelectedItem(null)
   }
 
-  const handleNavItemClick = (itemId: string) => {
-    setSelectedItem(itemId)
-    setIsSidebarOpen(false)
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }
 
-  const scrollToTop = () => {
+  const handleNavItemClick = (itemId: string, href?: string | null) => {
+    setSelectedItem(itemId)
+    setIsSidebarOpen(false)
+
+    if (href && !href.startsWith('http') && location.pathname === href) {
+      scrollToTop()
+    }
+  }
+
+  const handleBackToTopClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
@@ -107,7 +115,7 @@ export function MobileBottomNav() {
           isAtFooterBottom ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
         }`}
         aria-label={t('common.backToTop', { defaultValue: 'Back to top' })}
-        onClick={scrollToTop}
+        onClick={handleBackToTopClick}
       >
         <FiArrowUp />
       </button>
@@ -170,7 +178,7 @@ export function MobileBottomNav() {
                     target="_blank"
                     rel="noreferrer"
                     className={buttonClass}
-                    onClick={() => handleNavItemClick(item.id)}
+                    onClick={() => handleNavItemClick(item.id, item.href)}
                     aria-current={isActive ? 'page' : undefined}
                   >
                     {content}
@@ -183,7 +191,7 @@ export function MobileBottomNav() {
                   key={item.id}
                   to={item.href ?? '/'}
                   className={buttonClass}
-                  onClick={() => handleNavItemClick(item.id)}
+                  onClick={() => handleNavItemClick(item.id, item.href)}
                   aria-current={isActive ? 'page' : undefined}
                 >
                   {content}

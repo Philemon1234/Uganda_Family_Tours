@@ -172,12 +172,18 @@
     "minimumPrice": "Minimum price",
     "maximumPrice": "Maximum price",
     "duration": "Duration",
+    "region": "Region",
     "durationOptions": {
       "all": "All",
-      "oneTwo": "1-2 Days",
-      "threeFour": "3-4 Days",
-      "fiveSeven": "5-7 Days",
-      "eightPlus": "8+ Days"
+      "twoFive": "2-5",
+      "sixEight": "6-8",
+      "nineTwelve": "9-12",
+      "thirteenTwenty": "13-20",
+      "twentyPlus": "20+"
+    },
+    "regionOptions": {
+      "all": "All",
+      "eastAfrica": "East Africa"
     }
   },
   "tourCard": {

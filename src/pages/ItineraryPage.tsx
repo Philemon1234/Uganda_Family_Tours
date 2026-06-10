@@ -89,6 +89,31 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
   ] as const
 
   useEffect(() => {
+    const sectionIds = ['overview', 'gallery', 'highlights', 'itinerary']
+
+    const updateActiveTab = () => {
+      const anchorLine = window.scrollY + window.innerHeight * 0.32
+      const nextActiveIndex = sectionIds.reduce((activeIndex, sectionId, index) => {
+        const section = document.getElementById(sectionId)
+        if (!section) return activeIndex
+
+        return section.offsetTop <= anchorLine ? index : activeIndex
+      }, 0)
+
+      setActiveTab(nextActiveIndex)
+    }
+
+    updateActiveTab()
+    window.addEventListener('scroll', updateActiveTab, { passive: true })
+    window.addEventListener('resize', updateActiveTab)
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveTab)
+      window.removeEventListener('resize', updateActiveTab)
+    }
+  }, [details?.package.slug])
+
+  useEffect(() => {
     const updateTabState = () => {
       if (!tabSentinelRef.current) return
       const tabTop = tabSentinelRef.current.getBoundingClientRect().top
@@ -245,7 +270,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
               <a
                 key={label}
                 className={`relative flex min-w-0 items-center justify-center px-2 py-3.5 text-center text-sm font-semibold transition hover:bg-primary/5 hover:text-primary md:px-5 md:py-4 md:text-base ${
-                  activeTab === index ? 'text-primary' : 'text-ink'
+                  activeTab === index ? 'bg-primary/5 text-primary' : 'text-ink'
                 }`}
                 href={href}
                 onClick={() => setActiveTab(index)}
@@ -362,7 +387,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                 <span className="text-safe flex items-center justify-center gap-2"><FaShieldHeart className="shrink-0 text-primary" /> {t('tourDetails.secure')}</span>
                 <span className="text-safe flex items-center justify-center gap-2"><FaCheck className="shrink-0 text-primary" /> {t('tourDetails.fees')}</span>
               </div>
-              <button className="btn-primary mt-7 w-full justify-center" type="button" onClick={() => onBook(bookingTour)}>{t('tourDetails.bookThisTour')} <FiArrowRight /></button>
+              <button className="btn-primary mt-7 w-full justify-center text-white" type="button" onClick={() => onBook(bookingTour)}>{t('tourDetails.bookThisTour')} <FiArrowRight /></button>
               <div className="mt-8 text-sm">
                 <p className="text-safe text-muted">{t('tourDetails.needHelp')}</p>
                 <a className="text-safe mt-2 flex items-center justify-center gap-2 font-semibold text-primary transition hover:text-primary/80" href="tel:+256703543027">
@@ -466,12 +491,12 @@ function ItineraryDayArticle({ day, index, tourTitle, markerRef }: ItineraryDayA
     <article className="relative grid min-w-0 max-w-full grid-cols-[48px_minmax(0,1fr)] gap-4 sm:grid-cols-[56px_minmax(0,1fr)] sm:gap-5">
       <div
         ref={markerRef}
-        className="relative z-10 grid h-12 w-12 place-items-center rounded-full border-[0.32rem] border-white bg-primary text-base font-semibold text-ink shadow-[0_12px_26px_rgba(251,119,13,0.22)]"
+        className="relative z-10 grid h-12 w-12 place-items-center rounded-full border-[0.32rem] border-white bg-primary text-base font-semibold text-white shadow-[0_12px_26px_rgba(251,119,13,0.22)]"
       >
         {day.day_number}
       </div>
       <div className="min-w-0 max-w-full pb-1">
-        <h3 className="text-safe text-lg font-semibold leading-7 text-ink md:text-xl">{t('tourDetails.day')} {day.day_number}: {day.title}</h3>
+        <h3 className="text-safe text-lg font-semibold leading-7 text-ink md:text-xl">{day.title}</h3>
         {day.overview ? <p className="text-safe mt-3 max-w-5xl text-base font-normal leading-7 text-muted md:leading-8">{day.overview}</p> : null}
         {day.activities.length > 0 ? (
           <>

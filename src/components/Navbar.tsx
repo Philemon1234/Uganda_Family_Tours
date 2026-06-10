@@ -72,7 +72,7 @@ export function Navbar({ onInquiry }: NavbarProps) {
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-          <button className="btn-primary hidden px-5 py-3 text-[0.72rem] lg:inline-flex" type="button" onClick={onInquiry}>
+          <button className="btn-primary hidden px-5 py-3 text-[0.72rem] text-white lg:inline-flex" type="button" onClick={onInquiry}>
             {t('navbar.talkToSpecialist')}
           </button>
         </div>

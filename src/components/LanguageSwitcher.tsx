@@ -2,8 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import { FiCheck, FiChevronDown } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 import { languages, useLocale, type LanguageCode } from '../context/LocaleContext'
+import usFlag from '../assets/flags/us-flag.svg'
 
 function FlagIcon({ code }: { code: LanguageCode }) {
+  if (code === 'en-US') {
+    return <img className="language-flag language-flag-image" src={usFlag} alt="" aria-hidden="true" />
+  }
+
   return (
     <span
       className={`language-flag language-flag-${code.toLowerCase()}`}

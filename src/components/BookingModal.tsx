@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { FaHouse, FaRegStar, FaUserGroup, FaXmark } from 'react-icons/fa6'
-import { FiArrowLeft, FiArrowRight, FiCheck, FiChevronDown, FiMail, FiMinus, FiPhone, FiPlus } from 'react-icons/fi'
+import { FiArrowLeft, FiArrowRight, FiCheck, FiChevronDown, FiMinus, FiPlus } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 import type { Tour } from '../data/tours'
 import { countries, countryFlag } from '../data/countries'
@@ -65,11 +65,6 @@ const countryCurrencyOverrides: Partial<Record<string, CurrencyCode>> = {
   TZ: 'TZS',
   UG: 'UGX',
 }
-
-const phoneDisplay = '+256 703 543027'
-const phoneHref = 'tel:+256703543027'
-const emailDisplay = 'safaris@ugandafamilytours.com'
-const emailHref = 'mailto:safaris@ugandafamilytours.com'
 
 function currencyForCountryCode(countryCode?: string, fallback: CurrencyCode = 'USD') {
   if (!countryCode) return fallback
@@ -265,11 +260,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
         </div>
       ) : (
         <div className="flex h-full min-h-0 flex-col">
-          <header className="flex min-h-16 shrink-0 items-center justify-between gap-2 border-b border-white/10 bg-dark px-3 py-2 text-sm font-bold sm:px-8">
-            <div className="flex min-w-0 flex-wrap items-center gap-x-6 gap-y-1">
-              <a className="flex items-center gap-2 text-white transition hover:text-primary" href={phoneHref}><FiPhone className="text-primary" />{phoneDisplay}</a>
-              <a className="flex min-w-0 items-center gap-2 text-white transition hover:text-primary" href={emailHref}><FiMail className="shrink-0 text-primary" /><span className="truncate">{emailDisplay}</span></a>
-            </div>
+          <header className="flex min-h-16 shrink-0 items-center justify-end gap-2 border-b border-white/10 bg-dark px-3 py-2 text-sm font-bold sm:px-8">
             <button className="grid h-11 w-11 place-items-center rounded-full text-3xl text-white transition hover:bg-white/10" type="button" aria-label={t('common.close')} onClick={onClose}>
               <FaXmark />
             </button>
@@ -280,8 +271,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
               {tourImage && <img className="absolute inset-0 h-full w-full object-cover" src={tourImage} alt={selectedTour} />}
               <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/25 to-black/15" />
               <div className="absolute inset-x-0 bottom-0 p-10">
-                <p className="text-sm font-black uppercase tracking-[0.2em] text-primary">Uganda Family Tours</p>
-                <h2 id="booking-title" className="mt-3 max-w-xl text-4xl font-semibold leading-tight">{selectedTour}</h2>
+                <h2 id="booking-title" className="max-w-xl text-4xl font-semibold leading-tight">{selectedTour}</h2>
                 <p className="mt-4 max-w-lg text-base leading-7 text-white/78">{t('bookingForm.subtitle')}</p>
               </div>
             </aside>
@@ -291,8 +281,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                 {tourImage && <img className="h-full w-full object-cover" src={tourImage} alt={selectedTour} />}
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/85 to-black/15" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-primary">Uganda Family Tours</p>
-                  <h2 className="mt-1 text-xl font-semibold leading-tight">{selectedTour}</h2>
+                  <h2 className="text-xl font-semibold leading-tight">{selectedTour}</h2>
                 </div>
               </div>
 

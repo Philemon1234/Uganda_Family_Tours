@@ -17,8 +17,8 @@ export type LanguageOption = {
 }
 
 export const languages: LanguageOption[] = [
-  { code: 'en-GB', name: 'English UK', nativeName: 'English UK', labelKey: 'languages.enGB', flag: '\u{1F1EC}\u{1F1E7}', currency: 'GBP', symbol: '\u00A3' },
   { code: 'en-US', name: 'English USA', nativeName: 'English USA', labelKey: 'languages.enUS', flag: '\u{1F1FA}\u{1F1F8}', currency: 'USD', symbol: '$' },
+  { code: 'en-GB', name: 'English UK', nativeName: 'English UK', labelKey: 'languages.enGB', flag: '\u{1F1EC}\u{1F1E7}', currency: 'GBP', symbol: '\u00A3' },
   { code: 'es', name: 'Spanish', nativeName: 'Espanol', labelKey: 'languages.es', flag: '\u{1F1EA}\u{1F1F8}', currency: 'EUR', symbol: '\u20AC' },
   { code: 'fr', name: 'French', nativeName: 'Francais', labelKey: 'languages.fr', flag: '\u{1F1EB}\u{1F1F7}', currency: 'EUR', symbol: '\u20AC' },
   { code: 'de', name: 'German', nativeName: 'Deutsch', labelKey: 'languages.de', flag: '\u{1F1E9}\u{1F1EA}', currency: 'EUR', symbol: '\u20AC' },

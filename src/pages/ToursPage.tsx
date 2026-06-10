@@ -3,7 +3,7 @@ import { FiArrowRight } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 import type { Tour } from '../data/tours'
 import { TourCard } from '../components/TourCard'
-import { TourFilters, type DurationFilter } from '../components/TourFilters'
+import { TourFilters, type DurationFilter, type RegionFilter } from '../components/TourFilters'
 import { SectionHeader } from '../components/SectionHeader'
 import { SafariLoaderOverlay } from '../components/SafariTrailLoader'
 import { getPublishedTourPackages } from '../services/publicTourService'
@@ -19,6 +19,20 @@ const defaultPriceBounds = {
   max: 10000,
 }
 const toursPerPage = 9
+const eastAfricaTerms = [
+  'east africa',
+  'uganda',
+  'kenya',
+  'tanzania',
+  'rwanda',
+  'burundi',
+  'south sudan',
+  'bwindi',
+  'murchison',
+  'queen elizabeth',
+  'bunyonyi',
+  'kibale',
+]
 
 function getDurationDays(tour: Tour) {
   return Number(tour.duration.match(/\d+/)?.[0] ?? 0)
@@ -28,10 +42,18 @@ function matchesDurationFilter(tour: Tour, duration: DurationFilter) {
   const days = getDurationDays(tour)
 
   if (duration === 'all') return true
-  if (duration === '1-2') return days >= 1 && days <= 2
-  if (duration === '3-4') return days >= 3 && days <= 4
-  if (duration === '5-7') return days >= 5 && days <= 7
-  return days >= 8
+  if (duration === '2-5') return days >= 2 && days <= 5
+  if (duration === '6-8') return days >= 6 && days <= 8
+  if (duration === '9-12') return days >= 9 && days <= 12
+  if (duration === '13-20') return days >= 13 && days <= 20
+  return days > 20
+}
+
+function matchesRegionFilter(tour: Tour, region: RegionFilter) {
+  if (region === 'all') return true
+
+  const searchableText = [tour.destination, tour.title, tour.shortDescription, tour.overview].join(' ').toLowerCase()
+  return eastAfricaTerms.some((term) => searchableText.includes(term))
 }
 
 export function ToursPage({ onInquiry }: ToursPageProps) {
@@ -41,11 +63,13 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
   const [error, setError] = useState('')
   const [priceRange, setPriceRange] = useState(defaultPriceBounds)
   const [durationFilter, setDurationFilter] = useState<DurationFilter>('all')
+  const [regionFilter, setRegionFilter] = useState<RegionFilter>('all')
   const [currentPage, setCurrentPage] = useState(1)
 
   const resetFilters = () => {
     setPriceRange(defaultPriceBounds)
     setDurationFilter('all')
+    setRegionFilter('all')
     setCurrentPage(1)
   }
 
@@ -59,15 +83,20 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
     setCurrentPage(1)
   }
 
+  const updateRegionFilter = (region: RegionFilter) => {
+    setRegionFilter(region)
+    setCurrentPage(1)
+  }
+
   const filteredTours = useMemo(() => {
     const hasPriceFilter = priceRange.min !== defaultPriceBounds.min || priceRange.max !== defaultPriceBounds.max
 
     return tours.filter((tour) => {
       const matchesPrice = !hasPriceFilter || (tour.priceUSD >= priceRange.min && tour.priceUSD <= priceRange.max)
 
-      return matchesPrice && matchesDurationFilter(tour, durationFilter)
+      return matchesPrice && matchesDurationFilter(tour, durationFilter) && matchesRegionFilter(tour, regionFilter)
     })
-  }, [durationFilter, priceRange.max, priceRange.min, tours])
+  }, [durationFilter, priceRange.max, priceRange.min, regionFilter, tours])
 
   const totalPages = Math.max(1, Math.ceil(filteredTours.length / toursPerPage))
   const pageStartIndex = (currentPage - 1) * toursPerPage
@@ -136,8 +165,10 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
                 selectedDuration={durationFilter}
                 selectedMaxPrice={priceRange.max}
                 selectedMinPrice={priceRange.min}
+                selectedRegion={regionFilter}
                 onDurationChange={updateDurationFilter}
                 onPriceChange={updatePriceRange}
+                onRegionChange={updateRegionFilter}
                 onReset={resetFilters}
               />
             </div>

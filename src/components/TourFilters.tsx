@@ -2,7 +2,8 @@ import type { PointerEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocale } from '../context/LocaleContext'
 
-export type DurationFilter = 'all' | '1-2' | '3-4' | '5-7' | '8-plus'
+export type DurationFilter = 'all' | '2-5' | '6-8' | '9-12' | '13-20' | '20-plus'
+export type RegionFilter = 'all' | 'east-africa'
 
 type PriceRange = {
   min: number
@@ -15,17 +16,24 @@ type TourFiltersProps = {
   selectedMinPrice: number
   selectedMaxPrice: number
   selectedDuration: DurationFilter
+  selectedRegion: RegionFilter
   onPriceChange: (range: PriceRange) => void
   onDurationChange: (duration: DurationFilter) => void
+  onRegionChange: (region: RegionFilter) => void
   onReset: () => void
 }
 
 const durationOptions: Array<{ value: DurationFilter; labelKey: string }> = [
   { value: 'all', labelKey: 'tourFilters.durationOptions.all' },
-  { value: '1-2', labelKey: 'tourFilters.durationOptions.oneTwo' },
-  { value: '3-4', labelKey: 'tourFilters.durationOptions.threeFour' },
-  { value: '5-7', labelKey: 'tourFilters.durationOptions.fiveSeven' },
-  { value: '8-plus', labelKey: 'tourFilters.durationOptions.eightPlus' },
+  { value: '2-5', labelKey: 'tourFilters.durationOptions.twoFive' },
+  { value: '6-8', labelKey: 'tourFilters.durationOptions.sixEight' },
+  { value: '9-12', labelKey: 'tourFilters.durationOptions.nineTwelve' },
+  { value: '13-20', labelKey: 'tourFilters.durationOptions.thirteenTwenty' },
+  { value: '20-plus', labelKey: 'tourFilters.durationOptions.twentyPlus' },
+]
+
+const regionOptions: Array<{ value: RegionFilter; labelKey: string }> = [
+  { value: 'east-africa', labelKey: 'tourFilters.regionOptions.eastAfrica' },
 ]
 
 const minGap = 50
@@ -36,8 +44,10 @@ export function TourFilters({
   selectedMinPrice,
   selectedMaxPrice,
   selectedDuration,
+  selectedRegion,
   onPriceChange,
   onDurationChange,
+  onRegionChange,
 }: TourFiltersProps) {
   const { t } = useTranslation()
   const { formatCurrency } = useLocale()
@@ -134,27 +144,53 @@ export function TourFilters({
           </div>
         </div>
 
-        <div className="lg:w-[28rem]">
-          <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">{t('tourFilters.duration')}</p>
-          <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-5 lg:grid-cols-2 xl:grid-cols-5">
-            {durationOptions.map((option) => {
-              const isActive = selectedDuration === option.value
+        <div className="grid gap-4 lg:w-[36rem] xl:w-[38rem]">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">{t('tourFilters.duration')}</p>
+            <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-6">
+              {durationOptions.map((option) => {
+                const isActive = selectedDuration === option.value
 
-              return (
-                <button
-                  className={`min-h-9 rounded-lg border px-3.5 text-xs font-bold transition ${
-                    isActive
-                      ? 'border-primary bg-primary text-white shadow-[0_10px_22px_rgba(251,119,13,0.28)]'
-                      : 'border-[#eadfd3] bg-white text-ink hover:border-primary hover:bg-[#fff4ec]'
-                  }`}
-                  key={option.value}
-                  type="button"
-                  onClick={() => onDurationChange(option.value)}
-                >
-                  {t(option.labelKey)}
-                </button>
-              )
-            })}
+                return (
+                  <button
+                    className={`min-h-9 rounded-lg border px-3.5 text-xs font-bold transition ${
+                      isActive
+                        ? 'border-primary bg-primary text-white shadow-[0_10px_22px_rgba(251,119,13,0.28)]'
+                        : 'border-[#eadfd3] bg-white text-ink hover:border-primary hover:bg-[#fff4ec]'
+                    }`}
+                    key={option.value}
+                    type="button"
+                    onClick={() => onDurationChange(option.value)}
+                  >
+                    {t(option.labelKey)}
+                  </button>
+                )
+              })}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">{t('tourFilters.region')}</p>
+            <div className="mt-2 grid grid-cols-1 gap-2 sm:max-w-[18rem]">
+              {regionOptions.map((option) => {
+                const isActive = selectedRegion === option.value
+
+                return (
+                  <button
+                    className={`min-h-9 rounded-lg border px-3.5 text-xs font-bold transition ${
+                      isActive
+                        ? 'border-primary bg-primary text-white shadow-[0_10px_22px_rgba(251,119,13,0.28)]'
+                        : 'border-[#eadfd3] bg-white text-ink hover:border-primary hover:bg-[#fff4ec]'
+                    }`}
+                    key={option.value}
+                    type="button"
+                    onClick={() => onRegionChange(option.value)}
+                  >
+                    {t(option.labelKey)}
+                  </button>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>
