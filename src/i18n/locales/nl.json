@@ -488,12 +488,18 @@
     "minimumPrice": "Minimumprijs",
     "maximumPrice": "Maximumprijs",
     "duration": "Duur",
+    "region": "Regio",
     "durationOptions": {
       "all": "Alle",
-      "oneTwo": "1-2 dagen",
-      "threeFour": "3-4 dagen",
-      "fiveSeven": "5-7 dagen",
-      "eightPlus": "8+ dagen"
+      "twoFive": "2-5 dagen",
+      "sixEight": "6-8 dagen",
+      "nineTwelve": "9-12 dagen",
+      "thirteenTwenty": "13-20 dagen",
+      "twentyPlus": "20+ dagen"
+    },
+    "regionOptions": {
+      "all": "Alle",
+      "eastAfrica": "E Africa"
     }
   },
   "social": {

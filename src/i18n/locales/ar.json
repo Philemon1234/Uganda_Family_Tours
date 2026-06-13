@@ -517,7 +517,17 @@
     "minimumPrice": "الحد الأدنى للسعر",
     "maximumPrice": "الحد الأقصى للسعر",
     "duration": "المدة",
+    "region": "المنطقة",
+    "regionOptions": {
+      "all": "الكل",
+      "eastAfrica": "E Africa"
+    },
     "durationOptions": {
+      "twoFive": "2-5 أيام",
+      "sixEight": "6-8 أيام",
+      "nineTwelve": "9-12 أيام",
+      "thirteenTwenty": "13-20 أيام",
+      "twentyPlus": "20+ أيام",
       "all": "الكل",
       "oneTwo": "1-2 يوم",
       "threeFour": "3-4 أيام",

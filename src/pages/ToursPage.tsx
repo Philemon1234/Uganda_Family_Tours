@@ -158,7 +158,7 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
           />
 
           {!error && tours.length > 0 ? (
-            <div className="mx-auto mt-9 max-w-6xl">
+            <div className="mt-9 w-full">
               <TourFilters
                 maxPrice={defaultPriceBounds.max}
                 minPrice={defaultPriceBounds.min}

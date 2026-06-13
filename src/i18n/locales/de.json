@@ -517,12 +517,18 @@
     "minimumPrice": "Mindestpreis",
     "maximumPrice": "Hochstpreis",
     "duration": "Dauer",
+    "region": "Region",
     "durationOptions": {
       "all": "Alle",
-      "oneTwo": "1-2 Tage",
-      "threeFour": "3-4 Tage",
-      "fiveSeven": "5-7 Tage",
-      "eightPlus": "8+ Tage"
+      "twoFive": "2-5 Tage",
+      "sixEight": "6-8 Tage",
+      "nineTwelve": "9-12 Tage",
+      "thirteenTwenty": "13-20 Tage",
+      "twentyPlus": "20+ Tage"
+    },
+    "regionOptions": {
+      "all": "Alle",
+      "eastAfrica": "E Africa"
     }
   },
   "social": {

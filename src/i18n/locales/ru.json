@@ -517,7 +517,17 @@
     "minimumPrice": "Минимальная цена",
     "maximumPrice": "Максимальная цена",
     "duration": "Длительность",
+    "region": "Регион",
+    "regionOptions": {
+      "all": "Все",
+      "eastAfrica": "E Africa"
+    },
     "durationOptions": {
+      "twoFive": "2-5 дней",
+      "sixEight": "6-8 дней",
+      "nineTwelve": "9-12 дней",
+      "thirteenTwenty": "13-20 дней",
+      "twentyPlus": "20+ дней",
       "all": "Все",
       "oneTwo": "1-2 дня",
       "threeFour": "3-4 дня",

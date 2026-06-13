@@ -175,15 +175,15 @@
     "region": "Region",
     "durationOptions": {
       "all": "All",
-      "twoFive": "2-5",
-      "sixEight": "6-8",
-      "nineTwelve": "9-12",
-      "thirteenTwenty": "13-20",
-      "twentyPlus": "20+"
+      "twoFive": "2-5 days",
+      "sixEight": "6-8 days",
+      "nineTwelve": "9-12 days",
+      "thirteenTwenty": "13-20 days",
+      "twentyPlus": "20+ days"
     },
     "regionOptions": {
       "all": "All",
-      "eastAfrica": "East Africa"
+      "eastAfrica": "E Africa"
     }
   },
   "tourCard": {

@@ -95,7 +95,7 @@ export function TourFilters({
       aria-label={t('tourFilters.ariaLabel')}
       className="rounded-[1rem] border border-[#eadfd3] bg-[#fffdf9] p-4 shadow-[0_18px_45px_rgba(17,24,39,0.06)] md:p-5"
     >
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(39rem,42rem)] lg:items-end">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">{t('tourFilters.priceRange')}</p>
           <div className="tour-range-control relative mt-3 touch-none select-none px-1 pb-1 pt-7">
@@ -137,23 +137,19 @@ export function TourFilters({
               value={selectedMaxPrice}
               onChange={(event) => updateMaxPrice(Number(event.target.value))}
             />
-            <div className="mt-4 flex items-center justify-between text-[0.68rem] font-semibold text-slate-500">
-              <span>{formatCurrency(minPrice)}</span>
-              <span>{formatCurrency(maxPrice)}+</span>
-            </div>
           </div>
         </div>
 
-        <div className="grid gap-4 lg:w-[36rem] xl:w-[38rem]">
+        <div className="grid gap-4">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">{t('tourFilters.duration')}</p>
-            <div className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-6">
+            <div className="mt-2 flex flex-wrap gap-2">
               {durationOptions.map((option) => {
                 const isActive = selectedDuration === option.value
 
                 return (
                   <button
-                    className={`min-h-9 rounded-lg border px-3.5 text-xs font-bold transition ${
+                    className={`min-h-9 whitespace-nowrap rounded-lg border px-4 text-xs font-bold transition ${
                       isActive
                         ? 'border-primary bg-primary text-white shadow-[0_10px_22px_rgba(251,119,13,0.28)]'
                         : 'border-[#eadfd3] bg-white text-ink hover:border-primary hover:bg-[#fff4ec]'
@@ -166,18 +162,13 @@ export function TourFilters({
                   </button>
                 )
               })}
-            </div>
-          </div>
 
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-600">{t('tourFilters.region')}</p>
-            <div className="mt-2 grid grid-cols-1 gap-2 sm:max-w-[18rem]">
               {regionOptions.map((option) => {
                 const isActive = selectedRegion === option.value
 
                 return (
                   <button
-                    className={`min-h-9 rounded-lg border px-3.5 text-xs font-bold transition ${
+                    className={`min-h-9 whitespace-nowrap rounded-lg border px-4 text-xs font-bold transition ${
                       isActive
                         ? 'border-primary bg-primary text-white shadow-[0_10px_22px_rgba(251,119,13,0.28)]'
                         : 'border-[#eadfd3] bg-white text-ink hover:border-primary hover:bg-[#fff4ec]'
