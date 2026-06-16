@@ -260,8 +260,8 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
         </div>
       ) : (
         <div className="flex h-full min-h-0 flex-col">
-          <header className="flex min-h-16 shrink-0 items-center justify-end gap-2 border-b border-white/10 bg-dark px-3 py-2 text-sm font-bold sm:px-8">
-            <button className="grid h-11 w-11 place-items-center rounded-full text-3xl text-white transition hover:bg-white/10" type="button" aria-label={t('common.close')} onClick={onClose}>
+          <header className="pointer-events-none absolute inset-x-0 top-0 z-20 flex min-h-16 shrink-0 items-center justify-end gap-2 px-3 py-2 text-sm font-bold sm:px-8 lg:static lg:border-b lg:border-white/10 lg:bg-dark">
+            <button className="pointer-events-auto grid h-11 w-11 place-items-center rounded-full text-3xl text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)] transition hover:bg-white/10" type="button" aria-label={t('common.close')} onClick={onClose}>
               <FaXmark />
             </button>
           </header>
