@@ -130,7 +130,7 @@ export function HomePage({ onBook }: HomePageProps) {
           />
         ))}
         */}
-        <div className="absolute inset-0 bg-dark/50" />
+        <div className="absolute inset-0 bg-dark/20" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-[#171719]/70 to-[#171719] md:h-40" />
         <div className="container-custom home-hero-content relative z-10 flex min-h-[92vh] flex-col items-center justify-center px-4 pb-20 pt-40 text-center text-white lg:pb-24 lg:pt-44">
           <div className="w-full">
