@@ -14,15 +14,15 @@ dist-ssr
 *.local
 
 # Large video assets
-*.mp4
-*.mov
-*.avi
-*.mkv
-*.webm
-*.m4v
-public/videos/
-src/assets/videos/
-assets/videos/
+# *.mp4
+# *.mov
+# *.avi
+# *.mkv
+# *.webm
+# *.m4v
+# public/videos/
+# src/assets/videos/
+# assets/videos/
 
 # Editor directories and files
 .vscode/*
