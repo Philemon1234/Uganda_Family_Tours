@@ -12,9 +12,11 @@ import { ReviewCarousel } from '../components/ReviewCarousel'
 import { MotionReveal } from '../components/MotionReveal'
 import { getPublishedTourPackages } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
-import heroImage from '../assets/gorilla-7708328_1920.jpg'
-import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
-import elephantImage from '../assets/elephant-4736008_1280.jpg'
+import heroVideo from '../assets/Gorillatours.mp4'
+import heroVideoPoster from '../assets/on load.png'
+// import heroImage from '../assets/gorilla-7708328_1920.jpg'
+// import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
+// import elephantImage from '../assets/elephant-4736008_1280.jpg'
 import lionImage from '../assets/cover_1669-Tree-Climbing-Lions.jpg'
 import storyThumbnail from '../assets/Thumbnail.png'
 import homeIconOne from '../assets/UFT-Homepage-icons-01.png'
@@ -22,7 +24,6 @@ import homeIconTwo from '../assets/UFT-Homepage-icons-02.png'
 import homeIconThree from '../assets/UFT-Homepage-icons-03.png'
 import homeIconFour from '../assets/UFT-Favicon.png'
 import journeyImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
-import ctaImage from '../assets/cover_1669-Tree-Climbing-Lions.jpg'
 
 type HomePageProps = {
   onBook: () => void
@@ -31,14 +32,15 @@ type HomePageProps = {
 const FEATURED_TOURS_LIMIT = 6
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
-const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
+// const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
+const ctaImage = lionImage
 
 export function HomePage({ onBook }: HomePageProps) {
   const { t } = useTranslation()
   const [featuredTours, setFeaturedTours] = useState<Tour[]>([])
   const [isLoadingFeaturedTours, setIsLoadingFeaturedTours] = useState(true)
   const [featuredToursError, setFeaturedToursError] = useState('')
-  const [activeHeroSlide, setActiveHeroSlide] = useState(0)
+  const [isHeroVideoReady, setIsHeroVideoReady] = useState(false)
   const signatureExperiences = signatureExperienceIcons.map((Icon, index) => ({
     Icon,
     title: t(`home.signature.items.${index}.title`),
@@ -79,17 +81,42 @@ export function HomePage({ onBook }: HomePageProps) {
     }
   }, [])
 
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveHeroSlide((currentSlide) => (currentSlide + 1) % heroSlides.length)
-    }, 5000)
-
-    return () => window.clearInterval(timer)
-  }, [])
+  // useEffect(() => {
+  //   const timer = window.setInterval(() => {
+  //     setActiveHeroSlide((currentSlide) => (currentSlide + 1) % heroSlides.length)
+  //   }, 5000)
+  //
+  //   return () => window.clearInterval(timer)
+  // }, [])
 
   return (
     <>
       <section className="hero-section home-hero-section min-h-[92vh] bg-dark">
+        <img
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${
+            isHeroVideoReady ? 'opacity-0' : 'opacity-100'
+          }`}
+          src={heroVideoPoster}
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+        />
+        <video
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out ${
+            isHeroVideoReady ? 'opacity-100' : 'opacity-0'
+          }`}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          poster={heroVideoPoster}
+          aria-hidden="true"
+          onLoadedData={() => setIsHeroVideoReady(true)}
+        >
+          <source src={heroVideo} type="video/mp4" />
+        </video>
+        {/*
         {heroSlides.map((image, index) => (
           <img
             key={image}
@@ -102,6 +129,7 @@ export function HomePage({ onBook }: HomePageProps) {
             loading={index === 0 ? 'eager' : 'lazy'}
           />
         ))}
+        */}
         <div className="absolute inset-0 bg-dark/50" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-[#171719]/70 to-[#171719] md:h-40" />
         <div className="container-custom home-hero-content relative z-10 flex min-h-[92vh] flex-col items-center justify-center px-4 pb-20 pt-40 text-center text-white lg:pb-24 lg:pt-44">
