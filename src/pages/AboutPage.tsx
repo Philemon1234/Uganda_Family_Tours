@@ -1,4 +1,4 @@
-import { FaEnvelope, FaHandHoldingHeart, FaLeaf, FaPeopleGroup, FaPhone, FaSeedling, FaShieldHeart } from 'react-icons/fa6'
+import { FaHandHoldingHeart, FaLeaf, FaPeopleGroup, FaSeedling, FaShieldHeart } from 'react-icons/fa6'
 import { FiArrowRight } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 import heroImage from '../assets/happy-clients-on-uganda-safari-1.jpg'
@@ -6,8 +6,9 @@ import welcomeImage from '../assets/james-uganda-family-tours-safari.jpg'
 import originsImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
 import charityOne from '../assets/4.jpeg'
 import charityTwo from '../assets/pic1.jpg'
-import ctaImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
+import aboutFooterImage from '../assets/footer/UFT Website Work-02.jpg'
 import { MotionReveal } from '../components/MotionReveal'
+import { FooterImageBand } from '../components/FooterImageBand'
 
 type AboutPageProps = {
   onInquiry: () => void
@@ -156,19 +157,7 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-cover bg-center py-20 text-center text-white md:py-28" style={{ backgroundImage: `url(${ctaImage})` }}>
-        <div className="absolute inset-0 bg-dark/75" />
-        <div className="container-custom relative z-10">
-          <p className="luxury-script text-2xl leading-none md:text-3xl">{t('aboutPage.cta.label')}</p>
-          <h2 className="mx-auto mt-2 max-w-3xl text-3xl font-black leading-tight md:text-5xl">{t('aboutPage.cta.title')}</h2>
-          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-            <a className="btn-primary btn-on-dark justify-center" href="tel:+256703543027"><FaPhone /> {t('aboutPage.cta.call')} <FiArrowRight /></a>
-            <button className="btn-outline justify-center border-white/70 bg-transparent text-white hover:border-primary" type="button" onClick={onInquiry}>
-              <FaEnvelope /> {t('aboutPage.cta.inquiry')}
-            </button>
-          </div>
-        </div>
-      </section>
+      <FooterImageBand src={aboutFooterImage} alt={t('aboutPage.cta.title')} />
     </main>
   )
 }

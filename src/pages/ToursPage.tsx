@@ -1,18 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
-import { FiArrowRight } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 import type { Tour } from '../data/tours'
 import { TourCard } from '../components/TourCard'
 import { TourFilters, type DurationFilter, type RegionFilter } from '../components/TourFilters'
 import { SectionHeader } from '../components/SectionHeader'
 import { SafariLoaderOverlay } from '../components/SafariTrailLoader'
+import { FooterImageBand } from '../components/FooterImageBand'
 import { getPublishedTourPackages } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
-import ctaImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
-
-type ToursPageProps = {
-  onInquiry: () => void
-}
+import toursFooterImage from '../assets/footer/UFT Website Work-01.jpg'
 
 const defaultPriceBounds = {
   min: 0,
@@ -56,7 +52,7 @@ function matchesRegionFilter(tour: Tour, region: RegionFilter) {
   return eastAfricaTerms.some((term) => searchableText.includes(term))
 }
 
-export function ToursPage({ onInquiry }: ToursPageProps) {
+export function ToursPage() {
   const { t } = useTranslation()
   const [tours, setTours] = useState<Tour[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -269,14 +265,7 @@ export function ToursPage({ onInquiry }: ToursPageProps) {
           )}
         </div>
       </section>
-      <section className="relative overflow-hidden bg-cover bg-center py-28 text-center text-white" style={{ backgroundImage: `url(${ctaImage})` }}>
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="container-custom relative z-10">
-          <p className="font-bold text-white/70">{t('toursPage.ctaLabel')}</p>
-          <h2 className="mx-auto mt-4 max-w-5xl text-2xl font-black leading-tight md:text-4xl">{t('toursPage.ctaTitle')}</h2>
-          <button className="btn-primary mt-9" type="button" onClick={onInquiry}>{t('toursPage.ctaButton')} <FiArrowRight /></button>
-        </div>
-      </section>
+      <FooterImageBand src={toursFooterImage} alt={t('toursPage.ctaTitle')} />
     </main>
   )
 }

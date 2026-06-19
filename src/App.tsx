@@ -31,7 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage onBook={() => openBooking(tours[0])} />} />
           <Route path="/about" element={<AboutPage onInquiry={() => setIsInquiryOpen(true)} />} />
-          <Route path="/tours" element={<ToursPage onInquiry={() => setIsInquiryOpen(true)} />} />
+          <Route path="/tours" element={<ToursPage />} />
           <Route path="/tours/:tourId" element={<ItineraryRoute onBook={openBooking} />} />
         </Routes>
       </div>

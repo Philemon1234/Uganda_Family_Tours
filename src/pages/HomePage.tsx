@@ -10,6 +10,7 @@ import { WhyTravelCard } from '../components/WhyTravelCard'
 import { GalleryCarousel } from '../components/GalleryCarousel'
 import { ReviewCarousel } from '../components/ReviewCarousel'
 import { MotionReveal } from '../components/MotionReveal'
+import { FooterImageBand } from '../components/FooterImageBand'
 import { getPublishedTourPackages } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
 import heroVideo from '../assets/Gorillatours.mp4'
@@ -17,13 +18,13 @@ import heroVideoPoster from '../assets/on load.png'
 // import heroImage from '../assets/gorilla-7708328_1920.jpg'
 // import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
 // import elephantImage from '../assets/elephant-4736008_1280.jpg'
-import lionImage from '../assets/cover_1669-Tree-Climbing-Lions.jpg'
 import storyThumbnail from '../assets/Thumbnail.png'
 import homeIconOne from '../assets/UFT-Homepage-icons-01.png'
 import homeIconTwo from '../assets/UFT-Homepage-icons-02.png'
 import homeIconThree from '../assets/UFT-Homepage-icons-03.png'
 import homeIconFour from '../assets/UFT-Favicon.png'
 import journeyImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
+import homeFooterImage from '../assets/footer/UFT Website Work-03.jpg'
 
 type HomePageProps = {
   onBook: () => void
@@ -33,7 +34,6 @@ const FEATURED_TOURS_LIMIT = 6
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
 // const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
-const ctaImage = lionImage
 
 export function HomePage({ onBook }: HomePageProps) {
   const { t } = useTranslation()
@@ -327,17 +327,7 @@ export function HomePage({ onBook }: HomePageProps) {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-dark py-20 text-center text-white md:py-28" style={{ backgroundImage: `url(${ctaImage})`, backgroundPosition: 'center', backgroundSize: 'cover' }}>
-        <div className="absolute inset-0 bg-dark/75" />
-        <div className="container-custom relative z-10">
-          <MotionReveal>
-            <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('home.finalCta.label')}</p>
-            <h2 className="mx-auto mt-1 max-w-3xl text-3xl font-black leading-tight md:text-5xl">{t('home.finalCta.title')}</h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/78 md:text-lg">{t('home.finalCta.description')}</p>
-            <button className="btn-primary btn-on-dark mt-8" type="button" onClick={onBook}>{t('home.finalCta.button')} <FiArrowRight /></button>
-          </MotionReveal>
-        </div>
-      </section>
+      <FooterImageBand src={homeFooterImage} alt={t('home.finalCta.title')} />
     </>
   )
 }
