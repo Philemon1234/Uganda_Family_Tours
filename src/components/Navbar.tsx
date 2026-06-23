@@ -43,7 +43,7 @@ export function Navbar({ onInquiry }: NavbarProps) {
 
   return (
     <header
-      className={`site-header fixed left-0 right-0 top-0 z-40 border-b border-white/15 bg-dark text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)] ${
+      className={`site-header fixed left-0 right-0 top-0 z-40 border-b border-white/15 bg-transparent text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)] backdrop-blur-sm lg:bg-dark ${
         isAtFooterBottom ? 'site-header-hidden-mobile' : ''
       }`}
     >

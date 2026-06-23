@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
-  FaBoxOpen,
   FaFacebookF,
   FaHome,
   FaMapMarkerAlt,
@@ -21,7 +20,6 @@ type MobileSidebarDrawerProps = {
 const drawerItems = [
   { id: 'home', labelKey: 'navbar.home', href: '/', icon: FaHome },
   { id: 'tours', labelKey: 'navbar.tours', href: '/tours', icon: FaMapMarkerAlt },
-  { id: 'packages', labelKey: 'navbar.tours', href: '/tours', icon: FaBoxOpen },
   { id: 'about', labelKey: 'navbar.about', href: '/about', icon: FaUser },
   { id: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/256703543027', icon: FaWhatsapp },
 ]
@@ -48,8 +46,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
 
   const isActive = (id: string) => {
     if (id === 'home') return location.pathname === '/'
-    if (id === 'tours') return location.pathname.startsWith('/tours')
-    if (id === 'packages') return location.pathname.startsWith('/packages')
+    if (id === 'tours') return location.pathname === '/tours'
     if (id === 'about') return location.pathname.startsWith('/about')
     return false
   }
@@ -99,8 +96,8 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
               </>
             )
 
-            const className = `flex w-full items-center gap-4 rounded-2xl px-3 py-3.5 text-base font-bold transition ${
-              active ? 'bg-primary text-ink shadow-[0_14px_28px_rgba(255,164,96,0.18)]' : 'text-ink hover:bg-primary/8'
+            const className = `flex w-full items-center gap-4 rounded-2xl px-3 py-3.5 text-base font-semibold transition ${
+              active ? 'bg-primary text-white shadow-[0_14px_28px_rgba(255,164,96,0.18)]' : 'text-ink hover:bg-primary/8'
             }`
 
             if (item.href.startsWith('http')) {

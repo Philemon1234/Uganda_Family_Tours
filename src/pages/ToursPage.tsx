@@ -16,18 +16,11 @@ const defaultPriceBounds = {
 }
 const toursPerPage = 9
 const eastAfricaTerms = [
-  'east africa',
-  'uganda',
   'kenya',
   'tanzania',
   'rwanda',
   'burundi',
   'south sudan',
-  'bwindi',
-  'murchison',
-  'queen elizabeth',
-  'bunyonyi',
-  'kibale',
 ]
 
 function getDurationDays(tour: Tour) {
@@ -49,7 +42,11 @@ function matchesRegionFilter(tour: Tour, region: RegionFilter) {
   if (region === 'all') return true
 
   const searchableText = [tour.destination, tour.title, tour.shortDescription, tour.overview].join(' ').toLowerCase()
-  return eastAfricaTerms.some((term) => searchableText.includes(term))
+  const isExplicitEastAfricaTour = /\beast africa\b|\beast african\b/.test(searchableText)
+  const includesUganda = /\buganda\b/.test(searchableText)
+  const includesNeighboringCountry = eastAfricaTerms.some((term) => searchableText.includes(term))
+
+  return isExplicitEastAfricaTour || (includesUganda && includesNeighboringCountry)
 }
 
 export function ToursPage() {
@@ -265,7 +262,7 @@ export function ToursPage() {
           )}
         </div>
       </section>
-      <FooterImageBand src={toursFooterImage} alt={t('toursPage.ctaTitle')} />
+      <FooterImageBand src={toursFooterImage} alt={t('toursPage.ctaTitle')} zoom={1.25} />
     </main>
   )
 }

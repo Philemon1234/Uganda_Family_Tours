@@ -1,9 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { FiArrowUp, FiHome, FiMenu, FiUser } from 'react-icons/fi'
-import { FaWhatsapp } from 'react-icons/fa'
-import { LuHand } from 'react-icons/lu'
+import {
+  PiArrowUpLight,
+  PiCompassLight,
+  PiHouseLineLight,
+  PiListLight,
+  PiUserLight,
+  PiWhatsappLogoLight,
+} from 'react-icons/pi'
 import type { IconType } from 'react-icons'
 import { MobileSidebarDrawer } from './MobileSidebarDrawer'
 
@@ -14,11 +19,11 @@ type NavItem = {
 }
 
 const navItems: NavItem[] = [
-  { id: 'menu', href: null, icon: FiMenu },
-  { id: 'about', href: '/about', icon: FiUser },
-  { id: 'home', href: '/', icon: FiHome },
-  { id: 'services', href: '/tours', icon: LuHand },
-  { id: 'whatsapp', href: 'https://wa.me/256703543027', icon: FaWhatsapp },
+  { id: 'menu', href: null, icon: PiListLight },
+  { id: 'about', href: '/about', icon: PiUserLight },
+  { id: 'home', href: '/', icon: PiHouseLineLight },
+  { id: 'services', href: '/tours', icon: PiCompassLight },
+  { id: 'whatsapp', href: 'https://wa.me/256703543027', icon: PiWhatsappLogoLight },
 ]
 
 export function MobileBottomNav() {
@@ -31,7 +36,7 @@ export function MobileBottomNav() {
   const routeActiveItem = useMemo(() => {
     if (location.pathname === '/') return 'home'
     if (location.pathname.startsWith('/about')) return 'about'
-    if (location.pathname.startsWith('/tours')) return 'services'
+    if (location.pathname === '/tours') return 'services'
     return 'home'
   }, [location.pathname])
 
@@ -117,7 +122,7 @@ export function MobileBottomNav() {
         aria-label={t('common.backToTop', { defaultValue: 'Back to top' })}
         onClick={handleBackToTopClick}
       >
-        <FiArrowUp />
+        <PiArrowUpLight />
       </button>
       <div className="mobile-bottom-nav lg:hidden">
         <nav
@@ -137,14 +142,14 @@ export function MobileBottomNav() {
               transform: `translate3d(${activeIndex * 20}vw, 0, 0)`,
             }}
           >
-            <ActiveIcon strokeWidth={2} />
+            <ActiveIcon />
           </div>
 
           <div className="grid h-full grid-cols-5">
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = item.id === activeItem
-              const buttonClass = `relative z-20 flex h-full flex-col items-center justify-end gap-2 pb-4 text-[0.9rem] font-semibold transition hover:text-primary ${
+              const buttonClass = `relative z-20 flex h-full flex-col items-center justify-end gap-2 pb-4 text-[0.9rem] font-medium transition hover:text-primary ${
                 isActive ? 'text-primary' : 'text-ink'
               }`
 
@@ -157,7 +162,7 @@ export function MobileBottomNav() {
                     className={buttonClass}
                     onClick={handleMenuClick}
                   >
-                    <Icon className={`text-[1.35rem] transition ${isActive ? 'opacity-0' : 'opacity-100'}`} strokeWidth={2} />
+                    <Icon className={`text-[1.35rem] transition ${isActive ? 'opacity-0' : 'opacity-100'}`} />
                     <span>{labelFor(item)}</span>
                   </button>
                 )
@@ -165,7 +170,7 @@ export function MobileBottomNav() {
 
               const content = (
                 <>
-                  <Icon className={`text-[1.35rem] transition ${isActive ? 'opacity-0' : 'opacity-100'}`} strokeWidth={2} />
+                  <Icon className={`text-[1.35rem] transition ${isActive ? 'opacity-0' : 'opacity-100'}`} />
                   <span>{labelFor(item)}</span>
                 </>
               )

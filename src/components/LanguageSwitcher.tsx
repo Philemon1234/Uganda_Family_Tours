@@ -40,14 +40,14 @@ export function LanguageSwitcher() {
   return (
     <div ref={rootRef} className="relative">
       <button
-        className="inline-flex h-10 items-center gap-2 rounded-none border-0 bg-transparent px-2 text-sm font-bold text-white shadow-none transition hover:bg-transparent"
+        className="inline-flex h-10 items-center gap-2 rounded-none border-0 bg-white px-2 text-sm font-bold text-ink shadow-none transition hover:bg-white"
         type="button"
         aria-label={t('navbar.language')}
         aria-expanded={isOpen}
         onClick={() => setIsOpen((value) => !value)}
       >
         <FlagIcon code={language.code} />
-        <FiChevronDown className={`text-xs text-white transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <FiChevronDown className={`text-xs text-ink transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (

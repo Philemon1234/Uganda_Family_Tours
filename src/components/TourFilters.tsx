@@ -156,7 +156,10 @@ export function TourFilters({
                     }`}
                     key={option.value}
                     type="button"
-                    onClick={() => onDurationChange(option.value)}
+                    onClick={() => {
+                      onRegionChange('all')
+                      onDurationChange(option.value)
+                    }}
                   >
                     {t(option.labelKey)}
                   </button>
@@ -175,7 +178,10 @@ export function TourFilters({
                     }`}
                     key={option.value}
                     type="button"
-                    onClick={() => onRegionChange(option.value)}
+                    onClick={() => {
+                      onDurationChange('all')
+                      onRegionChange(isActive ? 'all' : option.value)
+                    }}
                   >
                     {t(option.labelKey)}
                   </button>

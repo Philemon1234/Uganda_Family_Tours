@@ -1,14 +1,14 @@
 import { FaHandHoldingHeart, FaLeaf, FaPeopleGroup, FaSeedling, FaShieldHeart } from 'react-icons/fa6'
 import { FiArrowRight } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
-import heroImage from '../assets/happy-clients-on-uganda-safari-1.jpg'
 import welcomeImage from '../assets/james-uganda-family-tours-safari.jpg'
-import originsImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
+import originsImage from '../assets/footer/UFT Website Work-01.jpg'
 import charityOne from '../assets/4.jpeg'
 import charityTwo from '../assets/pic1.jpg'
 import aboutFooterImage from '../assets/footer/UFT Website Work-02.jpg'
 import { MotionReveal } from '../components/MotionReveal'
 import { FooterImageBand } from '../components/FooterImageBand'
+import { SectionHeader } from '../components/SectionHeader'
 
 type AboutPageProps = {
   onInquiry: () => void
@@ -30,14 +30,13 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
   ]
 
   return (
-    <main className="bg-white">
-      <section className="hero-section min-h-[72vh] bg-dark" style={{ backgroundImage: `url(${heroImage})` }}>
-        <div className="absolute inset-0 bg-dark/55" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-dark/45 to-dark/70" />
-        <div className="container-custom relative z-10 flex min-h-[72vh] flex-col items-center justify-center pb-16 pt-36 text-center text-white">
-          <p className="hero-kicker luxury-script text-3xl leading-none text-white/95 md:text-4xl">{t('aboutPage.hero.kicker')}</p>
-          <h1 className="hero-title mt-1 text-4xl font-bold leading-tight md:text-7xl">{t('aboutPage.hero.title')}</h1>
-          <p className="hero-copy mx-auto mt-5 max-w-2xl text-base leading-8 text-white/82 md:text-lg">{t('aboutPage.hero.subtitle')}</p>
+    <main className="bg-white pt-16 md:pt-24">
+      <section className="pb-14 pt-5 md:pb-20 md:pt-10">
+        <div className="container-custom">
+          <SectionHeader
+            title={t('aboutPage.hero.title')}
+            description={t('aboutPage.hero.subtitle')}
+          />
         </div>
       </section>
 
@@ -124,16 +123,22 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
             <p className="luxury-script text-2xl leading-none text-ink md:text-3xl">{t('aboutPage.charities.label')}</p>
             <h2 className="mt-2 text-3xl font-black leading-tight text-ink md:text-4xl">{t('aboutPage.charities.title')}</h2>
           </div>
-          <div className="mt-10 grid gap-7">
-            <article className="grid overflow-hidden rounded-[1.5rem] border border-[#eadfd3] bg-white shadow-[0_18px_45px_rgba(17,24,39,0.06)] lg:grid-cols-[0.95fr_1.05fr]">
-              <img className="h-full min-h-72 w-full object-cover" src={charityOne} alt={t('aboutPage.charities.mammadu.imageAlt')} />
-              <div className="p-7 md:p-10">
-                <h3 className="text-2xl font-black text-ink">{t('aboutPage.charities.mammadu.title')}</h3>
-                <p className="mt-4 leading-7 text-muted">{t('aboutPage.charities.mammadu.p1')}</p>
-                <p className="mt-4 leading-7 text-muted">{t('aboutPage.charities.mammadu.p2')}</p>
-                <button className="btn-outline mt-6" type="button" onClick={onInquiry}>{t('aboutPage.charities.visit')} <FiArrowRight /></button>
+          <div className="mt-12 grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+            <MotionReveal>
+              <div className="relative overflow-hidden rounded-[1.75rem] shadow-soft">
+                <img className="aspect-[4/3] w-full object-cover" src={charityOne} alt={t('aboutPage.charities.mammadu.imageAlt')} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent" />
               </div>
-            </article>
+            </MotionReveal>
+            <MotionReveal delay={80}>
+              <p className="luxury-script text-2xl leading-none text-ink md:text-3xl">{t('aboutPage.charities.label')}</p>
+              <h3 className="mt-2 text-3xl font-black leading-tight text-ink md:text-4xl">{t('aboutPage.charities.mammadu.title')}</h3>
+              <div className="mt-6 space-y-5 text-base leading-8 text-muted md:text-lg">
+                <p>{t('aboutPage.charities.mammadu.p1')}</p>
+                <p>{t('aboutPage.charities.mammadu.p2')}</p>
+              </div>
+              <button className="btn-outline mt-8" type="button" onClick={onInquiry}>{t('aboutPage.charities.visit')} <FiArrowRight /></button>
+            </MotionReveal>
           </div>
         </div>
       </section>
@@ -157,7 +162,7 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
         </div>
       </section>
 
-      <FooterImageBand src={aboutFooterImage} alt={t('aboutPage.cta.title')} />
+      <FooterImageBand src={aboutFooterImage} alt={t('aboutPage.cta.title')} zoom={1.14} />
     </main>
   )
 }
