@@ -1192,6 +1192,35 @@ img {
   color: #ffffff;
 }
 
+.tripadvisor-reviews-embed .eapps-widget-toolbar,
+.tripadvisor-reviews-embed .eapps-link,
+.tripadvisor-reviews-embed a[href*="elfsight.com/tripadvisor-reviews-widget"] {
+  display: none !important;
+}
+
+.tripadvisor-reviews-embed [class*="Carousel__CarouselContainer"],
+.tripadvisor-reviews-embed [class*="Carousel__Track"],
+.tripadvisor-reviews-embed [class*="Slider__Track"],
+.tripadvisor-reviews-embed [class*="swiper-wrapper"] {
+  align-items: stretch !important;
+}
+
+.tripadvisor-reviews-embed [class*="Carousel__Slide"],
+.tripadvisor-reviews-embed [class*="Slider__Slide"],
+.tripadvisor-reviews-embed [class*="swiper-slide"] {
+  display: flex !important;
+  height: auto !important;
+}
+
+.tripadvisor-reviews-embed [class*="Review__ReviewContainer"],
+.tripadvisor-reviews-embed [class*="ReviewCard"],
+.tripadvisor-reviews-embed [class*="Review"][class*="Card"],
+.tripadvisor-reviews-embed [class*="Card"][class*="Item"] {
+  flex: 1 1 auto !important;
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
 @media (max-width: 768px) {
   html {
     font-size: 16px;

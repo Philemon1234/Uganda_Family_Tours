@@ -8,7 +8,6 @@ import { TourCard } from '../components/TourCard'
 import { SectionHeader } from '../components/SectionHeader'
 import { WhyTravelCard } from '../components/WhyTravelCard'
 import { GalleryCarousel } from '../components/GalleryCarousel'
-import { ReviewCarousel } from '../components/ReviewCarousel'
 import { MotionReveal } from '../components/MotionReveal'
 import { FooterImageBand } from '../components/FooterImageBand'
 import { getPublishedTourPackages } from '../services/publicTourService'
@@ -322,7 +321,9 @@ export function HomePage({ onBook }: HomePageProps) {
         <div className="container-custom">
           <SectionHeader title={t('home.reviewsTitle')} description={t('home.reviewsDescription')} />
           <MotionReveal delay={80}>
-            <div className="mt-9"><ReviewCarousel /></div>
+            <div className="tripadvisor-reviews-embed mt-9">
+              <div className="elfsight-app-cdba7e4e-ecf1-4fcc-9822-6ebda38b7f27" data-elfsight-app-lazy />
+            </div>
           </MotionReveal>
         </div>
       </section>
