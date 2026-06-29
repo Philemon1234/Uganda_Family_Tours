@@ -1,0 +1,551 @@
+{
+  "navbar": {
+    "home": "الرئيسية",
+    "tours": "الجولات",
+    "about": "من نحن",
+    "talkToSpecialist": "تحدث إلى خبير سفر",
+    "language": "اللغة",
+    "homeAria": "الصفحة الرئيسية لأوغندا فاميلي تورز"
+  },
+  "common": {
+    "from": "ابتداء من",
+    "days": "أيام",
+    "sending": "جار الإرسال...",
+    "required": "هذا الحقل مطلوب.",
+    "validEmail": "أدخل بريدا إلكترونيا صالحا.",
+    "yes": "نعم",
+    "no": "لا",
+    "close": "إغلاق",
+    "cancel": "إلغاء",
+    "menu": "القائمة",
+    "loading": "جار التحميل",
+    "logoAlt": "أوغندا فاميلي تورز",
+    "increase": "زيادة {{label}}",
+    "decrease": "تقليل {{label}}",
+    "backToTop": "العودة إلى الأعلى",
+    "separator": "-"
+  },
+  "home": {
+    "hero": {
+      "kicker": "لؤلؤة أفريقيا",
+      "title": "رحلة سفاري مصممة لك",
+      "subtitle": "سافر عبر غابات أوغندا وسهولها وبحيراتها وثقافاتها مع فريق محلي يصمم كل تفصيل حولك.",
+      "primaryCta": "استكشف الجولات",
+      "badgeAlt": {
+        "service": "أيقونة خدمة Uganda Family Tours",
+        "planning": "أيقونة تخطيط Uganda Family Tours",
+        "support": "أيقونة دعم Uganda Family Tours",
+        "brand": "علامة Uganda Family Tours التجارية"
+      }
+    },
+    "story": {
+      "label": "استكشف أفريقيا مع",
+      "title": "Uganda Family Tours & Safari Co.",
+      "description": "من الجبال الضبابية والأنهار العظيمة إلى الحياة البرية النادرة والضيافة الدافئة، اختبر أوغندا بطريقة جديدة.",
+      "p1": "أوغندا ليست مجرد وجهة. إنها إحساس: صوت الغابة، هدوء السافانا، دفء الناس، وروعة رؤية الحياة البرية في موطنها الطبيعي.",
+      "p2": "<0>Uganda Family Tours & Safari Co.</0> تنشئ رحلات أصيلة وسلسة ولا تنسى في أوغندا وشرق أفريقيا للمسافرين الذين يبحثون عن الراحة والعناية والارتباط العميق بالمكان."
+    },
+    "signature": {
+      "label": "تجارب مميزة",
+      "title": "تجارب مميزة",
+      "description": "من غابات الغوريلا إلى السافانا المفتوحة، يتم تشكيل كل رحلة حول ما يريد المسافر أن يشعر به ويراه ويتذكره.",
+      "items": [
+        {
+          "title": "تتبع الغوريلا",
+          "text": "مسارات هادئة في الغابة نحو واحدة من أكثر لقاءات الحياة البرية تأثيرا في أفريقيا."
+        },
+        {
+          "title": "سفاري الحياة البرية",
+          "text": "رحلات مشاهدة الحيوانات ورحلات القوارب والمناظر البرية بمعرفة محلية."
+        },
+        {
+          "title": "تتبع الشمبانزي",
+          "text": "اتبع نداءات الغابة في كيبالي وغيرها من مواطن الرئيسيات."
+        },
+        {
+          "title": "تجارب ثقافية",
+          "text": "التق بالمجتمعات والحرفيين والرواة والتقاليد باحترام."
+        },
+        {
+          "title": "البحيرات والطبيعة",
+          "text": "تمهل بجوار بحيرات الفوهات والمرتفعات والأنهار والملاذات الهادئة."
+        },
+        {
+          "title": "مغامرات عائلية",
+          "text": "رحلات سفاري هادئة ومدروسة لكل الأجيال."
+        }
+      ],
+      "videoAria": "فيديو تجارب السفاري المميزة",
+      "videoFallback": "متصفحك لا يدعم الفيديو المضمن."
+    },
+    "featured": {
+      "label": "مختارة لك",
+      "title": "تجارب سفاري مختارة",
+      "description": "مجموعة مركزة من رحلاتنا المنشورة، قصيرة بما يكفي لتبقى الصفحة دعوة وليست كتالوجا.",
+      "viewAll": "عرض كل الجولات",
+      "errorTitle": "تعذر تحميل الجولات المميزة",
+      "errorMessage": "لا يمكن تحميل الجولات المميزة الآن.",
+      "emptyTitle": "لا توجد جولات مميزة حاليا",
+      "emptyDescription": "يرجى العودة قريبا لاكتشاف تجارب سفاري جديدة."
+    },
+    "journey": {
+      "label": "مصممة بعناية",
+      "title": "حول رحلتك",
+      "description": "كل برنامج يصمم حسب وتيرتك واهتماماتك وراحتك وأسلوب سفرك، سواء كنت تزور أوغندا من أجل الغوريلا أو الحياة البرية أو الثقافة أو مغامرة عائلية لا تنسى.",
+      "cta": "تحدث إلى خبير سفر",
+      "imageAlt": "رحلة سفاري عبر أوغندا",
+      "thumbnailAlt": "لحظة سفاري مع Uganda Family Tours"
+    },
+    "why": {
+      "label": "مغامرتك. خبرتنا.",
+      "title": "لماذا تسافر مع أوغندا فاميلي تورز؟",
+      "description": "تخطيط هادئ، إرشاد محلي موثوق، قيم سفر مسؤولة، ودعم ثابت من الفكرة الأولى إلى آخر يوم في السفاري.",
+      "tailorTitle": "برامج مصممة لك",
+      "tailorText": "رحلات تشكل حول وتيرتك واهتماماتك وراحتك.",
+      "localTitle": "خبرة محلية موثوقة",
+      "localText": "مرشدون محليون ومسارات مدروسة ومعرفة داخلية.",
+      "responsibleTitle": "سفر مسؤول",
+      "responsibleText": "تخطيط سفاري يحترم الحياة البرية والطبيعة والمجتمعات.",
+      "peaceTitle": "راحة البال",
+      "peaceText": "حجز آمن وتواصل واضح ودعم أثناء السفر."
+    },
+    "galleryLabel": "مشاهد من الطريق",
+    "galleryTitle": "لحظات من رحلاتنا",
+    "galleryDescription": "لمحة عن المناظر والحياة البرية والنزل واللحظات الإنسانية التي تجعل كل برنامج حيا.",
+    "reviewsTitle": "ما يتذكره مسافرونا",
+    "reviewsDescription": "قصص بسيطة من ضيوف وثقوا بفريقنا المحلي أثناء وقتهم في أوغندا.",
+    "finalCta": {
+      "label": "ابدأ الحديث",
+      "title": "هل أنت جاهز لتخطيط سفاري أوغندا؟",
+      "description": "أخبرنا بنوع الرحلة التي تحلم بها، وسيساعدك فريقنا المحلي في تحويلها إلى برنامج شخصي.",
+      "button": "تحدث إلى خبير سفر"
+    }
+  },
+  "toursPage": {
+    "title": "Our Tours",
+    "description": "Handpicked safari experiences designed for unforgettable journeys across Uganda and East Africa.",
+    "ctaLabel": "Explore. Discover. Adventure. Travel",
+    "ctaTitle": "Your Journey Awaits - Let's Plan Your Dream Trip",
+    "ctaButton": "Contact Our Team",
+    "errorTitle": "تعذر تحميل الجولات",
+    "errorMessage": "تعذر تحميل الجولات الآن.",
+    "emptyTitle": "لا توجد جولات متاحة",
+    "emptyDescription": "يرجى العودة قريبا لاكتشاف تجارب سفاري جديدة.",
+    "noFilterResultsTitle": "لا توجد جولات تطابق الفلاتر.",
+    "noFilterResultsDescription": "جرب تعديل السعر أو المدة.",
+    "resetFilters": "إعادة ضبط الفلاتر",
+    "paginationAria": "ترقيم صفحات الجولات",
+    "previousPage": "السابق",
+    "nextPage": "التالي"
+  },
+  "tourCard": {
+    "duration": "المدة",
+    "getPackage": "عرض الباقة",
+    "fallbackDescription": "استكشف هذه التجربة مع أوغندا فاميلي تورز."
+  },
+  "tourDetails": {
+    "breadcrumbHome": "Home",
+    "breadcrumbTours": "Tours",
+    "overview": "Overview",
+    "gallery": "Gallery",
+    "highlights": "Highlights",
+    "itinerary": "Itinerary",
+    "tourHighlights": "Tour Highlights",
+    "dayByDay": "Day-by-Day Itinerary",
+    "price": "Price",
+    "availableOnRequest": "Available on Request",
+    "quote": "Contact us for a personalized quote",
+    "instant": "Instant Confirmation",
+    "secure": "Secure booking",
+    "fees": "No booking fees",
+    "bookThisTour": "Book This Tour",
+    "needHelp": "Need assistance with your booking?",
+    "activities": "Activities",
+    "bucketList": "Bucket list",
+    "day": "Day",
+    "accommodation": "الإقامة",
+    "loadDetailsError": "تعذر تحميل تفاصيل الباقة.",
+    "loadErrorTitle": "تعذر تحميل الباقة",
+    "backToTours": "العودة إلى الجولات",
+    "notFoundTitle": "لم يتم العثور على باقة الجولة.",
+    "notFoundDescription": "قد لا تكون هذه الباقة متاحة بعد الآن.",
+    "sectionsAria": "أقسام الجولة",
+    "openGalleryImage": "فتح صورة {{number}} من معرض {{title}}",
+    "galleryImageAlt": "معرض {{title}} {{number}}",
+    "closeGalleryImage": "إغلاق صورة المعرض",
+    "enlargedGalleryAlt": "معرض {{title}} المكبر",
+    "dayImageTitle": "{{title}} اليوم {{number}}",
+    "dayImagesAria": "صور {{title}}",
+    "dayImageAlt": "صورة {{number}} من {{title}}"
+  },
+  "bookingForm": {
+    "title": "Book This Tour",
+    "subtitle": "Tell us about your trip and we'll get back to you with availability and pricing.",
+    "selectedTour": "Selected Tour",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone / WhatsApp",
+    "country": "Country of Residence",
+    "travelDate": "Preferred Travel Date",
+    "flexibleDates": "Are your dates flexible?",
+    "groupSize": "Group Size",
+    "adults": "Adults",
+    "children": "Children",
+    "childrenAges": "Children's Ages",
+    "duration": "Number of Days / Preferred Duration",
+    "accommodation": "Accommodation Preference",
+    "budget": "Estimated Budget",
+    "specialRequests": "Special Requests / Notes",
+    "submit": "Send Booking Request",
+    "selectCountry": "Select country",
+    "noCountries": "No countries found.",
+    "fullNamePlaceholder": "Enter your full name",
+    "emailPlaceholder": "Enter your email",
+    "childrenAgesPlaceholder": "e.g. 5, 8, 12",
+    "durationPlaceholder": "Select number of days",
+    "budgetPlaceholder": "Select budget range",
+    "notesPlaceholder": "Any special requests or additional information...",
+    "info": "We'll contact you by email or WhatsApp to confirm availability.",
+    "sending": "Sending your booking request...",
+    "success": "Booking request sent successfully. We will contact you soon.",
+    "error": "The booking request could not be sent right now.",
+    "budgetTotal": "Estimated group budget",
+    "budgetCalculation": "{{perPerson}} per person x {{travelers}} travelers · {{stay}}",
+    "accommodationNote": "Accommodation preference adjusts the estimated budget.",
+    "accommodationStay": {
+      "budget": "Budget stay",
+      "midRange": "Mid-range stay",
+      "luxury": "Luxury stay"
+    },
+    "requiredMissing": "Please fill in the highlighted required fields before sending.",
+    "toggleCountryList": "تبديل قائمة البلدان",
+    "traveler": "مسافر",
+    "travelers": "مسافرون",
+    "accommodationOptions": {
+      "budget": "اقتصادي",
+      "midRange": "متوسط",
+      "luxury": "فاخر"
+    },
+    "selectedTourValue": "{{tour}}",
+    "defaultTourName": "سفاري في أوغندا"
+  },
+  "inquiryForm": {
+    "title": "Make an Inquiry",
+    "subtitle": "Tell us how we can help and our travel specialists will get back to you by email or WhatsApp.",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone / WhatsApp",
+    "message": "Message",
+    "submit": "Send Inquiry",
+    "fullNamePlaceholder": "Enter your full name",
+    "emailPlaceholder": "Enter your email address",
+    "phonePlaceholder": "Enter your phone number",
+    "messagePlaceholder": "Tell us more about your plans, interests or any special requests...",
+    "sending": "Sending your inquiry...",
+    "success": "Inquiry sent successfully. We will contact you soon.",
+    "error": "The inquiry could not be sent right now."
+  },
+  "footer": {
+    "about": "نحن شركة سفر عائلية محلية متخصصة في رحلات سفاري بيئية مصممة حسب الطلب في أوغندا وشرق أفريقيا.",
+    "contact": "اتصل بنا",
+    "quickLinks": "روابط سريعة",
+    "accept": "نقبل",
+    "social": "تواصل معنا",
+    "rights": "© 2025 Uganda Family Tours & Safari Co. جميع الحقوق محفوظة.",
+    "privacy": "سياسة الخصوصية",
+    "terms": "الشروط والأحكام",
+    "location": "كمبالا، أوغندا"
+  },
+  "aboutPage": {
+    "hero": {
+      "kicker": "Who We Are",
+      "title": "About Us",
+      "subtitle": "10 Years of Authentic Safaris"
+    },
+    "welcome": {
+      "label": "Welcome",
+      "title": "Karibu!",
+      "p1": "Welcome to Uganda Family Tours & Safari Company - your trusted partner for safe, fun and eco-friendly family adventures in the Pearl of Africa.",
+      "p2": "We are a team of locally based tour planners and guides committed to helping families explore the beauty, wildlife and culture of Uganda in a way that is exciting for kids, relaxing for parents and respectful to nature.",
+      "imageAlt": "ضيوف Uganda Family Tours بجانب مركبة السفاري"
+    },
+    "origins": {
+      "label": "Our Story",
+      "title": "Our Origins",
+      "p1": "Our story began with a love for nature, wildlife and the incredible people of Uganda. What started as small, family-led safaris has grown into a mission to share the magic of Africa with families from around the world.",
+      "p2": "Over the years we have built trusted partnerships, created safe and memorable journeys, and remained true to our values: authenticity, sustainability and exceptional care.",
+      "imageAlt": "مركبة سفاري في أوغندا بالقرب من الحياة البرية"
+    },
+    "initiatives": {
+      "label": "What Drives Us",
+      "title": "Our Initiatives",
+      "description": "We are committed to responsible travel and creating positive impact for communities, wildlife and the environment across Uganda.",
+      "responsible": {
+        "title": "Responsible Tourism",
+        "text": "Promoting ethical travel practices that protect nature, support local communities and preserve culture."
+      },
+      "community": {
+        "title": "Community Empowerment",
+        "text": "Partnering with local communities to support education, skills training and economic opportunities."
+      },
+      "conservation": {
+        "title": "Conservation Support",
+        "text": "Supporting wildlife conservation initiatives and habitat protection across Uganda."
+      },
+      "eco": {
+        "title": "Eco-Friendly Travel",
+        "text": "Reducing our environmental impact through sustainable operations and thoughtful travel planning."
+      }
+    },
+    "impact": {
+      "label": "Travel with purpose",
+      "title": "Travel That Gives Back",
+      "imageAlt": "Community travel experience supported by Uganda Family Tours",
+      "description": "Every journey we create is designed with care for people, wildlife and place. We work with local guides, support community-led experiences and encourage travel choices that protect Uganda's natural beauty for future generations."
+    },
+    "trust": {
+      "label": "Why choose us",
+      "title": "Why Travelers Trust Us",
+      "items": {
+        "local": "Local Uganda-based team",
+        "family": "Family-friendly safari planning",
+        "support": "Safe and reliable travel support",
+        "responsible": "Responsible and respectful travel"
+      }
+    },
+    "charities": {
+      "label": "Making A Difference",
+      "title": "Community Impact Through Travel",
+      "visit": "Ask About Responsible Travel",
+      "learn": "Learn More",
+      "mammadu": {
+        "title": "Uganda Community Travel Support",
+        "p1": "Our safaris are designed to keep more value within Uganda by working with local guides, community hosts, family-run lodges, craft makers and small travel partners wherever possible.",
+        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences connected to the journey.",
+        "imageAlt": "تجربة مجتمعية في أوغندا مرتبطة بالسفر المسؤول"
+      },
+      "orange": {
+        "title": "Orange Community Project",
+        "p1": "We partner with schools and community groups to help improve classrooms, provide supplies and support practical learning opportunities for children in rural areas.",
+        "p2": "Uganda Family Tours continues to support community projects initiated by local leaders, creating sustainable benefits beyond each safari.",
+        "imageAlt": "فريق Uganda Family Tours ومشروع مجتمعي"
+      }
+    },
+    "cta": {
+      "label": "Get in touch now",
+      "title": "Start building your dream journey",
+      "call": "Call Now",
+      "inquiry": "Make an Enquiry"
+    }
+  },
+  "tourContent": {
+    "gorilla-tracking-in-bwindi": {
+      "title": "تتبع الغوريلا في بويندي",
+      "shortDescription": "سر عبر الغابة المطيرة مع مرشدين خبراء لمشاهدة الغوريلا الجبلية في موطنها الطبيعي.",
+      "overview": "رحلة إلى قلب منتزه بويندي لتجربة تتبع الغوريلا، مع طبيعة وثقافة واستضافة محلية بعناية.",
+      "highlights": [
+        "Mountain gorilla tracking",
+        "Golden monkey encounters",
+        "Lake Kivu relaxation",
+        "Cultural immersion",
+        "Scenic rainforest landscapes"
+      ]
+    },
+    "murchison-falls-safari": {
+      "title": "سفاري شلالات ميرتشيسون",
+      "shortDescription": "اختبر الشلالات القوية ورحلات مشاهدة الحيوانات ورحلة قارب على النيل وسط حياة برية غنية.",
+      "overview": "سفاري مدروس في أوغندا يجمع الحياة البرية الشهيرة والثقافة المحلية والمناظر الجميلة والإرشاد الدافئ.",
+      "highlights": [
+        "Nile boat cruise",
+        "Top of the falls visit",
+        "Big game viewing",
+        "Birding hotspots",
+        "Sunrise game drive"
+      ]
+    },
+    "queen-elizabeth-wildlife-safari": {
+      "title": "سفاري الحياة البرية في كوين إليزابيث",
+      "shortDescription": "استكشف الحياة البرية والأسود المتسلقة للأشجار وبحيرات الفوهات والسافانا مع مرشد محلي.",
+      "overview": "سفاري مليء بالحيوانات والمناظر واللقاءات المحلية في قلب أوغندا.",
+      "highlights": [
+        "Tree-climbing lions",
+        "Kazinga Channel cruise",
+        "Crater lake scenery",
+        "Elephant sightings",
+        "Local village visit"
+      ]
+    },
+    "lake-bunyonyi-escape": {
+      "title": "استراحة بحيرة بونيوني",
+      "shortDescription": "استرخ بجانب البحيرة الهادئة واستمتع بالجزر والزوارق ومناظر المرتفعات.",
+      "overview": "تجربة هادئة بجانب البحيرة تجمع الطبيعة والثقافة والمناظر ووقت الاسترخاء.",
+      "highlights": [
+        "Island canoe tour",
+        "Highland viewpoints",
+        "Community visit",
+        "Lake relaxation",
+        "Bird watching"
+      ]
+    },
+    "chimpanzee-trekking": {
+      "title": "تتبع الشمبانزي",
+      "shortDescription": "تتبع الشمبانزي في غابة كيبالي واستمتع بمشي مستنقعات بيغودي الجميل.",
+      "overview": "تجربة غابية لمشاهدة الرئيسيات والطيور والمناظر الخضراء في أوغندا.",
+      "highlights": [
+        "Chimpanzee tracking",
+        "Bigodi wetland walk",
+        "Primate viewing",
+        "Forest birding",
+        "Local guide stories"
+      ]
+    },
+    "cultural-uganda-experience": {
+      "title": "تجربة أوغندا الثقافية",
+      "shortDescription": "انغمس في الثقافة المحلية والطعام والموسيقى والحكايات وأسواق الحرف واللقاءات المجتمعية.",
+      "overview": "رحلة ثقافية دافئة عبر التقاليد والنكهات والحياة اليومية في أوغندا.",
+      "highlights": [
+        "Cultural performances",
+        "Local food experience",
+        "Craft markets",
+        "Community walk",
+        "Storytelling with hosts"
+      ]
+    },
+    "itineraryDays": [
+      {
+        "title": "Arrival and Settling In",
+        "description": "Arrive at the designated airport or meeting point, where your safari guide welcomes you and briefs you on the adventure ahead.",
+        "activities": [
+          "Airport pickup and transfer",
+          "Scenic drive to your lodge",
+          "Lodge check-in and orientation"
+        ],
+        "details": "Accommodation: lodge  Meals: dinner  Distance: 120km"
+      },
+      {
+        "title": "Gorilla Trekking & Transfer to Queen Elizabeth",
+        "description": "Head into the rainforest for a guided trek, then continue through rolling hills and village landscapes toward Queen Elizabeth National Park.",
+        "activities": [
+          "Guided wildlife tracking",
+          "Packed lunch in nature",
+          "Evening transfer and lodge check-in"
+        ],
+        "details": "Accommodation: lodge  Meals: breakfast, lunch, dinner  Distance: 160km"
+      },
+      {
+        "title": "Queen Elizabeth Exploration",
+        "description": "Spend the day exploring savannah plains, crater lakes, and waterways known for elephant, buffalo, antelope, and birdlife.",
+        "activities": [
+          "Morning game drive",
+          "Boat cruise or nature walk",
+          "Sunset photography stop"
+        ],
+        "details": "Accommodation: lodge  Meals: breakfast, lunch, dinner  Distance: 80km"
+      },
+      {
+        "title": "Departure and Cultural Reflection",
+        "description": "Enjoy a relaxed breakfast before your return transfer, with time for local crafts, community visits, or scenic stops along the way.",
+        "activities": [
+          "Cultural visit",
+          "Souvenir stop",
+          "Transfer to Kampala or Entebbe"
+        ],
+        "details": "Accommodation: none  Meals: breakfast  Distance: 280km"
+      }
+    ]
+  },
+  "languages": {
+    "enGB": "الإنجليزية - بريطانيا",
+    "enUS": "الإنجليزية - أمريكا",
+    "es": "الإسبانية",
+    "fr": "الفرنسية",
+    "de": "الألمانية",
+    "ru": "الروسية",
+    "nl": "الهولندية",
+    "ar": "العربية"
+  },
+  "mobileNav": {
+    "ariaLabel": "التنقل السفلي للجوال",
+    "openMenu": "فتح القائمة",
+    "drawerAriaLabel": "تنقل الجوال"
+  },
+  "gallery": {
+    "previous": "صورة المعرض السابقة",
+    "next": "صورة المعرض التالية",
+    "goToSlide": "اذهب إلى صورة المعرض {{number}}",
+    "images": {
+      "lake": "إطلالة مرتفعات بحيرة بونيوني",
+      "safariTruck": "مركبة سفاري في أوغندا",
+      "culture": "تجمع ثقافي أوغندي",
+      "forest": "جولة مشي موجهة في الغابة المطيرة",
+      "gorilla": "غوريلا جبلية في غابة بويندي",
+      "lions": "أسود تتسلق الأشجار"
+    }
+  },
+  "reviews": {
+    "goToSlide": "اذهب إلى التقييم {{number}}",
+    "items": [
+      {
+        "country": "أستراليا",
+        "text": "تجربة رائعة من البداية إلى النهاية. كان المرشدون محترفين وودودين وجعلوا الرحلة لا تنسى."
+      },
+      {
+        "country": "المملكة المتحدة",
+        "text": "كل شيء كان منظما بإتقان. تتبع الغوريلا كان تجربة العمر. نوصي بشدة بأوغندا فاميلي تورز."
+      },
+      {
+        "country": "كندا",
+        "text": "مغامرة مذهلة بمناظر خلابة وحياة برية رائعة. نتطلع للعودة إلى أوغندا."
+      },
+      {
+        "country": "الولايات المتحدة",
+        "text": "شعرت عائلتنا بالعناية في كل خطوة. كان البرنامج متوازنا ومدروسا ومليئا بالذكريات."
+      },
+      {
+        "country": "كينيا",
+        "text": "سفاري منظم بشكل جميل مع مرشدين ودودين ونزل مريحة ومشاهدات رائعة للحياة البرية."
+      },
+      {
+        "country": "إسبانيا",
+        "text": "كان تتبع الغوريلا مؤثرا ولا ينسى. جعلت أوغندا فاميلي تورز كل شيء سلسا وشخصيا."
+      }
+    ]
+  },
+  "tourFilters": {
+    "ariaLabel": "فلاتر الجولات",
+    "priceRange": "نطاق السعر",
+    "minimumPrice": "الحد الأدنى للسعر",
+    "maximumPrice": "الحد الأقصى للسعر",
+    "duration": "المدة",
+    "region": "المنطقة",
+    "regionOptions": {
+      "all": "الكل",
+      "eastAfrica": "East Africa"
+    },
+    "durationOptions": {
+      "twoFive": "2-5 أيام",
+      "sixEight": "6-8 أيام",
+      "nineTwelve": "9-12 أيام",
+      "thirteenTwenty": "13-20 أيام",
+      "twentyPlus": "20+ أيام",
+      "all": "الكل",
+      "oneTwo": "1-2 يوم",
+      "threeFour": "3-4 أيام",
+      "fiveSeven": "5-7 أيام",
+      "eightPlus": "8+ أيام"
+    }
+  },
+  "social": {
+    "facebook": "Facebook",
+    "youtube": "YouTube",
+    "whatsapp": "WhatsApp"
+  },
+  "loader": {
+    "compass": {
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W"
+    }
+  }
+}

@@ -1,0 +1,551 @@
+{
+  "navbar": {
+    "home": "Главная",
+    "tours": "Туры",
+    "about": "О нас",
+    "talkToSpecialist": "Связаться со специалистом",
+    "language": "Язык",
+    "homeAria": "Главная Uganda Family Tours"
+  },
+  "common": {
+    "from": "От",
+    "days": "дней",
+    "sending": "Отправка...",
+    "required": "Это поле обязательно.",
+    "validEmail": "Введите корректный email.",
+    "yes": "Да",
+    "no": "Нет",
+    "close": "Закрыть",
+    "cancel": "Отмена",
+    "menu": "Меню",
+    "loading": "Загрузка",
+    "logoAlt": "Uganda Family Tours",
+    "increase": "Увеличить {{label}}",
+    "decrease": "Уменьшить {{label}}",
+    "backToTop": "Наверх",
+    "separator": "-"
+  },
+  "home": {
+    "hero": {
+      "kicker": "Жемчужина Африки",
+      "title": "Сафари, созданное лично для вас",
+      "subtitle": "Путешествуйте по лесам, саваннам, озерам и культурам Уганды с местной командой, которая продумывает каждую деталь.",
+      "primaryCta": "Посмотреть туры",
+      "badgeAlt": {
+        "service": "Иконка сервиса Uganda Family Tours",
+        "planning": "Иконка планирования Uganda Family Tours",
+        "support": "Иконка поддержки Uganda Family Tours",
+        "brand": "Фирменный знак Uganda Family Tours"
+      }
+    },
+    "story": {
+      "label": "Откройте Африку с",
+      "title": "Uganda Family Tours & Safari Co.",
+      "description": "От туманных гор и великих рек до редкой дикой природы и теплого гостеприимства - почувствуйте Уганду по-новому.",
+      "p1": "Уганда - это не просто направление. Это чувство: звук леса, тишина саванны, тепло людей и восторг от встречи с дикой природой в ее естественном доме.",
+      "p2": "<0>Uganda Family Tours & Safari Co.</0> создает аутентичные, плавные и запоминающиеся путешествия по Уганде и Восточной Африке для тех, кто ценит комфорт, заботу и глубокую связь с местом."
+    },
+    "signature": {
+      "label": "Фирменные впечатления",
+      "title": "Фирменные впечатления",
+      "description": "От лесов с гориллами до открытых саванн - каждое путешествие строится вокруг того, что вы хотите почувствовать, увидеть и запомнить.",
+      "items": [
+        {
+          "title": "Трекинг к гориллам",
+          "text": "Тихие лесные прогулки к одной из самых трогательных встреч с дикой природой Африки."
+        },
+        {
+          "title": "Сафари с животными",
+          "text": "Сафари-драйвы, лодочные прогулки и дикие ландшафты с местными гидами."
+        },
+        {
+          "title": "Трекинг к шимпанзе",
+          "text": "Следуйте за звуками леса в Кибале и других местах, богатых приматами."
+        },
+        {
+          "title": "Культурные встречи",
+          "text": "Знакомьтесь с общинами, мастерами, рассказчиками и традициями с уважением."
+        },
+        {
+          "title": "Озера и природа",
+          "text": "Замедлитесь у кратерных озер, высокогорий, рек и спокойных мест отдыха."
+        },
+        {
+          "title": "Семейные приключения",
+          "text": "Спокойные и продуманные сафари для всех поколений."
+        }
+      ],
+      "videoAria": "Видео фирменных сафари-впечатлений",
+      "videoFallback": "Ваш браузер не поддерживает встроенное видео."
+    },
+    "featured": {
+      "label": "Подобрано для вас",
+      "title": "Избранные сафари",
+      "description": "Короткая подборка маршрутов из нашей опубликованной коллекции, чтобы главная страница оставалась приглашением, а не каталогом.",
+      "viewAll": "Все туры",
+      "errorTitle": "Не удалось загрузить избранные туры",
+      "errorMessage": "Сейчас не удалось загрузить избранные туры.",
+      "emptyTitle": "Избранные туры недоступны",
+      "emptyDescription": "Загляните позже за новыми сафари."
+    },
+    "journey": {
+      "label": "Создано с заботой",
+      "title": "Вокруг вашего путешествия",
+      "description": "Каждый маршрут строится вокруг вашего темпа, интересов, комфорта и стиля путешествия - ради горилл, дикой природы, культуры или семейного приключения.",
+      "cta": "Связаться со специалистом",
+      "imageAlt": "Сафари-путешествие по Уганде",
+      "thumbnailAlt": "Момент сафари Uganda Family Tours"
+    },
+    "why": {
+      "label": "Ваше приключение. Наш опыт.",
+      "title": "Почему выбирают Uganda Family Tours?",
+      "description": "Спокойное планирование, надежные местные гиды, ценности ответственного туризма и поддержка от первой идеи до последнего дня сафари.",
+      "tailorTitle": "Маршруты на заказ",
+      "tailorText": "Путешествия под ваш темп, интересы и комфорт.",
+      "localTitle": "Надежная местная экспертиза",
+      "localText": "Местные гиды, продуманные маршруты и знание деталей.",
+      "responsibleTitle": "Ответственные путешествия",
+      "responsibleText": "Планирование сафари с уважением к природе, животным и общинам.",
+      "peaceTitle": "Спокойствие",
+      "peaceText": "Безопасное бронирование, ясная связь и поддержка в поездке."
+    },
+    "galleryLabel": "Увидено в пути",
+    "galleryTitle": "Моменты наших путешествий",
+    "galleryDescription": "Взгляд на пейзажи, животных, лоджи и человеческие моменты, которые оживляют каждый маршрут.",
+    "reviewsTitle": "Что запоминают наши гости",
+    "reviewsDescription": "Простые истории гостей, доверивших нашей местной команде свое время в Уганде.",
+    "finalCta": {
+      "label": "Начнем разговор",
+      "title": "Готовы спланировать сафари в Уганде?",
+      "description": "Расскажите, о каком путешествии мечтаете, и наша местная команда превратит это в личный маршрут.",
+      "button": "Связаться со специалистом"
+    }
+  },
+  "toursPage": {
+    "title": "Our Tours",
+    "description": "Handpicked safari experiences designed for unforgettable journeys across Uganda and East Africa.",
+    "ctaLabel": "Explore. Discover. Adventure. Travel",
+    "ctaTitle": "Your Journey Awaits - Let's Plan Your Dream Trip",
+    "ctaButton": "Contact Our Team",
+    "errorTitle": "Не удалось загрузить туры",
+    "errorMessage": "Сейчас не удалось загрузить туры.",
+    "emptyTitle": "Туры недоступны",
+    "emptyDescription": "Загляните позже, чтобы увидеть новые сафари.",
+    "noFilterResultsTitle": "Нет туров по выбранным фильтрам.",
+    "noFilterResultsDescription": "Измените цену или продолжительность.",
+    "resetFilters": "Сбросить фильтры",
+    "paginationAria": "Навигация по страницам туров",
+    "previousPage": "Назад",
+    "nextPage": "Далее"
+  },
+  "tourCard": {
+    "duration": "Длительность",
+    "getPackage": "Смотреть пакет",
+    "fallbackDescription": "Откройте это впечатление Uganda Family Tours."
+  },
+  "tourDetails": {
+    "breadcrumbHome": "Home",
+    "breadcrumbTours": "Tours",
+    "overview": "Overview",
+    "gallery": "Gallery",
+    "highlights": "Highlights",
+    "itinerary": "Itinerary",
+    "tourHighlights": "Tour Highlights",
+    "dayByDay": "Day-by-Day Itinerary",
+    "price": "Price",
+    "availableOnRequest": "Available on Request",
+    "quote": "Contact us for a personalized quote",
+    "instant": "Instant Confirmation",
+    "secure": "Secure booking",
+    "fees": "No booking fees",
+    "bookThisTour": "Book This Tour",
+    "needHelp": "Need assistance with your booking?",
+    "activities": "Activities",
+    "bucketList": "Bucket list",
+    "day": "Day",
+    "accommodation": "Размещение",
+    "loadDetailsError": "Не удалось загрузить детали пакета.",
+    "loadErrorTitle": "Не удалось загрузить пакет",
+    "backToTours": "Назад к турам",
+    "notFoundTitle": "Турпакет не найден.",
+    "notFoundDescription": "Этот пакет может быть больше недоступен.",
+    "sectionsAria": "Разделы тура",
+    "openGalleryImage": "Открыть изображение {{number}} галереи {{title}}",
+    "galleryImageAlt": "Галерея {{title}} {{number}}",
+    "closeGalleryImage": "Закрыть изображение галереи",
+    "enlargedGalleryAlt": "Увеличенная галерея {{title}}",
+    "dayImageTitle": "{{title}} день {{number}}",
+    "dayImagesAria": "Изображения {{title}}",
+    "dayImageAlt": "Изображение {{number}} {{title}}"
+  },
+  "bookingForm": {
+    "title": "Book This Tour",
+    "subtitle": "Tell us about your trip and we'll get back to you with availability and pricing.",
+    "selectedTour": "Selected Tour",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone / WhatsApp",
+    "country": "Country of Residence",
+    "travelDate": "Preferred Travel Date",
+    "flexibleDates": "Are your dates flexible?",
+    "groupSize": "Group Size",
+    "adults": "Adults",
+    "children": "Children",
+    "childrenAges": "Children's Ages",
+    "duration": "Number of Days / Preferred Duration",
+    "accommodation": "Accommodation Preference",
+    "budget": "Estimated Budget",
+    "specialRequests": "Special Requests / Notes",
+    "submit": "Send Booking Request",
+    "selectCountry": "Select country",
+    "noCountries": "No countries found.",
+    "fullNamePlaceholder": "Enter your full name",
+    "emailPlaceholder": "Enter your email",
+    "childrenAgesPlaceholder": "e.g. 5, 8, 12",
+    "durationPlaceholder": "Select number of days",
+    "budgetPlaceholder": "Select budget range",
+    "notesPlaceholder": "Any special requests or additional information...",
+    "info": "We'll contact you by email or WhatsApp to confirm availability.",
+    "sending": "Sending your booking request...",
+    "success": "Booking request sent successfully. We will contact you soon.",
+    "error": "The booking request could not be sent right now.",
+    "budgetTotal": "Estimated group budget",
+    "budgetCalculation": "{{perPerson}} per person x {{travelers}} travelers · {{stay}}",
+    "accommodationNote": "Accommodation preference adjusts the estimated budget.",
+    "accommodationStay": {
+      "budget": "Budget stay",
+      "midRange": "Mid-range stay",
+      "luxury": "Luxury stay"
+    },
+    "requiredMissing": "Please fill in the highlighted required fields before sending.",
+    "toggleCountryList": "Открыть или закрыть список стран",
+    "traveler": "путешественник",
+    "travelers": "путешественников",
+    "accommodationOptions": {
+      "budget": "Бюджет",
+      "midRange": "Средний уровень",
+      "luxury": "Люкс"
+    },
+    "selectedTourValue": "{{tour}}",
+    "defaultTourName": "Сафари в Уганде"
+  },
+  "inquiryForm": {
+    "title": "Make an Inquiry",
+    "subtitle": "Tell us how we can help and our travel specialists will get back to you by email or WhatsApp.",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone / WhatsApp",
+    "message": "Message",
+    "submit": "Send Inquiry",
+    "fullNamePlaceholder": "Enter your full name",
+    "emailPlaceholder": "Enter your email address",
+    "phonePlaceholder": "Enter your phone number",
+    "messagePlaceholder": "Tell us more about your plans, interests or any special requests...",
+    "sending": "Sending your inquiry...",
+    "success": "Inquiry sent successfully. We will contact you soon.",
+    "error": "The inquiry could not be sent right now."
+  },
+  "footer": {
+    "about": "Мы местная семейная туристическая компания, специализирующаяся на индивидуальных эко-сафари в Уганде и Восточной Африке.",
+    "contact": "Контакты",
+    "quickLinks": "Быстрые ссылки",
+    "accept": "Мы принимаем",
+    "social": "Связаться с нами",
+    "rights": "© 2025 Uganda Family Tours & Safari Co. Все права защищены.",
+    "privacy": "Политика конфиденциальности",
+    "terms": "Условия использования",
+    "location": "Кампала, Уганда"
+  },
+  "aboutPage": {
+    "hero": {
+      "kicker": "Who We Are",
+      "title": "About Us",
+      "subtitle": "10 Years of Authentic Safaris"
+    },
+    "welcome": {
+      "label": "Welcome",
+      "title": "Karibu!",
+      "p1": "Welcome to Uganda Family Tours & Safari Company - your trusted partner for safe, fun and eco-friendly family adventures in the Pearl of Africa.",
+      "p2": "We are a team of locally based tour planners and guides committed to helping families explore the beauty, wildlife and culture of Uganda in a way that is exciting for kids, relaxing for parents and respectful to nature.",
+      "imageAlt": "Гости Uganda Family Tours у сафари-автомобиля компании"
+    },
+    "origins": {
+      "label": "Our Story",
+      "title": "Our Origins",
+      "p1": "Our story began with a love for nature, wildlife and the incredible people of Uganda. What started as small, family-led safaris has grown into a mission to share the magic of Africa with families from around the world.",
+      "p2": "Over the years we have built trusted partnerships, created safe and memorable journeys, and remained true to our values: authenticity, sustainability and exceptional care.",
+      "imageAlt": "Сафари-автомобиль в Уганде рядом с дикой природой"
+    },
+    "initiatives": {
+      "label": "What Drives Us",
+      "title": "Our Initiatives",
+      "description": "We are committed to responsible travel and creating positive impact for communities, wildlife and the environment across Uganda.",
+      "responsible": {
+        "title": "Responsible Tourism",
+        "text": "Promoting ethical travel practices that protect nature, support local communities and preserve culture."
+      },
+      "community": {
+        "title": "Community Empowerment",
+        "text": "Partnering with local communities to support education, skills training and economic opportunities."
+      },
+      "conservation": {
+        "title": "Conservation Support",
+        "text": "Supporting wildlife conservation initiatives and habitat protection across Uganda."
+      },
+      "eco": {
+        "title": "Eco-Friendly Travel",
+        "text": "Reducing our environmental impact through sustainable operations and thoughtful travel planning."
+      }
+    },
+    "impact": {
+      "label": "Travel with purpose",
+      "title": "Travel That Gives Back",
+      "imageAlt": "Community travel experience supported by Uganda Family Tours",
+      "description": "Every journey we create is designed with care for people, wildlife and place. We work with local guides, support community-led experiences and encourage travel choices that protect Uganda's natural beauty for future generations."
+    },
+    "trust": {
+      "label": "Why choose us",
+      "title": "Why Travelers Trust Us",
+      "items": {
+        "local": "Local Uganda-based team",
+        "family": "Family-friendly safari planning",
+        "support": "Safe and reliable travel support",
+        "responsible": "Responsible and respectful travel"
+      }
+    },
+    "charities": {
+      "label": "Making A Difference",
+      "title": "Community Impact Through Travel",
+      "visit": "Ask About Responsible Travel",
+      "learn": "Learn More",
+      "mammadu": {
+        "title": "Uganda Community Travel Support",
+        "p1": "Our safaris are designed to keep more value within Uganda by working with local guides, community hosts, family-run lodges, craft makers and small travel partners wherever possible.",
+        "p2": "When travelers want to give back, our team can recommend respectful community visits, school-support opportunities and locally led experiences connected to the journey.",
+        "imageAlt": "Общественный опыт в Уганде, связанный с ответственным туризмом"
+      },
+      "orange": {
+        "title": "Orange Community Project",
+        "p1": "We partner with schools and community groups to help improve classrooms, provide supplies and support practical learning opportunities for children in rural areas.",
+        "p2": "Uganda Family Tours continues to support community projects initiated by local leaders, creating sustainable benefits beyond each safari.",
+        "imageAlt": "Команда Uganda Family Tours и общественный проект"
+      }
+    },
+    "cta": {
+      "label": "Get in touch now",
+      "title": "Start building your dream journey",
+      "call": "Call Now",
+      "inquiry": "Make an Enquiry"
+    }
+  },
+  "tourContent": {
+    "gorilla-tracking-in-bwindi": {
+      "title": "Трекинг к гориллам в Бвинди",
+      "shortDescription": "Идите по густому тропическому лесу с опытными гидами и встречайте горных горилл в их естественной среде.",
+      "overview": "Путешествие в сердце национального парка Бвинди для незабываемого трекинга к гориллам, с природой, культурой и заботливым местным сопровождением.",
+      "highlights": [
+        "Mountain gorilla tracking",
+        "Golden monkey encounters",
+        "Lake Kivu relaxation",
+        "Cultural immersion",
+        "Scenic rainforest landscapes"
+      ]
+    },
+    "murchison-falls-safari": {
+      "title": "Сафари к водопадам Мерчисон",
+      "shortDescription": "Мощные водопады, захватывающие сафари-драйвы и лодочная прогулка по Нилу с богатой дикой природой.",
+      "overview": "Продуманное сафари по Уганде с культовой дикой природой, местной культурой, красивыми пейзажами и теплым сопровождением.",
+      "highlights": [
+        "Nile boat cruise",
+        "Top of the falls visit",
+        "Big game viewing",
+        "Birding hotspots",
+        "Sunrise game drive"
+      ]
+    },
+    "queen-elizabeth-wildlife-safari": {
+      "title": "Сафари в Queen Elizabeth",
+      "shortDescription": "Откройте дикую природу, львов на деревьях, кратерные озера и открытые саванны с местным гидом.",
+      "overview": "Сафари с животными, пейзажами и местными встречами в самом сердце Уганды.",
+      "highlights": [
+        "Tree-climbing lions",
+        "Kazinga Channel cruise",
+        "Crater lake scenery",
+        "Elephant sightings",
+        "Local village visit"
+      ]
+    },
+    "lake-bunyonyi-escape": {
+      "title": "Отдых на озере Буньони",
+      "shortDescription": "Отдохните у спокойного озера, посетите острова на каноэ и насладитесь высокогорными видами.",
+      "overview": "Спокойный отдых у озера с природой, культурой, видами и временем замедлиться.",
+      "highlights": [
+        "Island canoe tour",
+        "Highland viewpoints",
+        "Community visit",
+        "Lake relaxation",
+        "Bird watching"
+      ]
+    },
+    "chimpanzee-trekking": {
+      "title": "Трекинг к шимпанзе",
+      "shortDescription": "Следите за шимпанзе в лесу Кибале и наслаждайтесь прогулками по водно-болотным угодьям Бигоди.",
+      "overview": "Лесное путешествие к приматам, птицам и зеленым пейзажам Уганды.",
+      "highlights": [
+        "Chimpanzee tracking",
+        "Bigodi wetland walk",
+        "Primate viewing",
+        "Forest birding",
+        "Local guide stories"
+      ]
+    },
+    "cultural-uganda-experience": {
+      "title": "Культурная Уганда",
+      "shortDescription": "Погрузитесь в местную культуру, еду, музыку, истории, рынки ремесел и общинные встречи.",
+      "overview": "Теплое культурное путешествие через традиции, вкусы и повседневную жизнь Уганды.",
+      "highlights": [
+        "Cultural performances",
+        "Local food experience",
+        "Craft markets",
+        "Community walk",
+        "Storytelling with hosts"
+      ]
+    },
+    "itineraryDays": [
+      {
+        "title": "Arrival and Settling In",
+        "description": "Arrive at the designated airport or meeting point, where your safari guide welcomes you and briefs you on the adventure ahead.",
+        "activities": [
+          "Airport pickup and transfer",
+          "Scenic drive to your lodge",
+          "Lodge check-in and orientation"
+        ],
+        "details": "Accommodation: lodge  Meals: dinner  Distance: 120km"
+      },
+      {
+        "title": "Gorilla Trekking & Transfer to Queen Elizabeth",
+        "description": "Head into the rainforest for a guided trek, then continue through rolling hills and village landscapes toward Queen Elizabeth National Park.",
+        "activities": [
+          "Guided wildlife tracking",
+          "Packed lunch in nature",
+          "Evening transfer and lodge check-in"
+        ],
+        "details": "Accommodation: lodge  Meals: breakfast, lunch, dinner  Distance: 160km"
+      },
+      {
+        "title": "Queen Elizabeth Exploration",
+        "description": "Spend the day exploring savannah plains, crater lakes, and waterways known for elephant, buffalo, antelope, and birdlife.",
+        "activities": [
+          "Morning game drive",
+          "Boat cruise or nature walk",
+          "Sunset photography stop"
+        ],
+        "details": "Accommodation: lodge  Meals: breakfast, lunch, dinner  Distance: 80km"
+      },
+      {
+        "title": "Departure and Cultural Reflection",
+        "description": "Enjoy a relaxed breakfast before your return transfer, with time for local crafts, community visits, or scenic stops along the way.",
+        "activities": [
+          "Cultural visit",
+          "Souvenir stop",
+          "Transfer to Kampala or Entebbe"
+        ],
+        "details": "Accommodation: none  Meals: breakfast  Distance: 280km"
+      }
+    ]
+  },
+  "languages": {
+    "enGB": "Английский UK",
+    "enUS": "Английский США",
+    "es": "Испанский",
+    "fr": "Французский",
+    "de": "Немецкий",
+    "ru": "Русский",
+    "nl": "Нидерландский",
+    "ar": "Арабский"
+  },
+  "mobileNav": {
+    "ariaLabel": "Нижняя мобильная навигация",
+    "openMenu": "Открыть меню",
+    "drawerAriaLabel": "Мобильная навигация"
+  },
+  "gallery": {
+    "previous": "Предыдущее фото галереи",
+    "next": "Следующее фото галереи",
+    "goToSlide": "Перейти к фото {{number}}",
+    "images": {
+      "lake": "Вид на высокогорья озера Буньони",
+      "safariTruck": "Сафари-автомобиль в Уганде",
+      "culture": "Культурная встреча в Уганде",
+      "forest": "Прогулка с гидом по тропическому лесу",
+      "gorilla": "Горная горилла в лесу Бвинди",
+      "lions": "Львы, забирающиеся на деревья"
+    }
+  },
+  "reviews": {
+    "goToSlide": "Перейти к отзыву {{number}}",
+    "items": [
+      {
+        "country": "Австралия",
+        "text": "Невероятный опыт от начала до конца. Гиды были знающими, дружелюбными и сделали поездку незабываемой."
+      },
+      {
+        "country": "Великобритания",
+        "text": "Все было отлично организовано. Трекинг к гориллам стал впечатлением на всю жизнь. Очень рекомендуем."
+      },
+      {
+        "country": "Канада",
+        "text": "Потрясающее приключение с красивыми пейзажами и удивительной дикой природой. Хотим вернуться в Уганду."
+      },
+      {
+        "country": "США",
+        "text": "Наша семья чувствовала заботу на каждом этапе. Маршрут был продуманным, спокойным и запоминающимся."
+      },
+      {
+        "country": "Кения",
+        "text": "Прекрасно организованное сафари с теплыми гидами, удобными лоджами и отличными встречами с животными."
+      },
+      {
+        "country": "Испания",
+        "text": "Трекинг к гориллам был трогательным и незабываемым. Uganda Family Tours сделали все плавно и лично."
+      }
+    ]
+  },
+  "tourFilters": {
+    "ariaLabel": "Фильтры туров",
+    "priceRange": "Диапазон цен",
+    "minimumPrice": "Минимальная цена",
+    "maximumPrice": "Максимальная цена",
+    "duration": "Длительность",
+    "region": "Регион",
+    "regionOptions": {
+      "all": "Все",
+      "eastAfrica": "East Africa"
+    },
+    "durationOptions": {
+      "twoFive": "2-5 дней",
+      "sixEight": "6-8 дней",
+      "nineTwelve": "9-12 дней",
+      "thirteenTwenty": "13-20 дней",
+      "twentyPlus": "20+ дней",
+      "all": "Все",
+      "oneTwo": "1-2 дня",
+      "threeFour": "3-4 дня",
+      "fiveSeven": "5-7 дней",
+      "eightPlus": "8+ дней"
+    }
+  },
+  "social": {
+    "facebook": "Facebook",
+    "youtube": "YouTube",
+    "whatsapp": "WhatsApp"
+  },
+  "loader": {
+    "compass": {
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W"
+    }
+  }
+}

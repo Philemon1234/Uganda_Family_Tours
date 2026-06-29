@@ -1,0 +1,547 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "tours": "Tours",
+    "about": "Sobre nosotros",
+    "talkToSpecialist": "Hablar con un especialista de viajes",
+    "language": "Idioma",
+    "homeAria": "Inicio de Uganda Family Tours"
+  },
+  "common": {
+    "from": "Desde",
+    "days": "Dias",
+    "sending": "Enviando...",
+    "required": "Este campo es obligatorio.",
+    "validEmail": "Introduce un correo electronico valido.",
+    "yes": "Si",
+    "no": "No",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "menu": "Menu",
+    "loading": "Cargando",
+    "logoAlt": "Uganda Family Tours",
+    "backToTop": "Volver arriba",
+    "separator": "-",
+    "increase": "Aumentar {{label}}",
+    "decrease": "Disminuir {{label}}"
+  },
+  "home": {
+    "hero": {
+      "title": "Un safari hecho personal",
+      "subtitle": "Viaja por bosques, sabanas, lagos y culturas de Uganda con un equipo local que adapta cada detalle a ti.",
+      "primaryCta": "Explorar tours",
+      "kicker": "La Perla de Africa",
+      "badgeAlt": {
+        "service": "Icono de servicio de Uganda Family Tours",
+        "planning": "Icono de planificacion de Uganda Family Tours",
+        "support": "Icono de asistencia de Uganda Family Tours",
+        "brand": "Marca de Uganda Family Tours"
+      }
+    },
+    "story": {
+      "label": "Explora Africa con",
+      "title": "Uganda Family Tours & Safari Co.",
+      "description": "Desde montanas brumosas y rios poderosos hasta fauna rara y hospitalidad calida, vive Uganda como nunca antes.",
+      "p1": "Uganda no es solo un destino. Es una sensacion: el sonido del bosque, el silencio de la sabana, la calidez de su gente y la emocion de ver vida silvestre en su hogar natural.",
+      "p2": "<0>Uganda Family Tours & Safari Co.</0> crea viajes autenticos, fluidos y memorables por Uganda y Africa Oriental para viajeros que buscan comodidad, cuidado y una conexion mas profunda con el lugar."
+    },
+    "featured": {
+      "label": "Seleccionado para ti",
+      "title": "Safaris seleccionados",
+      "viewAll": "Ver todos los tours",
+      "description": "Una seleccion enfocada de viajes de nuestra coleccion publicada, mantenida breve para que la pagina invite en lugar de parecer un catalogo.",
+      "errorTitle": "No se pueden cargar los tours destacados",
+      "errorMessage": "No se pueden cargar los tours destacados ahora.",
+      "emptyTitle": "No hay tours destacados disponibles",
+      "emptyDescription": "Vuelve pronto para ver nuevas experiencias de safari."
+    },
+    "why": {
+      "label": "Tu aventura. Nuestra experiencia.",
+      "title": "Por que viajar con Uganda Family Tours?",
+      "description": "Planificacion tranquila, guias locales confiables, valores de viaje responsable y apoyo constante desde la primera idea hasta el ultimo dia del safari.",
+      "tailorTitle": "Itinerarios a medida",
+      "tailorText": "Viajes adaptados a tu ritmo, intereses y comodidad.",
+      "localTitle": "Experiencia local confiable",
+      "localText": "Guias locales, rutas cuidadas y conocimiento interno.",
+      "responsibleTitle": "Viaje responsable",
+      "responsibleText": "Planificacion de safaris que respeta fauna, naturaleza y comunidades.",
+      "peaceTitle": "Tranquilidad",
+      "peaceText": "Reserva segura, comunicacion clara y asistencia de viaje."
+    },
+    "galleryTitle": "Momentos de nuestros viajes",
+    "reviewsTitle": "Lo que recuerdan nuestros viajeros",
+    "signature": {
+      "label": "Experiencias distintivas",
+      "title": "Experiencias distintivas",
+      "description": "Desde bosques de gorilas hasta sabanas abiertas, cada viaje se disena segun lo que los viajeros quieren sentir, ver y recordar.",
+      "items": [
+        {
+          "title": "Trekking de gorilas",
+          "text": "Caminatas tranquilas por el bosque hacia uno de los encuentros con fauna mas conmovedores de Africa."
+        },
+        {
+          "title": "Safaris de vida silvestre",
+          "text": "Game drives, cruceros en barco y paisajes salvajes guiados por conocimiento local."
+        },
+        {
+          "title": "Seguimiento de chimpances",
+          "text": "Sigue los llamados del bosque en Kibale y otros habitats ricos en primates."
+        },
+        {
+          "title": "Experiencias culturales",
+          "text": "Conoce comunidades, artesanos, narradores y tradiciones con respeto."
+        },
+        {
+          "title": "Escapadas al lago y naturaleza",
+          "text": "Baja el ritmo junto a lagos de crater, tierras altas, rios y retiros tranquilos."
+        },
+        {
+          "title": "Aventuras familiares",
+          "text": "Safaris pausados y cuidadosos planificados para todas las generaciones."
+        }
+      ],
+      "videoAria": "Video de experiencias de safari distintivas",
+      "videoFallback": "Tu navegador no admite video integrado."
+    },
+    "journey": {
+      "label": "Disenado con cuidado",
+      "title": "Alrededor de tu viaje",
+      "description": "Cada itinerario se adapta a tu ritmo, intereses, comodidad y estilo de viaje, ya vengas por gorilas, fauna, cultura o una aventura familiar unica.",
+      "cta": "Hablar con un especialista de viajes",
+      "imageAlt": "Viaje de safari por Uganda",
+      "thumbnailAlt": "Momento de safari de Uganda Family Tours"
+    },
+    "galleryLabel": "Visto en el camino",
+    "galleryDescription": "Una mirada a los paisajes, fauna, lodges y momentos humanos que hacen que cada itinerario cobre vida.",
+    "reviewsDescription": "Historias sencillas de huespedes que confiaron su tiempo en Uganda a nuestro equipo local.",
+    "finalCta": {
+      "label": "Comienza la conversacion",
+      "title": "Listo para planear tu safari en Uganda?",
+      "description": "Cuentanos que tipo de viaje imaginas y nuestro equipo local ayudara a convertirlo en un itinerario personal.",
+      "button": "Hablar con un especialista de viajes"
+    }
+  },
+  "toursPage": {
+    "title": "Nuestros tours",
+    "description": "Safaris seleccionados para viajes inolvidables por Uganda y África Oriental.",
+    "ctaLabel": "Explora. Descubre. Viaja.",
+    "ctaTitle": "Tu viaje te espera - planifiquemos tu sueño",
+    "ctaButton": "Contactar al equipo",
+    "errorTitle": "No se pueden cargar los tours",
+    "errorMessage": "No se pueden cargar los tours ahora.",
+    "emptyTitle": "No hay tours disponibles",
+    "emptyDescription": "Vuelve pronto para ver nuevas experiencias de safari.",
+    "noFilterResultsTitle": "Ningun tour coincide con tus filtros.",
+    "noFilterResultsDescription": "Prueba ajustar el precio o la duracion.",
+    "resetFilters": "Restablecer filtros",
+    "paginationAria": "Paginacion de tours",
+    "previousPage": "Anterior",
+    "nextPage": "Siguiente"
+  },
+  "tourCard": {
+    "duration": "Duracion",
+    "getPackage": "Ver paquete",
+    "fallbackDescription": "Explora esta experiencia de Uganda Family Tours."
+  },
+  "tourDetails": {
+    "breadcrumbHome": "Inicio",
+    "breadcrumbTours": "Tours",
+    "overview": "Resumen",
+    "gallery": "Galería",
+    "highlights": "Destacados",
+    "itinerary": "Itinerario",
+    "tourHighlights": "Lo más destacado",
+    "dayByDay": "Itinerario día a día",
+    "price": "Precio",
+    "availableOnRequest": "Disponible a solicitud",
+    "quote": "Contáctanos para una cotización personalizada",
+    "instant": "Confirmación instantánea",
+    "secure": "Reserva segura",
+    "fees": "Sin cargos de reserva",
+    "bookThisTour": "Reservar este tour",
+    "needHelp": "¿Necesitas ayuda con tu reserva?",
+    "activities": "Actividades",
+    "bucketList": "Lista de sue?os",
+    "day": "D?a",
+    "accommodation": "Alojamiento",
+    "loadDetailsError": "No se pueden cargar los detalles del paquete.",
+    "loadErrorTitle": "No se puede cargar el paquete",
+    "backToTours": "Volver a tours",
+    "notFoundTitle": "Paquete no encontrado.",
+    "notFoundDescription": "Es posible que este paquete ya no este disponible.",
+    "sectionsAria": "Secciones del tour",
+    "openGalleryImage": "Abrir imagen {{number}} de la galeria de {{title}}",
+    "galleryImageAlt": "Galeria de {{title}} {{number}}",
+    "closeGalleryImage": "Cerrar imagen de galeria",
+    "enlargedGalleryAlt": "Galeria ampliada de {{title}}",
+    "dayImageTitle": "{{title}} dia {{number}}",
+    "dayImagesAria": "Imagenes de {{title}}",
+    "dayImageAlt": "Imagen {{number}} de {{title}}"
+  },
+  "bookingForm": {
+    "title": "Reservar este tour",
+    "subtitle": "Cuéntanos sobre tu viaje y te responderemos con disponibilidad y precio.",
+    "selectedTour": "Tour seleccionado",
+    "fullName": "Nombre completo",
+    "email": "Correo electrónico",
+    "phone": "Teléfono / WhatsApp",
+    "country": "País de residencia",
+    "travelDate": "Fecha preferida",
+    "flexibleDates": "¿Tus fechas son flexibles?",
+    "groupSize": "Tamaño del grupo",
+    "adults": "Adultos",
+    "children": "Niños",
+    "childrenAges": "Edades de los niños",
+    "duration": "Número de días / Duración preferida",
+    "accommodation": "Preferencia de alojamiento",
+    "budget": "Presupuesto estimado",
+    "specialRequests": "Solicitudes especiales / Notas",
+    "submit": "Enviar solicitud",
+    "selectCountry": "Seleccionar país",
+    "noCountries": "No se encontraron países.",
+    "fullNamePlaceholder": "Introduce tu nombre completo",
+    "emailPlaceholder": "Introduce tu correo",
+    "childrenAgesPlaceholder": "ej. 5, 8, 12",
+    "durationPlaceholder": "Selecciona número de días",
+    "budgetPlaceholder": "Selecciona rango de presupuesto",
+    "notesPlaceholder": "Solicitudes especiales o información adicional...",
+    "info": "Te contactaremos por correo o WhatsApp para confirmar.",
+    "sending": "Enviando tu solicitud...",
+    "success": "Solicitud enviada correctamente. Te contactaremos pronto.",
+    "error": "La solicitud no se pudo enviar ahora.",
+    "budgetTotal": "Presupuesto estimado del grupo",
+    "budgetCalculation": "{{perPerson}} por persona x {{travelers}} viajeros · {{stay}}",
+    "accommodationNote": "La preferencia de alojamiento ajusta el presupuesto estimado.",
+    "accommodationStay": {
+      "budget": "Estancia económica",
+      "midRange": "Estancia de gama media",
+      "luxury": "Estancia de lujo"
+    },
+    "requiredMissing": "Completa los campos obligatorios resaltados antes de enviar.",
+    "toggleCountryList": "Alternar lista de paises",
+    "traveler": "viajero",
+    "travelers": "viajeros",
+    "accommodationOptions": {
+      "budget": "Economico",
+      "midRange": "Gama media",
+      "luxury": "Lujo"
+    },
+    "selectedTourValue": "{{tour}}",
+    "defaultTourName": "Safari en Uganda"
+  },
+  "inquiryForm": {
+    "title": "Hacer una consulta",
+    "subtitle": "Dinos cómo podemos ayudarte y nuestros especialistas responderán por email o WhatsApp.",
+    "fullName": "Nombre completo",
+    "email": "Correo electrónico",
+    "phone": "Teléfono / WhatsApp",
+    "message": "Mensaje",
+    "submit": "Enviar consulta",
+    "fullNamePlaceholder": "Introduce tu nombre completo",
+    "emailPlaceholder": "Introduce tu correo electrónico",
+    "phonePlaceholder": "Introduce tu teléfono",
+    "messagePlaceholder": "Cuéntanos tus planes, intereses o solicitudes especiales...",
+    "sending": "Enviando tu consulta...",
+    "success": "Consulta enviada correctamente. Te contactaremos pronto.",
+    "error": "La consulta no se pudo enviar ahora."
+  },
+  "footer": {
+    "about": "Somos una empresa local familiar especializada en safaris ecologicos a medida en Uganda y Africa Oriental.",
+    "contact": "Contacto",
+    "quickLinks": "Enlaces rapidos",
+    "accept": "Aceptamos",
+    "social": "Conecta con nosotros",
+    "rights": "? 2025 Uganda Family Tours & Safari Co. Todos los derechos reservados.",
+    "privacy": "Politica de privacidad",
+    "terms": "Terminos y condiciones",
+    "location": "Kampala, Uganda"
+  },
+  "aboutPage": {
+    "hero": {
+      "kicker": "Qui?nes somos",
+      "title": "Sobre nosotros",
+      "subtitle": "10 a?os de safaris aut?nticos"
+    },
+    "welcome": {
+      "label": "Bienvenido",
+      "title": "Karibu!",
+      "p1": "Bienvenido a Uganda Family Tours & Safari Company, tu socio de confianza para aventuras familiares seguras, divertidas y ecol?gicas en la Perla de ?frica.",
+      "p2": "Somos un equipo local de planificadores y gu?as que ayuda a las familias a descubrir la belleza, la fauna y la cultura de Uganda de forma emocionante para los ni?os, relajante para los padres y respetuosa con la naturaleza.",
+      "imageAlt": "Huespedes de Uganda Family Tours junto al vehiculo de safari"
+    },
+    "origins": {
+      "label": "Nuestra historia",
+      "title": "Nuestros or?genes",
+      "p1": "Nuestra historia comenz? con amor por la naturaleza, la fauna y la gente incre?ble de Uganda. Lo que empez? como peque?os safaris familiares creci? hasta convertirse en una misi?n para compartir la magia de ?frica.",
+      "p2": "Con los a?os hemos creado alianzas confiables, viajes seguros y memorables, y seguimos fieles a nuestros valores: autenticidad, sostenibilidad y cuidado excepcional.",
+      "imageAlt": "Vehiculo de safari en Uganda cerca de la vida silvestre"
+    },
+    "initiatives": {
+      "label": "Lo que nos impulsa",
+      "title": "Nuestras iniciativas",
+      "description": "Estamos comprometidos con el viaje responsable y con generar impacto positivo para comunidades, fauna y medio ambiente.",
+      "responsible": {
+        "title": "Turismo responsable",
+        "text": "Promovemos pr?cticas ?ticas que protegen la naturaleza, apoyan comunidades y preservan la cultura."
+      },
+      "community": {
+        "title": "Empoderamiento comunitario",
+        "text": "Colaboramos con comunidades locales para apoyar educaci?n, formaci?n y oportunidades econ?micas."
+      },
+      "conservation": {
+        "title": "Apoyo a la conservaci?n",
+        "text": "Apoyamos iniciativas de conservaci?n de fauna y protecci?n de h?bitats en Uganda."
+      },
+      "eco": {
+        "title": "Viajes ecol?gicos",
+        "text": "Reducimos nuestro impacto ambiental con operaciones sostenibles y planificaci?n cuidadosa."
+      }
+    },
+    "impact": {
+      "label": "Viajar con prop?sito",
+      "title": "Viajes que devuelven",
+      "imageAlt": "Experiencia comunitaria apoyada por Uganda Family Tours",
+      "description": "Cada viaje se dise?a con cuidado por las personas, la vida silvestre y el lugar. Trabajamos con gu?as locales, apoyamos experiencias lideradas por comunidades y fomentamos decisiones de viaje que protegen la belleza natural de Uganda para futuras generaciones."
+    },
+    "trust": {
+      "label": "Por qu? elegirnos",
+      "title": "Por qu? los viajeros conf?an en nosotros",
+      "items": {
+        "local": "Equipo local basado en Uganda",
+        "family": "Planificaci?n de safaris para familias",
+        "support": "Apoyo de viaje seguro y confiable",
+        "responsible": "Viaje responsable y respetuoso"
+      }
+    },
+    "charities": {
+      "label": "Marcando la diferencia",
+      "title": "Impacto comunitario a trav?s del viaje",
+      "visit": "Preguntar sobre viaje responsable",
+      "learn": "Saber m?s",
+      "mammadu": {
+        "title": "Apoyo comunitario en Uganda",
+        "p1": "Nuestros safaris est?n dise?ados para mantener m?s valor dentro de Uganda trabajando con gu?as locales, anfitriones comunitarios, alojamientos familiares, artesanos y peque?os socios de viaje.",
+        "p2": "Cuando los viajeros desean contribuir, nuestro equipo puede recomendar visitas comunitarias respetuosas, oportunidades de apoyo escolar y experiencias locales conectadas con el viaje.",
+        "imageAlt": "Experiencia comunitaria en Uganda conectada con viajes responsables"
+      },
+      "orange": {
+        "title": "Proyecto comunitario Orange",
+        "p1": "Colaboramos con escuelas y grupos comunitarios para mejorar aulas, proporcionar materiales y apoyar el aprendizaje pr?ctico.",
+        "p2": "Uganda Family Tours apoya proyectos iniciados por l?deres locales para crear beneficios sostenibles.",
+        "imageAlt": "Equipo de Uganda Family Tours y proyecto comunitario"
+      }
+    },
+    "cta": {
+      "label": "Cont?ctanos ahora",
+      "title": "Empieza a construir tu viaje so?ado",
+      "call": "Llamar ahora",
+      "inquiry": "Hacer una consulta"
+    }
+  },
+  "tourContent": {
+    "gorilla-tracking-in-bwindi": {
+      "title": "Trekking de gorilas en Bwindi",
+      "shortDescription": "Camina por la selva con gu?as expertos para encontrar gorilas de monta?a en su h?bitat natural.",
+      "overview": "Viaja al coraz?n de una belleza salvaje. Bwindi alberga casi la mitad de los gorilas de monta?a que quedan en el mundo.",
+      "highlights": [
+        "Trekking de gorilas",
+        "Monos dorados",
+        "Relajaci?n en el lago Kivu",
+        "Inmersi?n cultural",
+        "Paisajes de selva"
+      ]
+    },
+    "murchison-falls-safari": {
+      "title": "Safari en Murchison Falls",
+      "shortDescription": "Vive cascadas poderosas, game drives y un crucero esc?nico por el Nilo.",
+      "overview": "Un itinerario con fauna ic?nica, cultura local, paisajes hermosos y hospitalidad c?lida.",
+      "highlights": [
+        "Crucero por el Nilo",
+        "Cima de las cataratas",
+        "Gran fauna",
+        "Aves",
+        "Game drive al amanecer"
+      ]
+    },
+    "queen-elizabeth-wildlife-safari": {
+      "title": "Safari de vida silvestre Queen Elizabeth",
+      "shortDescription": "Explora leones trepadores, lagos de cr?ter y sabanas abiertas con un gu?a local.",
+      "overview": "Un safari lleno de fauna, paisajes y encuentros locales en Uganda.",
+      "highlights": [
+        "Leones trepadores",
+        "Canal Kazinga",
+        "Lagos de cr?ter",
+        "Elefantes",
+        "Visita local"
+      ]
+    },
+    "lake-bunyonyi-escape": {
+      "title": "Escapada al lago Bunyonyi",
+      "shortDescription": "Rel?jate junto al lago, disfruta de islas, canoas y paisajes de monta?a.",
+      "overview": "Una escapada tranquila con naturaleza, cultura y vistas preciosas.",
+      "highlights": [
+        "Canoa entre islas",
+        "Miradores",
+        "Visita comunitaria",
+        "Relax junto al lago",
+        "Aves"
+      ]
+    },
+    "chimpanzee-trekking": {
+      "title": "Trekking de chimpanc?s",
+      "shortDescription": "Sigue chimpanc?s en Kibale y disfruta del humedal de Bigodi.",
+      "overview": "Una inmersi?n forestal para observar primates, aves y paisajes verdes.",
+      "highlights": [
+        "Chimpanc?s",
+        "Paseo Bigodi",
+        "Primates",
+        "Aves del bosque",
+        "Gu?as locales"
+      ]
+    },
+    "cultural-uganda-experience": {
+      "title": "Experiencia cultural de Uganda",
+      "shortDescription": "Descubre comida, m?sica, historias, mercados artesanales y comunidades locales.",
+      "overview": "Una experiencia cultural c?lida con tradiciones, sabores y vida cotidiana.",
+      "highlights": [
+        "Actuaciones culturales",
+        "Comida local",
+        "Mercados artesanales",
+        "Paseo comunitario",
+        "Historias"
+      ]
+    },
+    "itineraryDays": [
+      {
+        "title": "Llegada e instalaci?n",
+        "description": "Llegada al punto de encuentro, bienvenida del gu?a y explicaci?n de la aventura.",
+        "activities": [
+          "Recogida y traslado",
+          "Ruta esc?nica al lodge",
+          "Check-in y orientaci?n"
+        ],
+        "details": "Alojamiento: lodge  Comidas: cena  Distancia: 120 km"
+      },
+      {
+        "title": "Trekking de gorilas y traslado a Queen Elizabeth",
+        "description": "Entra en la selva para un trekking guiado y contin?a hacia Queen Elizabeth.",
+        "activities": [
+          "Seguimiento guiado de fauna",
+          "Almuerzo en la naturaleza",
+          "Traslado y check-in"
+        ],
+        "details": "Alojamiento: lodge  Comidas: desayuno, almuerzo, cena  Distancia: 160 km"
+      },
+      {
+        "title": "Exploraci?n de Queen Elizabeth",
+        "description": "Explora sabanas, lagos de cr?ter y canales con mucha fauna.",
+        "activities": [
+          "Game drive matutino",
+          "Crucero o caminata natural",
+          "Fotos al atardecer"
+        ],
+        "details": "Alojamiento: lodge  Comidas: desayuno, almuerzo, cena  Distancia: 80 km"
+      },
+      {
+        "title": "Salida y reflexi?n cultural",
+        "description": "Desayuno tranquilo antes del regreso, con tiempo para artesan?a o visitas locales.",
+        "activities": [
+          "Visita cultural",
+          "Parada de recuerdos",
+          "Traslado a Kampala o Entebbe"
+        ],
+        "details": "Alojamiento: ninguno  Comidas: desayuno  Distancia: 280 km"
+      }
+    ]
+  },
+  "reviews": {
+    "items": [
+      {
+        "country": "Australia",
+        "text": "Una experiencia increible de principio a fin. Los guias fueron expertos, amables e hicieron el viaje inolvidable."
+      },
+      {
+        "country": "Reino Unido",
+        "text": "Todo estuvo perfectamente organizado. El trekking de gorilas fue una experiencia unica. Recomendamos Uganda Family Tours."
+      },
+      {
+        "country": "Canada",
+        "text": "Una aventura maravillosa con paisajes impresionantes y fauna increible. Queremos volver a Uganda."
+      },
+      {
+        "country": "Estados Unidos",
+        "text": "Nuestra familia se sintio cuidada en cada paso. El itinerario fue equilibrado, atento y lleno de recuerdos."
+      },
+      {
+        "country": "Kenia",
+        "text": "Safari muy bien organizado con guias calidos, lodges comodos y grandes avistamientos durante todo el viaje."
+      },
+      {
+        "country": "Espana",
+        "text": "El trekking de gorilas fue emotivo e inolvidable. Uganda Family Tours hizo que todo fuera fluido y personal."
+      }
+    ],
+    "goToSlide": "Ir a la resena {{number}}"
+  },
+  "languages": {
+    "enGB": "Ingles Reino Unido",
+    "enUS": "Ingles Estados Unidos",
+    "es": "Espanol",
+    "fr": "Frances",
+    "de": "Aleman",
+    "ru": "Ruso",
+    "nl": "Neerlandes",
+    "ar": "Arabe"
+  },
+  "social": {
+    "facebook": "Facebook",
+    "youtube": "YouTube",
+    "whatsapp": "WhatsApp"
+  },
+  "mobileNav": {
+    "ariaLabel": "Navegacion inferior movil",
+    "openMenu": "Abrir menu",
+    "drawerAriaLabel": "Navegacion movil"
+  },
+  "gallery": {
+    "previous": "Imagen anterior de la galeria",
+    "next": "Imagen siguiente de la galeria",
+    "goToSlide": "Ir a la imagen {{number}}",
+    "images": {
+      "lake": "Vista de las tierras altas del lago Bunyonyi",
+      "safariTruck": "Vehiculo de safari en Uganda",
+      "culture": "Encuentro cultural ugandes",
+      "forest": "Caminata guiada por la selva",
+      "gorilla": "Gorila de montana en el bosque de Bwindi",
+      "lions": "Leones trepadores"
+    }
+  },
+  "tourFilters": {
+    "ariaLabel": "Filtros de tours",
+    "priceRange": "Rango de precio",
+    "minimumPrice": "Precio minimo",
+    "maximumPrice": "Precio maximo",
+    "duration": "Duracion",
+    "region": "Region",
+    "durationOptions": {
+      "all": "Todos",
+      "twoFive": "2-5 dias",
+      "sixEight": "6-8 dias",
+      "nineTwelve": "9-12 dias",
+      "thirteenTwenty": "13-20 dias",
+      "twentyPlus": "20+ dias"
+    },
+    "regionOptions": {
+      "all": "Todos",
+      "eastAfrica": "East Africa"
+    }
+  },
+  "loader": {
+    "compass": {
+      "north": "N",
+      "east": "E",
+      "south": "S",
+      "west": "W"
+    }
+  }
+}
