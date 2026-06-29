@@ -18,6 +18,7 @@ export function Navbar({ onInquiry }: NavbarProps) {
   const { t } = useTranslation()
   const location = useLocation()
   const [isAtFooterBottom, setIsAtFooterBottom] = useState(false)
+  const [isPastHero, setIsPastHero] = useState(false)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 1023px)')
@@ -41,9 +42,35 @@ export function Navbar({ onInquiry }: NavbarProps) {
     return () => observer.disconnect()
   }, [location.pathname])
 
+  useEffect(() => {
+    function updateHeaderState() {
+      if (location.pathname !== '/') {
+        setIsPastHero(true)
+        return
+      }
+
+      const heroSection = document.querySelector('.home-hero-section')
+      const heroBottom = heroSection instanceof HTMLElement ? heroSection.offsetHeight : window.innerHeight * 0.9
+      setIsPastHero(window.scrollY > heroBottom - 96)
+    }
+
+    updateHeaderState()
+    window.addEventListener('scroll', updateHeaderState, { passive: true })
+    window.addEventListener('resize', updateHeaderState)
+
+    return () => {
+      window.removeEventListener('scroll', updateHeaderState)
+      window.removeEventListener('resize', updateHeaderState)
+    }
+  }, [location.pathname])
+
   return (
     <header
-      className={`site-header fixed left-0 right-0 top-0 z-40 border-b border-white/15 bg-transparent text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)] backdrop-blur-sm ${
+      className={`site-header fixed left-0 right-0 top-0 z-40 border-b text-white shadow-[0_12px_35px_rgb(0_0_0_/_0.16)] backdrop-blur-sm transition-[background-color,border-color,box-shadow] duration-300 ${
+        isPastHero
+          ? 'border-white/10 bg-[#25424C]/95 shadow-[0_14px_38px_rgb(0_0_0_/_0.2)]'
+          : 'border-white/15 bg-transparent'
+      } ${
         isAtFooterBottom ? 'site-header-hidden-mobile' : ''
       }`}
     >

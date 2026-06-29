@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Trans, useTranslation } from 'react-i18next'
 import { FaHandHoldingHeart, FaPeopleGroup, FaShieldHeart, FaSliders } from 'react-icons/fa6'
-import { FiArrowRight, FiCamera, FiCompass, FiHeart, FiMap, FiMapPin, FiUsers } from 'react-icons/fi'
+import { FiArrowRight, FiCamera, FiCompass, FiHeart, FiMap, FiMapPin, FiPlay, FiUsers, FiX } from 'react-icons/fi'
 import type { Tour } from '../data/tours'
 import { TourCard } from '../components/TourCard'
 import { SectionHeader } from '../components/SectionHeader'
@@ -12,8 +12,10 @@ import { MotionReveal } from '../components/MotionReveal'
 import { FooterImageBand } from '../components/FooterImageBand'
 import { getPublishedTourPackages } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
-import heroVideo from '../assets/Gorillatours.mp4'
 import heroVideoPoster from '../assets/on load.png'
+import heroVideoDesktopLocal from '../assets/Videos/Uganda Family tours banner.mp4'
+import heroVideoMobileLocal from '../assets/Videos/Uganda Family tours banner mobile.mp4'
+import aboutVideoLocal from '../assets/Videos/About Uganda Family Tours.mp4'
 // import heroImage from '../assets/gorilla-7708328_1920.jpg'
 // import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
 // import elephantImage from '../assets/elephant-4736008_1280.jpg'
@@ -30,6 +32,9 @@ type HomePageProps = {
 }
 
 const FEATURED_TOURS_LIMIT = 6
+const heroVideoDesktop = heroVideoDesktopLocal
+const heroVideoMobile = heroVideoMobileLocal
+const aboutVideo = aboutVideoLocal
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
 // const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
@@ -40,6 +45,7 @@ export function HomePage({ onBook }: HomePageProps) {
   const [isLoadingFeaturedTours, setIsLoadingFeaturedTours] = useState(true)
   const [featuredToursError, setFeaturedToursError] = useState('')
   const [isHeroVideoReady, setIsHeroVideoReady] = useState(false)
+  const [isSignatureVideoOpen, setIsSignatureVideoOpen] = useState(false)
   const signatureExperiences = signatureExperienceIcons.map((Icon, index) => ({
     Icon,
     title: t(`home.signature.items.${index}.title`),
@@ -80,6 +86,24 @@ export function HomePage({ onBook }: HomePageProps) {
     }
   }, [])
 
+  useEffect(() => {
+    if (!isSignatureVideoOpen) return
+
+    const previousBodyOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') setIsSignatureVideoOpen(false)
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isSignatureVideoOpen])
+
   // useEffect(() => {
   //   const timer = window.setInterval(() => {
   //     setActiveHeroSlide((currentSlide) => (currentSlide + 1) % heroSlides.length)
@@ -113,7 +137,8 @@ export function HomePage({ onBook }: HomePageProps) {
           aria-hidden="true"
           onLoadedData={() => setIsHeroVideoReady(true)}
         >
-          <source src={heroVideo} type="video/mp4" />
+          <source src={heroVideoMobile} type="video/mp4" media="(max-width: 767px)" />
+          <source src={heroVideoDesktop} type="video/mp4" />
         </video>
         {/*
         {heroSlides.map((image, index) => (
@@ -188,18 +213,30 @@ export function HomePage({ onBook }: HomePageProps) {
         <div className="container-custom">
           <div className="grid gap-12 lg:grid-cols-[0.95fr_1.25fr] lg:items-stretch">
             <MotionReveal className="h-full">
-              <div className="relative h-full min-h-[24rem] overflow-hidden rounded-[1.75rem] bg-dark shadow-[0_22px_55px_rgba(37,66,76,0.14)] lg:min-h-full">
-                <video
-                  className="aspect-[4/3] h-full w-full object-cover lg:aspect-auto"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster={journeyImage}
+              <div className="relative h-full min-h-[24rem] overflow-hidden rounded-[1.75rem] bg-transparent shadow-[0_22px_55px_rgba(37,66,76,0.14)] lg:min-h-full">
+                <button
+                  className="group relative block h-full w-full overflow-hidden !rounded-[1.75rem] bg-transparent p-0 text-left"
+                  type="button"
                   aria-label={t('home.signature.videoAria')}
+                  onClick={() => setIsSignatureVideoOpen(true)}
                 >
-                  <source src="/videos/signature-experiences.mp4" type="video/mp4" />
-                  {t('home.signature.videoFallback')}
-                </video>
+                  <img
+                    className="block h-full min-h-[24rem] w-full rounded-[inherit] object-cover transition duration-700 group-hover:scale-[1.035] lg:min-h-full"
+                    src={storyThumbnail}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                  />
+                  <span className="absolute bottom-6 right-6 hidden text-right text-white sm:block">
+                    <span className="block text-2xl font-black leading-tight md:text-4xl">Jackson Otwikende</span>
+                    <span className="block text-lg font-light leading-tight md:text-2xl">CEO &amp; Founder</span>
+                  </span>
+                  <span className="absolute inset-0 grid place-items-center">
+                    <span className="grid h-16 w-16 place-items-center rounded-full border-2 border-white bg-transparent text-2xl text-white shadow-none transition duration-300 group-hover:scale-110 group-hover:bg-white/10 md:h-20 md:w-20 md:text-3xl">
+                      <FiPlay className="ml-1 fill-none stroke-[1.8]" />
+                    </span>
+                  </span>
+                </button>
               </div>
             </MotionReveal>
             <MotionReveal className="h-full" delay={80}>
@@ -329,6 +366,48 @@ export function HomePage({ onBook }: HomePageProps) {
       </section>
 
       <FooterImageBand src={homeFooterImage} alt={t('home.finalCta.title')} />
+
+      {isSignatureVideoOpen && (
+        <div
+          className="fixed inset-0 z-[110] grid place-items-center bg-black/55 px-3 py-6 backdrop-blur-md sm:px-6"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t('home.signature.videoAria')}
+          onMouseDown={() => setIsSignatureVideoOpen(false)}
+        >
+          <div className="relative w-full max-w-6xl" onMouseDown={(event) => event.stopPropagation()}>
+            <button
+              className="absolute -top-14 right-0 grid h-11 w-11 place-items-center rounded-full bg-white text-xl text-ink shadow-[0_14px_35px_rgba(0,0,0,0.22)] transition hover:bg-primary hover:text-white"
+              type="button"
+              aria-label={t('common.close')}
+              onClick={() => setIsSignatureVideoOpen(false)}
+            >
+              <FiX />
+            </button>
+            <div className="overflow-hidden rounded-[1.25rem] bg-black">
+              <video
+                className="aspect-video max-h-[82vh] w-full bg-black object-contain"
+                autoPlay
+                loop
+                playsInline
+                preload="auto"
+                poster={storyThumbnail}
+                onClick={(event) => {
+                  const video = event.currentTarget
+                  if (video.paused) {
+                    void video.play()
+                  } else {
+                    video.pause()
+                  }
+                }}
+              >
+                <source src={aboutVideo} type="video/mp4" />
+                {t('home.signature.videoFallback')}
+              </video>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
