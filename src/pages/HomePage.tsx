@@ -12,7 +12,12 @@ import { MotionReveal } from '../components/MotionReveal'
 import { FooterImageBand } from '../components/FooterImageBand'
 import { getPublishedTourPackages } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
-import heroVideoPoster from '../assets/on load.png'
+import heroVideoDesktop from '../assets/videos/Uganda Family tours banner.mp4'
+import heroVideoMobile from '../assets/videos/Uganda Family tours banner mobile.mp4'
+import aboutVideo from '../assets/videos/About Uganda Family Tours.mp4'
+import heroVideoPoster from '../assets/videos/banner-placeholder.png'
+import heroVideoMobilePoster from '../assets/videos/banner-mobile-placeholder.png'
+import aboutVideoPoster from '../assets/videos/about-placeholder.png'
 // import heroImage from '../assets/gorilla-7708328_1920.jpg'
 // import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
 // import elephantImage from '../assets/elephant-4736008_1280.jpg'
@@ -29,9 +34,6 @@ type HomePageProps = {
 }
 
 const FEATURED_TOURS_LIMIT = 6
-const heroVideoDesktop = 'http://yufat.org/wp-content/uploads/2026/06/Uganda-Family-tours-banner.mp4'
-const heroVideoMobile = 'http://yufat.org/wp-content/uploads/2026/06/Uganda-Family-tours-banner-mobile.mp4'
-const aboutVideo = 'http://yufat.org/wp-content/uploads/2026/06/About-Uganda-Family-Tours.mp4'
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
 // const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
@@ -112,15 +114,20 @@ export function HomePage({ onBook }: HomePageProps) {
   return (
     <>
       <section className="hero-section home-hero-section min-h-[92vh] bg-dark">
-        <img
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${
+        <picture
+          className={`absolute inset-0 h-full w-full transition-opacity duration-700 ease-out ${
             isHeroVideoReady ? 'opacity-0' : 'opacity-100'
           }`}
-          src={heroVideoPoster}
-          alt=""
-          aria-hidden="true"
-          loading="eager"
-        />
+        >
+          <source srcSet={heroVideoMobilePoster} media="(max-width: 767px)" />
+          <img
+            className="h-full w-full object-cover"
+            src={heroVideoPoster}
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+          />
+        </picture>
         <video
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out ${
             isHeroVideoReady ? 'opacity-100' : 'opacity-0'
@@ -219,7 +226,7 @@ export function HomePage({ onBook }: HomePageProps) {
                 >
                   <img
                     className="block h-full min-h-[24rem] w-full rounded-[inherit] object-cover transition duration-700 group-hover:scale-[1.035] lg:min-h-full"
-                    src={storyThumbnail}
+                    src={aboutVideoPoster}
                     alt=""
                     aria-hidden="true"
                     loading="lazy"
@@ -388,7 +395,7 @@ export function HomePage({ onBook }: HomePageProps) {
                 loop
                 playsInline
                 preload="auto"
-                poster={storyThumbnail}
+                poster={aboutVideoPoster}
                 onClick={(event) => {
                   const video = event.currentTarget
                   if (video.paused) {
