@@ -13,9 +13,6 @@ import { FooterImageBand } from '../components/FooterImageBand'
 import { getPublishedTourPackages } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
 import heroVideoPoster from '../assets/on load.png'
-import heroVideoDesktopLocal from '../assets/Videos/Uganda Family tours banner.mp4'
-import heroVideoMobileLocal from '../assets/Videos/Uganda Family tours banner mobile.mp4'
-import aboutVideoLocal from '../assets/Videos/About Uganda Family Tours.mp4'
 // import heroImage from '../assets/gorilla-7708328_1920.jpg'
 // import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
 // import elephantImage from '../assets/elephant-4736008_1280.jpg'
@@ -32,9 +29,9 @@ type HomePageProps = {
 }
 
 const FEATURED_TOURS_LIMIT = 6
-const heroVideoDesktop = heroVideoDesktopLocal
-const heroVideoMobile = heroVideoMobileLocal
-const aboutVideo = aboutVideoLocal
+const heroVideoDesktop = 'http://yufat.org/wp-content/uploads/2026/06/Uganda-Family-tours-banner.mp4'
+const heroVideoMobile = 'http://yufat.org/wp-content/uploads/2026/06/Uganda-Family-tours-banner-mobile.mp4'
+const aboutVideo = 'http://yufat.org/wp-content/uploads/2026/06/About-Uganda-Family-Tours.mp4'
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
 // const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
