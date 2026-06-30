@@ -13,10 +13,6 @@ import { MotionReveal } from '../components/MotionReveal'
 import { FooterImageBand } from '../components/FooterImageBand'
 import { getPublishedTourPackages } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
-import heroVideoDesktop from '../assets/videos/Uganda Family tours banner.mp4'
-import heroVideoMobile from '../assets/videos/Uganda Family tours banner mobile.mp4'
-import aboutVideo from '../assets/videos/About Uganda Family Tours.mp4'
-import aboutVideoPoster from '../assets/videos/about-placeholder.png'
 import heroOnloadImage from '../assets/on load.png'
 // import heroImage from '../assets/gorilla-7708328_1920.jpg'
 // import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
@@ -34,6 +30,9 @@ type HomePageProps = {
 }
 
 const FEATURED_TOURS_LIMIT = 6
+const heroVideoDesktop = 'http://yufat.org/wp-content/uploads/2026/06/Uganda-Family-tours-banner.mp4'
+const heroVideoMobile = 'http://yufat.org/wp-content/uploads/2026/06/Uganda-Family-tours-banner-mobile.mp4'
+const aboutVideo = 'http://yufat.org/wp-content/uploads/2026/06/About-Uganda-Family-Tours.mp4'
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
 // const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
@@ -225,7 +224,7 @@ export function HomePage({ onBook }: HomePageProps) {
                 >
                   <img
                     className="block h-full min-h-[24rem] w-full rounded-[inherit] object-cover transition duration-700 group-hover:scale-[1.035] lg:min-h-full"
-                    src={aboutVideoPoster}
+                    src={storyThumbnail}
                     alt=""
                     aria-hidden="true"
                     loading="lazy"
@@ -387,7 +386,7 @@ export function HomePage({ onBook }: HomePageProps) {
                 loop
                 playsInline
                 preload="auto"
-                poster={aboutVideoPoster}
+                poster={storyThumbnail}
                 onClick={(event) => {
                   const video = event.currentTarget
                   if (video.paused) {
