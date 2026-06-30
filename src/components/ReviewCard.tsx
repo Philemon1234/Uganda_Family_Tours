@@ -26,7 +26,7 @@ export function ReviewStars({ rating, label }: { rating: number; label?: string 
 export function ReviewCard({ review, onOpen }: ReviewCardProps) {
   return (
     <article
-      className="group flex h-full min-h-[19rem] cursor-pointer flex-col rounded-card border border-black bg-white p-5 text-left text-ink shadow-[0_16px_38px_rgba(17,24,39,0.08)] transition duration-200 hover:-translate-y-1 hover:shadow-[0_22px_48px_rgba(17,24,39,0.12)]"
+      className="group flex h-full min-h-[19rem] cursor-pointer flex-col rounded-card border border-black bg-white p-5 text-left text-ink shadow-none transition duration-200 hover:-translate-y-1 hover:shadow-none"
       onClick={() => onOpen(review)}
     >
       <div className="flex items-start gap-3">

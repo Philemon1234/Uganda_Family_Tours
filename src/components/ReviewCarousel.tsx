@@ -194,7 +194,7 @@ export function ReviewCarousel() {
   return (
     <>
       <section className="relative overflow-hidden bg-white py-16 md:py-20" aria-labelledby="tripadvisor-reviews-title">
-        <div className="container-custom">
+        <div className="container-custom bg-white">
           <div className="text-center">
             <h2 id="tripadvisor-reviews-title" className="text-2xl font-black leading-tight text-ink md:text-4xl">
               What our customers say
@@ -230,7 +230,7 @@ export function ReviewCarousel() {
           </a>
         </div>
 
-        <div className="relative mt-5 md:mt-7">
+        <div className="relative mt-5 bg-white md:mt-7">
           <button
             type="button"
             className="absolute left-1 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-white text-xl text-[#008f5a] shadow-[0_14px_34px_rgba(17,24,39,0.14)] transition hover:bg-[#008f5a] hover:text-white md:left-0 md:h-12 md:w-12 md:-translate-x-1/2"
@@ -240,9 +240,9 @@ export function ReviewCarousel() {
             <FiChevronLeft aria-hidden="true" />
           </button>
 
-          <div className="overflow-hidden bg-transparent px-0.5 py-3">
+          <div className="overflow-hidden bg-white px-0.5 py-0">
             <div
-              className={`flex ${isTransitioning ? 'transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]' : ''}`}
+              className={`flex bg-white ${isTransitioning ? 'transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]' : ''}`}
               style={{
                 transform: `translateX(-${carouselIndex * (100 / slidesPerView)}%)`,
               }}
@@ -251,7 +251,7 @@ export function ReviewCarousel() {
               {slides.map((review, slideIndex) => (
                 <div
                   key={`${review.id}-${slideIndex}`}
-                  className="shrink-0 px-2 md:px-3"
+                  className="shrink-0 bg-white px-2 md:px-3"
                   style={{ flexBasis: `${100 / slidesPerView}%` }}
                 >
                   <ReviewCard review={review} onOpen={openReview} />
@@ -270,7 +270,7 @@ export function ReviewCarousel() {
           </button>
         </div>
 
-        <div className="mt-4 flex items-center justify-center gap-2" aria-label="TripAdvisor review carousel slides">
+        <div className="mt-4 flex items-center justify-center gap-2 bg-white" aria-label="TripAdvisor review carousel slides">
           {reviews.map((_, index) => (
             <button
               key={index}
