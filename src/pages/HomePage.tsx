@@ -16,9 +16,8 @@ import { packageToTour } from '../utils/tourPackageMapper'
 import heroVideoDesktop from '../assets/videos/Uganda Family tours banner.mp4'
 import heroVideoMobile from '../assets/videos/Uganda Family tours banner mobile.mp4'
 import aboutVideo from '../assets/videos/About Uganda Family Tours.mp4'
-import heroVideoPoster from '../assets/videos/banner-placeholder.png'
-import heroVideoMobilePoster from '../assets/videos/banner-mobile-placeholder.png'
 import aboutVideoPoster from '../assets/videos/about-placeholder.png'
+import heroOnloadImage from '../assets/on load.png'
 // import heroImage from '../assets/gorilla-7708328_1920.jpg'
 // import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
 // import elephantImage from '../assets/elephant-4736008_1280.jpg'
@@ -120,10 +119,9 @@ export function HomePage({ onBook }: HomePageProps) {
             isHeroVideoReady ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <source srcSet={heroVideoMobilePoster} media="(max-width: 767px)" />
           <img
             className="h-full w-full object-cover"
-            src={heroVideoPoster}
+            src={heroOnloadImage}
             alt=""
             aria-hidden="true"
             loading="eager"
@@ -138,7 +136,7 @@ export function HomePage({ onBook }: HomePageProps) {
           muted
           playsInline
           preload="auto"
-          poster={heroVideoPoster}
+          poster={heroOnloadImage}
           aria-hidden="true"
           onLoadedData={() => setIsHeroVideoReady(true)}
         >
