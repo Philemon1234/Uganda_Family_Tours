@@ -157,7 +157,9 @@ img {
 
 .clamp-2,
 .clamp-3,
-.clamp-4 {
+.clamp-4,
+.clamp-5,
+.clamp-6 {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
@@ -173,6 +175,14 @@ img {
 
 .clamp-4 {
   -webkit-line-clamp: 4;
+}
+
+.clamp-5 {
+  -webkit-line-clamp: 5;
+}
+
+.clamp-6 {
+  -webkit-line-clamp: 6;
 }
 
 @utility container-custom {
