@@ -240,7 +240,7 @@ export function ReviewCarousel() {
             <FiChevronLeft aria-hidden="true" />
           </button>
 
-          <div className="overflow-hidden bg-white px-0.5 py-0">
+          <div className="overflow-hidden bg-white px-0.5 py-4">
             <div
               className={`flex bg-white ${isTransitioning ? 'transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]' : ''}`}
               style={{
