@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Trans, useTranslation } from 'react-i18next'
 import { FaHandHoldingHeart, FaPeopleGroup, FaShieldHeart, FaSliders } from 'react-icons/fa6'
@@ -30,9 +30,10 @@ type HomePageProps = {
 }
 
 const FEATURED_TOURS_LIMIT = 6
-const heroVideoDesktop = 'http://yufat.org/wp-content/uploads/2026/06/Uganda-Family-tours-banner.mp4'
-const heroVideoMobile = 'http://yufat.org/wp-content/uploads/2026/06/Uganda-Family-tours-banner-mobile.mp4'
-const aboutVideo = 'http://yufat.org/wp-content/uploads/2026/06/About-Uganda-Family-Tours.mp4'
+const mediaOrigin = 'https://yufat.org'
+const heroVideoDesktop = `${mediaOrigin}/wp-content/uploads/2026/06/Uganda-Family-tours-banner.mp4`
+const heroVideoMobile = `${mediaOrigin}/wp-content/uploads/2026/06/Uganda-Family-tours-banner-mobile.mp4`
+const aboutVideo = `${mediaOrigin}/wp-content/uploads/2026/06/About-Uganda-Family-Tours.mp4`
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
 // const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
@@ -44,6 +45,7 @@ export function HomePage({ onBook }: HomePageProps) {
   const [featuredToursError, setFeaturedToursError] = useState('')
   const [isHeroVideoReady, setIsHeroVideoReady] = useState(false)
   const [isSignatureVideoOpen, setIsSignatureVideoOpen] = useState(false)
+  const signatureVideoRef = useRef<HTMLVideoElement | null>(null)
   const signatureExperiences = signatureExperienceIcons.map((Icon, index) => ({
     Icon,
     title: t(`home.signature.items.${index}.title`),
@@ -85,13 +87,51 @@ export function HomePage({ onBook }: HomePageProps) {
   }, [])
 
   useEffect(() => {
+    const headLinks: HTMLLinkElement[] = []
+
+    function addHeadLink(rel: string, href: string, attributes: Record<string, string> = {}) {
+      const selector = `link[rel="${rel}"][href="${href}"]`
+      const existingLink = document.head.querySelector(selector)
+
+      if (existingLink) return
+
+      const link = document.createElement('link')
+      link.rel = rel
+      link.href = href
+      Object.entries(attributes).forEach(([name, value]) => link.setAttribute(name, value))
+      document.head.appendChild(link)
+      headLinks.push(link)
+    }
+
+    addHeadLink('dns-prefetch', '//yufat.org')
+    addHeadLink('preconnect', mediaOrigin, { crossorigin: '' })
+    addHeadLink('preload', heroVideoMobile, {
+      as: 'video',
+      type: 'video/mp4',
+      media: '(max-width: 767px)',
+    })
+    addHeadLink('preload', heroVideoDesktop, {
+      as: 'video',
+      type: 'video/mp4',
+      media: '(min-width: 768px)',
+    })
+
+    return () => {
+      headLinks.forEach((link) => link.remove())
+    }
+  }, [])
+
+  useEffect(() => {
     if (!isSignatureVideoOpen) return
 
     const previousBodyOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setIsSignatureVideoOpen(false)
+      if (event.key === 'Escape') {
+        setIsSignatureVideoOpen(false)
+        signatureVideoRef.current?.pause()
+      }
     }
 
     window.addEventListener('keydown', handleKeyDown)
@@ -220,7 +260,16 @@ export function HomePage({ onBook }: HomePageProps) {
                   className="group relative block h-full w-full overflow-hidden !rounded-[1.75rem] bg-transparent p-0 text-left"
                   type="button"
                   aria-label={t('home.signature.videoAria')}
-                  onClick={() => setIsSignatureVideoOpen(true)}
+                  onClick={() => {
+                    setIsSignatureVideoOpen(true)
+                    const video = signatureVideoRef.current
+
+                    if (video) {
+                      void video.play().catch(() => {
+                        video.controls = true
+                      })
+                    }
+                  }}
                 >
                   <img
                     className="block h-full min-h-[24rem] w-full rounded-[inherit] object-cover transition duration-700 group-hover:scale-[1.035] lg:min-h-full"
@@ -362,47 +411,57 @@ export function HomePage({ onBook }: HomePageProps) {
 
       <FooterImageBand src={homeFooterImage} alt={t('home.finalCta.title')} />
 
-      {isSignatureVideoOpen && (
-        <div
-          className="fixed inset-0 z-[110] grid place-items-center bg-black/55 px-3 py-6 backdrop-blur-md sm:px-6"
-          role="dialog"
-          aria-modal="true"
-          aria-label={t('home.signature.videoAria')}
-          onMouseDown={() => setIsSignatureVideoOpen(false)}
-        >
-          <div className="relative w-full max-w-6xl" onMouseDown={(event) => event.stopPropagation()}>
-            <button
-              className="absolute -top-14 right-0 grid h-11 w-11 place-items-center rounded-full bg-white text-xl text-ink shadow-[0_14px_35px_rgba(0,0,0,0.22)] transition hover:bg-primary hover:text-white"
-              type="button"
-              aria-label={t('common.close')}
-              onClick={() => setIsSignatureVideoOpen(false)}
+      <div
+        className={`fixed inset-0 z-[110] grid place-items-center bg-black/55 px-3 py-6 backdrop-blur-md transition-opacity duration-200 sm:px-6 ${
+          isSignatureVideoOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!isSignatureVideoOpen}
+        aria-label={t('home.signature.videoAria')}
+        onMouseDown={() => {
+          setIsSignatureVideoOpen(false)
+          signatureVideoRef.current?.pause()
+        }}
+      >
+        <div className="relative w-full max-w-6xl" onMouseDown={(event) => event.stopPropagation()}>
+          <button
+            className="absolute -top-14 right-0 grid h-11 w-11 place-items-center rounded-full bg-white text-xl text-ink shadow-[0_14px_35px_rgba(0,0,0,0.22)] transition hover:bg-primary hover:text-white"
+            type="button"
+            aria-label={t('common.close')}
+            tabIndex={isSignatureVideoOpen ? 0 : -1}
+            onClick={() => {
+              setIsSignatureVideoOpen(false)
+              signatureVideoRef.current?.pause()
+            }}
+          >
+            <FiX />
+          </button>
+          <div className="overflow-hidden rounded-[1.25rem] bg-black">
+            <video
+              ref={signatureVideoRef}
+              className="aspect-video max-h-[82vh] w-full bg-black object-contain"
+              loop
+              playsInline
+              preload="auto"
+              poster={storyThumbnail}
+              controls={isSignatureVideoOpen}
+              tabIndex={isSignatureVideoOpen ? 0 : -1}
+              onClick={(event) => {
+                const video = event.currentTarget
+                if (video.paused) {
+                  void video.play()
+                } else {
+                  video.pause()
+                }
+              }}
             >
-              <FiX />
-            </button>
-            <div className="overflow-hidden rounded-[1.25rem] bg-black">
-              <video
-                className="aspect-video max-h-[82vh] w-full bg-black object-contain"
-                autoPlay
-                loop
-                playsInline
-                preload="auto"
-                poster={storyThumbnail}
-                onClick={(event) => {
-                  const video = event.currentTarget
-                  if (video.paused) {
-                    void video.play()
-                  } else {
-                    video.pause()
-                  }
-                }}
-              >
-                <source src={aboutVideo} type="video/mp4" />
-                {t('home.signature.videoFallback')}
-              </video>
-            </div>
+              <source src={aboutVideo} type="video/mp4" />
+              {t('home.signature.videoFallback')}
+            </video>
           </div>
         </div>
-      )}
+      </div>
     </>
   )
 }
