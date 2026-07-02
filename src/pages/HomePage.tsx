@@ -11,7 +11,7 @@ import { GalleryCarousel } from '../components/GalleryCarousel'
 import { ReviewCarousel } from '../components/ReviewCarousel'
 import { MotionReveal } from '../components/MotionReveal'
 import { FooterImageBand } from '../components/FooterImageBand'
-import { getPublishedTourPackages } from '../services/publicTourService'
+import { getPublishedTourPackages, subscribeToTourPackageChanges } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
 import heroOnloadImage from '../assets/on load.png'
 // import heroImage from '../assets/gorilla-7708328_1920.jpg'
@@ -80,9 +80,13 @@ export function HomePage({ onBook }: HomePageProps) {
     }
 
     void loadFeaturedTours()
+    const unsubscribe = subscribeToTourPackageChanges(() => {
+      void loadFeaturedTours()
+    })
 
     return () => {
       isMounted = false
+      unsubscribe()
     }
   }, [])
 

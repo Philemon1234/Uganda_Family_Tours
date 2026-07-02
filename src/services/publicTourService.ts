@@ -11,7 +11,7 @@ import type {
 } from '../types/tourPackage'
 
 const TOUR_PACKAGE_SELECT =
-  'id,title,slug,category,duration_days,price_from_usd,short_description,overview,main_image_url,hero_image_url,map_style,status,created_at,updated_at'
+  'id,title,slug,category,duration_days,price_from_usd,short_description,overview,main_image_url,hero_image_url,map_style,status,display_order,created_at,updated_at'
 const TOUR_PACKAGE_SELECT_FALLBACK =
   'id,title,slug,category,duration_days,price_from_usd,short_description,overview,main_image_url,hero_image_url,status,created_at,updated_at'
 
@@ -36,6 +36,10 @@ type PublishedTourPackageOptions = {
   limit?: number
 }
 
+function isMissingOptionalTourPackageColumn(message: string) {
+  return message.includes('map_style') || message.includes('display_order')
+}
+
 export async function getPublishedTourPackages(
   options: PublishedTourPackageOptions = {},
 ): Promise<TourPackage[]> {
@@ -43,6 +47,7 @@ export async function getPublishedTourPackages(
     .from('tour_packages')
     .select(TOUR_PACKAGE_SELECT)
     .eq('status', 'published')
+    .order('display_order', { ascending: true })
     .order('created_at', { ascending: false })
 
   if (options.limit) {
@@ -52,7 +57,7 @@ export async function getPublishedTourPackages(
   const { data, error } = await query
 
   if (error) {
-    if (error.message.includes('map_style')) {
+    if (isMissingOptionalTourPackageColumn(error.message)) {
       let fallbackQuery = getSupabaseClient()
         .from('tour_packages')
         .select(TOUR_PACKAGE_SELECT_FALLBACK)
@@ -69,13 +74,41 @@ export async function getPublishedTourPackages(
         throw new Error(fallbackResult.error.message)
       }
 
-      return withDefaultMapStyle((fallbackResult.data ?? []) as Omit<TourPackage, 'map_style'>[])
+      return withDefaultMapStyle(
+        ((fallbackResult.data ?? []) as Omit<TourPackage, 'map_style' | 'display_order'>[]).map(
+          (tourPackage, index) => ({
+            ...tourPackage,
+            display_order: index + 1,
+          }),
+        ),
+      )
     }
 
     throw new Error(error.message)
   }
 
   return data ?? []
+}
+
+export function subscribeToTourPackageChanges(onChange: () => void) {
+  const client = supabase
+
+  if (!client) {
+    return () => {}
+  }
+
+  const channel = client
+    .channel(`public-tour-packages-${crypto.randomUUID()}`)
+    .on(
+      'postgres_changes',
+      { event: '*', schema: 'public', table: 'tour_packages' },
+      onChange,
+    )
+    .subscribe()
+
+  return () => {
+    void client.removeChannel(channel)
+  }
 }
 
 export async function getPublishedTourPackageBySlug(
@@ -89,7 +122,7 @@ export async function getPublishedTourPackageBySlug(
     .maybeSingle()
 
   if (error) {
-    if (error.message.includes('map_style')) {
+    if (isMissingOptionalTourPackageColumn(error.message)) {
       const fallbackResult = await getSupabaseClient()
         .from('tour_packages')
         .select(TOUR_PACKAGE_SELECT_FALLBACK)
@@ -102,7 +135,10 @@ export async function getPublishedTourPackageBySlug(
       }
 
       return fallbackResult.data
-        ? withDefaultMapStyle([fallbackResult.data as Omit<TourPackage, 'map_style'>])[0]
+        ? withDefaultMapStyle([{
+            ...(fallbackResult.data as Omit<TourPackage, 'map_style' | 'display_order'>),
+            display_order: 0,
+          }])[0]
         : null
     }
 

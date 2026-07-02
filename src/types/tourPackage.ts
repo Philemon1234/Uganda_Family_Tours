@@ -14,6 +14,7 @@ export type TourPackage = {
   hero_image_url: string | null
   map_style: TourMapStyle
   status: PackageStatus
+  display_order: number
   created_at: string
   updated_at: string
 }

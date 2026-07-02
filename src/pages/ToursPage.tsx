@@ -6,7 +6,7 @@ import { TourFilters, type DurationFilter, type RegionFilter } from '../componen
 import { SectionHeader } from '../components/SectionHeader'
 import { SafariLoaderOverlay } from '../components/SafariTrailLoader'
 import { FooterImageBand } from '../components/FooterImageBand'
-import { getPublishedTourPackages } from '../services/publicTourService'
+import { getPublishedTourPackages, subscribeToTourPackageChanges } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
 import toursFooterImage from '../assets/footer/UFT Website Work-01.jpg'
 
@@ -131,9 +131,13 @@ export function ToursPage() {
     }
 
     void loadTours()
+    const unsubscribe = subscribeToTourPackageChanges(() => {
+      void loadTours()
+    })
 
     return () => {
       isMounted = false
+      unsubscribe()
     }
   }, [])
 
