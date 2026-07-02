@@ -61,8 +61,8 @@ export function getTourContentKey(slug: string, fallbackText = '') {
   return exactKey
 }
 
-export function getLocalizedTourTitle(t: TFunction, tour: Pick<Tour, 'slug' | 'title'>) {
-  return t(`tourContent.${getTourContentKey(tour.slug, tour.title)}.title`, { defaultValue: tour.title })
+export function getLocalizedTourTitle(_t: TFunction, tour: Pick<Tour, 'slug' | 'title'>) {
+  return tour.title
 }
 
 export function getLocalizedTourShortDescription(t: TFunction, tour: Pick<Tour, 'slug' | 'shortDescription'>) {
@@ -76,7 +76,7 @@ export function getLocalizedPackage(t: TFunction, tourPackage: TourPackage): Tou
 
   return {
     ...tourPackage,
-    title: t(`tourContent.${contentKey}.title`, { defaultValue: tourPackage.title }),
+    title: tourPackage.title,
     category: t(`tourContent.${contentKey}.category`, { defaultValue: tourPackage.category }),
     short_description: t(`tourContent.${contentKey}.shortDescription`, {
       defaultValue: tourPackage.short_description,
