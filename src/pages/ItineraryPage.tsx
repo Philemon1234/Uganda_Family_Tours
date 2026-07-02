@@ -241,7 +241,7 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
       <section className="hero-section min-h-[460px] md:min-h-[520px]" style={{ backgroundImage: `url(${heroImage})` }}>
         <div className="absolute inset-0 bg-dark/60" />
         <div className="container-custom relative z-10 flex min-h-[460px] flex-col justify-end pb-20 pt-32 text-white md:min-h-[520px] md:pb-24 md:pt-40">
-          <h1 className="text-safe max-w-5xl text-4xl font-semibold leading-[1.08] md:text-5xl lg:text-6xl">{t('tourDetails.bucketList')}: {tourTitle}</h1>
+          <h1 className="text-safe max-w-5xl text-4xl font-semibold leading-[1.08] md:text-5xl lg:text-6xl">{tourTitle}</h1>
           <div className="mt-5 flex min-w-0 flex-wrap items-center gap-2 text-xs font-semibold text-white/78 md:text-sm">
             <Link to="/" className="transition hover:text-primary">{t('tourDetails.breadcrumbHome')}</Link>
             <FiChevronRight className="text-white/45" />
