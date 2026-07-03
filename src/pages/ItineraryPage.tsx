@@ -17,12 +17,6 @@ import {
   getLocalizedPackage,
   getTourContentKey,
 } from '../utils/localizedTourContent'
-import hotelExterior from '../assets/Hotels/hotel.jpg'
-import kabiraPool from '../assets/Hotels/Kabira_Country_Club-Kampala-Pool-2-477529.jpg'
-import kampalaSerena from '../assets/Hotels/kampala-serena-hotel.jpg'
-import proteaHotel from '../assets/Hotels/Protea hotel.webp'
-import serenaHotel from '../assets/Hotels/serena hotel.jpg'
-import lodgeRoom from '../assets/Hotels/v3Ppqx8Q6OKs.jpg'
 
 type ItineraryPageProps = {
   slug: string
@@ -30,7 +24,6 @@ type ItineraryPageProps = {
 }
 
 const fallbackTour = tours[0]
-const fallbackDayImages = [hotelExterior, kabiraPool, kampalaSerena, proteaHotel, serenaHotel, lodgeRoom]
 
 export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
   const { t } = useTranslation()
@@ -359,7 +352,6 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                     <ItineraryDayArticle
                       key={day.id}
                       day={day}
-                      index={index}
                       tourTitle={tourTitle}
                       markerRef={(element) => {
                         dayMarkerRefs.current[index] = element
@@ -473,19 +465,13 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
 
 type ItineraryDayArticleProps = {
   day: TourItineraryDayWithDetails
-  index: number
   tourTitle: string
   markerRef: (element: HTMLDivElement | null) => void
 }
 
-function ItineraryDayArticle({ day, index, tourTitle, markerRef }: ItineraryDayArticleProps) {
+function ItineraryDayArticle({ day, tourTitle, markerRef }: ItineraryDayArticleProps) {
   const { t } = useTranslation()
   const dayImages = day.images.slice(0, 2).map((image) => image.image_url)
-  const fallbackImages = [
-    fallbackDayImages[index % fallbackDayImages.length],
-    fallbackDayImages[(index + 1) % fallbackDayImages.length],
-  ]
-  const sliderImages = dayImages.length > 0 ? dayImages : fallbackImages
 
   return (
     <article className="relative grid min-w-0 max-w-full grid-cols-[48px_minmax(0,1fr)] gap-4 sm:grid-cols-[56px_minmax(0,1fr)] sm:gap-5">
@@ -515,7 +501,13 @@ function ItineraryDayArticle({ day, index, tourTitle, markerRef }: ItineraryDayA
         {day.accommodation_name ? (
           <p className="text-safe mt-4 text-sm leading-6 text-muted">{t('tourDetails.accommodation')}: {day.accommodation_name}</p>
         ) : null}
-        {sliderImages.length > 0 ? <DayImageSlider images={sliderImages} title={t('tourDetails.dayImageTitle', { title: tourTitle, number: day.day_number })} /> : null}
+        {dayImages.length > 0 ? (
+          <DayImageSlider images={dayImages} title={t('tourDetails.dayImageTitle', { title: tourTitle, number: day.day_number })} />
+        ) : (
+          <div className="mt-5 rounded-[1.2rem] border border-dashed border-border bg-white px-5 py-4 text-sm font-medium text-muted">
+            {t('tourDetails.noDayImages', { defaultValue: 'No images added for this itinerary day yet.' })}
+          </div>
+        )}
       </div>
     </article>
   )
