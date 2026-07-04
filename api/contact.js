@@ -1,4 +1,4 @@
-const RECIPIENT_EMAIL = 'ntivuguruzwaphilemon0@gmail.com'
+const RECIPIENT_EMAILS = ['ntivuguruzwaphilemon0@gmail.com', 'Safaris@ugandafamilytours.com']
 const DEFAULT_FROM_EMAIL = 'Uganda Family Tours <onboarding@resend.dev>'
 
 function sendJson(response, statusCode, payload) {
@@ -209,7 +209,7 @@ export default async function handler(request, response) {
         },
         body: JSON.stringify({
           from: process.env.RESEND_FROM_EMAIL || DEFAULT_FROM_EMAIL,
-          to: [RECIPIENT_EMAIL],
+          to: RECIPIENT_EMAILS,
           reply_to: email,
           subject: 'New Inquiry from Uganda Family Tours Website',
           html,
@@ -366,7 +366,7 @@ export default async function handler(request, response) {
       },
       body: JSON.stringify({
         from: process.env.RESEND_FROM_EMAIL || DEFAULT_FROM_EMAIL,
-        to: [RECIPIENT_EMAIL],
+        to: RECIPIENT_EMAILS,
         reply_to: email,
         subject,
         html,
