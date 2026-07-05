@@ -1,6 +1,7 @@
 import heroOnloadImage from '../assets/on load.png'
 import storyThumbnail from '../assets/Thumbnail.png'
 import journeyImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
+import logoImage from '../assets/UFT-Logo-PNG.png'
 import homeIconOne from '../assets/UFT-Homepage-icons-01.png'
 import homeIconTwo from '../assets/UFT-Homepage-icons-02.png'
 import homeIconThree from '../assets/UFT-Homepage-icons-03.png'
@@ -10,10 +11,24 @@ import galleryTwo from '../assets/gorilla-7708328_1280.jpg'
 import footerBandImage from '../assets/footer/UFT Website Work-03.jpg'
 import type { HomeCustomizationContent } from '../types/homeCustomization'
 
+const localAssetUrls: Record<string, string> = {
+  '/src/assets/UFT-Logo-PNG.png': logoImage,
+  '/src/assets/on load.png': heroOnloadImage,
+  '/src/assets/Thumbnail.png': storyThumbnail,
+  '/src/assets/Venture-Uganda-Safari-Uganda-01.jpg': journeyImage,
+  '/src/assets/UFT-Homepage-icons-01.png': homeIconOne,
+  '/src/assets/UFT-Homepage-icons-02.png': homeIconTwo,
+  '/src/assets/UFT-Homepage-icons-03.png': homeIconThree,
+  '/src/assets/UFT-Favicon.png': homeIconFour,
+  '/src/assets/cover_1669-Tree-Climbing-Lions.jpg': galleryOne,
+  '/src/assets/gorilla-7708328_1280.jpg': galleryTwo,
+  '/src/assets/footer/UFT Website Work-03.jpg': footerBandImage,
+}
+
 export const defaultHomeCustomization: HomeCustomizationContent = {
   nav: {
     logo: {
-      src: '/src/assets/UFT-Logo-PNG.png',
+      src: logoImage,
       alt: 'Uganda Family Tours',
     },
     links: [
@@ -122,8 +137,25 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value && typeof value === 'object' && !Array.isArray(value))
 }
 
+function resolveLocalAssetReference(value: string) {
+  return localAssetUrls[value] ?? value
+}
+
+function normalizeLocalAssetReferences<T>(value: T): T {
+  if (typeof value === 'string') return resolveLocalAssetReference(value) as T
+  if (Array.isArray(value)) return value.map((item) => normalizeLocalAssetReferences(item)) as T
+  if (isRecord(value)) {
+    return Object.fromEntries(
+      Object.entries(value).map(([key, entryValue]) => [key, normalizeLocalAssetReferences(entryValue)]),
+    ) as T
+  }
+
+  return value
+}
+
 export function mergeHomeCustomization(content?: Partial<HomeCustomizationContent> | null): HomeCustomizationContent {
   if (!content) return defaultHomeCustomization
+  const normalizedContent = normalizeLocalAssetReferences(content)
 
   const merge = (base: unknown, override: unknown): unknown => {
     if (Array.isArray(base)) return Array.isArray(override) ? override : base
@@ -135,16 +167,8 @@ export function mergeHomeCustomization(content?: Partial<HomeCustomizationConten
       })
       return next
     }
-    if (
-      typeof base === 'string' &&
-      typeof override === 'string' &&
-      override.startsWith('/src/assets/')
-    ) {
-      return base
-    }
-
     return override === undefined || override === null ? base : override
   }
 
-  return merge(defaultHomeCustomization, content) as HomeCustomizationContent
+  return merge(defaultHomeCustomization, normalizedContent) as HomeCustomizationContent
 }
