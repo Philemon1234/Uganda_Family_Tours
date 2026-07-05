@@ -22,7 +22,8 @@ export type Tour = {
   title: string
   slug: string
   price: string
-  priceUSD: number
+  priceUSD: number | null
+  accommodationTier?: 'standard' | 'budget' | 'mid_range' | 'luxury'
   duration: string
   destination: string
   tripLevel: string

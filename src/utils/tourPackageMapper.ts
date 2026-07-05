@@ -3,7 +3,9 @@ import type { TourPackage } from '../types/tourPackage'
 
 const fallbackTour = allTours[0]
 
-function formatUsd(value: number) {
+function formatUsd(value: number | null) {
+  if (value === null) return 'Contact us'
+
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -20,8 +22,9 @@ export function packageToTour(tourPackage: TourPackage, index: number): Tour {
     packageId: tourPackage.id,
     title: tourPackage.title,
     slug: tourPackage.slug,
-    price: `From ${formatUsd(tourPackage.price_from_usd)}`,
-    priceUSD: Number(tourPackage.price_from_usd),
+    price: tourPackage.price_from_usd === null ? 'Contact us' : `From ${formatUsd(tourPackage.price_from_usd)}`,
+    priceUSD: tourPackage.price_from_usd,
+    accommodationTier: tourPackage.accommodation_tier ?? 'standard',
     duration: `${tourPackage.duration_days} Days`,
     destination: tourPackage.category,
     tripLevel: fallbackTour.tripLevel,

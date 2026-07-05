@@ -1,5 +1,6 @@
 export type PackageStatus = 'draft' | 'published' | 'archived'
 export type TourMapStyle = 'light' | 'green' | 'warm' | 'dark'
+export type AccommodationTier = 'standard' | 'budget' | 'mid_range' | 'luxury'
 
 export type TourPackage = {
   id: string
@@ -7,7 +8,8 @@ export type TourPackage = {
   slug: string
   category: string
   duration_days: number
-  price_from_usd: number
+  price_from_usd: number | null
+  accommodation_tier: AccommodationTier
   short_description: string
   overview: string
   main_image_url: string | null

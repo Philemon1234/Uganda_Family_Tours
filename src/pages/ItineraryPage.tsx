@@ -376,8 +376,10 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
             <div className="card min-w-0 border-border/80 p-7 text-center shadow-[0_22px_55px_rgba(17,24,39,0.08)] md:p-8">
               <p className="text-safe text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted">{t('tourDetails.price')}</p>
               <h2 className="mt-3 flex max-w-full flex-wrap items-baseline justify-center gap-x-2 gap-y-1 text-2xl font-semibold text-primary">
-                <span>{t('common.from')}</span>
-                <span className="currency-value max-w-full overflow-hidden text-ellipsis">{formatCurrency(tourPackage.price_from_usd)}</span>
+                {tourPackage.price_from_usd === null ? null : <span>{t('common.from')}</span>}
+                <span className="currency-value max-w-full overflow-hidden text-ellipsis">
+                  {tourPackage.price_from_usd === null ? 'Contact us' : formatCurrency(tourPackage.price_from_usd)}
+                </span>
               </h2>
               <p className="text-safe mt-2 text-sm leading-6 text-muted">{t('tourDetails.quote')}</p>
               <div className="mx-auto mt-5 inline-flex items-center gap-2 rounded-full bg-green-50 px-4 py-2 text-sm font-semibold text-green-700">
@@ -606,12 +608,15 @@ function packageDetailsToTour(details: TourPackageDetails): Tour {
     id: 1,
     title: tourPackage.title,
     slug: tourPackage.slug,
-    price: `${new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      maximumFractionDigits: 0,
-    }).format(tourPackage.price_from_usd)}`,
+    price: tourPackage.price_from_usd === null
+      ? 'Contact us'
+      : `${new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0,
+      }).format(tourPackage.price_from_usd)}`,
     priceUSD: tourPackage.price_from_usd,
+    accommodationTier: tourPackage.accommodation_tier ?? 'standard',
     duration: String(tourPackage.duration_days),
     destination: tourPackage.category,
     tripLevel: fallbackTour.tripLevel,

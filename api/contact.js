@@ -1,4 +1,4 @@
-const RECIPIENT_EMAIL = 'ntivuguruzwaphilemon0@gmail.com'
+const DEFAULT_RECIPIENT_EMAILS = ['ntivuguruzwaphilemon0@gmail.com']
 const DEFAULT_FROM_EMAIL = 'Uganda Family Tours <onboarding@resend.dev>'
 
 function sendJson(response, statusCode, payload) {
@@ -43,6 +43,15 @@ function detail(label, value) {
 
 function getEnv(name) {
   return process.env[name]
+}
+
+function getRecipientEmails() {
+  const configured = getEnv('CONTACT_RECIPIENT_EMAILS') || getEnv('RECIPIENT_EMAIL') || getEnv('RECIPIENT_EMAILS')
+  const recipients = configured
+    ? configured.split(',').map((email) => clean(email)).filter(Boolean)
+    : DEFAULT_RECIPIENT_EMAILS
+
+  return recipients.length > 0 ? recipients : DEFAULT_RECIPIENT_EMAILS
 }
 
 function toNullable(value) {
@@ -151,6 +160,8 @@ export default async function handler(request, response) {
       ['Submitted', submittedAt],
     ]
 
+    let saveWarning = null
+
     try {
       await saveFormSubmission({
         type: 'inquiry',
@@ -162,9 +173,8 @@ export default async function handler(request, response) {
         raw_payload: body,
       })
     } catch (saveError) {
-      return sendJson(response, 502, {
-        message: saveError instanceof Error ? saveError.message : 'The inquiry could not be saved right now.',
-      })
+      saveWarning = saveError instanceof Error ? saveError.message : 'The inquiry could not be saved right now.'
+      console.warn('Inquiry email will still be sent, but saving the submission failed:', saveWarning)
     }
 
     const text = [
@@ -209,7 +219,7 @@ export default async function handler(request, response) {
         },
         body: JSON.stringify({
           from: process.env.RESEND_FROM_EMAIL || DEFAULT_FROM_EMAIL,
-          to: [RECIPIENT_EMAIL],
+          to: getRecipientEmails(),
           reply_to: email,
           subject: 'New Inquiry from Uganda Family Tours Website',
           html,
@@ -229,7 +239,7 @@ export default async function handler(request, response) {
       })
     }
 
-    return sendJson(response, 200, { message: 'Inquiry sent successfully.' })
+    return sendJson(response, 200, { message: 'Inquiry sent successfully.', saved: !saveWarning })
   }
 
   const selectedTour = clean(body?.selectedTour)
@@ -288,6 +298,8 @@ export default async function handler(request, response) {
     ['Submitted', submittedAt],
   ]
 
+  let saveWarning = null
+
   try {
     await saveFormSubmission({
       type: 'booking',
@@ -313,9 +325,8 @@ export default async function handler(request, response) {
       raw_payload: body,
     })
   } catch (saveError) {
-    return sendJson(response, 502, {
-      message: saveError instanceof Error ? saveError.message : 'The booking request could not be saved right now.',
-    })
+    saveWarning = saveError instanceof Error ? saveError.message : 'The booking request could not be saved right now.'
+    console.warn('Booking email will still be sent, but saving the submission failed:', saveWarning)
   }
 
   const text = [
@@ -366,7 +377,7 @@ export default async function handler(request, response) {
       },
       body: JSON.stringify({
         from: process.env.RESEND_FROM_EMAIL || DEFAULT_FROM_EMAIL,
-        to: [RECIPIENT_EMAIL],
+        to: getRecipientEmails(),
         reply_to: email,
         subject,
         html,
@@ -386,5 +397,5 @@ export default async function handler(request, response) {
     })
   }
 
-  return sendJson(response, 200, { message: 'Booking request sent successfully.' })
+  return sendJson(response, 200, { message: 'Booking request sent successfully.', saved: !saveWarning })
 }

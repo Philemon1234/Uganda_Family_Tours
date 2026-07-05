@@ -11,14 +11,17 @@ import type {
 } from '../types/tourPackage'
 
 const TOUR_PACKAGE_SELECT =
-  'id,title,slug,category,duration_days,price_from_usd,short_description,overview,main_image_url,hero_image_url,map_style,status,display_order,created_at,updated_at'
+  'id,title,slug,category,duration_days,price_from_usd,accommodation_tier,short_description,overview,main_image_url,hero_image_url,map_style,status,display_order,created_at,updated_at'
 const TOUR_PACKAGE_SELECT_FALLBACK =
   'id,title,slug,category,duration_days,price_from_usd,short_description,overview,main_image_url,hero_image_url,status,created_at,updated_at'
 
-function withDefaultMapStyle(packages: Omit<TourPackage, 'map_style'>[]): TourPackage[] {
+function withDefaultPackageFields(
+  packages: Array<Omit<TourPackage, 'map_style' | 'accommodation_tier'> & Partial<Pick<TourPackage, 'map_style' | 'accommodation_tier'>>>,
+): TourPackage[] {
   return packages.map((tourPackage) => ({
     ...tourPackage,
-    map_style: 'light',
+    accommodation_tier: tourPackage.accommodation_tier ?? 'standard',
+    map_style: tourPackage.map_style ?? 'light',
   }))
 }
 
@@ -37,7 +40,7 @@ type PublishedTourPackageOptions = {
 }
 
 function isMissingOptionalTourPackageColumn(message: string) {
-  return message.includes('map_style') || message.includes('display_order')
+  return message.includes('map_style') || message.includes('display_order') || message.includes('accommodation_tier')
 }
 
 export async function getPublishedTourPackages(
@@ -74,7 +77,7 @@ export async function getPublishedTourPackages(
         throw new Error(fallbackResult.error.message)
       }
 
-      return withDefaultMapStyle(
+      return withDefaultPackageFields(
         ((fallbackResult.data ?? []) as Omit<TourPackage, 'map_style' | 'display_order'>[]).map(
           (tourPackage, index) => ({
             ...tourPackage,
@@ -135,8 +138,8 @@ export async function getPublishedTourPackageBySlug(
       }
 
       return fallbackResult.data
-        ? withDefaultMapStyle([{
-            ...(fallbackResult.data as Omit<TourPackage, 'map_style' | 'display_order'>),
+        ? withDefaultPackageFields([{
+            ...(fallbackResult.data as Omit<TourPackage, 'map_style' | 'display_order' | 'accommodation_tier'>),
             display_order: 0,
           }])[0]
         : null

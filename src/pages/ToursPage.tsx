@@ -85,7 +85,7 @@ export function ToursPage() {
     const hasPriceFilter = priceRange.min !== defaultPriceBounds.min || priceRange.max !== defaultPriceBounds.max
 
     return tours.filter((tour) => {
-      const matchesPrice = !hasPriceFilter || (tour.priceUSD >= priceRange.min && tour.priceUSD <= priceRange.max)
+      const matchesPrice = !hasPriceFilter || (tour.priceUSD !== null && tour.priceUSD >= priceRange.min && tour.priceUSD <= priceRange.max)
 
       return matchesPrice && matchesDurationFilter(tour, durationFilter) && matchesRegionFilter(tour, regionFilter)
     })

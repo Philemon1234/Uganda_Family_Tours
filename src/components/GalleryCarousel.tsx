@@ -2,11 +2,15 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { galleryImages } from '../data/gallery'
+import type { EditableImage } from '../types/homeCustomization'
 
-export function GalleryCarousel() {
+export function GalleryCarousel({ images }: { images?: EditableImage[] }) {
   const { t } = useTranslation()
-  const slideCount = galleryImages.length
-  const slides = useMemo(() => [...galleryImages, ...galleryImages, ...galleryImages], [])
+  const baseImages = images && images.length > 0
+    ? images.map((image) => ({ src: image.src, alt: image.alt }))
+    : galleryImages.map((image) => ({ src: image.src, alt: t(image.altKey) }))
+  const slideCount = baseImages.length
+  const slides = useMemo(() => [...baseImages, ...baseImages, ...baseImages], [baseImages])
   const [index, setIndex] = useState(slideCount)
   const [isTransitioning, setIsTransitioning] = useState(true)
   const [isPaused, setIsPaused] = useState(false)
@@ -121,8 +125,8 @@ export function GalleryCarousel() {
           onTransitionEnd={handleTransitionEnd}
         >
           {slides.map((image, slideIndex) => (
-            <div key={`${image.altKey}-${slideIndex}`} className="shrink-0 basis-full bg-transparent px-0 md:basis-1/2 md:px-2.5 lg:basis-1/3">
-              <img className="h-80 w-full rounded-[1.75rem] object-cover pointer-events-none" src={image.src} alt={t(image.altKey)} draggable="false" />
+            <div key={`${image.alt}-${slideIndex}`} className="shrink-0 basis-full bg-transparent px-0 md:basis-1/2 md:px-2.5 lg:basis-1/3">
+              <img className="h-80 w-full rounded-[1.75rem] object-cover pointer-events-none" src={image.src} alt={image.alt} draggable="false" />
             </div>
           ))}
         </div>
@@ -134,7 +138,7 @@ export function GalleryCarousel() {
         <FiArrowRight />
       </button>
       <div className="mt-6 flex justify-center gap-2">
-        {galleryImages.map((_, dotIndex) => (
+        {baseImages.map((_, dotIndex) => (
           <button
             key={dotIndex}
             type="button"

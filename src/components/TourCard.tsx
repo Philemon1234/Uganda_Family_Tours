@@ -29,7 +29,7 @@ export function TourCard({ tour, revealDelay = 0 }: TourCardProps) {
           <span className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/35 to-transparent" />
         </div>
         <span className="tour-price-badge absolute left-4 top-[12.85rem] z-30 rounded-full bg-dark px-4 py-2.5 text-base font-black leading-none text-white shadow-[0_14px_30px_rgba(37,66,76,0.18)] sm:-left-4">
-          <span className="currency-value">{formatCardCurrency(tour.priceUSD)}</span>
+          <span className="currency-value">{tour.priceUSD === null ? 'Contact us' : formatCardCurrency(tour.priceUSD)}</span>
         </span>
         <div className="relative z-10 -mt-8 flex min-h-60 min-w-0 flex-1 flex-col rounded-t-[1.75rem] rounded-b-[1.75rem] bg-white px-7 pb-7 pt-9">
           <h3 className="clamp-2 text-safe min-h-[3.75rem] text-2xl font-medium leading-tight text-dark transition group-hover:text-primary">{title}</h3>

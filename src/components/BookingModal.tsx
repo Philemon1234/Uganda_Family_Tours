@@ -72,6 +72,13 @@ function currencyForCountryCode(countryCode?: string, fallback: CurrencyCode = '
   return countryCurrencyOverrides[countryCode] ?? fallback
 }
 
+function getFixedAccommodationPreference(tier?: Tour['accommodationTier']): AccommodationPreference | null {
+  if (tier === 'budget') return 'Budget'
+  if (tier === 'mid_range') return 'Mid-range'
+  if (tier === 'luxury') return 'Luxury'
+  return null
+}
+
 export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const { t, i18n } = useTranslation()
   const { currency, formatCurrencyIn, hasLiveExchangeRates } = useLocale()
@@ -81,6 +88,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [currentStep, setCurrentStep] = useState(0)
   const [showSuccess, setShowSuccess] = useState(false)
+  const [hasAttemptedFinalSubmit, setHasAttemptedFinalSubmit] = useState(false)
 
   const selectedTour = useMemo(
     () => t('bookingForm.selectedTourValue', {
@@ -100,12 +108,16 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   })
   const requestedSelectedCurrency = currencyForCountryCode(selectedCountry?.code, currency)
   const selectedCurrency = hasLiveExchangeRates ? requestedSelectedCurrency : 'USD'
-  const perPersonBudgetUSD = tour?.priceUSD ?? 1970
+  const fixedAccommodationPreference = getFixedAccommodationPreference(tour?.accommodationTier)
+  const isAccommodationFixed = fixedAccommodationPreference !== null
+  const packagePriceUSD = typeof tour?.priceUSD === 'number' ? tour.priceUSD : null
+  const hasPackagePrice = packagePriceUSD !== null
+  const perPersonBudgetUSD = packagePriceUSD ?? 0
   const travelers = Math.max(1, Number(form.adults) + Number(form.children))
   const accommodationMultiplier = accommodationMultipliers[form.accommodation]
   const adjustedPerPersonBudgetUSD = perPersonBudgetUSD * accommodationMultiplier
-  const estimatedPerPersonBudget = formatCurrencyIn(adjustedPerPersonBudgetUSD, selectedCurrency)
-  const estimatedGroupBudget = formatCurrencyIn(adjustedPerPersonBudgetUSD * travelers, selectedCurrency)
+  const estimatedPerPersonBudget = hasPackagePrice ? formatCurrencyIn(adjustedPerPersonBudgetUSD, selectedCurrency) : 'Custom quote'
+  const estimatedGroupBudget = hasPackagePrice ? formatCurrencyIn(adjustedPerPersonBudgetUSD * travelers, selectedCurrency) : 'Custom quote'
   const accommodationStayLabelKey =
     form.accommodation === 'Budget'
       ? 'budget'
@@ -140,10 +152,15 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   useEffect(() => {
     if (!isOpen) return
     setCurrentStep(0)
+    setForm((currentForm) => ({
+      ...currentForm,
+      accommodation: fixedAccommodationPreference ?? currentForm.accommodation,
+    }))
     setErrors({})
     setStatus(null)
     setShowSuccess(false)
-  }, [isOpen, tour?.slug])
+    setHasAttemptedFinalSubmit(false)
+  }, [fixedAccommodationPreference, isOpen, tour?.slug, tour?.accommodationTier])
 
   if (!isOpen) return null
 
@@ -153,8 +170,19 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
     setStatus(null)
   }
 
-  const validateStep = (step = currentStep) => {
+  const updateAccommodation = (value: AccommodationPreference) => {
+    if (fixedAccommodationPreference && value !== fixedAccommodationPreference) return
+    update('accommodation', value)
+  }
+
+  const validateStep = (step = currentStep, updateErrors = true) => {
     const nextErrors: Partial<Record<keyof FormState, string>> = {}
+    const stepFields: (keyof FormState)[] =
+      step === 0
+        ? ['travelDate', 'country']
+        : step === 1
+          ? ['adults', 'children']
+          : ['fullName', 'email', 'phone']
 
     if (step === 0) {
       if (!form.travelDate.trim()) nextErrors.travelDate = t('common.required')
@@ -173,23 +201,53 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
       if (!form.phone.trim()) nextErrors.phone = t('common.required')
     }
 
-    setErrors((current) => ({ ...current, ...nextErrors }))
+    if (updateErrors) {
+      setErrors((current) => {
+        const updated = { ...current }
+        stepFields.forEach((field) => {
+          delete updated[field]
+        })
+        return { ...updated, ...nextErrors }
+      })
+    }
+
     return Object.keys(nextErrors).length === 0
   }
 
   const nextStep = () => {
     if (!validateStep(currentStep)) return
+    if (currentStep === 1) {
+      setHasAttemptedFinalSubmit(false)
+      setStatus(null)
+      setErrors((current) => {
+        const updated = { ...current }
+        ;(['fullName', 'email', 'phone'] as const).forEach((field) => {
+          delete updated[field]
+        })
+        return updated
+      })
+    }
     setCurrentStep((step) => Math.min(step + 1, steps.length - 1))
   }
 
   const previousStep = () => {
     setStatus(null)
+    if (currentStep === 2) {
+      setHasAttemptedFinalSubmit(false)
+      setErrors((current) => {
+        const updated = { ...current }
+        ;(['fullName', 'email', 'phone'] as const).forEach((field) => {
+          delete updated[field]
+        })
+        return updated
+      })
+    }
     setCurrentStep((step) => Math.max(step - 1, 0))
   }
 
   const validateAll = () => {
-    const isTripValid = validateStep(0)
-    const isTravelersValid = validateStep(1)
+    const isTripValid = validateStep(0, false)
+    const isTravelersValid = validateStep(1, false)
     const isContactValid = validateStep(2)
     if (!isTripValid) setCurrentStep(0)
     else if (!isTravelersValid) setCurrentStep(1)
@@ -199,11 +257,14 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    if (currentStep < 2) {
+      nextStep()
+      return
+    }
+
+    setHasAttemptedFinalSubmit(true)
     if (!validateAll()) {
-      setStatus({
-        type: 'error',
-        message: t('bookingForm.requiredMissing'),
-      })
+      setStatus(null)
       return
     }
     const payload = { selectedTour, ...form }
@@ -218,7 +279,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
           ...payload,
           packageId: tour?.packageId,
           budgetPerPerson: estimatedPerPersonBudget,
-          baseBudgetPerPerson: formatCurrencyIn(perPersonBudgetUSD, selectedCurrency),
+          baseBudgetPerPerson: hasPackagePrice ? formatCurrencyIn(perPersonBudgetUSD, selectedCurrency) : 'Custom quote',
           estimatedGroupBudget,
           travelers,
           accommodationPreference: form.accommodation,
@@ -235,6 +296,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
       setForm(initialForm)
       setStatus(null)
       setShowSuccess(true)
+      setHasAttemptedFinalSubmit(false)
     } catch (error) {
       setStatus({
         type: 'error',
@@ -244,6 +306,8 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
       setIsSubmitting(false)
     }
   }
+
+  const visibleStatus = status?.message === t('bookingForm.requiredMissing') ? null : status
 
   return (
     <div className="booking-modal fixed inset-0 z-[100] h-dvh w-full overflow-hidden bg-dark text-white" role="dialog" aria-modal="true" aria-labelledby="booking-title">
@@ -329,12 +393,20 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                       )}
                       <Field label={t('bookingForm.accommodation')} required>
                         <div className="grid min-w-0 grid-cols-3 gap-2">
-                          {[
+                          {([
                             { name: 'Budget', label: t('bookingForm.accommodationOptions.budget'), icon: FaHouse },
                             { name: 'Mid-range', label: t('bookingForm.accommodationOptions.midRange'), icon: FaUserGroup },
                             { name: 'Luxury', label: t('bookingForm.accommodationOptions.luxury'), icon: FaRegStar },
-                          ].map(({ name, label, icon: Icon }) => (
-                            <button key={name} className={`booking-accommodation ${form.accommodation === name ? 'booking-accommodation-active' : ''}`} type="button" onClick={() => update('accommodation', name)}>
+                          ] as Array<{ name: AccommodationPreference; label: string; icon: typeof FaHouse }>).map(({ name, label, icon: Icon }) => (
+                            <button
+                              key={name}
+                              className={`booking-accommodation ${form.accommodation === name ? 'booking-accommodation-active' : ''}`}
+                              type="button"
+                              onClick={() => updateAccommodation(name)}
+                              disabled={isAccommodationFixed && name !== fixedAccommodationPreference}
+                              aria-disabled={isAccommodationFixed && name !== fixedAccommodationPreference}
+                              title={isAccommodationFixed && name !== fixedAccommodationPreference ? 'This package has a fixed accommodation preference.' : undefined}
+                            >
                               <Icon className="mx-auto mb-1.5 text-base" />{label}
                             </button>
                           ))}
@@ -352,14 +424,14 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                   {currentStep === 2 && (
                     <div className="grid gap-2 pt-1">
                       <div className="grid min-w-0 gap-3 md:grid-cols-2">
-                        <Field label={t('bookingForm.fullName')} required error={errors.fullName}>
+                        <Field label={t('bookingForm.fullName')} required error={hasAttemptedFinalSubmit ? errors.fullName : undefined}>
                           <input className="booking-input" value={form.fullName} onChange={(event) => update('fullName', event.target.value)} placeholder={t('bookingForm.fullNamePlaceholder')} />
                         </Field>
-                        <Field label={t('bookingForm.email')} required error={errors.email}>
+                        <Field label={t('bookingForm.email')} required error={hasAttemptedFinalSubmit ? errors.email : undefined}>
                           <input className="booking-input" type="email" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder={t('bookingForm.emailPlaceholder')} />
                         </Field>
                       </div>
-                      <Field label={t('bookingForm.phone')} required error={errors.phone}>
+                      <Field label={t('bookingForm.phone')} required error={hasAttemptedFinalSubmit ? errors.phone : undefined}>
                         <input className="booking-input" value={form.phone} onChange={(event) => update('phone', event.target.value)} placeholder={t('inquiryForm.phonePlaceholder')} />
                       </Field>
                       <Field label={t('bookingForm.specialRequests')} error={errors.notes}>
@@ -376,15 +448,15 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
                   )}
                 </div>
 
-                {status && (
+                {visibleStatus && (
                   <p className={`mx-auto mt-5 max-w-4xl rounded-xl p-3 text-sm font-semibold ${
-                    status.type === 'success'
+                    visibleStatus.type === 'success'
                       ? 'bg-green-50 text-green-700'
-                      : status.type === 'error'
+                      : visibleStatus.type === 'error'
                         ? 'bg-red-50 text-red-700'
                         : 'bg-primary/20 text-primary'
                   }`}>
-                    {status.message}
+                    {visibleStatus.message}
                   </p>
                 )}
               </div>
@@ -451,7 +523,6 @@ function Field({ label, required, error, className = '', children }: { label: st
         {label} {required && <span className="text-primary">*</span>}
       </span>
       <span className="mt-2 block">{children}</span>
-      {error && <span className="mt-1 block text-xs font-semibold text-red-300">{error}</span>}
     </div>
   )
 }
