@@ -23,7 +23,7 @@ import homeIconOne from '../assets/UFT-Homepage-icons-01.png'
 import homeIconTwo from '../assets/UFT-Homepage-icons-02.png'
 import homeIconThree from '../assets/UFT-Homepage-icons-03.png'
 import homeIconFour from '../assets/UFT-Favicon.png'
-import journeyImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
+import journeyImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
 import homeFooterImage from '../assets/footer/UFT Website Work-03.jpg'
 
 type HomePageProps = {

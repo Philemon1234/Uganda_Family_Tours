@@ -61,114 +61,84 @@ export function getTourContentKey(slug: string, fallbackText = '') {
   return exactKey
 }
 
-export function getLocalizedTourTitle(t: TFunction, tour: Pick<Tour, 'slug' | 'title'>) {
-  return t(`tourContent.${getTourContentKey(tour.slug, tour.title)}.title`, { defaultValue: tour.title })
+export function getLocalizedTourTitle(_t: TFunction, tour: Pick<Tour, 'slug' | 'title'>) {
+  return tour.title
 }
 
-export function getLocalizedTourShortDescription(t: TFunction, tour: Pick<Tour, 'slug' | 'shortDescription'>) {
-  return t(`tourContent.${getTourContentKey(tour.slug, tour.shortDescription)}.shortDescription`, {
-    defaultValue: tour.shortDescription,
-  })
+export function getLocalizedTourShortDescription(_t: TFunction, tour: Pick<Tour, 'slug' | 'shortDescription'>) {
+  return tour.shortDescription
 }
 
-export function getLocalizedPackage(t: TFunction, tourPackage: TourPackage): TourPackage {
-  const contentKey = getTourContentKey(tourPackage.slug, `${tourPackage.title} ${tourPackage.short_description} ${tourPackage.overview}`)
-
+export function getLocalizedPackage(_t: TFunction, tourPackage: TourPackage): TourPackage {
   return {
     ...tourPackage,
-    title: t(`tourContent.${contentKey}.title`, { defaultValue: tourPackage.title }),
-    category: t(`tourContent.${contentKey}.category`, { defaultValue: tourPackage.category }),
-    short_description: t(`tourContent.${contentKey}.shortDescription`, {
-      defaultValue: tourPackage.short_description,
-    }),
-    overview: t(`tourContent.${contentKey}.overview`, { defaultValue: tourPackage.overview }),
+    title: tourPackage.title,
+    category: tourPackage.category,
+    short_description: tourPackage.short_description,
+    overview: tourPackage.overview,
   }
 }
 
 export function getLocalizedHighlight(
-  t: TFunction,
+  _t: TFunction,
   highlight: TourHighlight,
-  contentKey: string,
-  index: number,
+  _contentKey: string,
+  _index: number,
 ): TourHighlight {
   return {
     ...highlight,
-    title: t(`tourContent.${contentKey}.highlights.${index}.title`, {
-      defaultValue: t(`tourContent.${contentKey}.highlights.${index}`, { defaultValue: highlight.title }),
-    }),
-    description: highlight.description
-      ? t(`tourContent.${contentKey}.highlights.${index}.description`, { defaultValue: highlight.description })
-      : highlight.description,
+    title: highlight.title,
+    description: highlight.description,
   }
 }
 
 export function getLocalizedGalleryImage(
-  t: TFunction,
+  _t: TFunction,
   image: TourGalleryImage,
-  contentKey: string,
-  index: number,
+  _contentKey: string,
+  _index: number,
 ): TourGalleryImage {
   return {
     ...image,
-    alt_text: image.alt_text
-      ? t(`tourContent.${contentKey}.galleryImages.${index}.altText`, { defaultValue: image.alt_text })
-      : image.alt_text,
-    caption: image.caption
-      ? t(`tourContent.${contentKey}.galleryImages.${index}.caption`, { defaultValue: image.caption })
-      : image.caption,
+    alt_text: image.alt_text,
+    caption: image.caption,
   }
 }
 
 export function getLocalizedItineraryDay(
-  t: TFunction,
+  _t: TFunction,
   day: TourItineraryDayWithDetails,
-  contentKey: string,
-  index: number,
+  _contentKey: string,
+  _index: number,
 ): TourItineraryDayWithDetails {
   return {
     ...day,
-    title: t(`tourContent.${contentKey}.itineraryDays.${index}.title`, { defaultValue: day.title }),
-    overview: t(`tourContent.${contentKey}.itineraryDays.${index}.description`, { defaultValue: day.overview }),
-    accommodation_name: day.accommodation_name
-      ? t(`tourContent.${contentKey}.itineraryDays.${index}.accommodation`, { defaultValue: day.accommodation_name })
-      : day.accommodation_name,
-    activities: day.activities.map((activity, activityIndex) => getLocalizedItineraryActivity(t, activity, contentKey, index, activityIndex)),
+    title: day.title,
+    overview: day.overview,
+    accommodation_name: day.accommodation_name,
+    activities: day.activities.map((activity) => getLocalizedItineraryActivity(activity)),
   }
 }
 
 function getLocalizedItineraryActivity(
-  t: TFunction,
   activity: TourItineraryActivity,
-  contentKey: string,
-  dayIndex: number,
-  activityIndex: number,
 ): TourItineraryActivity {
   return {
     ...activity,
-    title: t(`tourContent.${contentKey}.itineraryDays.${dayIndex}.activities.${activityIndex}.title`, {
-      defaultValue: t(`tourContent.${contentKey}.itineraryDays.${dayIndex}.activities.${activityIndex}`, {
-        defaultValue: activity.title,
-      }),
-    }),
-    description: activity.description
-      ? t(`tourContent.${contentKey}.itineraryDays.${dayIndex}.activities.${activityIndex}.description`, {
-        defaultValue: activity.description,
-      })
-      : activity.description,
+    title: activity.title,
+    description: activity.description,
   }
 }
 
 export function getLocalizedLocation(
-  t: TFunction,
+  _t: TFunction,
   location: TourPackageLocation,
-  contentKey: string,
-  index: number,
+  _contentKey: string,
+  _index: number,
 ): TourPackageLocation {
   return {
     ...location,
-    location_name: t(`tourContent.${contentKey}.locations.${index}.name`, { defaultValue: location.location_name }),
-    notes: location.notes
-      ? t(`tourContent.${contentKey}.locations.${index}.notes`, { defaultValue: location.notes })
-      : location.notes,
+    location_name: location.location_name,
+    notes: location.notes,
   }
 }
