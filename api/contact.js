@@ -1,5 +1,5 @@
-const DEFAULT_RECIPIENT_EMAILS = ['ntivuguruzwaphilemon0@gmail.com', 'Safaris@ugandafamilytours.com']
-const DEFAULT_FROM_EMAIL = 'Uganda Family Tours <onboarding@resend.dev>'
+const DEFAULT_RECIPIENT_EMAILS = ['Safaris@ugandafamilytours.com']
+const DEFAULT_FROM_EMAIL = 'Uganda Family Tours <Safaris@ugandafamilytours.com>'
 
 function sendJson(response, statusCode, payload) {
   response.statusCode = statusCode
