@@ -15,6 +15,13 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
   const location = useLocation()
   const [isAtFooterBottom, setIsAtFooterBottom] = useState(false)
   const [isPastHero, setIsPastHero] = useState(false)
+  const [hasLogoError, setHasLogoError] = useState(false)
+  const logoSrc = customization.nav.logo?.src || fallbackLogo
+  const displayedLogoSrc = hasLogoError ? fallbackLogo : logoSrc
+
+  useEffect(() => {
+    setHasLogoError(false)
+  }, [logoSrc])
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 1023px)')
@@ -74,8 +81,11 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
         <NavLink to="/" aria-label={t('navbar.homeAria')}>
           <img
             className="h-8 w-auto object-contain md:h-9"
-            src={customization.nav.logo?.src || fallbackLogo}
+            src={displayedLogoSrc}
             alt={customization.nav.logo?.alt || 'Uganda Family Tours'}
+            onError={() => {
+              if (displayedLogoSrc !== fallbackLogo) setHasLogoError(true)
+            }}
           />
         </NavLink>
 
