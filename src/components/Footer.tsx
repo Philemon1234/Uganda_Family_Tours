@@ -21,6 +21,7 @@ export function Footer({ customization }: { customization: HomeCustomizationCont
   const phoneDisplay = customization.footer.phone
   const phoneHref = phoneHrefFromDisplay(phoneDisplay)
   const emailHref = `mailto:${customization.footer.email}`
+  const currentYear = new Date().getFullYear()
 
   return (
     <footer id="site-footer" className="relative bg-dark text-white">
@@ -67,7 +68,7 @@ export function Footer({ customization }: { customization: HomeCustomizationCont
       </div>
       <div className="border-t border-white/10 pb-[calc(6.5rem+env(safe-area-inset-bottom))] pt-4 md:pb-5 md:pt-5">
         <div className="container-custom flex flex-col gap-2 text-xs text-white/60 md:flex-row md:items-center md:justify-between md:text-sm">
-          <p>{t('footer.rights')}</p>
+          <p>{t('footer.rights', { year: currentYear })}</p>
           <div className="flex gap-5">
             <a href="#" className="hover:text-primary">{t('footer.privacy')}</a>
             <a href="#" className="hover:text-primary">{t('footer.terms')}</a>

@@ -251,7 +251,7 @@
     "quickLinks": "روابط سريعة",
     "accept": "نقبل",
     "social": "تواصل معنا",
-    "rights": "© 2025 Uganda Family Tours & Safari Co. جميع الحقوق محفوظة.",
+    "rights": "\u00A9 {{year}} Uganda Family Tours & Safari Co. جميع الحقوق محفوظة.",
     "privacy": "سياسة الخصوصية",
     "terms": "الشروط والأحكام",
     "location": "كمبالا، أوغندا"

@@ -251,7 +251,7 @@
     "quickLinks": "Schnelllinks",
     "accept": "Wir akzeptieren",
     "social": "Verbinden Sie sich mit uns",
-    "rights": "© 2025 Uganda Family Tours & Safari Co. Alle Rechte vorbehalten.",
+    "rights": "\u00A9 {{year}} Uganda Family Tours & Safari Co. Alle Rechte vorbehalten.",
     "privacy": "Datenschutz",
     "terms": "AGB",
     "location": "Kampala, Uganda"
