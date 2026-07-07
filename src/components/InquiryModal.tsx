@@ -80,7 +80,7 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
       const result = await response.json().catch(() => null)
 
       if (!response.ok || result?.success === false) {
-        throw new Error(result?.message || t('inquiryForm.error'))
+        throw new Error(result?.message || result?.error || t('inquiryForm.error'))
       }
 
       setForm(initialForm)

@@ -286,7 +286,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
       const result = await response.json().catch(() => null)
 
       if (!response.ok || result?.success === false) {
-        throw new Error(result?.message || t('bookingForm.error'))
+        throw new Error(result?.message || result?.error || t('bookingForm.error'))
       }
 
       setForm(initialForm)

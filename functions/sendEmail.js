@@ -16,8 +16,16 @@ function clean(value) {
   return String(value ?? '').trim()
 }
 
+function getProcessEnvValue(name) {
+  return typeof process !== 'undefined' ? process.env?.[name] : undefined
+}
+
+function getDefaultEnv() {
+  return typeof process !== 'undefined' ? process.env : {}
+}
+
 function getEnvValue(env, name) {
-  return env?.[name] ?? process.env[name]
+  return env?.[name] ?? getProcessEnvValue(name)
 }
 
 function sendJson(statusCode, payload) {
@@ -60,7 +68,7 @@ function createTransport(env) {
   })
 }
 
-export async function sendEmailMessage(payload, env = process.env) {
+export async function sendEmailMessage(payload, env = getDefaultEnv()) {
   const to = clean(payload?.to)
   const subject = clean(payload?.subject)
   const html = clean(payload?.html)
@@ -155,7 +163,7 @@ export async function handler(event) {
   return handleSendEmailRequest({
     method: event.httpMethod,
     body: event.body || '{}',
-    env: process.env,
+    env: getDefaultEnv(),
   })
 }
 
