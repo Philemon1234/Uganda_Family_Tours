@@ -1,5 +1,10 @@
-const DEFAULT_RECIPIENT_EMAILS = ['Safaris@ugandafamilytours.com']
-const DEFAULT_FROM_EMAIL = 'Uganda Family Tours <Safaris@ugandafamilytours.com>'
+import nodemailer from 'nodemailer'
+
+const DEFAULT_RECIPIENT_EMAILS = ['safaris@ugandafamilytours.com']
+const DEFAULT_FROM_EMAIL = 'Uganda Family Tours <safaris@ugandafamilytours.com>'
+const DEFAULT_SMTP_HOST = 'mail.ugandafamilytours.com'
+const DEFAULT_SMTP_PORT = 587
+const DEFAULT_SMTP_USER = 'safaris@ugandafamilytours.com'
 
 function sendJson(response, statusCode, payload) {
   response.statusCode = statusCode
@@ -45,6 +50,39 @@ function getEnv(name) {
   return process.env[name]
 }
 
+function getSmtpConfig() {
+  const host = getEnv('SMTP_HOST') || DEFAULT_SMTP_HOST
+  const port = Number(getEnv('SMTP_PORT') || DEFAULT_SMTP_PORT)
+  const user = getEnv('SMTP_USER') || getEnv('SMTP_USERNAME') || DEFAULT_SMTP_USER
+  const pass = getEnv('SMTP_PASSWORD') || getEnv('SMTP_PASS')
+
+  if (!host || !Number.isFinite(port) || !user || !pass) {
+    throw new Error('SMTP email service is not configured.')
+  }
+
+  return {
+    host,
+    port,
+    user,
+    pass,
+  }
+}
+
+function createSmtpTransport() {
+  const smtp = getSmtpConfig()
+
+  return nodemailer.createTransport({
+    host: smtp.host,
+    port: smtp.port,
+    secure: smtp.port === 465,
+    requireTLS: smtp.port === 587,
+    auth: {
+      user: smtp.user,
+      pass: smtp.pass,
+    },
+  })
+}
+
 function getRecipientEmails() {
   const configured = getEnv('CONTACT_RECIPIENT_EMAILS') || getEnv('RECIPIENT_EMAIL') || getEnv('RECIPIENT_EMAILS')
   const recipients = configured
@@ -52,6 +90,29 @@ function getRecipientEmails() {
     : DEFAULT_RECIPIENT_EMAILS
 
   return recipients.length > 0 ? recipients : DEFAULT_RECIPIENT_EMAILS
+}
+
+async function sendEmail({ formType, replyTo, subject, html, text }) {
+  try {
+    const transporter = createSmtpTransport()
+
+    await transporter.sendMail({
+      from: getEnv('SMTP_FROM_EMAIL') || getEnv('FROM_EMAIL') || DEFAULT_FROM_EMAIL,
+      to: getRecipientEmails(),
+      replyTo,
+      subject,
+      html,
+      text,
+    })
+  } catch (error) {
+    console.error(`Failed to send ${formType} email via SMTP:`, {
+      message: error instanceof Error ? error.message : String(error),
+      recipientEmails: getRecipientEmails(),
+      smtpHost: getEnv('SMTP_HOST') || DEFAULT_SMTP_HOST,
+      smtpPort: getEnv('SMTP_PORT') || String(DEFAULT_SMTP_PORT),
+    })
+    throw new Error('The message could not be sent right now. Please try again, or contact us directly by WhatsApp.')
+  }
 }
 
 function toNullable(value) {
@@ -114,12 +175,6 @@ export default async function handler(request, response) {
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST')
     return sendJson(response, 405, { message: 'Method not allowed.' })
-  }
-
-  const apiKey = process.env.RESEND_API_KEY
-
-  if (!apiKey) {
-    return sendJson(response, 500, { message: 'Email service is not configured.' })
   }
 
   let body
@@ -208,34 +263,17 @@ export default async function handler(request, response) {
       </div>
     `
 
-    let resendResponse
-
     try {
-      resendResponse = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: process.env.RESEND_FROM_EMAIL || DEFAULT_FROM_EMAIL,
-          to: getRecipientEmails(),
-          reply_to: email,
-          subject: 'New Inquiry from Uganda Family Tours Website',
-          html,
-          text,
-        }),
+      await sendEmail({
+        formType: 'inquiry',
+        replyTo: email,
+        subject: 'New Inquiry from Uganda Family Tours Website',
+        html,
+        text,
       })
-    } catch {
+    } catch (error) {
       return sendJson(response, 502, {
-        message: 'Could not reach the email service. Please check your connection and try again.',
-      })
-    }
-
-    if (!resendResponse.ok) {
-      const error = await resendResponse.json().catch(() => null)
-      return sendJson(response, 502, {
-        message: error?.message || 'The inquiry could not be sent right now.',
+        message: error instanceof Error ? error.message : 'The inquiry could not be sent right now.',
       })
     }
 
@@ -366,34 +404,17 @@ export default async function handler(request, response) {
     </div>
   `
 
-  let resendResponse
-
   try {
-    resendResponse = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: process.env.RESEND_FROM_EMAIL || DEFAULT_FROM_EMAIL,
-        to: getRecipientEmails(),
-        reply_to: email,
-        subject,
-        html,
-        text,
-      }),
+    await sendEmail({
+      formType: 'booking',
+      replyTo: email,
+      subject,
+      html,
+      text,
     })
-  } catch {
+  } catch (error) {
     return sendJson(response, 502, {
-      message: 'Could not reach the email service. Please check your connection and try again.',
-    })
-  }
-
-  if (!resendResponse.ok) {
-    const error = await resendResponse.json().catch(() => null)
-    return sendJson(response, 502, {
-      message: error?.message || 'The booking request could not be sent right now.',
+      message: error instanceof Error ? error.message : 'The booking request could not be sent right now.',
     })
   }
 
