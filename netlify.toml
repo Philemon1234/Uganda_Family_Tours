@@ -19,6 +19,12 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[redirects]]
+  from = "/api/send-email"
+  to = "/.netlify/functions/send-email"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/api/contact"
   to = "/.netlify/functions/contact"
   status = 200

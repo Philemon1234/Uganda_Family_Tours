@@ -6,6 +6,7 @@ import type { Tour } from '../data/tours'
 import { countries, countryFlag } from '../data/countries'
 import { useLocale } from '../context/LocaleContext'
 import type { CurrencyCode } from '../utils/currency'
+import { buildBookingEmail } from '../utils/contactEmailTemplates'
 import { getLocalizedTourTitle } from '../utils/localizedTourContent'
 
 type BookingModalProps = {
@@ -272,24 +273,19 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
     setStatus({ type: 'info', message: t('bookingForm.sending') })
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+        body: JSON.stringify(buildBookingEmail({
           ...payload,
-          packageId: tour?.packageId,
           budgetPerPerson: estimatedPerPersonBudget,
-          baseBudgetPerPerson: hasPackagePrice ? formatCurrencyIn(perPersonBudgetUSD, selectedCurrency) : 'Custom quote',
           estimatedGroupBudget,
-          travelers,
-          accommodationPreference: form.accommodation,
-          accommodationMultiplier,
           currency: selectedCurrency,
-        }),
+        })),
       })
       const result = await response.json().catch(() => null)
 
-      if (!response.ok) {
+      if (!response.ok || result?.success === false) {
         throw new Error(result?.message || t('bookingForm.error'))
       }
 

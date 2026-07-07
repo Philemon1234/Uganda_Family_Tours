@@ -1,10 +1,6 @@
-import nodemailer from 'nodemailer'
+import { sendEmailMessage } from '../functions/sendEmail.js'
 
 const DEFAULT_RECIPIENT_EMAILS = ['safaris@ugandafamilytours.com']
-const DEFAULT_FROM_EMAIL = 'Uganda Family Tours <safaris@ugandafamilytours.com>'
-const DEFAULT_SMTP_HOST = 'mail.ugandafamilytours.com'
-const DEFAULT_SMTP_PORT = 587
-const DEFAULT_SMTP_USER = 'safaris@ugandafamilytours.com'
 
 function sendJson(response, statusCode, payload) {
   response.statusCode = statusCode
@@ -50,39 +46,6 @@ function getEnv(name) {
   return process.env[name]
 }
 
-function getSmtpConfig() {
-  const host = getEnv('SMTP_HOST') || DEFAULT_SMTP_HOST
-  const port = Number(getEnv('SMTP_PORT') || DEFAULT_SMTP_PORT)
-  const user = getEnv('SMTP_USER') || getEnv('SMTP_USERNAME') || DEFAULT_SMTP_USER
-  const pass = getEnv('SMTP_PASSWORD') || getEnv('SMTP_PASS')
-
-  if (!host || !Number.isFinite(port) || !user || !pass) {
-    throw new Error('SMTP email service is not configured.')
-  }
-
-  return {
-    host,
-    port,
-    user,
-    pass,
-  }
-}
-
-function createSmtpTransport() {
-  const smtp = getSmtpConfig()
-
-  return nodemailer.createTransport({
-    host: smtp.host,
-    port: smtp.port,
-    secure: smtp.port === 465,
-    requireTLS: smtp.port === 587,
-    auth: {
-      user: smtp.user,
-      pass: smtp.pass,
-    },
-  })
-}
-
 function getRecipientEmails() {
   const configured = getEnv('CONTACT_RECIPIENT_EMAILS') || getEnv('RECIPIENT_EMAIL') || getEnv('RECIPIENT_EMAILS')
   const recipients = configured
@@ -93,23 +56,18 @@ function getRecipientEmails() {
 }
 
 async function sendEmail({ formType, replyTo, subject, html, text }) {
-  try {
-    const transporter = createSmtpTransport()
+  const result = await sendEmailMessage({
+    to: getRecipientEmails().join(','),
+    replyTo,
+    subject,
+    html,
+    text,
+  })
 
-    await transporter.sendMail({
-      from: getEnv('SMTP_FROM_EMAIL') || getEnv('FROM_EMAIL') || DEFAULT_FROM_EMAIL,
-      to: getRecipientEmails(),
-      replyTo,
-      subject,
-      html,
-      text,
-    })
-  } catch (error) {
+  if (!result.ok) {
     console.error(`Failed to send ${formType} email via SMTP:`, {
-      message: error instanceof Error ? error.message : String(error),
+      message: result.message,
       recipientEmails: getRecipientEmails(),
-      smtpHost: getEnv('SMTP_HOST') || DEFAULT_SMTP_HOST,
-      smtpPort: getEnv('SMTP_PORT') || String(DEFAULT_SMTP_PORT),
     })
     throw new Error('The message could not be sent right now. Please try again, or contact us directly by WhatsApp.')
   }

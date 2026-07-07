@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { FaEnvelope, FaPhone, FaRegUser, FaXmark } from 'react-icons/fa6'
 import { FiArrowRight } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
+import { buildInquiryEmail } from '../utils/contactEmailTemplates'
 
 type InquiryModalProps = {
   isOpen: boolean
@@ -71,14 +72,14 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
     setStatus({ type: 'info', message: t('inquiryForm.sending') })
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ formType: 'inquiry', ...form }),
+        body: JSON.stringify(buildInquiryEmail(form)),
       })
       const result = await response.json().catch(() => null)
 
-      if (!response.ok) {
+      if (!response.ok || result?.success === false) {
         throw new Error(result?.message || t('inquiryForm.error'))
       }
 
