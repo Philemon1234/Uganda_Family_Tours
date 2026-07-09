@@ -81,6 +81,12 @@ export function ToursPage() {
     setCurrentPage(1)
   }
 
+  const changePage = (nextPage: number) => {
+    const clampedPage = Math.min(totalPages, Math.max(1, nextPage))
+    setCurrentPage(clampedPage)
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }
+
   const filteredTours = useMemo(() => {
     const hasPriceFilter = priceRange.min !== defaultPriceBounds.min || priceRange.max !== defaultPriceBounds.max
 
@@ -204,7 +210,7 @@ export function ToursPage() {
                         className="min-h-10 rounded-lg border border-[#eadfd3] bg-white px-4 text-sm font-bold text-ink transition hover:border-primary hover:bg-[#fff4ec] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[#eadfd3] disabled:hover:bg-white"
                         type="button"
                         disabled={currentPage === 1}
-                        onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+                        onClick={() => changePage(currentPage - 1)}
                       >
                         {t('toursPage.previousPage')}
                       </button>
@@ -213,7 +219,7 @@ export function ToursPage() {
                           <button
                             className="grid min-h-10 min-w-10 place-items-center rounded-lg border border-[#eadfd3] bg-white px-3 text-sm font-bold text-ink transition hover:border-primary hover:bg-[#fff4ec]"
                             type="button"
-                            onClick={() => setCurrentPage(1)}
+                            onClick={() => changePage(1)}
                           >
                             1
                           </button>
@@ -232,7 +238,7 @@ export function ToursPage() {
                             }`}
                             key={page}
                             type="button"
-                            onClick={() => setCurrentPage(page)}
+                            onClick={() => changePage(page)}
                           >
                             {page}
                           </button>
@@ -244,7 +250,7 @@ export function ToursPage() {
                           <button
                             className="grid min-h-10 min-w-10 place-items-center rounded-lg border border-[#eadfd3] bg-white px-3 text-sm font-bold text-ink transition hover:border-primary hover:bg-[#fff4ec]"
                             type="button"
-                            onClick={() => setCurrentPage(totalPages)}
+                            onClick={() => changePage(totalPages)}
                           >
                             {totalPages}
                           </button>
@@ -254,7 +260,7 @@ export function ToursPage() {
                         className="min-h-10 rounded-lg border border-[#eadfd3] bg-white px-4 text-sm font-bold text-ink transition hover:border-primary hover:bg-[#fff4ec] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-[#eadfd3] disabled:hover:bg-white"
                         type="button"
                         disabled={currentPage === totalPages}
-                        onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
+                        onClick={() => changePage(currentPage + 1)}
                       >
                         {t('toursPage.nextPage')}
                       </button>
