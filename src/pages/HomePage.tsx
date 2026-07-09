@@ -28,7 +28,7 @@ import homeFooterImage from '../assets/footer/UFT Website Work-03.jpg'
 
 type HomePageProps = {
   customization: HomeCustomizationContent
-  onBook: () => void
+  onInquiry: () => void
 }
 
 const FEATURED_TOURS_LIMIT = 6
@@ -40,7 +40,7 @@ const aboutVideo = `${mediaOrigin}/wp-content/uploads/2026/06/About-Uganda-Famil
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
 // const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
 
-export function HomePage({ customization, onBook }: HomePageProps) {
+export function HomePage({ customization, onInquiry }: HomePageProps) {
   const { t } = useTranslation()
   const [featuredTours, setFeaturedTours] = useState<Tour[]>([])
   const [isLoadingFeaturedTours, setIsLoadingFeaturedTours] = useState(true)
@@ -379,7 +379,7 @@ export function HomePage({ customization, onBook }: HomePageProps) {
                 <p className="luxury-script text-2xl leading-none text-ink md:text-3xl">{customization.journey.label || t('home.journey.label')}</p>
                 <h2 className="mt-1 text-2xl font-black leading-tight text-ink md:text-3xl">{customization.journey.title || t('home.journey.title')}</h2>
                 <p className="mt-5 text-base leading-8 text-muted md:text-lg">{customization.journey.description || t('home.journey.description')}</p>
-                <button className="btn-outline mt-8" type="button" onClick={onBook} style={{ borderColor: customization.journey.cta.color, color: customization.journey.cta.color }}>{customization.journey.cta.text || t('home.journey.cta')} <FiArrowRight /></button>
+                <button className="btn-outline mt-8" type="button" onClick={onInquiry} style={{ borderColor: customization.journey.cta.color, color: customization.journey.cta.color }}>{customization.journey.cta.text || t('home.journey.cta')} <FiArrowRight /></button>
               </div>
             </MotionReveal>
           </div>

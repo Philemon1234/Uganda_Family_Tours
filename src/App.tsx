@@ -56,7 +56,7 @@ function App() {
       <Navbar customization={homeCustomization} onInquiry={() => setIsInquiryOpen(true)} />
       <div key={location.pathname} className="page-transition">
         <Routes>
-          <Route path="/" element={<HomePage customization={homeCustomization} onBook={() => openBooking(tours[0])} />} />
+          <Route path="/" element={<HomePage customization={homeCustomization} onInquiry={() => setIsInquiryOpen(true)} />} />
           <Route path="/about" element={<AboutPage onInquiry={() => setIsInquiryOpen(true)} />} />
           <Route path="/tours" element={<ToursPage />} />
           <Route path="/tours/:tourId" element={<ItineraryRoute onBook={openBooking} />} />
