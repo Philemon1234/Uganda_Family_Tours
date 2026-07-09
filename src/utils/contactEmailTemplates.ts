@@ -6,6 +6,8 @@ type EmailPayload = {
   html: string
   text: string
   replyTo: string
+  formType: 'inquiry' | 'booking'
+  formData: InquiryEmailInput | BookingEmailInput
 }
 
 type InquiryEmailInput = {
@@ -98,6 +100,8 @@ export function buildInquiryEmail(input: InquiryEmailInput): EmailPayload {
   return {
     to: ADMIN_EMAIL,
     replyTo: input.email,
+    formType: 'inquiry',
+    formData: input,
     subject: 'New Inquiry from Uganda Family Tours Website',
     text: [
       'New Inquiry from Uganda Family Tours Website',
@@ -141,6 +145,8 @@ export function buildBookingEmail(input: BookingEmailInput): EmailPayload {
   return {
     to: ADMIN_EMAIL,
     replyTo: input.email,
+    formType: 'booking',
+    formData: input,
     subject: `New tour booking request from ${input.fullName}`,
     text: [
       'New Uganda Family Tours booking request',
