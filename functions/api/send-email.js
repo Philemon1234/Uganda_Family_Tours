@@ -74,13 +74,13 @@ function createTransport(env) {
 }
 
 function normalizePayload(payload) {
-  const to = clean(payload?.to)
+  const to = clean(payload?.to) || ADMIN_EMAIL
   const subject = clean(payload?.subject)
   const html = clean(payload?.html)
 
-  if (to && subject && html) {
+  if (subject && html) {
     return {
-      to,
+      to: ADMIN_EMAIL,
       subject,
       html,
       text: clean(payload?.text),
@@ -101,7 +101,7 @@ function normalizePayload(payload) {
   }
 
   return {
-    to: ADMIN_EMAIL,
+    to,
     subject: `New website message from ${name}`,
     replyTo: email,
     text: [
@@ -149,7 +149,7 @@ export async function onRequestPost({ request, env }) {
     })
   }
 
-  const recipients = mail.to.split(',').map((email) => clean(email)).filter(Boolean)
+  const recipients = ADMIN_EMAIL.split(',').map((email) => clean(email)).filter(Boolean)
 
   if (recipients.length === 0 || recipients.some((email) => !isValidEmail(email))) {
     return jsonResponse(400, { success: false, error: 'Please provide a valid recipient email address.' })
