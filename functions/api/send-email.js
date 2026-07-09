@@ -5,6 +5,7 @@ const DEFAULT_FROM_EMAIL = 'Uganda Family Tours <safaris@ugandafamilytours.com>'
 const DEFAULT_SMTP_HOST = 'mail.ugandafamilytours.com'
 const DEFAULT_SMTP_PORT = 587
 const DEFAULT_SMTP_USER = 'safaris@ugandafamilytours.com'
+const SMTP_TIMEOUT_MS = 15000
 
 const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type',
@@ -66,6 +67,9 @@ function createTransport(env) {
     port: smtp.port,
     secure: smtp.port === 465,
     requireTLS: smtp.port === 587,
+    connectionTimeout: SMTP_TIMEOUT_MS,
+    greetingTimeout: SMTP_TIMEOUT_MS,
+    socketTimeout: SMTP_TIMEOUT_MS,
     auth: {
       user: smtp.user,
       pass: smtp.pass,

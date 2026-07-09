@@ -44,6 +44,23 @@ const initialForm: FormState = {
   accommodation: 'Mid-range',
   notes: '',
 }
+const emailRequestTimeoutMs = 20000
+
+async function postEmail(payload: unknown) {
+  const controller = new AbortController()
+  const timeoutId = window.setTimeout(() => controller.abort(), emailRequestTimeoutMs)
+
+  try {
+    return await fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    })
+  } finally {
+    window.clearTimeout(timeoutId)
+  }
+}
 
 const accommodationMultipliers: Record<AccommodationPreference, number> = {
   Budget: 0.85,
@@ -273,16 +290,12 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
     setStatus({ type: 'info', message: t('bookingForm.sending') })
 
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(buildBookingEmail({
+      const response = await postEmail(buildBookingEmail({
           ...payload,
           budgetPerPerson: estimatedPerPersonBudget,
           estimatedGroupBudget,
           currency: selectedCurrency,
-        })),
-      })
+        }))
       const result = await response.json().catch(() => null)
 
       if (!response.ok || result?.success === false) {
@@ -294,9 +307,15 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
       setShowSuccess(true)
       setHasAttemptedFinalSubmit(false)
     } catch (error) {
+      const message = error instanceof DOMException && error.name === 'AbortError'
+        ? 'The email request timed out. Please try again, or contact us directly by WhatsApp.'
+        : error instanceof Error
+          ? error.message
+          : t('bookingForm.error')
+
       setStatus({
         type: 'error',
-        message: error instanceof Error ? error.message : t('bookingForm.error'),
+        message,
       })
     } finally {
       setIsSubmitting(false)
