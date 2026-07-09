@@ -1,5 +1,5 @@
 import { FaTripadvisor } from 'react-icons/fa'
-import { FiChevronDown } from 'react-icons/fi'
+import { MdVerified } from 'react-icons/md'
 import type { TripAdvisorReview } from '../data/reviews'
 
 type ReviewCardProps = {
@@ -7,84 +7,115 @@ type ReviewCardProps = {
   onOpen: (review: TripAdvisorReview) => void
 }
 
-const TRIPADVISOR_GREEN = '#008f5a'
-
 export function ReviewStars({ rating, label }: { rating: number; label?: string }) {
   return (
-    <span className="flex items-center gap-1.5" aria-label={label ?? `${rating} out of 5 rating`}>
+    <span className="flex items-center justify-center gap-1" aria-label={label ?? `${rating} out of 5 rating`}>
       {Array.from({ length: 5 }).map((_, index) => (
         <span
           key={index}
           aria-hidden="true"
-          className={`h-3.5 w-3.5 rounded-full ${index < rating ? 'bg-[#008f5a]' : 'bg-[#d8e7df]'}`}
-        />
+          className={`grid h-[1.05rem] w-[1.05rem] place-items-center rounded-full border-[0.16rem] ${
+            index < rating ? 'border-[#00b98b]' : 'border-[#b9e2d7]'
+          }`}
+        >
+          <span
+            className={`h-[0.48rem] w-[0.48rem] rounded-full ${
+              index < rating ? 'bg-[#00b98b]' : 'bg-transparent'
+            }`}
+          />
+        </span>
       ))}
     </span>
+  )
+}
+
+function relativeReviewDate(date: string) {
+  const parsedDate = new Date(date)
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return date
+  }
+
+  const now = new Date()
+  const months =
+    (now.getFullYear() - parsedDate.getFullYear()) * 12 +
+    now.getMonth() -
+    parsedDate.getMonth() -
+    (now.getDate() < parsedDate.getDate() ? 1 : 0)
+
+  if (months >= 1) {
+    return `${months} month${months === 1 ? '' : 's'} ago`
+  }
+
+  const days = Math.max(1, Math.floor((now.getTime() - parsedDate.getTime()) / 86_400_000))
+
+  return `${days} day${days === 1 ? '' : 's'} ago`
+}
+
+function ReviewExcerpt({ review }: { review: TripAdvisorReview }) {
+  return (
+    <p className="clamp-4 mt-3 text-center text-[1.02rem] font-medium leading-[1.45] text-[#07152a]">
+      <span className="font-bold">{review.title}</span>
+      <br />
+      <span>{review.text}</span>
+    </p>
   )
 }
 
 export function ReviewCard({ review, onOpen }: ReviewCardProps) {
   return (
     <article
-      className="group flex h-full min-h-[19rem] cursor-pointer flex-col rounded-card border border-black bg-white p-5 text-left text-ink shadow-none transition duration-200 hover:-translate-y-1 hover:shadow-none"
+      className="group relative z-0 flex h-full min-h-[17.4rem] cursor-pointer flex-col items-center rounded-[0.55rem] bg-[#f4f4f4] px-6 pb-6 pt-[3.65rem] text-center text-[#07152a] transition duration-200 hover:-translate-y-1 md:min-h-[17.8rem] md:px-7"
       onClick={() => onOpen(review)}
     >
-      <div className="flex items-start gap-3">
-        <a
-          className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full bg-[#eef5f0] focus-visible:ring-4 focus-visible:ring-[#008f5a]/15"
-          href={review.sourceUrl}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Open ${review.name}'s TripAdvisor review`}
-          onClick={(event) => event.stopPropagation()}
-        >
-          <img
-            className="h-full w-full object-cover"
-            src={review.profileImage}
-            alt={`${review.name} profile`}
-            loading="lazy"
-          />
-          <span className="absolute -bottom-0.5 -right-0.5 grid h-5 w-5 place-items-center rounded-full border-2 border-white bg-[#00aa6c] text-[0.65rem] text-white">
-            <FaTripadvisor aria-hidden="true" />
-          </span>
-        </a>
-        <div className="min-w-0">
-          <a
-            className="text-safe block text-sm font-black leading-tight text-ink transition hover:text-[#008f5a] focus-visible:text-[#008f5a]"
-            href={review.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(event) => event.stopPropagation()}
-          >
-            {review.name}
-          </a>
-          <p className="mt-1 text-xs font-bold leading-tight text-muted">{review.date}</p>
-        </div>
-      </div>
+      <a
+        className="absolute left-1/2 top-0 z-20 h-[4.45rem] w-[4.45rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#eef5f0] focus-visible:ring-4 focus-visible:ring-[#008f5a]/15"
+        href={review.sourceUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Open ${review.name}'s TripAdvisor review`}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <img
+          className="h-full w-full rounded-full object-cover"
+          src={review.profileImage}
+          alt={`${review.name} profile`}
+          loading="lazy"
+        />
+        <span className="absolute bottom-0 right-0 grid h-[1.35rem] w-[1.35rem] place-items-center rounded-full border-2 border-white bg-[#00b98b] text-[0.72rem] text-white shadow-[0_2px_5px_rgb(0_0_0/0.12)]">
+          <FaTripadvisor aria-hidden="true" />
+        </span>
+      </a>
 
-      <div className="mt-4">
+      <a
+        className="text-safe block max-w-full text-[0.98rem] font-bold leading-tight text-[#07152a] transition hover:text-[#008f5a] focus-visible:text-[#008f5a]"
+        href={review.sourceUrl}
+        target="_blank"
+        rel="noreferrer"
+        onClick={(event) => event.stopPropagation()}
+      >
+        {review.name}
+      </a>
+      <p className="mt-1 text-[0.92rem] font-medium leading-tight text-[#7f8790]">{relativeReviewDate(review.date)}</p>
+
+      <div className="mt-3 flex items-center justify-center gap-2">
         <ReviewStars rating={review.rating} label={`${review.rating} out of 5 TripAdvisor stars`} />
+        <MdVerified aria-label="Verified review" className="text-[1.05rem] text-[#3b82f6]" />
       </div>
 
-      <p className="clamp-5 mt-5 flex-1 text-base leading-7 text-[#1f2933]">
-        {review.text}
-      </p>
+      <ReviewExcerpt review={review} />
 
-      <div className="mt-5 border-t border-[#ece6df] pt-4">
-        <button
-          type="button"
-          className="inline-flex items-center gap-2 text-sm font-medium text-[#008f5a] transition group-hover:text-[#006f47]"
-          style={{ color: TRIPADVISOR_GREEN }}
-          aria-label={`Read full review by ${review.name}`}
-          onClick={(event) => {
-            event.stopPropagation()
-            onOpen(review)
-          }}
-        >
-          Read more
-          <FiChevronDown aria-hidden="true" className="text-base" />
-        </button>
-      </div>
+      <button
+        type="button"
+        className="mt-auto pt-3 text-[0.95rem] font-bold text-[#969696] transition group-hover:text-[#6f6f6f]"
+        aria-label={`Read full review by ${review.name}`}
+        onClick={(event) => {
+          event.stopPropagation()
+          onOpen(review)
+        }}
+      >
+        Read more
+      </button>
     </article>
   )
 }
