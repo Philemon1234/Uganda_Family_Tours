@@ -1,10 +1,4 @@
 name = "uganda-family-tours"
-type = "javascript"
-functions = "functions"
+pages_build_output_dir = "./dist"
 compatibility_date = "2026-07-01"
 compatibility_flags = ["nodejs_compat"]
-
-[[functions]]
-name = "api/send-email"
-path = "functions/api/send-email.js"
-platform = "nodejs"
