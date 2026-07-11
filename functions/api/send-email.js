@@ -314,18 +314,10 @@ export async function onRequestPost({ request, env }) {
       smtpPort: getEnvValue(env, 'SMTP_PORT') || String(DEFAULT_SMTP_PORT),
     })
 
-    if (saveResult.saved) {
-      return jsonResponse(200, {
-        success: true,
-        saved: true,
-        emailSent: false,
-        warning: errorMessage,
-      })
-    }
-
     return jsonResponse(502, {
       success: false,
       saved: saveResult.saved,
+      emailSent: false,
       error: errorMessage || 'Email delivery failed.',
     })
   }
