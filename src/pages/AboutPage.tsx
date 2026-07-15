@@ -30,9 +30,9 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
   ]
 
   return (
-    <main className="bg-[#6A611B] pt-16 text-white md:pt-24">
-      <section className="bg-[#6A611B] pb-14 pt-5 md:pb-20 md:pt-10">
-        <div className="container-custom [&_h2]:text-white [&_p]:text-white/86">
+    <main className="bg-[#FECF97] pt-16 text-ink md:pt-24">
+      <section className="bg-[#FECF97] pb-14 pt-5 md:pb-20 md:pt-10">
+        <div className="container-custom [&_h2]:text-ink [&_p]:text-[#4f4a32]">
           <SectionHeader
             title={t('aboutPage.hero.title')}
             description={t('aboutPage.hero.subtitle')}
@@ -40,7 +40,7 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-[#6A611B]">
+      <section className="section-padding bg-[#FECF97]">
         <div className="container-custom grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
           <MotionReveal>
             <div className="overflow-hidden rounded-[1.75rem] shadow-[0_22px_55px_rgba(17,24,39,0.13)]">
@@ -48,9 +48,9 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
             </div>
           </MotionReveal>
           <MotionReveal delay={80}>
-            <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('aboutPage.welcome.label')}</p>
-            <h2 className="mt-2 text-3xl font-black leading-tight text-white md:text-4xl">{t('aboutPage.welcome.title')}</h2>
-            <div className="mt-6 space-y-5 text-base leading-8 text-white/86 md:text-lg">
+            <p className="luxury-script text-2xl leading-none text-ink md:text-3xl">{t('aboutPage.welcome.label')}</p>
+            <h2 className="mt-2 text-3xl font-black leading-tight text-ink md:text-4xl">{t('aboutPage.welcome.title')}</h2>
+            <div className="mt-6 space-y-5 text-base leading-8 text-[#4f4a32] md:text-lg">
               <p>{t('aboutPage.welcome.p1')}</p>
               <p>{t('aboutPage.welcome.p2')}</p>
             </div>
@@ -58,13 +58,13 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-[#6A611B]">
+      <section className="section-padding bg-[#FECF97]">
         <div className="container-custom grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <MotionReveal>
-            <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('aboutPage.origins.label')}</p>
-            <h2 className="mt-2 text-3xl font-black leading-tight text-white md:text-4xl">{t('aboutPage.origins.title')}</h2>
-            <span className="mt-4 block h-0.5 w-12 bg-white" />
-            <div className="mt-6 space-y-5 text-base leading-8 text-white/86 md:text-lg">
+            <p className="luxury-script text-2xl leading-none text-ink md:text-3xl">{t('aboutPage.origins.label')}</p>
+            <h2 className="mt-2 text-3xl font-black leading-tight text-ink md:text-4xl">{t('aboutPage.origins.title')}</h2>
+            <span className="mt-4 block h-0.5 w-12 bg-ink" />
+            <div className="mt-6 space-y-5 text-base leading-8 text-[#4f4a32] md:text-lg">
               <p>{t('aboutPage.origins.p1')}</p>
               <p>{t('aboutPage.origins.p2')}</p>
             </div>
@@ -77,23 +77,23 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-[#6A611B]">
+      <section className="section-padding bg-[#FECF97]">
         <div className="container-custom">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('aboutPage.initiatives.label')}</p>
-            <h2 className="mt-2 text-3xl font-black leading-tight text-white md:text-4xl">{t('aboutPage.initiatives.title')}</h2>
-            <span className="mx-auto mt-4 block h-0.5 w-12 bg-white" />
-            <p className="mt-5 leading-7 text-white/86">{t('aboutPage.initiatives.description')}</p>
+            <p className="luxury-script text-2xl leading-none text-ink md:text-3xl">{t('aboutPage.initiatives.label')}</p>
+            <h2 className="mt-2 text-3xl font-black leading-tight text-ink md:text-4xl">{t('aboutPage.initiatives.title')}</h2>
+            <span className="mx-auto mt-4 block h-0.5 w-12 bg-ink" />
+            <p className="mt-5 leading-7 text-[#4f4a32]">{t('aboutPage.initiatives.description')}</p>
           </div>
           <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {initiatives.map(({ icon: Icon, title, text }, index) => (
               <MotionReveal key={title} delay={index * 80}>
-                <article className="h-full border-t border-white/25 px-1 py-5 text-center transition hover:border-white sm:py-6">
-                  <span className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-white text-lg text-[#6A611B] sm:h-12 sm:w-12 sm:text-xl">
+                <article className="h-full border-t border-ink/25 px-1 py-5 text-center transition hover:border-ink sm:py-6">
+                  <span className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-ink text-lg text-white sm:h-12 sm:w-12 sm:text-xl">
                     <Icon />
                   </span>
-                  <h3 className="mt-4 text-sm font-black leading-5 text-white sm:mt-5 sm:text-base">{title}</h3>
-                  <p className="mt-2 text-xs leading-5 text-white/82 sm:mt-3 sm:text-sm sm:leading-6">{text}</p>
+                  <h3 className="mt-4 text-sm font-black leading-5 text-ink sm:mt-5 sm:text-base">{title}</h3>
+                  <p className="mt-2 text-xs leading-5 text-[#4f4a32] sm:mt-3 sm:text-sm sm:leading-6">{text}</p>
                 </article>
               </MotionReveal>
             ))}
@@ -101,7 +101,7 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-[#6A611B]">
+      <section className="section-padding bg-[#FECF97]">
         <div className="container-custom grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
           <MotionReveal>
             <div className="relative overflow-hidden rounded-[1.75rem] shadow-soft">
@@ -110,18 +110,18 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
             </div>
           </MotionReveal>
           <MotionReveal delay={80}>
-            <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('aboutPage.impact.label')}</p>
-            <h2 className="mt-2 text-3xl font-black leading-tight text-white md:text-4xl">{t('aboutPage.impact.title')}</h2>
-            <p className="mt-6 text-base leading-8 text-white/86 md:text-lg">{t('aboutPage.impact.description')}</p>
+            <p className="luxury-script text-2xl leading-none text-ink md:text-3xl">{t('aboutPage.impact.label')}</p>
+            <h2 className="mt-2 text-3xl font-black leading-tight text-ink md:text-4xl">{t('aboutPage.impact.title')}</h2>
+            <p className="mt-6 text-base leading-8 text-[#4f4a32] md:text-lg">{t('aboutPage.impact.description')}</p>
           </MotionReveal>
         </div>
       </section>
 
-      <section className="section-padding bg-[#6A611B]">
+      <section className="section-padding bg-[#FECF97]">
         <div className="container-custom">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('aboutPage.charities.label')}</p>
-            <h2 className="mt-2 text-3xl font-black leading-tight text-white md:text-4xl">{t('aboutPage.charities.title')}</h2>
+            <p className="luxury-script text-2xl leading-none text-ink md:text-3xl">{t('aboutPage.charities.label')}</p>
+            <h2 className="mt-2 text-3xl font-black leading-tight text-ink md:text-4xl">{t('aboutPage.charities.title')}</h2>
           </div>
           <div className="mt-12 grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
             <MotionReveal>
@@ -131,30 +131,30 @@ export function AboutPage({ onInquiry }: AboutPageProps) {
               </div>
             </MotionReveal>
             <MotionReveal delay={80}>
-              <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('aboutPage.charities.label')}</p>
-              <h3 className="mt-2 text-3xl font-black leading-tight text-white md:text-4xl">{t('aboutPage.charities.mammadu.title')}</h3>
-              <div className="mt-6 space-y-5 text-base leading-8 text-white/86 md:text-lg">
+              <p className="luxury-script text-2xl leading-none text-ink md:text-3xl">{t('aboutPage.charities.label')}</p>
+              <h3 className="mt-2 text-3xl font-black leading-tight text-ink md:text-4xl">{t('aboutPage.charities.mammadu.title')}</h3>
+              <div className="mt-6 space-y-5 text-base leading-8 text-[#4f4a32] md:text-lg">
                 <p>{t('aboutPage.charities.mammadu.p1')}</p>
                 <p>{t('aboutPage.charities.mammadu.p2')}</p>
               </div>
-              <button className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-white bg-white px-7 py-4 text-sm font-bold uppercase tracking-[0.1em] text-[#6A611B] transition hover:-translate-y-0.5 hover:bg-transparent hover:text-white" type="button" onClick={onInquiry}>{t('aboutPage.charities.visit')} <FiArrowRight /></button>
+              <button className="mt-8 inline-flex items-center justify-center gap-2 rounded-full border border-ink bg-ink px-7 py-4 text-sm font-bold uppercase tracking-[0.1em] text-white transition hover:-translate-y-0.5 hover:bg-transparent hover:text-ink" type="button" onClick={onInquiry}>{t('aboutPage.charities.visit')} <FiArrowRight /></button>
             </MotionReveal>
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-[#6A611B]">
+      <section className="section-padding bg-[#FECF97]">
         <div className="container-custom">
           <div className="mx-auto max-w-4xl text-center">
-            <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{t('aboutPage.trust.label')}</p>
-            <h2 className="mt-2 text-3xl font-black leading-tight text-white md:text-4xl">{t('aboutPage.trust.title')}</h2>
+            <p className="luxury-script text-2xl leading-none text-ink md:text-3xl">{t('aboutPage.trust.label')}</p>
+            <h2 className="mt-2 text-3xl font-black leading-tight text-ink md:text-4xl">{t('aboutPage.trust.title')}</h2>
           </div>
           <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
             {trustPoints.map(({ icon: Icon, title }, index) => (
               <MotionReveal key={title} delay={index * 70}>
-                <div className="h-full rounded-[1.25rem] border border-white/25 bg-white/10 p-5 text-center shadow-[0_18px_45px_rgba(0,0,0,0.12)]">
-                  <Icon className="mx-auto text-2xl text-white" />
-                  <p className="mt-4 text-sm font-black leading-6 text-white">{title}</p>
+                <div className="h-full rounded-[1.25rem] border border-ink/15 bg-white/30 p-5 text-center shadow-[0_18px_45px_rgba(0,0,0,0.08)]">
+                  <Icon className="mx-auto text-2xl text-ink" />
+                  <p className="mt-4 text-sm font-black leading-6 text-ink">{title}</p>
                 </div>
               </MotionReveal>
             ))}
