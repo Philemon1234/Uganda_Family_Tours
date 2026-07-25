@@ -31,6 +31,16 @@ function withDefaultPackageFields(
     price_luxury_usd: Object.prototype.hasOwnProperty.call(tourPackage, 'price_luxury_usd')
       ? tourPackage.price_luxury_usd ?? null
       : null,
+  })).map((tourPackage) => ({
+    ...tourPackage,
+    price_from_usd:
+      tourPackage.accommodation_tier === 'budget'
+        ? tourPackage.price_budget_usd ?? tourPackage.price_from_usd
+        : tourPackage.accommodation_tier === 'mid_range'
+          ? tourPackage.price_mid_range_usd ?? tourPackage.price_from_usd
+          : tourPackage.accommodation_tier === 'luxury'
+            ? tourPackage.price_luxury_usd ?? tourPackage.price_from_usd
+            : tourPackage.price_mid_range_usd ?? tourPackage.price_budget_usd ?? tourPackage.price_luxury_usd ?? tourPackage.price_from_usd,
   }))
 }
 
@@ -99,7 +109,7 @@ export async function getPublishedTourPackages(
     throw new Error(error.message)
   }
 
-  return data ?? []
+  return withDefaultPackageFields(data ?? [])
 }
 
 export function subscribeToTourPackageChanges(onChange: () => void) {
@@ -157,7 +167,7 @@ export async function getPublishedTourPackageBySlug(
     throw new Error(error.message)
   }
 
-  return data
+  return data ? withDefaultPackageFields([data])[0] : null
 }
 
 export async function getTourPackageBySlug(slug: string) {
