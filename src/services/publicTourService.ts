@@ -11,17 +11,26 @@ import type {
 } from '../types/tourPackage'
 
 const TOUR_PACKAGE_SELECT =
-  'id,title,slug,category,duration_days,price_from_usd,accommodation_tier,short_description,overview,main_image_url,hero_image_url,map_style,status,display_order,created_at,updated_at'
+  'id,title,slug,category,duration_days,price_from_usd,price_budget_usd,price_mid_range_usd,price_luxury_usd,accommodation_tier,short_description,overview,main_image_url,hero_image_url,map_style,status,display_order,created_at,updated_at'
 const TOUR_PACKAGE_SELECT_FALLBACK =
   'id,title,slug,category,duration_days,price_from_usd,short_description,overview,main_image_url,hero_image_url,status,created_at,updated_at'
 
 function withDefaultPackageFields(
-  packages: Array<Omit<TourPackage, 'map_style' | 'accommodation_tier'> & Partial<Pick<TourPackage, 'map_style' | 'accommodation_tier'>>>,
+  packages: Array<Omit<TourPackage, 'map_style' | 'accommodation_tier' | 'price_budget_usd' | 'price_mid_range_usd' | 'price_luxury_usd'> & Partial<Pick<TourPackage, 'map_style' | 'accommodation_tier' | 'price_budget_usd' | 'price_mid_range_usd' | 'price_luxury_usd'>>>,
 ): TourPackage[] {
   return packages.map((tourPackage) => ({
     ...tourPackage,
     accommodation_tier: tourPackage.accommodation_tier ?? 'standard',
     map_style: tourPackage.map_style ?? 'light',
+    price_budget_usd: Object.prototype.hasOwnProperty.call(tourPackage, 'price_budget_usd')
+      ? tourPackage.price_budget_usd ?? null
+      : tourPackage.price_from_usd,
+    price_mid_range_usd: Object.prototype.hasOwnProperty.call(tourPackage, 'price_mid_range_usd')
+      ? tourPackage.price_mid_range_usd ?? null
+      : tourPackage.price_from_usd,
+    price_luxury_usd: Object.prototype.hasOwnProperty.call(tourPackage, 'price_luxury_usd')
+      ? tourPackage.price_luxury_usd ?? null
+      : null,
   }))
 }
 
@@ -40,7 +49,7 @@ type PublishedTourPackageOptions = {
 }
 
 function isMissingOptionalTourPackageColumn(message: string) {
-  return message.includes('map_style') || message.includes('display_order') || message.includes('accommodation_tier')
+  return message.includes('map_style') || message.includes('display_order') || message.includes('accommodation_tier') || message.includes('price_budget_usd') || message.includes('price_mid_range_usd') || message.includes('price_luxury_usd')
 }
 
 export async function getPublishedTourPackages(

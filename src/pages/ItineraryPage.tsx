@@ -608,6 +608,11 @@ function packageDetailsToTour(details: TourPackageDetails): Tour {
         maximumFractionDigits: 0,
       }).format(tourPackage.price_from_usd)}`,
     priceUSD: tourPackage.price_from_usd,
+    accommodationPrices: {
+      budget: tourPackage.price_budget_usd,
+      midRange: tourPackage.price_mid_range_usd,
+      luxury: tourPackage.price_luxury_usd,
+    },
     accommodationTier: tourPackage.accommodation_tier ?? 'standard',
     duration: String(tourPackage.duration_days),
     destination: tourPackage.category,

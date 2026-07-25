@@ -62,12 +62,6 @@ async function postEmail(payload: unknown) {
   }
 }
 
-const accommodationMultipliers: Record<AccommodationPreference, number> = {
-  Budget: 0.85,
-  'Mid-range': 1,
-  Luxury: 1.35,
-}
-
 const euroCountryCodes = new Set([
   'AD', 'AT', 'BE', 'CY', 'DE', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'IE', 'IT', 'LT', 'LU', 'LV', 'MC', 'ME',
   'MT', 'NL', 'PT', 'SI', 'SK', 'SM', 'VA',
@@ -95,6 +89,20 @@ function getFixedAccommodationPreference(tier?: Tour['accommodationTier']): Acco
   if (tier === 'mid_range') return 'Mid-range'
   if (tier === 'luxury') return 'Luxury'
   return null
+}
+
+function getAccommodationPriceUSD(tour: Tour | undefined, accommodation: AccommodationPreference) {
+  if (!tour) return null
+
+  const tierPrice =
+    accommodation === 'Budget'
+      ? tour.accommodationPrices?.budget
+      : accommodation === 'Luxury'
+        ? tour.accommodationPrices?.luxury
+        : tour.accommodationPrices?.midRange
+
+  if (typeof tierPrice === 'number') return tierPrice
+  return tour.accommodationPrices ? null : tour.priceUSD
 }
 
 export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
@@ -128,14 +136,12 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
   const selectedCurrency = hasLiveExchangeRates ? requestedSelectedCurrency : 'USD'
   const fixedAccommodationPreference = getFixedAccommodationPreference(tour?.accommodationTier)
   const isAccommodationFixed = fixedAccommodationPreference !== null
-  const packagePriceUSD = typeof tour?.priceUSD === 'number' ? tour.priceUSD : null
+  const packagePriceUSD = getAccommodationPriceUSD(tour, form.accommodation)
   const hasPackagePrice = packagePriceUSD !== null
   const perPersonBudgetUSD = packagePriceUSD ?? 0
   const travelers = Math.max(1, Number(form.adults) + Number(form.children))
-  const accommodationMultiplier = accommodationMultipliers[form.accommodation]
-  const adjustedPerPersonBudgetUSD = perPersonBudgetUSD * accommodationMultiplier
-  const estimatedPerPersonBudget = hasPackagePrice ? formatCurrencyIn(adjustedPerPersonBudgetUSD, selectedCurrency) : 'Custom quote'
-  const estimatedGroupBudget = hasPackagePrice ? formatCurrencyIn(adjustedPerPersonBudgetUSD * travelers, selectedCurrency) : 'Custom quote'
+  const estimatedPerPersonBudget = hasPackagePrice ? formatCurrencyIn(perPersonBudgetUSD, selectedCurrency) : 'Custom quote'
+  const estimatedGroupBudget = hasPackagePrice ? formatCurrencyIn(perPersonBudgetUSD * travelers, selectedCurrency) : 'Custom quote'
   const accommodationStayLabelKey =
     form.accommodation === 'Budget'
       ? 'budget'

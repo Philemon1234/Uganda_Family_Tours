@@ -24,6 +24,11 @@ export function packageToTour(tourPackage: TourPackage, index: number): Tour {
     slug: tourPackage.slug,
     price: tourPackage.price_from_usd === null ? 'Contact us' : `From ${formatUsd(tourPackage.price_from_usd)}`,
     priceUSD: tourPackage.price_from_usd,
+    accommodationPrices: {
+      budget: tourPackage.price_budget_usd,
+      midRange: tourPackage.price_mid_range_usd,
+      luxury: tourPackage.price_luxury_usd,
+    },
     accommodationTier: tourPackage.accommodation_tier ?? 'standard',
     duration: `${tourPackage.duration_days} Days`,
     destination: tourPackage.category,

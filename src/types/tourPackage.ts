@@ -9,6 +9,9 @@ export type TourPackage = {
   category: string
   duration_days: number
   price_from_usd: number | null
+  price_budget_usd: number | null
+  price_mid_range_usd: number | null
+  price_luxury_usd: number | null
   accommodation_tier: AccommodationTier
   short_description: string
   overview: string
