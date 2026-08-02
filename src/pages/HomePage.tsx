@@ -35,18 +35,27 @@ const FEATURED_TOURS_LIMIT = 6
 const mediaOrigin = 'https://yufat.org'
 const heroVideoDesktop = `${mediaOrigin}/wp-content/uploads/2026/06/Uganda-Family-tours-banner.mp4`
 const heroVideoMobile = `${mediaOrigin}/wp-content/uploads/2026/06/Uganda-Family-tours-banner-mobile.mp4`
-const aboutVideo = `${mediaOrigin}/wp-content/uploads/2026/06/About-Uganda-Family-Tours.mp4`
+const aboutVideo = 'https://dorcassamaritan.org/wp-content/uploads/2026/08/Uganda-Family-Tours.mp4'
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
 // const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
+
+function getHeroVideoSrc() {
+  if (typeof window === 'undefined') return heroVideoDesktop
+
+  return window.matchMedia('(max-width: 767px)').matches ? heroVideoMobile : heroVideoDesktop
+}
 
 export function HomePage({ customization, onInquiry }: HomePageProps) {
   const { t } = useTranslation()
   const [featuredTours, setFeaturedTours] = useState<Tour[]>([])
   const [isLoadingFeaturedTours, setIsLoadingFeaturedTours] = useState(true)
   const [featuredToursError, setFeaturedToursError] = useState('')
+  const [heroVideoSrc, setHeroVideoSrc] = useState(getHeroVideoSrc)
   const [isHeroVideoReady, setIsHeroVideoReady] = useState(false)
+  const [showSignatureVideoControls, setShowSignatureVideoControls] = useState(false)
   const [isSignatureVideoOpen, setIsSignatureVideoOpen] = useState(false)
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null)
   const signatureVideoRef = useRef<HTMLVideoElement | null>(null)
   const signatureExperiences = signatureExperienceIcons.map((Icon, index) => ({
     Icon,
@@ -129,15 +138,69 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
   }, [])
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)')
+
+    function handleHeroSourceChange() {
+      setHeroVideoSrc(mediaQuery.matches ? heroVideoMobile : heroVideoDesktop)
+      setIsHeroVideoReady(false)
+    }
+
+    handleHeroSourceChange()
+    mediaQuery.addEventListener('change', handleHeroSourceChange)
+
+    return () => mediaQuery.removeEventListener('change', handleHeroSourceChange)
+  }, [])
+
+  useEffect(() => {
+    const video = heroVideoRef.current
+
+    if (!video) return
+
+    const heroVideo = video
+    let retryTimer: number | undefined
+
+    function tryPlayHeroVideo() {
+      if (!heroVideo.paused) return
+
+      heroVideo.muted = true
+      heroVideo.defaultMuted = true
+      void heroVideo.play().catch(() => {
+        retryTimer = window.setTimeout(tryPlayHeroVideo, 1200)
+      })
+    }
+
+    heroVideo.load()
+    tryPlayHeroVideo()
+    window.addEventListener('focus', tryPlayHeroVideo)
+    document.addEventListener('visibilitychange', tryPlayHeroVideo)
+
+    return () => {
+      if (retryTimer) window.clearTimeout(retryTimer)
+      window.removeEventListener('focus', tryPlayHeroVideo)
+      document.removeEventListener('visibilitychange', tryPlayHeroVideo)
+    }
+  }, [heroVideoSrc])
+
+  useEffect(() => {
     if (!isSignatureVideoOpen) return
 
     const previousBodyOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    const video = signatureVideoRef.current
+
+    if (video) {
+      video.currentTime = 0
+      video.controls = true
+      setShowSignatureVideoControls(true)
+      void video.play().catch(() => {
+        setShowSignatureVideoControls(true)
+      })
+    }
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         setIsSignatureVideoOpen(false)
-        signatureVideoRef.current?.pause()
+        video?.pause()
       }
     }
 
@@ -145,6 +208,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
 
     return () => {
       document.body.style.overflow = previousBodyOverflow
+      video?.pause()
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isSignatureVideoOpen])
@@ -174,6 +238,8 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
           />
         </picture>
         <video
+          ref={heroVideoRef}
+          key={heroVideoSrc}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out ${
             isHeroVideoReady ? 'opacity-100' : 'opacity-0'
           }`}
@@ -184,10 +250,12 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
           preload="auto"
           poster={heroOnloadImage}
           aria-hidden="true"
-          onLoadedData={() => setIsHeroVideoReady(true)}
+          disablePictureInPicture
+          onCanPlay={() => setIsHeroVideoReady(true)}
+          onPlaying={() => setIsHeroVideoReady(true)}
+          onError={() => setIsHeroVideoReady(false)}
         >
-          <source src={heroVideoMobile} type="video/mp4" media="(max-width: 767px)" />
-          <source src={heroVideoDesktop} type="video/mp4" />
+          <source src={heroVideoSrc} type="video/mp4" />
         </video>
         {/*
         {heroSlides.map((image, index) => (
@@ -265,14 +333,8 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
                   type="button"
                   aria-label={t('home.signature.videoAria')}
                   onClick={() => {
+                    setShowSignatureVideoControls(false)
                     setIsSignatureVideoOpen(true)
-                    const video = signatureVideoRef.current
-
-                    if (video) {
-                      void video.play().catch(() => {
-                        video.controls = true
-                      })
-                    }
                   }}
                 >
                   <img
@@ -453,12 +515,12 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
               playsInline
               preload="auto"
               poster={storyThumbnail}
-              controls={isSignatureVideoOpen}
+              controls={isSignatureVideoOpen || showSignatureVideoControls}
               tabIndex={isSignatureVideoOpen ? 0 : -1}
               onClick={(event) => {
                 const video = event.currentTarget
                 if (video.paused) {
-                  void video.play()
+                  void video.play().catch(() => setShowSignatureVideoControls(true))
                 } else {
                   video.pause()
                 }
