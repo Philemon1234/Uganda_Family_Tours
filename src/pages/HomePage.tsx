@@ -14,10 +14,10 @@ import { FooterImageBand } from '../components/FooterImageBand'
 import { getPublishedTourPackages, subscribeToTourPackageChanges } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
 import type { HomeCustomizationContent } from '../types/homeCustomization'
-import heroOnloadImage from '../assets/on load.png'
-// import heroImage from '../assets/gorilla-7708328_1920.jpg'
-// import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
-// import elephantImage from '../assets/elephant-4736008_1280.jpg'
+import elephantImage from '../assets/elephant-4736008_1280.jpg'
+import lionImage from '../assets/cover_1669-Tree-Climbing-Lions.jpg'
+import gorillaImage from '../assets/gorilla-7708328_1280.jpg'
+import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
 import storyThumbnail from '../assets/Thumbnail.png'
 import homeIconOne from '../assets/UFT-Homepage-icons-01.png'
 import homeIconTwo from '../assets/UFT-Homepage-icons-02.png'
@@ -32,30 +32,19 @@ type HomePageProps = {
 }
 
 const FEATURED_TOURS_LIMIT = 6
-const mediaOrigin = 'https://yufat.org'
-const heroVideoDesktop = `${mediaOrigin}/wp-content/uploads/2026/06/Uganda-Family-tours-banner.mp4`
-const heroVideoMobile = `${mediaOrigin}/wp-content/uploads/2026/06/Uganda-Family-tours-banner-mobile.mp4`
 const aboutVideo = 'https://dorcassamaritan.org/wp-content/uploads/2026/08/Uganda-Family-Tours.mp4'
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
-// const heroSlides = [heroImage, gorillaForestImage, elephantImage, lionImage]
-
-function getHeroVideoSrc() {
-  if (typeof window === 'undefined') return heroVideoDesktop
-
-  return window.matchMedia('(max-width: 767px)').matches ? heroVideoMobile : heroVideoDesktop
-}
+const heroSlides = [elephantImage, lionImage, gorillaImage, gorillaForestImage]
 
 export function HomePage({ customization, onInquiry }: HomePageProps) {
   const { t } = useTranslation()
   const [featuredTours, setFeaturedTours] = useState<Tour[]>([])
   const [isLoadingFeaturedTours, setIsLoadingFeaturedTours] = useState(true)
   const [featuredToursError, setFeaturedToursError] = useState('')
-  const [heroVideoSrc, setHeroVideoSrc] = useState(getHeroVideoSrc)
-  const [isHeroVideoReady, setIsHeroVideoReady] = useState(false)
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0)
   const [showSignatureVideoControls, setShowSignatureVideoControls] = useState(false)
   const [isSignatureVideoOpen, setIsSignatureVideoOpen] = useState(false)
-  const heroVideoRef = useRef<HTMLVideoElement | null>(null)
   const signatureVideoRef = useRef<HTMLVideoElement | null>(null)
   const signatureExperiences = signatureExperienceIcons.map((Icon, index) => ({
     Icon,
@@ -103,83 +92,12 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
   }, [])
 
   useEffect(() => {
-    const headLinks: HTMLLinkElement[] = []
+    const timer = window.setInterval(() => {
+      setActiveHeroSlide((currentSlide) => (currentSlide + 1) % heroSlides.length)
+    }, 4000)
 
-    function addHeadLink(rel: string, href: string, attributes: Record<string, string> = {}) {
-      const selector = `link[rel="${rel}"][href="${href}"]`
-      const existingLink = document.head.querySelector(selector)
-
-      if (existingLink) return
-
-      const link = document.createElement('link')
-      link.rel = rel
-      link.href = href
-      Object.entries(attributes).forEach(([name, value]) => link.setAttribute(name, value))
-      document.head.appendChild(link)
-      headLinks.push(link)
-    }
-
-    addHeadLink('dns-prefetch', '//yufat.org')
-    addHeadLink('preconnect', mediaOrigin, { crossorigin: '' })
-    addHeadLink('preload', heroVideoMobile, {
-      as: 'video',
-      type: 'video/mp4',
-      media: '(max-width: 767px)',
-    })
-    addHeadLink('preload', heroVideoDesktop, {
-      as: 'video',
-      type: 'video/mp4',
-      media: '(min-width: 768px)',
-    })
-
-    return () => {
-      headLinks.forEach((link) => link.remove())
-    }
+    return () => window.clearInterval(timer)
   }, [])
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 767px)')
-
-    function handleHeroSourceChange() {
-      setHeroVideoSrc(mediaQuery.matches ? heroVideoMobile : heroVideoDesktop)
-      setIsHeroVideoReady(false)
-    }
-
-    handleHeroSourceChange()
-    mediaQuery.addEventListener('change', handleHeroSourceChange)
-
-    return () => mediaQuery.removeEventListener('change', handleHeroSourceChange)
-  }, [])
-
-  useEffect(() => {
-    const video = heroVideoRef.current
-
-    if (!video) return
-
-    const heroVideo = video
-    let retryTimer: number | undefined
-
-    function tryPlayHeroVideo() {
-      if (!heroVideo.paused) return
-
-      heroVideo.muted = true
-      heroVideo.defaultMuted = true
-      void heroVideo.play().catch(() => {
-        retryTimer = window.setTimeout(tryPlayHeroVideo, 1200)
-      })
-    }
-
-    heroVideo.load()
-    tryPlayHeroVideo()
-    window.addEventListener('focus', tryPlayHeroVideo)
-    document.addEventListener('visibilitychange', tryPlayHeroVideo)
-
-    return () => {
-      if (retryTimer) window.clearTimeout(retryTimer)
-      window.removeEventListener('focus', tryPlayHeroVideo)
-      document.removeEventListener('visibilitychange', tryPlayHeroVideo)
-    }
-  }, [heroVideoSrc])
 
   useEffect(() => {
     if (!isSignatureVideoOpen) return
@@ -213,51 +131,9 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
     }
   }, [isSignatureVideoOpen])
 
-  // useEffect(() => {
-  //   const timer = window.setInterval(() => {
-  //     setActiveHeroSlide((currentSlide) => (currentSlide + 1) % heroSlides.length)
-  //   }, 5000)
-  //
-  //   return () => window.clearInterval(timer)
-  // }, [])
-
   return (
     <>
       <section className="hero-section home-hero-section min-h-[92vh] bg-dark">
-        <picture
-          className={`absolute inset-0 h-full w-full transition-opacity duration-700 ease-out ${
-            isHeroVideoReady ? 'opacity-0' : 'opacity-100'
-          }`}
-        >
-          <img
-            className="h-full w-full object-cover"
-            src={heroOnloadImage}
-            alt=""
-            aria-hidden="true"
-            loading="eager"
-          />
-        </picture>
-        <video
-          ref={heroVideoRef}
-          key={heroVideoSrc}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out ${
-            isHeroVideoReady ? 'opacity-100' : 'opacity-0'
-          }`}
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          poster={heroOnloadImage}
-          aria-hidden="true"
-          disablePictureInPicture
-          onCanPlay={() => setIsHeroVideoReady(true)}
-          onPlaying={() => setIsHeroVideoReady(true)}
-          onError={() => setIsHeroVideoReady(false)}
-        >
-          <source src={heroVideoSrc} type="video/mp4" />
-        </video>
-        {/*
         {heroSlides.map((image, index) => (
           <img
             key={image}
@@ -270,7 +146,6 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
             loading={index === 0 ? 'eager' : 'lazy'}
           />
         ))}
-        */}
         <div className="absolute inset-0 bg-dark/20" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-[#171719]/70 to-[#171719] md:h-40" />
         <div className="container-custom home-hero-content relative z-10 flex min-h-[92vh] flex-col items-center justify-center px-4 pb-20 pt-40 text-center text-white lg:pb-24 lg:pt-44">
