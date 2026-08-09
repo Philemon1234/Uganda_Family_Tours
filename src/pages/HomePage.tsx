@@ -53,7 +53,6 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
   const [featuredToursError, setFeaturedToursError] = useState('')
   const [heroVideoSrc, setHeroVideoSrc] = useState(getHeroVideoSrc)
   const [isHeroVideoReady, setIsHeroVideoReady] = useState(false)
-  const [showSignatureVideoControls, setShowSignatureVideoControls] = useState(false)
   const [isSignatureVideoOpen, setIsSignatureVideoOpen] = useState(false)
   const heroVideoRef = useRef<HTMLVideoElement | null>(null)
   const signatureVideoRef = useRef<HTMLVideoElement | null>(null)
@@ -189,12 +188,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
     const video = signatureVideoRef.current
 
     if (video) {
-      video.currentTime = 0
       video.controls = true
-      setShowSignatureVideoControls(true)
-      void video.play().catch(() => {
-        setShowSignatureVideoControls(true)
-      })
     }
 
     function handleKeyDown(event: KeyboardEvent) {
@@ -254,9 +248,8 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
           onCanPlay={() => setIsHeroVideoReady(true)}
           onPlaying={() => setIsHeroVideoReady(true)}
           onError={() => setIsHeroVideoReady(false)}
-        >
-          <source src={heroVideoSrc} type="video/mp4" />
-        </video>
+          src={heroVideoSrc}
+        />
         {/*
         {heroSlides.map((image, index) => (
           <img
@@ -333,8 +326,15 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
                   type="button"
                   aria-label={t('home.signature.videoAria')}
                   onClick={() => {
-                    setShowSignatureVideoControls(false)
                     setIsSignatureVideoOpen(true)
+                    const video = signatureVideoRef.current
+
+                    if (video) {
+                      video.currentTime = 0
+                      video.controls = true
+                      video.load()
+                      void video.play()
+                    }
                   }}
                 >
                   <img
@@ -513,20 +513,20 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
               className="aspect-video max-h-[82vh] w-full bg-black object-contain"
               loop
               playsInline
-              preload="auto"
+              preload="metadata"
               poster={storyThumbnail}
-              controls={isSignatureVideoOpen || showSignatureVideoControls}
+              controls
               tabIndex={isSignatureVideoOpen ? 0 : -1}
+              src={aboutVideo}
               onClick={(event) => {
                 const video = event.currentTarget
                 if (video.paused) {
-                  void video.play().catch(() => setShowSignatureVideoControls(true))
+                  void video.play()
                 } else {
                   video.pause()
                 }
               }}
             >
-              <source src={aboutVideo} type="video/mp4" />
               {t('home.signature.videoFallback')}
             </video>
           </div>
