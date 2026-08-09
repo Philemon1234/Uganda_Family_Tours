@@ -11,6 +11,7 @@ type EmailPayload = {
 }
 
 type InquiryEmailInput = {
+  packageId?: string
   fullName: string
   email: string
   phone: string
@@ -18,6 +19,7 @@ type InquiryEmailInput = {
 }
 
 type BookingEmailInput = {
+  packageId?: string
   selectedTour: string
   fullName: string
   email: string

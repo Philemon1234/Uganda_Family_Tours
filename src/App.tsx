@@ -19,6 +19,8 @@ function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false)
   const [isInquiryOpen, setIsInquiryOpen] = useState(false)
   const [bookingTour, setBookingTour] = useState<Tour | undefined>(tours[0])
+  const [activeTourPackageId, setActiveTourPackageId] = useState<string | undefined>()
+  const [inquiryPackageId, setInquiryPackageId] = useState<string | undefined>()
   const [homeCustomization, setHomeCustomization] = useState<HomeCustomizationContent>(defaultHomeCustomization)
   const location = useLocation()
 
@@ -50,29 +52,41 @@ function App() {
     setIsBookingOpen(true)
   }
 
+  const openInquiry = () => {
+    setInquiryPackageId(location.pathname.startsWith('/tours/') ? activeTourPackageId : undefined)
+    setIsInquiryOpen(true)
+  }
+
+
   return (
     <div className="min-h-screen bg-white pb-24 font-sans text-ink lg:pb-0">
       <ScrollToTop />
-      <Navbar customization={homeCustomization} onInquiry={() => setIsInquiryOpen(true)} />
+      <Navbar customization={homeCustomization} onInquiry={openInquiry} />
       <div key={location.pathname} className="page-transition">
         <Routes>
-          <Route path="/" element={<HomePage customization={homeCustomization} onInquiry={() => setIsInquiryOpen(true)} />} />
-          <Route path="/about" element={<AboutPage onInquiry={() => setIsInquiryOpen(true)} />} />
+          <Route path="/" element={<HomePage customization={homeCustomization} onInquiry={openInquiry} />} />
+          <Route path="/about" element={<AboutPage onInquiry={openInquiry} />} />
           <Route path="/tours" element={<ToursPage />} />
-          <Route path="/tours/:tourId" element={<ItineraryRoute onBook={openBooking} />} />
+          <Route path="/tours/:tourId" element={<ItineraryRoute onBook={openBooking} onPackageLoad={setActiveTourPackageId} />} />
         </Routes>
       </div>
       <Footer customization={homeCustomization} />
       <MobileBottomNav />
       <BookingModal isOpen={isBookingOpen} tour={bookingTour} onClose={() => setIsBookingOpen(false)} />
-      <InquiryModal isOpen={isInquiryOpen} onClose={() => setIsInquiryOpen(false)} />
+      <InquiryModal isOpen={isInquiryOpen} packageId={inquiryPackageId} onClose={() => setIsInquiryOpen(false)} />
     </div>
   )
 }
 
-function ItineraryRoute({ onBook }: { onBook: (tour?: Tour) => void }) {
+function ItineraryRoute({
+  onBook,
+  onPackageLoad,
+}: {
+  onBook: (tour?: Tour) => void
+  onPackageLoad: (packageId: string) => void
+}) {
   const { tourId } = useParams()
-  return <ItineraryPage slug={tourId ?? ''} onBook={onBook} />
+  return <ItineraryPage slug={tourId ?? ''} onBook={onBook} onPackageLoad={onPackageLoad} />
 }
 
 export default App

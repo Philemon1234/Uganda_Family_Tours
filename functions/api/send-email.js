@@ -52,6 +52,11 @@ function toNullableNumber(value) {
   return Number.isFinite(number) ? number : null
 }
 
+function toNullableUuid(value) {
+  const text = clean(value)
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(text) ? text : null
+}
+
 function base64(value) {
   if (typeof btoa === 'function') return btoa(value)
   return Buffer.from(value, 'utf8').toString('base64')
@@ -176,6 +181,7 @@ function buildSubmission(mail) {
     return {
       type: 'inquiry',
       status: 'new',
+      package_id: toNullableUuid(formData.packageId),
       full_name: clean(formData.fullName),
       email: clean(formData.email).toLowerCase(),
       phone: clean(formData.phone),
@@ -187,6 +193,7 @@ function buildSubmission(mail) {
   return {
     type: 'booking',
     status: 'new',
+    package_id: toNullableUuid(formData.packageId),
     tour_package_name: clean(formData.selectedTour),
     full_name: clean(formData.fullName),
     email: clean(formData.email).toLowerCase(),

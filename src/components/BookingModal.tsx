@@ -8,6 +8,7 @@ import { useLocale } from '../context/LocaleContext'
 import type { CurrencyCode } from '../utils/currency'
 import { buildBookingEmail } from '../utils/contactEmailTemplates'
 import { getLocalizedTourTitle } from '../utils/localizedTourContent'
+import { trackTourAnalyticsEventQuietly } from '../services/tourAnalyticsService'
 
 type BookingModalProps = {
   isOpen: boolean
@@ -298,6 +299,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
     try {
       const response = await postEmail(buildBookingEmail({
           ...payload,
+          packageId: tour?.packageId,
           budgetPerPerson: estimatedPerPersonBudget,
           estimatedGroupBudget,
           currency: selectedCurrency,
@@ -311,6 +313,7 @@ export function BookingModal({ isOpen, tour, onClose }: BookingModalProps) {
       setForm(initialForm)
       setStatus(null)
       setShowSuccess(true)
+      trackTourAnalyticsEventQuietly(tour?.packageId, 'booking_submitted')
       setHasAttemptedFinalSubmit(false)
     } catch (error) {
       const message = error instanceof DOMException && error.name === 'AbortError'

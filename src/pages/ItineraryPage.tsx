@@ -7,6 +7,7 @@ import { SafariLoaderOverlay } from '../components/SafariTrailLoader'
 import TourRouteMap from '../components/TourRouteMap'
 import { tours, type ItineraryDay, type Tour } from '../data/tours'
 import { useLocale } from '../context/LocaleContext'
+import { trackTourAnalyticsEventQuietly, trackTourPageViewQuietly } from '../services/tourAnalyticsService'
 import { getTourPackageDetailsBySlug } from '../services/publicTourService'
 import type { TourPackageDetails, TourItineraryDayWithDetails } from '../types/tourPackage'
 import {
@@ -21,11 +22,12 @@ import {
 type ItineraryPageProps = {
   slug: string
   onBook: (tour?: Tour) => void
+  onPackageLoad?: (packageId: string) => void
 }
 
 const fallbackTour = tours[0]
 
-export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
+export function ItineraryPage({ slug, onBook, onPackageLoad }: ItineraryPageProps) {
   const { t } = useTranslation()
   const { formatCurrency } = useLocale()
   const tabSentinelRef = useRef<HTMLDivElement>(null)
@@ -73,6 +75,13 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
       isMounted = false
     }
   }, [slug, t])
+
+  useEffect(() => {
+    if (!details?.package.id) return
+
+    onPackageLoad?.(details.package.id)
+    trackTourPageViewQuietly(details.package.id, slug)
+  }, [details?.package.id, onPackageLoad, slug])
 
   const tabs = [
     [t('tourDetails.overview'), '#overview'],
@@ -381,7 +390,16 @@ export function ItineraryPage({ slug, onBook }: ItineraryPageProps) {
                 <span className="text-safe flex items-center justify-center gap-2"><FaShieldHeart className="shrink-0 text-primary" /> {t('tourDetails.secure')}</span>
                 <span className="text-safe flex items-center justify-center gap-2"><FaCheck className="shrink-0 text-primary" /> {t('tourDetails.fees')}</span>
               </div>
-              <button className="btn-primary mt-7 w-full justify-center text-white" type="button" onClick={() => onBook(bookingTour)}>{t('tourDetails.bookThisTour')} <FiArrowRight /></button>
+              <button
+                className="btn-primary mt-7 w-full justify-center text-white"
+                type="button"
+                onClick={() => {
+                  trackTourAnalyticsEventQuietly(bookingTour.packageId, 'book_now')
+                  onBook(bookingTour)
+                }}
+              >
+                {t('tourDetails.bookThisTour')} <FiArrowRight />
+              </button>
               <div className="mt-8 text-sm">
                 <p className="text-safe text-muted">{t('tourDetails.needHelp')}</p>
                 <a className="text-safe mt-2 flex items-center justify-center gap-2 font-semibold text-primary transition hover:text-primary/80" href="tel:+256703543027">
@@ -598,6 +616,7 @@ function packageDetailsToTour(details: TourPackageDetails): Tour {
 
   return {
     id: 1,
+    packageId: tourPackage.id,
     title: tourPackage.title,
     slug: tourPackage.slug,
     price: tourPackage.price_from_usd === null

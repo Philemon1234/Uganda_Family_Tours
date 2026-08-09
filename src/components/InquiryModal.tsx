@@ -3,9 +3,11 @@ import { FaEnvelope, FaPhone, FaRegUser, FaXmark } from 'react-icons/fa6'
 import { FiArrowRight } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 import { buildInquiryEmail } from '../utils/contactEmailTemplates'
+import { trackTourAnalyticsEventQuietly } from '../services/tourAnalyticsService'
 
 type InquiryModalProps = {
   isOpen: boolean
+  packageId?: string
   onClose: () => void
 }
 
@@ -40,7 +42,7 @@ async function postEmail(payload: unknown) {
   }
 }
 
-export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
+export function InquiryModal({ isOpen, packageId, onClose }: InquiryModalProps) {
   const { t } = useTranslation()
   const [form, setForm] = useState<InquiryForm>(initialForm)
   const [errors, setErrors] = useState<Partial<Record<keyof InquiryForm, string>>>({})
@@ -89,7 +91,7 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
     setStatus({ type: 'info', message: t('inquiryForm.sending') })
 
     try {
-      const response = await postEmail(buildInquiryEmail(form))
+      const response = await postEmail(buildInquiryEmail({ ...form, packageId }))
       const result = await response.json().catch(() => null)
 
       if (!response.ok || result?.success === false) {
@@ -98,6 +100,7 @@ export function InquiryModal({ isOpen, onClose }: InquiryModalProps) {
 
       setForm(initialForm)
       setStatus({ type: 'success', message: t('inquiryForm.success') })
+      trackTourAnalyticsEventQuietly(packageId, 'inquiry')
     } catch (error) {
       const message = error instanceof DOMException && error.name === 'AbortError'
         ? 'The email request timed out. Please try again, or contact us directly by WhatsApp.'
