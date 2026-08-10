@@ -1,6 +1,4 @@
-import { connect } from 'cloudflare:sockets'
-
-const ADMIN_EMAIL = 'safaris@ugandafamilytours.com'
+﻿const ADMIN_EMAIL = 'safaris@ugandafamilytours.com'
 const DEFAULT_FROM_EMAIL = 'Uganda Family Tours <safaris@ugandafamilytours.com>'
 const DEFAULT_SMTP_HOST = 'mail.ugandafamilytours.com'
 const DEFAULT_SMTP_PORT = 587
@@ -99,6 +97,15 @@ function getSmtpConfig(env) {
   }
 
   return { host, port, user, pass, from }
+}
+
+async function getCloudflareSocketConnect() {
+  if (typeof process !== 'undefined' && process.versions?.node) {
+    throw new Error('SMTP delivery through cloudflare:sockets requires the Cloudflare runtime. Configure RESEND_API_KEY for local development email delivery.')
+  }
+
+  const sockets = await import('cloudflare:sockets')
+  return sockets.connect
 }
 
 function validateAndBuildMail(payload) {
@@ -305,6 +312,7 @@ async function writeSmtp(writer, command) {
 }
 
 async function sendWithSmtp(mail, env) {
+  const connect = await getCloudflareSocketConnect()
   const smtp = getSmtpConfig(env)
   const secureTransport = smtp.port === 465 ? 'on' : smtp.port === 587 ? 'starttls' : 'off'
   let socket = connect({ hostname: smtp.host, port: smtp.port }, { secureTransport })
@@ -450,3 +458,4 @@ export async function onRequestPost({ request, env }) {
 export function onRequest() {
   return jsonResponse(405, { success: false, error: 'Method not allowed.' })
 }
+

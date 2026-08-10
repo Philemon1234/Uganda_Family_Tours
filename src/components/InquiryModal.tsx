@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { FaEnvelope, FaPhone, FaRegUser, FaXmark } from 'react-icons/fa6'
 import { FiArrowRight } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
@@ -25,6 +25,7 @@ const initialForm: InquiryForm = {
   message: '',
 }
 const emailRequestTimeoutMs = 20000
+const messageMaxLength = 1000
 
 async function postEmail(payload: unknown) {
   const controller = new AbortController()
@@ -165,13 +166,15 @@ export function InquiryModal({ isOpen, packageId, onClose }: InquiryModalProps) 
 
             <Field label={t('inquiryForm.message')} required error={errors.message}>
               <textarea
-                className="input min-h-32 resize-none"
+                className="input resize-y align-top"
                 value={form.message}
-                maxLength={500}
+                rows={7}
+                style={{ minHeight: '8rem' }}
+                maxLength={messageMaxLength}
                 onChange={(event) => update('message', event.target.value)}
                 placeholder={t('inquiryForm.messagePlaceholder')}
               />
-              <p className="mt-1 text-right text-xs text-muted">{form.message.length}/500</p>
+              <p className="mt-1 text-right text-xs text-muted">{form.message.length}/{messageMaxLength}</p>
             </Field>
 
             {status && (
@@ -214,3 +217,8 @@ function Field({ label, required, error, children }: FieldProps) {
     </label>
   )
 }
+
+
+
+
+
