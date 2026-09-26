@@ -188,7 +188,7 @@
   },
   "tourCard": {
     "duration": "Duration",
-    "getPackage": "Get Package",
+    "getPackage": "View Journey",
     "fallbackDescription": "Explore this Uganda Family Tours experience."
   },
   "gallery": {
@@ -248,7 +248,7 @@
     "instant": "Instant Confirmation",
     "secure": "Secure booking",
     "fees": "No booking fees",
-    "bookThisTour": "Book This Tour",
+    "bookThisTour": "Request Quote",
     "needHelp": "Need assistance with your booking?",
     "activities": "Activities",
     "accommodation": "Accommodation",
