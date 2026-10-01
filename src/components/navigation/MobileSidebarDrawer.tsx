@@ -10,7 +10,7 @@ import {
   FaWhatsapp,
   FaYoutube,
 } from 'react-icons/fa'
-import logo from '../../assets/UFT-Logo-PNG.png'
+import logo from '../../assets/New logo.png'
 
 type MobileSidebarDrawerProps = {
   isOpen: boolean

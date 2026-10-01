@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import fallbackLogo from '../assets/UFT-Logo-PNG.png'
+import fallbackLogo from '../assets/New logo.png'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import type { HomeCustomizationContent } from '../types/homeCustomization'
 

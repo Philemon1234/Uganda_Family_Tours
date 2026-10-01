@@ -1,7 +1,7 @@
 import heroOnloadImage from '../assets/on load.png'
 import storyThumbnail from '../assets/Thumbnail.png'
 import journeyImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
-import logoImage from '../assets/UFT-Logo-PNG.png'
+import logoImage from '../assets/New logo.png'
 import homeIconOne from '../assets/UFT-Homepage-icons-01.png'
 import homeIconTwo from '../assets/UFT-Homepage-icons-02.png'
 import homeIconThree from '../assets/UFT-Homepage-icons-03.png'
@@ -12,6 +12,7 @@ import footerBandImage from '../assets/footer/UFT Website Work-03.jpg'
 import type { HomeCustomizationContent } from '../types/homeCustomization'
 
 const localAssetUrls: Record<string, string> = {
+  '/src/assets/New logo.png': logoImage,
   '/src/assets/UFT-Logo-PNG.png': logoImage,
   '/src/assets/on load.png': heroOnloadImage,
   '/src/assets/Thumbnail.png': storyThumbnail,

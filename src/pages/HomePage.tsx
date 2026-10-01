@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FaHandHoldingHeart, FaPeopleGroup, FaShieldHeart, FaSliders } from 'react-icons/fa6'
-import { FiArrowRight, FiCamera, FiCompass, FiHeart, FiMap, FiMapPin, FiPlay, FiUsers, FiX } from 'react-icons/fi'
+import { FiArrowRight, FiCamera, FiCompass, FiHeart, FiMap, FiMapPin, FiPause, FiPlay, FiUsers, FiX } from 'react-icons/fi'
 import type { Tour } from '../data/tours'
 import { TourCard } from '../components/TourCard'
 import { SectionHeader } from '../components/SectionHeader'
@@ -44,6 +44,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
   const [isLoadingFeaturedTours, setIsLoadingFeaturedTours] = useState(true)
   const [featuredToursError, setFeaturedToursError] = useState('')
   const [activeHeroSlide, setActiveHeroSlide] = useState(0)
+  const [isHeroPaused, setIsHeroPaused] = useState(false)
   const [isSignatureVideoOpen, setIsSignatureVideoOpen] = useState(false)
   const signatureVideoRef = useRef<HTMLVideoElement | null>(null)
   const signatureExperiences = signatureExperienceIcons.map((Icon, index) => ({
@@ -92,12 +93,14 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
   }, [])
 
   useEffect(() => {
+    if (isHeroPaused) return
+
     const timer = window.setInterval(() => {
       setActiveHeroSlide((currentSlide) => (currentSlide + 1) % heroSlides.length)
     }, 4000)
 
     return () => window.clearInterval(timer)
-  }, [])
+  }, [isHeroPaused])
 
   useEffect(() => {
     if (!isSignatureVideoOpen) return
@@ -153,6 +156,15 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
             <Link className="hero-action btn-primary btn-on-dark mt-8" to={customization.hero.cta.href || '/tours'} style={{ backgroundColor: customization.hero.cta.color }}>{customization.hero.cta.text || t('home.hero.primaryCta')} <FiArrowRight /></Link>
           </div>
         </div>
+        <button
+          type="button"
+          className="absolute bottom-[calc(6rem+env(safe-area-inset-bottom))] left-6 z-20 flex h-12 items-center gap-2 rounded-full border border-white/70 bg-black/25 px-5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:left-10 lg:bottom-16 lg:left-16"
+          onClick={() => setIsHeroPaused((paused) => !paused)}
+          aria-label={isHeroPaused ? 'Play hero slideshow' : 'Pause hero slideshow'}
+        >
+          {isHeroPaused ? <FiPlay aria-hidden="true" /> : <FiPause aria-hidden="true" />}
+          <span>{isHeroPaused ? 'Play' : 'Pause'}</span>
+        </button>
       </section>
 
       <section className="bg-[#171719] pb-20 pt-8 md:pb-28 md:pt-12">
