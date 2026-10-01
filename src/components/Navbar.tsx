@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import fallbackLogo from '../assets/New logo.png'
+import navbarLogo from '../assets/New logo.png'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import type { HomeCustomizationContent } from '../types/homeCustomization'
 
@@ -15,13 +15,6 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
   const location = useLocation()
   const [isAtFooterBottom, setIsAtFooterBottom] = useState(false)
   const [isPastHero, setIsPastHero] = useState(false)
-  const [hasLogoError, setHasLogoError] = useState(false)
-  const logoSrc = customization.nav.logo?.src || fallbackLogo
-  const displayedLogoSrc = hasLogoError ? fallbackLogo : logoSrc
-
-  useEffect(() => {
-    setHasLogoError(false)
-  }, [logoSrc])
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 1023px)')
@@ -78,14 +71,11 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
       }`}
     >
       <nav className="container-custom flex min-h-15 items-center justify-between py-2">
-        <NavLink to="/" aria-label={t('navbar.homeAria')}>
+        <NavLink className="shrink-0" to="/" aria-label={t('navbar.homeAria')}>
           <img
-            className="h-8 w-auto object-contain md:h-9"
-            src={displayedLogoSrc}
-            alt={customization.nav.logo?.alt || 'Uganda Family Tours'}
-            onError={() => {
-              if (displayedLogoSrc !== fallbackLogo) setHasLogoError(true)
-            }}
+            className="block h-12 w-auto object-contain md:h-14"
+            src={navbarLogo}
+            alt="Uganda Family Tours"
           />
         </NavLink>
 
