@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
 @font-face {
+  font-family: "Arson";
+  src: url("./assets/Fonts/Arson/Arson Pro Bold.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
   font-family: "Gotham Rounded";
   src: url("./font-family/gothamrnd_light.otf") format("opentype");
   font-display: swap;
@@ -295,6 +303,10 @@ img {
       min-height: 100dvh;
     }
   }
+}
+
+.navbar-link {
+  font-family: "Arson", "Gotham Rounded", ui-sans-serif, system-ui, sans-serif;
 }
 
 .site-header {
