@@ -15,6 +15,7 @@ import { getPublishedTourPackages, subscribeToTourPackageChanges } from '../serv
 import { packageToTour } from '../utils/tourPackageMapper'
 import type { HomeCustomizationContent } from '../types/homeCustomization'
 import elephantImage from '../assets/elephant-4736008_1280.jpg'
+import elephantBannerImage from '../assets/elephant.jpeg'
 import lionImage from '../assets/cover_1669-Tree-Climbing-Lions.jpg'
 import gorillaImage from '../assets/gorilla-7708328_1280.jpg'
 import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
@@ -35,7 +36,7 @@ const FEATURED_TOURS_LIMIT = 6
 const aboutVideo = 'https://dorcassamaritan.org/wp-content/uploads/2026/08/Uganda-Family-Tours.mp4'
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
-const heroSlides = [elephantImage, lionImage, gorillaImage, gorillaForestImage]
+const heroSlides = [elephantImage, lionImage, gorillaImage, gorillaForestImage, elephantBannerImage]
 
 export function HomePage({ customization, onInquiry }: HomePageProps) {
   const { t } = useTranslation()
@@ -142,11 +143,11 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
         ))}
         <div className="absolute inset-0 bg-dark/20" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-[#171719]/70 to-[#171719] md:h-40" />
-        <div className="container-custom home-hero-content relative z-10 flex min-h-[92vh] flex-col items-center justify-center px-4 pb-20 pt-40 text-center text-white lg:pb-24 lg:pt-44">
-          <div className="w-full">
+        <div className="home-hero-content relative z-10 flex min-h-[92vh] w-full flex-col items-end justify-end px-6 pb-12 pt-40 text-right text-white md:px-10 lg:px-16 lg:pb-16 lg:pt-44">
+          <div className="w-full max-w-3xl">
             <p className="hero-kicker luxury-script text-3xl leading-none text-white/95 md:text-4xl">{customization.hero.kicker || t('home.hero.kicker')}</p>
-            <h1 className="hero-title mx-auto mt-1 max-w-5xl text-4xl font-bold leading-tight md:text-7xl">{customization.hero.title || t('home.hero.title')}</h1>
-            <p className="hero-copy mx-auto mt-5 max-w-2xl text-base leading-8 text-white/82 md:text-lg">
+            <h1 className="hero-title mt-1 text-4xl font-bold leading-tight md:text-7xl">{customization.hero.title || t('home.hero.title')}</h1>
+            <p className="hero-copy ml-auto mt-5 max-w-2xl text-base leading-8 text-white/82 md:text-lg">
               {customization.hero.subtitle || t('home.hero.subtitle')}
             </p>
             <Link className="hero-action btn-primary btn-on-dark mt-8" to={customization.hero.cta.href || '/tours'} style={{ backgroundColor: customization.hero.cta.color }}>{customization.hero.cta.text || t('home.hero.primaryCta')} <FiArrowRight /></Link>
