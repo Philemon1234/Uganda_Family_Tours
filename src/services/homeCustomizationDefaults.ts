@@ -1,4 +1,4 @@
-import heroOnloadImage from '../assets/on load.png'
+import heroOnloadImage from '../assets/gorilla-7708328_1280.jpg'
 import storyThumbnail from '../assets/Thumbnail.png'
 import journeyImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
 import logoImage from '../assets/New logo.png'
@@ -41,8 +41,8 @@ export const defaultHomeCustomization: HomeCustomizationContent = {
   },
   hero: {
     kicker: 'Explore the Pearl of Africa',
-    title: 'A Safari Journey Made Personal',
-    subtitle: 'Nobody knows Uganda better than us',
+    title: 'Bespoke Journeys into the Heart of Africa',
+    subtitle: 'Tailor-made & Guided by Local Experts',
     cta: { text: 'Explore Our Tours', href: '/tours', color: '#FB770D', icon: 'arrow' },
     background: { src: heroOnloadImage, alt: 'Uganda safari landscape' },
   },

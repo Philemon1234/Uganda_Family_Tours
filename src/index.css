@@ -348,7 +348,7 @@ img {
 
 @media (max-width: 768px) {
   .home-fixed-giraffe {
-    height: min(78vh, 30rem);
+    height: min(96vh, 40rem);
   }
 }
 
