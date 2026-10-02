@@ -88,7 +88,7 @@ export function ReviewCarousel({ title, description }: { title?: string; descrip
   }
 
   return (
-    <section className="tripadvisor-reviews-section bg-white py-16 md:py-20" aria-label={title || t('home.reviewsTitle')}>
+    <section className="tripadvisor-reviews-section home-light-section home-light-white py-16 md:py-20" aria-label={title || t('home.reviewsTitle')}>
       <div className="container-custom">
         <SectionHeader
           title={title || t('home.reviewsTitle')}

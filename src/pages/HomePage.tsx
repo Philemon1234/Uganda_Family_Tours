@@ -24,6 +24,7 @@ import homeIconOne from '../assets/UFT-Homepage-icons-01.png'
 import homeIconTwo from '../assets/UFT-Homepage-icons-02.png'
 import homeIconThree from '../assets/UFT-Homepage-icons-03.png'
 import homeIconFour from '../assets/UFT-Favicon.png'
+import giraffeBackground from '../assets/UFT Bcackground girraf-01.png'
 import journeyImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
 import homeFooterImage from '../assets/footer/UFT Website Work-03.jpg'
 
@@ -127,8 +128,9 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
   }, [isSignatureVideoOpen])
 
   return (
-    <>
-      <section className="hero-section home-hero-section min-h-[92vh] bg-dark">
+    <div className="home-page">
+      <img className="home-fixed-giraffe" src={giraffeBackground} alt="" aria-hidden="true" />
+      <section className="hero-section home-hero-section home-solid-section min-h-[92vh] bg-dark">
         {heroSlides.map((image, index) => (
           <img
             key={image}
@@ -173,7 +175,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
         </div>
       </section>
 
-      <section className="bg-[#171719] pb-20 pt-8 md:pb-28 md:pt-12">
+      <section className="home-solid-section bg-[#171719] pb-20 pt-8 md:pb-28 md:pt-12">
         <div className="container-custom">
           <MotionReveal>
             <div className="mx-auto mb-14 flex w-full max-w-xl items-center justify-center gap-5 px-4 md:mb-16 md:gap-7">
@@ -211,7 +213,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-[#faf7f2]">
+      <section className="section-padding home-light-section home-light-warm">
         <div className="container-custom">
           <div className="grid gap-12 lg:grid-cols-[0.95fr_1.25fr] lg:items-stretch">
             <MotionReveal className="h-full">
@@ -279,7 +281,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-white">
+      <section className="section-padding home-light-section home-light-white">
         <div className="container-custom">
           <SectionHeader
             label={customization.featuredTours.label || t('home.featured.label')}
@@ -318,7 +320,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-[#fffaf5]">
+      <section className="section-padding home-light-section home-light-cream">
         <div className="container-custom">
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <MotionReveal>
@@ -343,7 +345,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
         </div>
       </section>
 
-      <section className="section-padding bg-dark">
+      <section className="section-padding home-solid-section bg-dark">
         <div className="container-custom">
           <div className="mx-auto max-w-5xl text-center">
             <p className="luxury-script text-2xl leading-none text-white md:text-3xl">{customization.why.label || t('home.why.label')}</p>
@@ -361,7 +363,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
         </div>
       </section>
 
-      <section className="section-padding section-blend-warm">
+      <section className="section-padding home-light-section home-light-warm">
         <div className="container-custom">
           <SectionHeader label={customization.gallery.label || t('home.galleryLabel')} title={customization.gallery.title || t('home.galleryTitle')} description={customization.gallery.description || t('home.galleryDescription')} />
           <MotionReveal delay={80}>
@@ -374,7 +376,9 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
       <ReviewCarousel title={customization.reviews.title} description={customization.reviews.description} />
       </MotionReveal>
 
-      <FooterImageBand src={customization.footerBand.src || homeFooterImage} alt={customization.footerBand.alt || t('home.finalCta.title')} />
+      <div className="home-solid-section">
+        <FooterImageBand src={customization.footerBand.src || homeFooterImage} alt={customization.footerBand.alt || t('home.finalCta.title')} />
+      </div>
 
       <div
         className={`fixed inset-0 z-[110] grid place-items-center bg-black/55 px-3 py-6 backdrop-blur-md transition-opacity duration-200 sm:px-6 ${
@@ -427,6 +431,6 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

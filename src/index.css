@@ -300,6 +300,58 @@ img {
   background-position: center;
 }
 
+.home-page {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #faf7f2;
+}
+
+.home-fixed-giraffe {
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: auto;
+  height: min(82vh, 42rem);
+  max-width: none;
+  opacity: 0.72;
+  user-select: none;
+}
+
+.home-solid-section {
+  position: relative;
+  z-index: 2;
+}
+
+.home-light-section {
+  position: relative;
+}
+
+.home-light-section > .container-custom {
+  position: relative;
+  z-index: 2;
+}
+
+.home-light-white {
+  background: rgb(255 255 255 / 0.78);
+}
+
+.home-light-warm {
+  background: rgb(250 247 242 / 0.76);
+}
+
+.home-light-cream {
+  background: rgb(255 250 245 / 0.76);
+}
+
+@media (max-width: 768px) {
+  .home-fixed-giraffe {
+    height: min(78vh, 30rem);
+  }
+}
+
 @media (max-width: 1023px) {
   .home-hero-section,
   .home-hero-content {
