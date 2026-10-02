@@ -16,9 +16,9 @@ import { packageToTour } from '../utils/tourPackageMapper'
 import type { HomeCustomizationContent } from '../types/homeCustomization'
 import elephantImage from '../assets/elephant-4736008_1280.jpg'
 import elephantBannerImage from '../assets/elephant.jpeg'
-import lionImage from '../assets/cover_1669-Tree-Climbing-Lions.jpg'
+import balloonImage from '../assets/Ballon.jpeg'
 import gorillaImage from '../assets/gorilla-7708328_1280.jpg'
-import gorillaForestImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
+import elephantsSunsetImage from '../assets/elephants sunset.jpeg'
 import storyThumbnail from '../assets/Thumbnail.png'
 import homeIconOne from '../assets/UFT-Homepage-icons-01.png'
 import homeIconTwo from '../assets/UFT-Homepage-icons-02.png'
@@ -36,7 +36,7 @@ const FEATURED_TOURS_LIMIT = 6
 const aboutVideo = 'https://dorcassamaritan.org/wp-content/uploads/2026/08/Uganda-Family-Tours.mp4'
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
-const heroSlides = [elephantImage, lionImage, gorillaImage, gorillaForestImage, elephantBannerImage]
+const heroSlides = [elephantImage, balloonImage, gorillaImage, elephantsSunsetImage, elephantBannerImage]
 
 export function HomePage({ customization, onInquiry }: HomePageProps) {
   const { t } = useTranslation()
@@ -153,7 +153,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
             <Link className="hero-action btn-primary btn-on-dark mt-8" to={customization.hero.cta.href || '/tours'} style={{ backgroundColor: customization.hero.cta.color }}>{customization.hero.cta.text || t('home.hero.primaryCta')} <FiArrowRight /></Link>
           </div>
         </div>
-        <div className="absolute bottom-[calc(6rem+env(safe-area-inset-bottom))] left-6 z-20 flex gap-3 md:left-10 lg:bottom-16 lg:left-16">
+        <div className="absolute bottom-[calc(6rem+env(safe-area-inset-bottom))] left-6 z-20 hidden gap-3 md:left-10 md:flex lg:bottom-16 lg:left-16">
           <button
             type="button"
             className="grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-black/25 text-2xl text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"

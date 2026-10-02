@@ -100,7 +100,7 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
           <button
-            className="btn-primary hidden px-5 py-3 text-[0.72rem] text-white lg:inline-flex"
+            className="btn-primary font-arson hidden px-5 py-3 text-[0.72rem] text-white lg:inline-flex"
             type="button"
             onClick={onInquiry}
             style={{ backgroundColor: customization.nav.inquiryButton.color }}

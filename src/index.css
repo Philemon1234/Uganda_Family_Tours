@@ -80,6 +80,14 @@
   font-weight: 400;
 }
 
+@font-face {
+  font-family: "Elliana Samatha";
+  src: url("./assets/Fonts/Elliana Samatha/Elliana Samantha demo.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
 @theme {
   --color-primary: #FB770D;
   --color-dark: #25424C;
@@ -132,6 +140,10 @@ textarea {
   font-family: "Adelia", cursive !important;
   font-weight: 400;
   letter-spacing: 0;
+}
+
+.hero-kicker {
+  font-family: "Elliana Samatha", "Adelia", cursive !important;
 }
 
 button,
@@ -219,6 +231,10 @@ img {
   color: #ffffff;
   box-shadow: none;
   transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.font-arson {
+  font-family: "Arson", "Gotham Rounded", ui-sans-serif, system-ui, sans-serif !important;
 }
 
 @utility btn-outline {
