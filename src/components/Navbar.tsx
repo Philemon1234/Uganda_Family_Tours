@@ -73,7 +73,7 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
       <nav className="container-custom flex min-h-15 items-center justify-between py-2">
         <NavLink className="shrink-0" to="/" aria-label={t('navbar.homeAria')}>
           <img
-            className="block h-12 w-auto object-contain md:h-14"
+            className="block h-9 w-auto object-contain md:h-10"
             src={navbarLogo}
             alt="Uganda Family Tours"
           />
