@@ -33,9 +33,9 @@ export function Footer({ customization }: { customization: HomeCustomizationCont
         <div className="col-span-2 md:col-span-1">
           <h3 className="footer-title">{t('footer.contact')}</h3>
           <ul className="mt-3 grid gap-2 text-sm text-white/75 sm:grid-cols-3 md:mt-5 md:block md:space-y-3">
-            <li><a className="flex min-w-0 gap-2 transition hover:text-primary md:gap-3" href={phoneHref}><FaPhone className="mt-1 shrink-0 text-primary" /><span className="truncate">{phoneDisplay}</span></a></li>
-            <li><a className="flex min-w-0 gap-2 transition hover:text-primary md:gap-3" href={emailHref}><MdEmail className="mt-1 shrink-0 text-primary" /><span className="truncate">{customization.footer.email}</span></a></li>
-            <li className="flex min-w-0 gap-2 md:gap-3"><FaLocationDot className="mt-1 shrink-0 text-primary" /><span className="truncate">{customization.footer.location || t('footer.location')}</span></li>
+            <li><a className="flex min-w-0 gap-2 transition hover:text-primary md:gap-3" href={phoneHref}><FaPhone className="mt-1 shrink-0 text-white" /><span className="truncate">{phoneDisplay}</span></a></li>
+            <li><a className="flex min-w-0 gap-2 transition hover:text-primary md:gap-3" href={emailHref}><MdEmail className="mt-1 shrink-0 text-white" /><span className="truncate">{customization.footer.email}</span></a></li>
+            <li className="flex min-w-0 gap-2 md:gap-3"><FaLocationDot className="mt-1 shrink-0 text-white" /><span className="truncate">{customization.footer.location || t('footer.location')}</span></li>
           </ul>
         </div>
         <div>

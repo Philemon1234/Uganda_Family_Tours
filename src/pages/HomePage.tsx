@@ -20,10 +20,10 @@ import balloonImage from '../assets/Ballon.jpeg'
 import gorillaImage from '../assets/gorilla-7708328_1280.jpg'
 import elephantsSunsetImage from '../assets/elephants sunset.jpeg'
 import storyThumbnail from '../assets/Thumbnail.png'
-import homeIconOne from '../assets/UFT-Homepage-icons-01.png'
-import homeIconTwo from '../assets/UFT-Homepage-icons-02.png'
-import homeIconThree from '../assets/UFT-Homepage-icons-03.png'
-import homeIconFour from '../assets/UFT-Favicon.png'
+import homeIconOne from '../assets/UFT logos/UFT web logos-03.png'
+import homeIconTwo from '../assets/UFT logos/UFT web logos-04.png'
+import homeIconThree from '../assets/UFT logos/UFT web logos-01.png'
+import homeIconFour from '../assets/UFT logos/UFT web logos-02.png'
 import giraffeBackground from '../assets/UFT Bcackground girraf-01.png'
 import journeyImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
 import homeFooterImage from '../assets/footer/UFT Website Work-03.jpg'
@@ -180,10 +180,10 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
           <MotionReveal>
             <div className="mx-auto mb-14 flex w-full max-w-xl items-center justify-center gap-5 px-4 md:mb-16 md:gap-7">
               {[
-                customization.story.badges[0] ?? { src: homeIconOne, alt: t('home.hero.badgeAlt.service') },
-                customization.story.badges[1] ?? { src: homeIconTwo, alt: t('home.hero.badgeAlt.planning') },
-                customization.story.badges[2] ?? { src: homeIconThree, alt: t('home.hero.badgeAlt.support') },
-                customization.story.badges[3] ?? { src: homeIconFour, alt: t('home.hero.badgeAlt.brand') },
+                { ...customization.story.badges[0], src: homeIconOne, alt: 'SafariBookings' },
+                { ...customization.story.badges[1], src: homeIconTwo, alt: 'Top Rated Safari Booking' },
+                { ...customization.story.badges[2], src: homeIconThree, alt: 'Tripadvisor' },
+                { ...customization.story.badges[3], src: homeIconFour, alt: 'Uganda Wildlife Authority' },
               ].map((item) => (
                 <a
                   key={item.alt}
@@ -192,7 +192,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img className="max-h-10 w-auto object-contain md:max-h-11" src={item.src} alt={item.alt} />
+                  <img className="h-10 w-10 object-contain md:h-11 md:w-11" src={item.src} alt={item.alt} />
                 </a>
               ))}
             </div>

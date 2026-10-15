@@ -2,10 +2,10 @@ import heroOnloadImage from '../assets/gorilla-7708328_1280.jpg'
 import storyThumbnail from '../assets/Thumbnail.png'
 import journeyImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
 import logoImage from '../assets/New logo.png'
-import homeIconOne from '../assets/UFT-Homepage-icons-01.png'
-import homeIconTwo from '../assets/UFT-Homepage-icons-02.png'
-import homeIconThree from '../assets/UFT-Homepage-icons-03.png'
-import homeIconFour from '../assets/UFT-Favicon.png'
+import homeIconOne from '../assets/UFT logos/UFT web logos-03.png'
+import homeIconTwo from '../assets/UFT logos/UFT web logos-04.png'
+import homeIconThree from '../assets/UFT logos/UFT web logos-01.png'
+import homeIconFour from '../assets/UFT logos/UFT web logos-02.png'
 import galleryOne from '../assets/cover_1669-Tree-Climbing-Lions.jpg'
 import galleryTwo from '../assets/gorilla-7708328_1280.jpg'
 import footerBandImage from '../assets/footer/UFT Website Work-03.jpg'
@@ -54,10 +54,10 @@ export const defaultHomeCustomization: HomeCustomizationContent = {
       'Uganda Family Tours & Safari Co. creates authentic, smooth, and memorable journeys across Uganda and East Africa for travelers who want comfort, care, and a deeper connection to place.',
     ],
     badges: [
-      { src: homeIconOne, alt: 'Service', href: 'https://ugandafamilytours.com' },
-      { src: homeIconTwo, alt: 'Planning', href: 'https://ugandafamilytours.com/tours' },
-      { src: homeIconThree, alt: 'Support', href: 'https://wa.me/256703543027' },
-      { src: homeIconFour, alt: 'Brand', href: 'https://ugandafamilytours.com' },
+      { src: homeIconOne, alt: 'SafariBookings', href: 'https://ugandafamilytours.com' },
+      { src: homeIconTwo, alt: 'Top Rated Safari Booking', href: 'https://ugandafamilytours.com/tours' },
+      { src: homeIconThree, alt: 'Tripadvisor', href: 'https://wa.me/256703543027' },
+      { src: homeIconFour, alt: 'Uganda Wildlife Authority', href: 'https://ugandafamilytours.com' },
     ],
   },
   signature: {
