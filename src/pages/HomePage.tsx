@@ -37,7 +37,13 @@ const FEATURED_TOURS_LIMIT = 6
 const aboutVideo = 'https://dorcassamaritan.org/wp-content/uploads/2026/08/Uganda-Family-Tours.mp4'
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
-const heroSlides = [gorillaImage, elephantImage, balloonImage, elephantsSunsetImage, elephantBannerImage]
+const heroSlides = [
+  { image: gorillaImage, copyKey: 'intro' },
+  { image: elephantImage, copyKey: 'wildlife' },
+  { image: balloonImage, copyKey: 'balloon' },
+  { image: elephantsSunsetImage, copyKey: 'sunset' },
+  { image: elephantBannerImage, copyKey: 'elephants' },
+]
 
 export function HomePage({ customization, onInquiry }: HomePageProps) {
   const { t } = useTranslation()
@@ -45,6 +51,18 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
   const [isLoadingFeaturedTours, setIsLoadingFeaturedTours] = useState(true)
   const [featuredToursError, setFeaturedToursError] = useState('')
   const [activeHeroSlide, setActiveHeroSlide] = useState(0)
+  const activeSlide = heroSlides[activeHeroSlide]
+  const heroCopy = activeSlide.copyKey === 'intro'
+    ? {
+        kicker: customization.hero.kicker || t('home.hero.kicker'),
+        title: customization.hero.title || t('home.hero.title'),
+        subtitle: customization.hero.subtitle || t('home.hero.subtitle'),
+      }
+    : {
+        kicker: t(`home.hero.slides.${activeSlide.copyKey}.kicker`),
+        title: t(`home.hero.slides.${activeSlide.copyKey}.title`),
+        subtitle: t(`home.hero.slides.${activeSlide.copyKey}.subtitle`),
+      }
   const [isSignatureVideoOpen, setIsSignatureVideoOpen] = useState(false)
   const signatureVideoRef = useRef<HTMLVideoElement | null>(null)
   const signatureExperiences = signatureExperienceIcons.map((Icon, index) => ({
@@ -131,13 +149,13 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
     <div className="home-page">
       <img className="home-fixed-giraffe" src={giraffeBackground} alt="" aria-hidden="true" />
       <section className="hero-section home-hero-section home-solid-section min-h-[92vh] bg-dark">
-        {heroSlides.map((image, index) => (
+        {heroSlides.map((slide, index) => (
           <img
-            key={image}
+            key={slide.copyKey}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out ${
               activeHeroSlide === index ? 'opacity-100' : 'opacity-0'
             }`}
-            src={image}
+            src={slide.image}
             alt=""
             aria-hidden="true"
             loading={index === 0 ? 'eager' : 'lazy'}
@@ -147,12 +165,12 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-[#171719]/70 to-[#171719] md:h-40" />
         <div className="home-hero-content relative z-10 flex min-h-[92vh] w-full flex-col items-center justify-center px-6 py-32 text-center text-white md:px-10 lg:items-end lg:justify-end lg:px-16 lg:pb-16 lg:pt-44 lg:text-right">
           <div className="w-full max-w-3xl">
-            <p className="hero-kicker luxury-script text-3xl leading-none text-white/95 md:text-4xl">{customization.hero.kicker || t('home.hero.kicker')}</p>
-            <h1 className="hero-title mt-1 text-4xl font-bold leading-tight md:text-7xl">{customization.hero.title || t('home.hero.title')}</h1>
-            <p className="hero-copy mx-auto mt-5 max-w-2xl text-base leading-8 text-white/82 md:text-lg lg:ml-auto lg:mr-0">
-              {customization.hero.subtitle || t('home.hero.subtitle')}
+            <p key={`${activeSlide.copyKey}-kicker`} className="hero-kicker luxury-script text-3xl leading-none text-white/95 md:text-4xl">{heroCopy.kicker}</p>
+            <h1 key={`${activeSlide.copyKey}-title`} className="hero-title mt-1 text-4xl font-normal leading-tight md:text-7xl">{heroCopy.title}</h1>
+            <p key={`${activeSlide.copyKey}-subtitle`} className="hero-copy mx-auto mt-5 max-w-2xl text-base leading-8 text-white/82 md:text-lg lg:ml-auto lg:mr-0">
+              {heroCopy.subtitle}
             </p>
-            <Link className="hero-action btn-primary btn-on-dark mt-8 px-5 py-3 text-[0.7rem] md:px-6 md:py-3.5 md:text-[0.76rem]" to={customization.hero.cta.href || '/tours'} style={{ backgroundColor: customization.hero.cta.color }}>{customization.hero.cta.text || t('home.hero.primaryCta')} <FiArrowRight /></Link>
+            <Link key={`${activeSlide.copyKey}-action`} className="hero-action btn-primary btn-on-dark mt-8 px-5 py-3 text-[0.7rem] md:px-6 md:py-3.5 md:text-[0.76rem]" to={customization.hero.cta.href || '/tours'} style={{ backgroundColor: customization.hero.cta.color }}>{customization.hero.cta.text || t('home.hero.primaryCta')} <FiArrowRight /></Link>
           </div>
         </div>
         {heroSlides.length > 1 && <div className="absolute bottom-[calc(6rem+env(safe-area-inset-bottom))] left-6 z-20 hidden gap-3 md:left-10 md:flex lg:bottom-16 lg:left-16">
