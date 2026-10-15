@@ -101,6 +101,9 @@
       "description": "From gorilla forests to open savannahs, every journey is shaped around what travelers want to feel, see, and remember.",
       "videoAria": "Signature safari experiences video",
       "videoFallback": "Your browser does not support embedded video.",
+      "videoPlayPrompt": "Tap the video's play control to start playback.",
+      "videoError": "The video could not load. Check your connection or open it directly.",
+      "videoOpen": "Open video",
       "items": [
         {
           "title": "Gorilla Trekking",

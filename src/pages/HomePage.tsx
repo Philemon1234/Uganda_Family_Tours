@@ -64,6 +64,8 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
         subtitle: t(`home.hero.slides.${activeSlide.copyKey}.subtitle`),
       }
   const [isSignatureVideoOpen, setIsSignatureVideoOpen] = useState(false)
+  const [signatureVideoMessage, setSignatureVideoMessage] = useState('')
+  const signatureDialogRef = useRef<HTMLDialogElement | null>(null)
   const signatureVideoRef = useRef<HTMLVideoElement | null>(null)
   const signatureExperiences = signatureExperienceIcons.map((Icon, index) => ({
     Icon,
@@ -125,23 +127,9 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
     document.body.style.overflow = 'hidden'
     const video = signatureVideoRef.current
 
-    if (video) {
-      video.controls = true
-    }
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        setIsSignatureVideoOpen(false)
-        video?.pause()
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-
     return () => {
       document.body.style.overflow = previousBodyOverflow
       video?.pause()
-      window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isSignatureVideoOpen])
 
@@ -241,14 +229,19 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
                   type="button"
                   aria-label={t('home.signature.videoAria')}
                   onClick={() => {
+                    signatureDialogRef.current?.showModal()
                     setIsSignatureVideoOpen(true)
+                    setSignatureVideoMessage('')
                     const video = signatureVideoRef.current
 
                     if (video) {
-                      video.currentTime = 0
-                      video.controls = true
-                      video.load()
-                      void video.play()
+                      if (video.readyState >= 1) video.currentTime = 0
+                      // Keep play in the tap handler so mobile browsers allow sound.
+                      void video.play().catch((error: unknown) => {
+                        if (!signatureDialogRef.current?.open) return
+                        if (error instanceof DOMException && error.name === 'AbortError') return
+                        setSignatureVideoMessage(t('home.signature.videoPlayPrompt'))
+                      })
                     }
                   }}
                 >
@@ -398,57 +391,51 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
         <FooterImageBand src={customization.footerBand.src || homeFooterImage} alt={customization.footerBand.alt || t('home.finalCta.title')} />
       </div>
 
-      <div
-        className={`fixed inset-0 z-[110] grid place-items-center bg-black/55 px-3 py-6 backdrop-blur-md transition-opacity duration-200 sm:px-6 ${
-          isSignatureVideoOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
-        }`}
-        role="dialog"
-        aria-modal="true"
-        aria-hidden={!isSignatureVideoOpen}
+      <dialog
+        ref={signatureDialogRef}
+        className="fixed inset-0 m-0 hidden h-dvh max-h-none w-screen max-w-none flex-col items-center justify-center overflow-y-auto border-0 bg-black/70 p-3 text-white backdrop:bg-black/40 backdrop:backdrop-blur-md open:flex sm:p-6"
         aria-label={t('home.signature.videoAria')}
-        onMouseDown={() => {
+        onClose={() => {
           setIsSignatureVideoOpen(false)
           signatureVideoRef.current?.pause()
         }}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) signatureDialogRef.current?.close()
+        }}
       >
-        <div className="relative w-full max-w-6xl" onMouseDown={(event) => event.stopPropagation()}>
+        <div className="w-full max-w-6xl">
           <button
-            className="absolute -top-14 right-0 grid h-11 w-11 place-items-center rounded-full bg-white text-xl text-ink shadow-[0_14px_35px_rgba(0,0,0,0.22)] transition hover:bg-primary hover:text-white"
+            className="mb-3 ml-auto grid h-11 w-11 place-items-center rounded-full bg-white text-xl text-ink shadow-[0_14px_35px_rgba(0,0,0,0.22)] transition hover:bg-primary hover:text-white"
             type="button"
             aria-label={t('common.close')}
-            tabIndex={isSignatureVideoOpen ? 0 : -1}
-            onClick={() => {
-              setIsSignatureVideoOpen(false)
-              signatureVideoRef.current?.pause()
-            }}
+            autoFocus
+            onClick={() => signatureDialogRef.current?.close()}
           >
             <FiX />
           </button>
           <div className="overflow-hidden rounded-[1.25rem] bg-black">
             <video
               ref={signatureVideoRef}
-              className="aspect-video max-h-[82vh] w-full bg-black object-contain"
-              loop
+              className="mx-auto block h-auto max-h-[calc(100dvh-9rem)] w-full bg-black object-contain"
               playsInline
-              preload="metadata"
+              preload="none"
               poster={storyThumbnail}
               controls
-              tabIndex={isSignatureVideoOpen ? 0 : -1}
               src={aboutVideo}
-              onClick={(event) => {
-                const video = event.currentTarget
-                if (video.paused) {
-                  void video.play()
-                } else {
-                  video.pause()
-                }
-              }}
+              onPlaying={() => setSignatureVideoMessage('')}
+              onError={() => setSignatureVideoMessage(t('home.signature.videoError'))}
             >
               {t('home.signature.videoFallback')}
             </video>
           </div>
+          {signatureVideoMessage && (
+            <p className="mt-3 text-center text-sm" role="status">
+              {signatureVideoMessage}{' '}
+              <a className="underline" href={aboutVideo} target="_blank" rel="noreferrer">{t('home.signature.videoOpen')}</a>
+            </p>
+          )}
         </div>
-      </div>
+      </dialog>
     </div>
   )
 }
