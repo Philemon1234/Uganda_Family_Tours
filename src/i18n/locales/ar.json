@@ -27,10 +27,6 @@
   },
   "home": {
     "hero": {
-      "kicker": "لؤلؤة أفريقيا",
-      "title": "رحلة سفاري مصممة لك",
-      "subtitle": "سافر عبر غابات أوغندا وسهولها وبحيراتها وثقافاتها مع فريق محلي يصمم كل تفصيل حولك.",
-      "primaryCta": "استكشف الجولات",
       "badgeAlt": {
         "service": "أيقونة خدمة Uganda Family Tours",
         "planning": "أيقونة تخطيط Uganda Family Tours",

@@ -105,7 +105,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
   return (
     <div className="home-page">
       <img className="home-fixed-giraffe" src={giraffeBackground} alt="" aria-hidden="true" />
-      <HeroCarousel legacyHero={customization.hero} />
+      <HeroCarousel />
 
       <section className="home-solid-section bg-[#171719] pb-20 pt-8 md:pb-28 md:pt-12">
         <div className="container-custom">

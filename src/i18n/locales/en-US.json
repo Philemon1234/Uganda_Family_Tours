@@ -55,38 +55,15 @@
   },
   "home": {
     "hero": {
-      "kicker": "Explore the Pearl of Africa",
-      "title": "Bespoke Journeys into the Heart of Africa",
-      "subtitle": "Tailor-made & Guided by Local Experts",
-      "primaryCta": "Explore Our Tours",
-      "slides": {
-        "wildlife": {
-          "kicker": "Into the Wild",
-          "title": "Discover Uganda's Remarkable Wildlife",
-          "subtitle": "Explore open savannahs and encounter wildlife with local experts."
-        },
-        "balloon": {
-          "kicker": "A New Perspective",
-          "title": "Soar Above Africa's Open Landscapes",
-          "subtitle": "Let your sense of adventure rise with unforgettable views from above."
-        },
-        "sunset": {
-          "kicker": "Golden Moments",
-          "title": "Follow the Sunset into the Wild",
-          "subtitle": "Slow down and savour Africa's beauty in the warm glow of evening."
-        },
-        "elephants": {
-          "kicker": "Extraordinary Encounters",
-          "title": "Meet the Giants of the Savannah",
-          "subtitle": "Discover the wonder of elephants in their natural habitat on a guided safari."
-        }
-      },
       "badgeAlt": {
         "service": "Uganda Family Tours service icon",
         "planning": "Uganda Family Tours planning icon",
         "support": "Uganda Family Tours support icon",
         "brand": "Uganda Family Tours brand mark"
-      }
+      },
+      "loading": "Loading highlights…",
+      "empty": "No featured experiences available.",
+      "unavailable": "Highlights are currently unavailable."
     },
     "story": {
       "label": "Explore Africa with",

@@ -1,4 +1,3 @@
-import heroOnloadImage from '../assets/gorilla-7708328_1280.jpg'
 import storyThumbnail from '../assets/Thumbnail.png'
 import journeyImage from '../assets/Venture-Uganda-Safari-Uganda-01.jpg'
 import logoImage from '../assets/New logo.png'
@@ -14,7 +13,6 @@ import type { HomeCustomizationContent } from '../types/homeCustomization'
 const localAssetUrls: Record<string, string> = {
   '/src/assets/New logo.png': logoImage,
   '/src/assets/UFT-Logo-PNG.png': logoImage,
-  '/src/assets/on load.png': heroOnloadImage,
   '/src/assets/Thumbnail.png': storyThumbnail,
   '/src/assets/Venture-Uganda-Safari-Uganda-01.jpg': journeyImage,
   '/src/assets/UFT-Homepage-icons-01.png': homeIconOne,
@@ -40,11 +38,13 @@ export const defaultHomeCustomization: HomeCustomizationContent = {
     inquiryButton: { text: 'Talk to a Travel Specialist', href: '#inquiry', color: '#FB770D', icon: 'arrow' },
   },
   hero: {
-    kicker: 'Explore the Pearl of Africa',
-    title: 'Bespoke Journeys into the Heart of Africa',
-    subtitle: 'Tailor-made & Guided by Local Experts',
-    cta: { text: 'Explore Our Tours', href: '/tours', color: '#FB770D', icon: 'arrow' },
-    background: { src: heroOnloadImage, alt: 'Uganda safari landscape' },
+    // Retain the legacy JSON shape for compatibility with other customization
+    // fields. The public hero never reads this object or supplies demo content.
+    kicker: '',
+    title: '',
+    subtitle: '',
+    cta: { text: '', href: '', color: '#FB770D', icon: 'none' },
+    background: { src: '', alt: '' },
   },
   story: {
     label: 'Crafted for you',

@@ -27,10 +27,6 @@
   },
   "home": {
     "hero": {
-      "title": "Un safari hecho personal",
-      "subtitle": "Viaja por bosques, sabanas, lagos y culturas de Uganda con un equipo local que adapta cada detalle a ti.",
-      "primaryCta": "Explorar tours",
-      "kicker": "La Perla de Africa",
       "badgeAlt": {
         "service": "Icono de servicio de Uganda Family Tours",
         "planning": "Icono de planificacion de Uganda Family Tours",
