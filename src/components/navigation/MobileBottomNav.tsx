@@ -11,6 +11,7 @@ import {
 } from 'react-icons/pi'
 import type { IconType } from 'react-icons'
 import { MobileSidebarDrawer } from './MobileSidebarDrawer'
+import type { HomeCustomizationContent } from '../../types/homeCustomization'
 
 type NavItem = {
   id: string
@@ -26,7 +27,7 @@ const navItems: NavItem[] = [
   { id: 'whatsapp', href: 'https://wa.me/256703543027', icon: PiWhatsappLogoLight },
 ]
 
-export function MobileBottomNav() {
+export function MobileBottomNav({ navigation }: { navigation: HomeCustomizationContent['nav'] }) {
   const { t } = useTranslation()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [selectedItem, setSelectedItem] = useState<string | null>(null)
@@ -113,7 +114,7 @@ export function MobileBottomNav() {
 
   return (
     <>
-      <MobileSidebarDrawer isOpen={isSidebarOpen} onClose={closeSidebar} />
+      <MobileSidebarDrawer isOpen={isSidebarOpen} onClose={closeSidebar} navigation={navigation} />
       <button
         type="button"
         className={`fixed bottom-[7.25rem] right-5 z-[95] grid h-12 w-12 place-items-center rounded-full bg-primary text-xl text-white shadow-[0_14px_34px_rgba(0,0,0,0.22)] transition duration-300 ease-out lg:hidden ${

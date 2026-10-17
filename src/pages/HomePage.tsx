@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { FaHandHoldingHeart, FaPeopleGroup, FaShieldHeart, FaSliders } from 'react-icons/fa6'
-import { FiArrowRight, FiCamera, FiChevronLeft, FiChevronRight, FiCompass, FiHeart, FiMap, FiMapPin, FiPlay, FiUsers, FiX } from 'react-icons/fi'
+import { FiArrowRight, FiCamera, FiCompass, FiHeart, FiMap, FiMapPin, FiPlay, FiUsers, FiX } from 'react-icons/fi'
 import type { Tour } from '../data/tours'
 import { TourCard } from '../components/TourCard'
 import { SectionHeader } from '../components/SectionHeader'
@@ -10,15 +10,11 @@ import { WhyTravelCard } from '../components/WhyTravelCard'
 import { GalleryCarousel } from '../components/GalleryCarousel'
 import { ReviewCarousel } from '../components/ReviewCarousel'
 import { MotionReveal } from '../components/MotionReveal'
+import { HeroCarousel } from '../components/HeroCarousel'
 import { FooterImageBand } from '../components/FooterImageBand'
 import { getPublishedTourPackages, subscribeToTourPackageChanges } from '../services/publicTourService'
 import { packageToTour } from '../utils/tourPackageMapper'
 import type { HomeCustomizationContent } from '../types/homeCustomization'
-import elephantImage from '../assets/elephant-4736008_1280.jpg'
-import elephantBannerImage from '../assets/elephant.jpeg'
-import balloonImage from '../assets/Ballon.jpeg'
-import gorillaImage from '../assets/gorilla-7708328_1280.jpg'
-import elephantsSunsetImage from '../assets/elephants sunset.jpeg'
 import storyThumbnail from '../assets/Thumbnail.png'
 import homeIconOne from '../assets/UFT logos/UFT web logos-03.png'
 import homeIconTwo from '../assets/UFT logos/UFT web logos-04.png'
@@ -37,32 +33,11 @@ const FEATURED_TOURS_LIMIT = 6
 const aboutVideo = 'https://dorcassamaritan.org/wp-content/uploads/2026/08/Uganda-Family-Tours.mp4'
 
 const signatureExperienceIcons = [FiMapPin, FiCamera, FiCompass, FiUsers, FiMap, FiHeart]
-const heroSlides = [
-  { image: gorillaImage, copyKey: 'intro' },
-  { image: elephantImage, copyKey: 'wildlife' },
-  { image: balloonImage, copyKey: 'balloon' },
-  { image: elephantsSunsetImage, copyKey: 'sunset' },
-  { image: elephantBannerImage, copyKey: 'elephants' },
-]
-
 export function HomePage({ customization, onInquiry }: HomePageProps) {
   const { t } = useTranslation()
   const [featuredTours, setFeaturedTours] = useState<Tour[]>([])
   const [isLoadingFeaturedTours, setIsLoadingFeaturedTours] = useState(true)
   const [featuredToursError, setFeaturedToursError] = useState('')
-  const [activeHeroSlide, setActiveHeroSlide] = useState(0)
-  const activeSlide = heroSlides[activeHeroSlide]
-  const heroCopy = activeSlide.copyKey === 'intro'
-    ? {
-        kicker: customization.hero.kicker || t('home.hero.kicker'),
-        title: customization.hero.title || t('home.hero.title'),
-        subtitle: customization.hero.subtitle || t('home.hero.subtitle'),
-      }
-    : {
-        kicker: t(`home.hero.slides.${activeSlide.copyKey}.kicker`),
-        title: t(`home.hero.slides.${activeSlide.copyKey}.title`),
-        subtitle: t(`home.hero.slides.${activeSlide.copyKey}.subtitle`),
-      }
   const [isSignatureVideoOpen, setIsSignatureVideoOpen] = useState(false)
   const [signatureVideoMessage, setSignatureVideoMessage] = useState('')
   const signatureDialogRef = useRef<HTMLDialogElement | null>(null)
@@ -112,13 +87,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
     }
   }, [])
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      setActiveHeroSlide((currentSlide) => (currentSlide + 1) % heroSlides.length)
-    }, 4000)
 
-    return () => window.clearTimeout(timer)
-  }, [activeHeroSlide])
 
   useEffect(() => {
     if (!isSignatureVideoOpen) return
@@ -136,50 +105,7 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
   return (
     <div className="home-page">
       <img className="home-fixed-giraffe" src={giraffeBackground} alt="" aria-hidden="true" />
-      <section className="hero-section home-hero-section home-solid-section min-h-[92vh] bg-dark">
-        {heroSlides.map((slide, index) => (
-          <img
-            key={slide.copyKey}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out ${
-              activeHeroSlide === index ? 'opacity-100' : 'opacity-0'
-            }`}
-            src={slide.image}
-            alt=""
-            aria-hidden="true"
-            loading={index === 0 ? 'eager' : 'lazy'}
-          />
-        ))}
-        <div className="absolute inset-0 bg-dark/20" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent via-[#171719]/70 to-[#171719] md:h-40" />
-        <div className="home-hero-content relative z-10 flex min-h-[92vh] w-full flex-col items-center justify-center px-6 py-32 text-center text-white md:px-10 lg:items-end lg:justify-end lg:px-16 lg:pb-16 lg:pt-44 lg:text-right">
-          <div className="w-full max-w-3xl">
-            <p key={`${activeSlide.copyKey}-kicker`} className="hero-kicker luxury-script text-3xl leading-none text-white/95 md:text-4xl">{heroCopy.kicker}</p>
-            <h1 key={`${activeSlide.copyKey}-title`} className="hero-title mt-1 text-4xl font-normal leading-tight md:text-7xl">{heroCopy.title}</h1>
-            <p key={`${activeSlide.copyKey}-subtitle`} className="hero-copy mx-auto mt-5 max-w-2xl text-base leading-8 text-white/82 md:text-lg lg:ml-auto lg:mr-0">
-              {heroCopy.subtitle}
-            </p>
-            <Link key={`${activeSlide.copyKey}-action`} className="hero-action btn-primary btn-on-dark mt-8 px-5 py-3 text-[0.7rem] md:px-6 md:py-3.5 md:text-[0.76rem]" to={customization.hero.cta.href || '/tours'} style={{ backgroundColor: customization.hero.cta.color }}>{customization.hero.cta.text || t('home.hero.primaryCta')} <FiArrowRight /></Link>
-          </div>
-        </div>
-        {heroSlides.length > 1 && <div className="absolute bottom-[calc(6rem+env(safe-area-inset-bottom))] left-6 z-20 hidden gap-3 md:left-10 md:flex lg:bottom-16 lg:left-16">
-          <button
-            type="button"
-            className="grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-black/25 text-2xl text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-            onClick={() => setActiveHeroSlide((currentSlide) => (currentSlide - 1 + heroSlides.length) % heroSlides.length)}
-            aria-label="Previous slide"
-          >
-            <FiChevronLeft aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            className="grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-black/25 text-2xl text-white backdrop-blur-sm transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
-            onClick={() => setActiveHeroSlide((currentSlide) => (currentSlide + 1) % heroSlides.length)}
-            aria-label="Next slide"
-          >
-            <FiChevronRight aria-hidden="true" />
-          </button>
-        </div>}
-      </section>
+      <HeroCarousel legacyHero={customization.hero} />
 
       <section className="home-solid-section bg-[#171719] pb-20 pt-8 md:pb-28 md:pt-12">
         <div className="container-custom">

@@ -1,3 +1,5 @@
+import type { HeroSliderContent } from './heroSlider'
+
 export type EditableNavLink = {
   id: string
   label: string
@@ -18,6 +20,7 @@ export type EditableImage = {
 }
 
 export type HomeCustomizationContent = {
+  heroSlider?: HeroSliderContent
   nav: {
     logo: EditableImage
     links: EditableNavLink[]

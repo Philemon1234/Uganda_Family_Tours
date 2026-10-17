@@ -11,22 +11,25 @@ import {
   FaYoutube,
 } from 'react-icons/fa'
 import logo from '../../assets/New logo.png'
+import type { HomeCustomizationContent } from '../../types/homeCustomization'
+import { isSafeHeroLink } from '../../utils/heroSlider'
 
 type MobileSidebarDrawerProps = {
   isOpen: boolean
   onClose: () => void
+  navigation: HomeCustomizationContent['nav']
 }
 
-const drawerItems = [
-  { id: 'home', labelKey: 'navbar.home', href: '/', icon: FaHome },
-  { id: 'tours', labelKey: 'navbar.tours', href: '/tours', icon: FaMapMarkerAlt },
-  { id: 'about', labelKey: 'navbar.about', href: '/about', icon: FaUser },
-  { id: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/256703543027', icon: FaWhatsapp },
-]
+const navigationIcons = { home: FaHome, tours: FaMapMarkerAlt, about: FaUser }
+const defaultLabels: Record<string, string> = { home: 'Home', tours: 'Tours', about: 'About Us' }
+const labelKeys: Record<string, string> = { home: 'navbar.home', tours: 'navbar.tours', about: 'navbar.about' }
 
-export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProps) {
+export function MobileSidebarDrawer({ isOpen, onClose, navigation }: MobileSidebarDrawerProps) {
   const { t } = useTranslation()
   const location = useLocation()
+  const drawerItems = navigation.links.filter(item => isSafeHeroLink(item.href)).map(item => ({ ...item, icon: navigationIcons[item.id as keyof typeof navigationIcons] || FaMapMarkerAlt }))
+  // Preserve the existing mobile WhatsApp shortcut alongside the managed links.
+  if (!drawerItems.some(item => item.href === 'https://wa.me/256703543027')) drawerItems.push({ id: 'whatsapp', label: 'WhatsApp', href: 'https://wa.me/256703543027', icon: FaWhatsapp })
 
   useEffect(() => {
     if (!isOpen) return
@@ -44,11 +47,10 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
     }
   }, [isOpen, onClose])
 
-  const isActive = (id: string) => {
-    if (id === 'home') return location.pathname === '/'
-    if (id === 'tours') return location.pathname === '/tours'
-    if (id === 'about') return location.pathname.startsWith('/about')
-    return false
+  const isActive = (href: string) => {
+    const path = href.split(/[?#]/)[0]
+    if (path === '/') return location.pathname === '/'
+    return path.startsWith('/') && (location.pathname === path || location.pathname.startsWith(`${path}/`))
   }
 
   return (
@@ -68,7 +70,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
         }`}
       >
         <div className="flex items-center justify-between gap-4">
-          <img className="h-10 w-auto object-contain" src={logo} alt={t('common.logoAlt')} />
+          <img className="h-10 w-auto object-contain" src={navigation.logo.src || logo} alt={navigation.logo.alt || t('common.logoAlt')} onError={event => { if (event.currentTarget.getAttribute('src') !== logo) event.currentTarget.src = logo }} />
           <button
             type="button"
             aria-label={t('common.close')}
@@ -82,7 +84,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
         <nav className="mt-8 space-y-4" aria-label={t('mobileNav.drawerAriaLabel')}>
           {drawerItems.map((item) => {
             const Icon = item.icon
-            const active = isActive(item.id)
+            const active = isActive(item.href)
             const content = (
               <>
                 <span
@@ -92,7 +94,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
                 >
                   <Icon />
                 </span>
-                <span>{'label' in item ? item.label : t(item.labelKey)}</span>
+                <span>{labelKeys[item.id] && item.label === defaultLabels[item.id] ? t(labelKeys[item.id]) : item.label}</span>
               </>
             )
 
@@ -100,7 +102,7 @@ export function MobileSidebarDrawer({ isOpen, onClose }: MobileSidebarDrawerProp
               active ? 'bg-primary text-white shadow-[0_14px_28px_rgba(255,164,96,0.18)]' : 'text-ink hover:bg-primary/8'
             }`
 
-            if (item.href.startsWith('http')) {
+            if (/^(https?:|mailto:|tel:)/i.test(item.href)) {
               return (
                 <a key={item.id} href={item.href} className={className} target="_blank" rel="noreferrer" onClick={onClose}>
                   {content}

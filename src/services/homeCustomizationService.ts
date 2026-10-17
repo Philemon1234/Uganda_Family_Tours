@@ -14,7 +14,7 @@ export async function getPublishedHomepageCustomization(): Promise<HomeCustomiza
     .maybeSingle()
 
   if (error) {
-    if (error.message.includes('homepage_customizations')) {
+    if (error.code === '42P01' || error.code === 'PGRST205') {
       return mergeHomeCustomization(null)
     }
     throw new Error(error.message)
@@ -36,7 +36,20 @@ export function subscribeToHomepageCustomizationChanges(onChange: () => void) {
     )
     .subscribe()
 
+  // Refresh only this configuration when Realtime is unavailable or a tab was
+  // asleep. This also covers existing databases without this table published
+  // through Realtime; it requires no schema or global cache changes.
+  const refresh = () => { if (!document.hidden) onChange() }
+  const interval = window.setInterval(refresh, 5000)
+  window.addEventListener('focus', refresh)
+  window.addEventListener('pageshow', refresh)
+  document.addEventListener('visibilitychange', refresh)
+
   return () => {
     void client.removeChannel(channel)
+    window.clearInterval(interval)
+    window.removeEventListener('focus', refresh)
+    window.removeEventListener('pageshow', refresh)
+    document.removeEventListener('visibilitychange', refresh)
   }
 }

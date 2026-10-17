@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import navbarLogo from '../assets/New logo.png'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import type { HomeCustomizationContent } from '../types/homeCustomization'
+import { isSafeHeroLink } from '../utils/heroSlider'
 
 type NavbarProps = {
   customization: HomeCustomizationContent
@@ -15,6 +16,8 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
   const location = useLocation()
   const [isAtFooterBottom, setIsAtFooterBottom] = useState(false)
   const [isPastHero, setIsPastHero] = useState(false)
+  const configuredHref = customization.nav.inquiryButton.href?.trim() || '#inquiry'
+  const ctaHref = isSafeHeroLink(configuredHref) ? configuredHref : '#inquiry'
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 1023px)')
@@ -74,13 +77,14 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
         <NavLink className="shrink-0" to="/" aria-label={t('navbar.homeAria')}>
           <img
             className="block h-9 w-auto object-contain md:h-10"
-            src={navbarLogo}
-            alt="Uganda Family Tours"
+            src={customization.nav.logo.src || navbarLogo}
+            alt={customization.nav.logo.alt || 'Uganda Family Tours'}
+            onError={event => { if (event.currentTarget.getAttribute('src') !== navbarLogo) event.currentTarget.src = navbarLogo }}
           />
         </NavLink>
 
         <div className="hidden items-center gap-7 lg:flex">
-          {customization.nav.links.map((item) => (
+          {customization.nav.links.filter(item => isSafeHeroLink(item.href)).map((item) => (
             <NavLink
               key={item.id}
               to={item.href}
@@ -99,14 +103,14 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-          <button
+          <a
             className="btn-primary font-arson hidden px-5 py-3 text-[0.72rem] text-white lg:inline-flex"
-            type="button"
-            onClick={onInquiry}
+            href={ctaHref}
+            onClick={event => { if (ctaHref === '#inquiry') { event.preventDefault(); onInquiry() } }}
             style={{ backgroundColor: customization.nav.inquiryButton.color }}
           >
             {customization.nav.inquiryButton.text || t('navbar.talkToSpecialist')}
-          </button>
+          </a>
         </div>
       </nav>
     </header>

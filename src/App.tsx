@@ -26,14 +26,18 @@ function App() {
 
   useEffect(() => {
     let isMounted = true
+    let isRefreshing = false
 
     async function loadCustomization() {
+      if (isRefreshing) return
+      isRefreshing = true
       try {
         const customization = await getPublishedHomepageCustomization()
-        if (isMounted) setHomeCustomization(customization)
+        if (isMounted) setHomeCustomization(current => JSON.stringify(current) === JSON.stringify(customization) ? current : customization)
       } catch {
-        if (isMounted) setHomeCustomization(defaultHomeCustomization)
-      }
+        // Retain the last published snapshot during temporary failures.
+        console.warn('Unable to refresh published homepage customization. Retaining the current configuration.')
+      } finally { isRefreshing = false }
     }
 
     void loadCustomization()
@@ -71,7 +75,7 @@ function App() {
         </Routes>
       </div>
       <Footer customization={homeCustomization} />
-      <MobileBottomNav />
+      <MobileBottomNav navigation={homeCustomization.nav} />
       <BookingModal isOpen={isBookingOpen} tour={bookingTour} onClose={() => setIsBookingOpen(false)} />
       <InquiryModal isOpen={isInquiryOpen} packageId={inquiryPackageId} onClose={() => setIsInquiryOpen(false)} />
     </div>
