@@ -3,11 +3,11 @@ import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
   PiArrowUpLight,
-  PiCompassLight,
-  PiHouseLineLight,
-  PiListLight,
-  PiUserLight,
-  PiWhatsappLogoLight,
+  PiCompassBold,
+  PiHouseLineBold,
+  PiListBold,
+  PiUserBold,
+  PiWhatsappLogoBold,
 } from 'react-icons/pi'
 import type { IconType } from 'react-icons'
 import { MobileSidebarDrawer } from './MobileSidebarDrawer'
@@ -20,11 +20,11 @@ type NavItem = {
 }
 
 const navItems: NavItem[] = [
-  { id: 'menu', href: null, icon: PiListLight },
-  { id: 'about', href: '/about', icon: PiUserLight },
-  { id: 'home', href: '/', icon: PiHouseLineLight },
-  { id: 'services', href: '/tours', icon: PiCompassLight },
-  { id: 'whatsapp', href: 'https://wa.me/256703543027', icon: PiWhatsappLogoLight },
+  { id: 'menu', href: null, icon: PiListBold },
+  { id: 'about', href: '/about', icon: PiUserBold },
+  { id: 'home', href: '/', icon: PiHouseLineBold },
+  { id: 'services', href: '/tours', icon: PiCompassBold },
+  { id: 'whatsapp', href: 'https://wa.me/256703543027', icon: PiWhatsappLogoBold },
 ]
 
 export function MobileBottomNav({ navigation }: { navigation: HomeCustomizationContent['nav'] }) {
