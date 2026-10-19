@@ -89,7 +89,7 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
               key={item.id}
               to={item.href}
               className={({ isActive }) =>
-                `navbar-link group flex items-center gap-1.5 py-4 text-[0.78rem] font-bold uppercase text-white transition hover:text-white ${
+                `navbar-link group flex items-center gap-1.5 py-4 text-[0.78rem] font-medium uppercase text-white transition hover:text-white ${
                   isActive
                     ? 'underline decoration-primary decoration-2 underline-offset-[14px]'
                     : 'text-white'

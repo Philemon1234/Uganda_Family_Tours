@@ -2,6 +2,14 @@
 
 @font-face {
   font-family: "Arson";
+  src: url("./assets/Fonts/Arson/Arson Pro Medium.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Arson";
   src: url("./assets/Fonts/Arson/Arson Pro Bold.otf") format("opentype");
   font-display: swap;
   font-style: normal;
@@ -359,8 +367,11 @@ img {
   }
 
   .home-hero-content {
-    padding-top: 7.75rem;
-    padding-bottom: calc(9.75rem + env(safe-area-inset-bottom));
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    padding-top: calc(7rem + env(safe-area-inset-top));
+    padding-bottom: calc(7rem + env(safe-area-inset-bottom));
   }
 }
 

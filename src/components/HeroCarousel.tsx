@@ -96,7 +96,7 @@ export function HeroCarousel() {
         {active.button_text && isSafeHeroLink(active.button_url) && <a key={`${active.id}-action`} className="hero-action btn-primary mt-8 max-w-full whitespace-normal px-5 py-3 text-center text-[0.7rem] md:px-6 md:py-3.5 md:text-[0.76rem]" href={active.button_url} style={{ backgroundColor: '#FB770D' }}>{active.button_text} <FiArrowRight className="shrink-0" /></a>}
       </div>
     </div>
-    {slides.length > 1 && <div className="absolute bottom-[calc(6rem+env(safe-area-inset-bottom))] left-6 z-20 flex gap-3 md:left-10 lg:bottom-10 lg:left-16">
+    {slides.length > 1 && <div className="absolute bottom-[calc(6rem+env(safe-area-inset-bottom))] left-6 z-20 hidden gap-3 md:left-10 lg:bottom-10 lg:left-16 lg:flex">
       <button type="button" className="grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-black/25 text-2xl text-white backdrop-blur-sm hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={() => move(-1)} aria-label="Previous slide"><FiChevronLeft /></button>
       <button type="button" className="grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-black/25 text-2xl text-white backdrop-blur-sm hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white" onClick={() => move(1)} aria-label="Next slide"><FiChevronRight /></button>
     </div>}
