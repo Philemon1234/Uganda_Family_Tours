@@ -16,10 +16,10 @@ import { getPublishedTourPackages, subscribeToTourPackageChanges } from '../serv
 import { packageToTour } from '../utils/tourPackageMapper'
 import type { HomeCustomizationContent } from '../types/homeCustomization'
 import storyThumbnail from '../assets/Thumbnail.png'
-import homeIconOne from '../assets/UFT logos/UFT web logos-03.png'
-import homeIconTwo from '../assets/UFT logos/UFT web logos-04.png'
-import homeIconThree from '../assets/UFT logos/UFT web logos-01.png'
-import homeIconFour from '../assets/UFT logos/UFT web logos-02.png'
+import homeIconOne from '../assets/UFT logos/UFT web logos-07 white.png'
+import homeIconTwo from '../assets/UFT logos/UFT web logos-08 white.png'
+import homeIconThree from '../assets/UFT logos/UFT web logos-05 white.png'
+import homeIconFour from '../assets/UFT logos/UFT web logos-06 white.png'
 import giraffeBackground from '../assets/UFT Bcackground girraf-01.png'
 import journeyImage from '../assets/Africa-Gorilla-GettyImages-986556120.jpg'
 import homeFooterImage from '../assets/footer/UFT Website Work-03.jpg'
@@ -119,12 +119,12 @@ export function HomePage({ customization, onInquiry }: HomePageProps) {
               ].map((item) => (
                 <a
                   key={item.alt}
-                  className="grid h-14 w-14 place-items-center rounded-full bg-white shadow-[0_14px_34px_rgba(0,0,0,0.22)] transition hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.28)] md:h-16 md:w-16"
+                  className="grid h-14 w-14 place-items-center transition hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white md:h-16 md:w-16"
                   href={item.href || '#'}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img className="h-10 w-10 object-contain md:h-11 md:w-11" src={item.src} alt={item.alt} />
+                  <img className="h-full w-full object-contain" src={item.src} alt={item.alt} />
                 </a>
               ))}
             </div>
