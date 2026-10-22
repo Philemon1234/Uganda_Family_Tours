@@ -1,4 +1,4 @@
-import logo from '../assets/UFT-Logo-PNG.png'
+import logo from '../assets/New logo.png'
 
 export function Logo() {
   return (

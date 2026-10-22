@@ -70,7 +70,7 @@ export function MobileSidebarDrawer({ isOpen, onClose, navigation }: MobileSideb
         }`}
       >
         <div className="flex items-center justify-between gap-4">
-          <img className="h-10 w-auto object-contain" src={navigation.logo.src || logo} alt={navigation.logo.alt || t('common.logoAlt')} onError={event => { if (event.currentTarget.getAttribute('src') !== logo) event.currentTarget.src = logo }} />
+          <img className="h-10 w-auto object-contain" src={logo} alt={navigation.logo.alt || t('common.logoAlt')} onError={event => { if (event.currentTarget.getAttribute('src') !== logo) event.currentTarget.src = logo }} />
           <button
             type="button"
             aria-label={t('common.close')}

@@ -77,7 +77,7 @@ export function Navbar({ customization, onInquiry }: NavbarProps) {
         <NavLink className="shrink-0" to="/" aria-label={t('navbar.homeAria')}>
           <img
             className="block h-9 w-auto object-contain md:h-10"
-            src={customization.nav.logo.src || navbarLogo}
+            src={navbarLogo}
             alt={customization.nav.logo.alt || 'Uganda Family Tours'}
             onError={event => { if (event.currentTarget.getAttribute('src') !== navbarLogo) event.currentTarget.src = navbarLogo }}
           />
